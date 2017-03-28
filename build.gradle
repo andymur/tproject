@@ -1,0 +1,91 @@
+group 'tproject'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+
+sourceCompatibility = 1.5
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+    }
+}
+
+configurations {
+    liquibase
+    sqlDriver
+}
+
+repositories {
+    mavenCentral()
+}
+
+task updateDb(type: JavaExec) {
+    group = "Liquibase"
+    classpath configurations.liquibase
+    main = "liquibase.integration.commandline.Main"
+    args "--changeLogFile=" + gradle.dbFile
+    args "--username=" + gradle.dbUser
+    args "--password=" + gradle.password
+    args "--url=" + gradle.dbUrl
+    args "--driver=" + gradle.dbDriver
+    args "--logLevel=debug"
+    args "--defaultSchemaName=public"
+    args "update"
+}
+task dropAll(type: JavaExec) {
+    group = "Liquibase"
+    classpath configurations.liquibase
+    main = "liquibase.integration.commandline.Main"
+    args "--changeLogFile=db.change.log.generated.xml"
+    args "--username=" + gradle.dbUser
+    args "--password=" + gradle.password
+    args "--url=" + gradle.dbUrl
+    args "--driver=" + gradle.dbDriver
+    args "dropAll"
+}
+
+configurations {
+    liquibase
+    sqlDriver
+}
+
+dependencies {
+    def springVersion = '4.3.7.RELEASE'
+    def springSecurityVersion = '4.2.2.RELEASE'
+    def hibernateVersion = '5.1.0.Final'
+    def tomcatVersion = '8.0.27'
+    def postgresVersion = '9.3-1102-jdbc41'
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    providedCompile "javax.servlet:javax.servlet-api:3.0.1",
+                    "javax.servlet.jsp:jsp-api:2.1"
+    compile "org.springframework:spring-core:$springVersion",
+            "org.springframework:spring-context:${springVersion}",
+            "org.springframework:spring-webmvc:${springVersion}",
+            "org.springframework:spring-orm:${springVersion}",
+            "org.springframework.security:spring-security-web:${springSecurityVersion}",
+            "org.springframework.security:spring-security-config:${springSecurityVersion}",
+            "org.slf4j:slf4j-simple:1.7.25",
+            "org.hibernate:hibernate-java8:${hibernateVersion}",
+            "org.hibernate:hibernate-core:${hibernateVersion}",
+            "org.hibernate:hibernate-entitymanager:${hibernateVersion}",
+            "javax.servlet:jstl:1.2",
+            "com.fasterxml.jackson.core:jackson-databind:2.5.0"
+    runtime "org.postgresql:postgresql:${postgresVersion}"
+    liquibase "org.postgresql:postgresql:${postgresVersion}"
+    liquibase "org.liquibase:liquibase-core:3.2.2"
+    sqlDriver "org.postgresql:postgresql:${postgresVersion}"
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
+            "javax.servlet:jstl:1.2"
+}

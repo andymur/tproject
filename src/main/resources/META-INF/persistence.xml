@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+
+    <persistence-unit name="persistconf">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>tapplication.customer.Customer</class>
+        <class>tapplication.customer.role.Role</class>
+        <class>tapplication.customer.address.Address</class>
+        <class>tapplication.customer.basket.Basket</class>
+        <class>tapplication.product.brand.Brand</class>
+        <class>tapplication.product.category.Category</class>
+        <class>tapplication.product.parameters.Parameters</class>
+        <class>tapplication.product.Product</class>
+        <class>tapplication.product.productImage.ProductImage</class>
+        <class>tapplication.order.Order</class>
+        <class>tapplication.order.deliveryType.DeliveryType</class>
+        <class>tapplication.order.orderedProduct.OrderedProduct</class>
+        <class>tapplication.order.orderStatus.OrderStatus</class>
+        <class>tapplication.order.paymentStatus.PaymentStatus</class>
+        <class>tapplication.order.paymentType.PaymentType</class>
+
+        <properties>
+
+            <!-- Properties for usual JDBC driver. //-->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:6000/shop" />
+
+
+            <!-- Properties for LOG4JDBC. //-->
+            <!--<property name="javax.persistence.jdbc.driver" value="net.sf.log4jdbc.DriverSpy" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:log4jdbc:mysql://localhost:3306/jokerconf" />-->
+
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="password" />
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
+
+            <property name="hibernate.jdbc.batch_size" value="50"/>
+            <property name="hibernate.order_inserts" value="true"/>
+            <property name="hibernate.order_update" value="true"/>
+            <property name="connection.useUnicode" value="true"/>
+            <property name="connection.characterEncoding" value="utf-8"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
+            <property name="hibernate.cache.use_query_cache" value="false"/>
+            <property name="hibernate.generate_statistics" value="false"/>
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+            <property name="javax.persistence.validation.mode" value="NONE"/>
+            <property name="hibernate.check_nullability" value="false"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:6000/shop"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

@@ -1,0 +1,12 @@
+rootProject.name = 'tproject'
+
+//database
+gradle.ext.db = "postgresql"
+gradle.ext.dbHost = "localhost"
+gradle.ext.dbPort = "6000"
+gradle.ext.dbName = "shop"
+gradle.ext.dbUser = "postgres"
+gradle.ext.password = "password"
+gradle.ext.dbUrl = "jdbc:${gradle.db}://${gradle.dbHost}:${gradle.dbPort}/${gradle.dbName}"
+gradle.ext.dbDriver = "org.postgresql.Driver"
+gradle.ext.dbFile = "src/main/resources/db/db-changelog.xml"
