@@ -5,24 +5,25 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-    <display-name>Gradle + Spring MVC Hello World + XML</display-name>
+    <display-name>Spring Hibernate Gradle JSP application</display-name>
     <description>Spring MVC web application</description>
 
     <!-- For web context -->
     <servlet>
-        <servlet-name>hello-dispatcher</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
+
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>WEB-INF/spring-web-config.xml</param-value>
+            <param-value>WEB-INF/dispatcher-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>hello-dispatcher</servlet-name>
+        <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
@@ -38,4 +39,11 @@
         <param-value>WEB-INF/spring-core-config.xml</param-value>
     </context-param>
 
+
+    <resource-ref>
+        <description>dbDataSource</description>
+        <res-ref-name>jdbc/postgres</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 </web-app>

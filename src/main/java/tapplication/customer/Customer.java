@@ -62,10 +62,11 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, String email, String password) {
+    public Customer(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Customer(String name, String secondName, Date birthDate, String email, String phoneNumber, String password, Role role, List<Address> addresses, Basket basket) {

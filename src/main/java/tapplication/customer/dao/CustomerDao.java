@@ -1,20 +1,28 @@
 package tapplication.customer.dao;
 
+import org.springframework.stereotype.Repository;
 import tapplication.customer.Customer;
+import tapplication.dao.AbstractDao;
 
-import java.util.List;
+import javax.persistence.Id;
 
 /**
  * Created by alexpench on 25.03.17.
  */
-public interface CustomerDao {
-    public List<Customer> findAll();
 
-    public Customer findByEmail(String email);
+@Repository("customerDao")
+public class CustomerDao extends AbstractDao<Customer, Id>{
 
-    public Customer save(Customer customer);
+    public CustomerDao() {
+        super(Customer.class);
+    }
 
-    public void update(Customer customer);
+    @Override
+    public void persist(Customer user) {
+        super.persist(user);
+    }
 
-    public void delete(Customer contact);
+    public boolean isUserExsist(String email) {
+        return count("email", email) != 0;
+    }
 }

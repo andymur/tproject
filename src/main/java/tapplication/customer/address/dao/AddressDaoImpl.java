@@ -1,6 +1,5 @@
 package tapplication.customer.address.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tapplication.customer.address.Address;
 import tapplication.utils.PersistenceUtils;
@@ -15,11 +14,8 @@ import java.util.List;
 @Component
 public class AddressDaoImpl implements AddressDao {
 
-    @Autowired
-    private PersistenceUtils pUtil;
-
     public Address save(Address address) {
-        EntityManager em = pUtil.openConnection();
+        EntityManager em = PersistenceUtils.openConnection();
         em.persist(address);
         em.getTransaction().commit();
         em.close();
@@ -27,7 +23,7 @@ public class AddressDaoImpl implements AddressDao {
     }
 
     public List<Address> getAllByCustomerId(Long id) {
-        EntityManager em = pUtil.openConnection();
+        EntityManager em = PersistenceUtils.openConnection();
         Query query = em.createQuery("SELECT a FROM Address a where a.customer.id = :id");
         List<Address> addresses = query.getResultList();
         em.close();
@@ -35,7 +31,7 @@ public class AddressDaoImpl implements AddressDao {
     }
 
     public void update(Address address) {
-        EntityManager em = pUtil.openConnection();
+        EntityManager em = PersistenceUtils.openConnection();
         em.merge(address);
         em.getTransaction().commit();
         em.close();
