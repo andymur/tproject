@@ -9,7 +9,7 @@
 *.rar
 /out/
 .idea_modules/
-
+.idea
 .gradle
 /build/
 
