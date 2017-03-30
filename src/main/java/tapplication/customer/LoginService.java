@@ -19,7 +19,7 @@ public class LoginService {
     private RoleDao roleDao;
 
     @Transactional
-    public Customer save(String name, String email, String password, Role role) {
+    public Customer save(String name, String email, String password, Role role) throws AlreadyExistException{
 
         Customer customer = new Customer(name, email, password, role);
 

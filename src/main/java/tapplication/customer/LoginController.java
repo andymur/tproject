@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import tapplication.customer.role.Role;
+import tapplication.exceptions.AlreadyExistException;
 
 /**
  * Created by alexpench on 23.03.17.
@@ -25,7 +26,7 @@ public class LoginController {
     public Object register(@RequestParam(value = "email", required = true) String email,
                            @RequestParam(value = "password", required = true) String password,
                            @RequestParam(value = "name", required = true) String name,
-                            Model model) {
+                            Model model) throws AlreadyExistException {
 
 //
 //        if (loginService.isAlreadyExist(customer)) {
@@ -44,7 +45,7 @@ public class LoginController {
 //        String targetModel = "";
 //        //validate email and password
 //        if (!loginService.validateEmail(email)) {
-//            throw new UserNotFoundException();
+//            throw new NotFoundException();
 //        }
 //        if (!loginService.validatePassword(email, password)) {
 //            throw new InvalidPasswordException();
