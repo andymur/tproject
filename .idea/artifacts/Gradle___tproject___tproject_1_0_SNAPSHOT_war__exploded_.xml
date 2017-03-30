@@ -32,6 +32,7 @@
           <element id="library" level="project" name="Gradle: javax:javaee-api:7.0" />
           <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.5.0" />
+          <element id="library" level="project" name="Gradle: org.apache.tomcat:dbcp:6.0.35" />
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.postgresql:postgresql:9.3-1102-jdbc41" />

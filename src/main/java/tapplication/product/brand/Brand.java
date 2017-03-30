@@ -6,17 +6,21 @@ import javax.persistence.*;
  * Created by alexpench on 27.03.17.
  */
 @Entity
-@Table(name = "brand")
+@Table(name = Brand.TABLE_BRAND)
 public class Brand {
+    public static final String TABLE_BRAND = "brand";
+    public static final String ID = "id";
+    public static final String NAME = "name";
+    public static final String BRAND_IMAGE = "brand_image";
     @Id
-    @Column(name = "id")
+    @Column(name = ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = NAME)
     private String name;
 
-    @Column(name = "brand_image")
+    @Column(name = BRAND_IMAGE)
     private String brandImage;
 
     public Brand(){}

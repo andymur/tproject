@@ -3,7 +3,6 @@ package tapplication.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.customer.dao.CustomerDao;
 import tapplication.customer.role.Role;
 import tapplication.customer.role.dao.RoleDao;
 import tapplication.exceptions.AlreadyExistException;

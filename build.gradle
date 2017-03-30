@@ -84,7 +84,8 @@ dependencies {
             "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}",
             "javax:javaee-api:${javaxVersion}",
             "javax.servlet:jstl:1.2",
-            "com.fasterxml.jackson.core:jackson-databind:2.5.0"
+            "com.fasterxml.jackson.core:jackson-databind:2.5.0",
+            "org.apache.tomcat:dbcp:6.0.35"
     runtime "org.postgresql:postgresql:${postgresVersion}"
     liquibase "org.postgresql:postgresql:${postgresVersion}"
     liquibase "org.liquibase:liquibase-core:3.2.2"
@@ -93,5 +94,13 @@ dependencies {
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
-            "javax.servlet:jstl:1.2"
+            "javax.servlet:jstl:1.2",
+//            for JNDI datasource
+            "org.apache.tomcat:tomcat-dbcp:7.0.11"
+
+//    [
+//            tomcatRun
+//    ]*.with{
+//        configFile = file("/Users/alexpench/Documents/tproject/src/main/webapp/META-INF/context.xml")
+//    }
 }

@@ -1,16 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alexpench
-  Date: 29.03.17
-  Time: 13:52
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<a href="hello">Hello</a>
-</body>
-</html>
+<t:genericpage>
+    <jsp:attribute name="header">
+      <h1>Register page</h1>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">alex shop</p>
+    </jsp:attribute>
+    <jsp:body>
+        <a href="register">Register</a>
+        <a href="login.jsp">Login</a>
+    </jsp:body>
+</t:genericpage>

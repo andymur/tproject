@@ -24,7 +24,7 @@ CREATE TABLE "address" (
   "street" TEXT NOT NULL,
   "building" TEXT NOT NULL,
   "apartment" TEXT NOT NULL,
-  "zip_code" bigint NOT NULL,
+  "zip_code" bigint,
   CONSTRAINT address_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -51,8 +51,10 @@ OIDS=FALSE
 CREATE TABLE "product" (
   "id" SERIAL NOT NULL,
   "brand_id" bigint NOT NULL,
+  "model" text NOT NULL,
+  "color" text NOT NULL,
   "name" TEXT NOT NULL,
-  "description" TEXT NOT NULL,
+  "description" TEXT,
   "price" DOUBLE PRECISION NOT NULL,
   "quantity" bigint NOT NULL,
   "change_date" DATE NOT NULL,
@@ -78,8 +80,8 @@ OIDS=FALSE
 CREATE TABLE "category" (
   "id" SERIAL NOT NULL,
   "name" TEXT NOT NULL,
-  "category_image" TEXT NOT NULL,
-  "parent_category_id" bigint NOT NULL,
+  "category_image" TEXT,
+  "parent_category_id" bigint,
   CONSTRAINT category_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -90,9 +92,8 @@ OIDS=FALSE
 CREATE TABLE "parameters" (
   "id" SERIAL NOT NULL,
   "product_id" bigint NOT NULL,
-  "color" TEXT NOT NULL,
-  "size" TEXT NOT NULL,
-  "weight" bigint NOT NULL,
+  "size" TEXT,
+  "weight" bigint,
   CONSTRAINT parameters_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -103,7 +104,7 @@ OIDS=FALSE
 CREATE TABLE "order_status" (
   "id" SERIAL NOT NULL,
   "status_code" TEXT NOT NULL,
-  "description" TEXT NOT NULL,
+  "description" TEXT,
   CONSTRAINT order_status_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -114,7 +115,7 @@ OIDS=FALSE
 CREATE TABLE "delivery_type" (
   "id" SERIAL NOT NULL,
   "type_code" TEXT NOT NULL,
-  "description" TEXT NOT NULL,
+  "description" TEXT,
   CONSTRAINT delivery_type_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -125,7 +126,7 @@ OIDS=FALSE
 CREATE TABLE "payment_type" (
   "id" SERIAL NOT NULL,
   "type_code" TEXT NOT NULL,
-  "description" TEXT NOT NULL,
+  "description" TEXT,
   CONSTRAINT payment_type_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -136,7 +137,7 @@ OIDS=FALSE
 CREATE TABLE "payment_status" (
   "id" SERIAL NOT NULL,
   "status_code" TEXT NOT NULL,
-  "description" TEXT NOT NULL,
+  "description" TEXT,
   CONSTRAINT payment_status_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -158,7 +159,7 @@ OIDS=FALSE
 CREATE TABLE "product_image" (
   "id" SERIAL NOT NULL,
   "image_name" TEXT NOT NULL,
-  "image" TEXT NOT NULL,
+  "image" TEXT,
   "product_id" bigint NOT NULL,
   CONSTRAINT product_image_pk PRIMARY KEY ("id")
 ) WITH (
@@ -189,7 +190,7 @@ OIDS=FALSE
 CREATE TABLE "brand" (
   "id" SERIAL NOT NULL,
   "name" TEXT NOT NULL,
-  "brand_image" TEXT NOT NULL,
+  "brand_image" TEXT,
   CONSTRAINT brand_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE

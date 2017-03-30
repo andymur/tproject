@@ -8,30 +8,32 @@ import javax.persistence.*;
  * Created by alexpench on 27.03.17.
  */
 @Entity
-@Table(name = "parameters")
+@Table(name = Parameters.TABLE_PARAMETERS)
 public class Parameters {
+    public static final String TABLE_PARAMETERS = "parameters";
+    public static final String ID = "id";
+    public static final String SIZE = "size";
+    public static final String WEIGHT = "weight";
+    public static final String PRODUCT_ID = "product_id";
+    public static final String REFERENCED_ID = "id";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = ID)
     private Long id;
 
-    @Column(name = "color")
-    private String color;
-
-    @Column(name = "size")
+    @Column(name = SIZE)
     private String size;
 
-    @Column(name = "weight")
+    @Column(name = WEIGHT)
     private Long weight;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = PRODUCT_ID, referencedColumnName = REFERENCED_ID)
     private Product product;
 
     public Parameters(){}
 
-    public Parameters(String color, String size, Long weight, Product product) {
-        this.color = color;
+    public Parameters(String size, Long weight, Product product) {
         this.size = size;
         this.weight = weight;
         this.product = product;
@@ -41,7 +43,6 @@ public class Parameters {
     public String toString() {
         return "Parameters{" +
                 "id=" + id +
-                ", color='" + color + '\'' +
                 ", size='" + size + '\'' +
                 ", weight=" + weight +
                 ", product=" + product +
@@ -54,14 +55,6 @@ public class Parameters {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getSize() {

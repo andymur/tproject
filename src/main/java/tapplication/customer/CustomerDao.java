@@ -1,7 +1,6 @@
-package tapplication.customer.dao;
+package tapplication.customer;
 
 import org.springframework.stereotype.Repository;
-import tapplication.customer.Customer;
 import tapplication.dao.AbstractDao;
 
 import javax.persistence.Id;

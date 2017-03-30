@@ -13,22 +13,25 @@ import java.util.List;
  * Created by alexpench on 22.03.17.
  */
 @Entity
-@Table(name = "customer")
+@Table(name = Customer.CUSTOMER)
 public class Customer {
 
+    public static final String CUSTOMER = "customer";
+    public static final String ID = "id";
+    public static final String FIRST_NAME = "first_name";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = ID)
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = FIRST_NAME)
     private String name;
 
     @Column(name = "last_name")
     private String secondName;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date", nullable = true, insertable = true, updatable = true)
+    @Column(name = "birth_date")
     private Date birthDate;
 
     @Column(name = "email")

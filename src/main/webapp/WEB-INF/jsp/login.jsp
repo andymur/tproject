@@ -10,25 +10,16 @@
       <p id="copyright">alex shop</p>
     </jsp:attribute>
     <jsp:body>
-        <form name="f" action="{login}" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <fieldset>
-                <legend>Please Login</legend>
-                <div c:if ${param.error} class="alert alert-error">
-                    Invalid username and password.
-                </div>
-                <div c:if ${param.logout} class="alert alert-success">
-                    You have been logged out.
-                </div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username"/>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"/>
-                <div class="form-actions">
-                    <button type="submit" class="btn">Log in</button>
-                </div>
-            </fieldset>
+        <h3>Register Form</h3>
+
+        <br/>
+        <form action="register" method="get">
+            Name:<input type="text" name="name"/><br/><br/>
+            Email:<input type="text" name="email"/><br/><br/>
+            Password:<input type="password" name="password"/><br/><br/>
+            <input type="submit" value="register"/>"
         </form>
+        <br/><br/>
     </jsp:body>
 </t:genericpage>
 

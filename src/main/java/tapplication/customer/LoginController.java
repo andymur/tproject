@@ -16,10 +16,10 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    public Object redirect() {
-        return "login";
-    }
+//    @RequestMapping(path = "/", method = RequestMethod.GET)
+//    public Object redirect() {
+//        return "login";
+//    }
 
     @RequestMapping(path = "register", method = RequestMethod.GET)
     public Object register(@RequestParam(value = "email", required = true) String email,
