@@ -48,7 +48,7 @@ Hello ${Customer.name} !<br/><br/>
 
 <h2>Add new address here:</h2>
 <div id="address">
-    country:<input type="text" name="country"/><br/><br/>
+    COUNTRY:<input type="text" name="country"/><br/><br/>
     city:<input type="text" name="city"/><br/><br/>
     street:<input type="text" name="street"/><br/><br/>
     building:<input type="text" name="building"/><br/><br/>
