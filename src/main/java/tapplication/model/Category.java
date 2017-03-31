@@ -17,7 +17,7 @@ public class Category {
     public static final String PRODUCT_ID = "product_id";
     public static final String CATEGORY_ID = "category_id";
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID)
     private Long id;
 
