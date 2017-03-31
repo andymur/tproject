@@ -21,9 +21,18 @@ configurations {
     liquibase
     sqlDriver
 }
-
+tomcat {
+    httpPort = 8080
+    httpsPort = 8081
+    enableSSL = true
+    contextPath = '/'
+}
 repositories {
     mavenCentral()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4.1'
 }
 
 task updateDb(type: JavaExec) {
@@ -68,7 +77,7 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
     providedCompile "javax.servlet:javax.servlet-api:3.0.1",
-                    "javax.servlet.jsp:jsp-api:2.1"
+            "javax.servlet.jsp:jsp-api:2.1"
     compile "org.springframework:spring-core:$springVersion",
             "org.springframework:spring-context:${springVersion}",
             "org.springframework:spring-webmvc:${springVersion}",
@@ -83,7 +92,8 @@ dependencies {
             "javax:javaee-api:${javaxVersion}",
             "javax.servlet:jstl:1.2",
             "com.fasterxml.jackson.core:jackson-databind:2.5.0",
-            "org.apache.tomcat:dbcp:6.0.35"
+            "org.apache.tomcat:dbcp:6.0.35",
+            "org.aspectj:aspectjweaver:1.7.2"
     runtime "org.postgresql:postgresql:${postgresVersion}"
     liquibase "org.postgresql:postgresql:${postgresVersion}"
     liquibase "org.liquibase:liquibase-core:3.2.2"

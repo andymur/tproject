@@ -48,9 +48,6 @@ public class JpaConfiguration {
         return factoryBean;
     }
 
-    /*
-     * Provider specific adapter.
-     */
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();

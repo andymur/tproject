@@ -81,7 +81,6 @@ CREATE TABLE "category" (
   "id" SERIAL NOT NULL,
   "name" TEXT NOT NULL,
   "category_image" TEXT,
-  "parent_category_id" bigint,
   CONSTRAINT category_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -158,9 +157,9 @@ OIDS=FALSE
 
 CREATE TABLE "product_image" (
   "id" SERIAL NOT NULL,
-  "image_name" TEXT NOT NULL,
+  "name" TEXT NOT NULL,
   "image" TEXT,
-  "product_id" bigint NOT NULL,
+  "product_id" bigint,
   CONSTRAINT product_image_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE
@@ -215,14 +214,9 @@ ALTER TABLE "product" ADD CONSTRAINT "product_fk0" FOREIGN KEY ("brand_id") REFE
 ALTER TABLE "ordered_product" ADD CONSTRAINT "ordered_product_fk0" FOREIGN KEY ("order_id") REFERENCES "order"("id");
 ALTER TABLE "ordered_product" ADD CONSTRAINT "ordered_product_fk1" FOREIGN KEY ("product_id") REFERENCES "product"("id");
 
-ALTER TABLE "category" ADD CONSTRAINT "category_fk0" FOREIGN KEY ("parent_category_id") REFERENCES "category"("id");
-
 ALTER TABLE "parameters" ADD CONSTRAINT "parameters_fk0" FOREIGN KEY ("product_id") REFERENCES "product"("id");
 
 ALTER TABLE "basket_product" ADD CONSTRAINT "basket_product_fk0" FOREIGN KEY ("product_id") REFERENCES "product"("id");
-
-ALTER TABLE "product_image" ADD CONSTRAINT "product_image_fk0" FOREIGN KEY ("product_id") REFERENCES "product"("id");
-
 
 ALTER TABLE "product_category" ADD CONSTRAINT "product_category_fk0" FOREIGN KEY ("product_id") REFERENCES "product"("id");
 ALTER TABLE "product_category" ADD CONSTRAINT "product_category_fk1" FOREIGN KEY ("category_id") REFERENCES "category"("id");
