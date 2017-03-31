@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="Gradle : tproject : tproject-1.0-SNAPSHOT.war (exploded)">
+  <artifact type="exploded-war" name="Gradle : tproject : tproject-1.0-SNAPSHOT.war (exploded)">
     <output-path>$PROJECT_DIR$/build/libs/exploded/tproject-1.0-SNAPSHOT.war</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$">
@@ -22,7 +22,6 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-tx:4.3.7.RELEASE" />
-          <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-web:4.2.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-config:4.2.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-simple:1.7.25" />
@@ -39,6 +38,7 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.7.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.3.7.RELEASE" />
           <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-core:4.2.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.25" />
