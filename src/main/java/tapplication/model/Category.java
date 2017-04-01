@@ -1,5 +1,7 @@
 package tapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -72,6 +74,7 @@ public class Category {
         this.categoryImage = categoryImage;
     }
 
+    @JsonIgnore
     public List<Product> getProducts() {
         return products;
     }
