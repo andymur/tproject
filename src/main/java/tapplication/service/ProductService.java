@@ -30,16 +30,11 @@ public class ProductService {
         if (productDao.isProductExist(newProduct.getBrand().getName(), newProduct.getModel(), newProduct.getColor())) {
             throw new AlreadyExistException();
         }
-
         productDao.persist(newProduct);
         newProduct.getBrand().setProduct(newProduct);
         newProduct.getImages().forEach(item->item.setProduct(newProduct));
         newProduct.getCategories().forEach(item->item.setProducts(newProduct));
         newProduct.getParameters().forEach(item->item.setProduct(newProduct));
-        parametersDao.persist(newProduct.getParameters().get(0));
-        productImageDao.merge(newProduct.getImages().get(0));
-        categoryDao.merge(newProduct.getCategories().get(0));
-        productDao.merge(newProduct);
         return newProduct;
     }
 }

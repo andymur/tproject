@@ -29,7 +29,8 @@ public class Category {
     private String categoryImage;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = PRODUCT_CATEGORY, joinColumns = {@JoinColumn(name = CATEGORY_ID)},
+    @JoinTable(name = PRODUCT_CATEGORY,
+            joinColumns = {@JoinColumn(name = CATEGORY_ID)},
             inverseJoinColumns = {@JoinColumn(name = PRODUCT_ID)})
     private List<Product> products;
 

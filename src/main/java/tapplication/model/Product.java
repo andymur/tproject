@@ -62,10 +62,10 @@ public class Product {
     @ManyToMany(mappedBy= PRODUCTS)
     private List<Category> categories;
 
-    @OneToMany(mappedBy = TABLE_PRODUCT)
+    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.PERSIST)
     private List<ProductImage> images;
 
-    @OneToMany(mappedBy = TABLE_PRODUCT)
+    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.PERSIST)
     private List<Parameters> parameters;
 
     public Product(Brand brand, String name, String model, String color, String description, Long price, Long quantity, Date changeDate, List<Category> categories, List<ProductImage> images, List<Parameters> parameters) {
@@ -192,18 +192,16 @@ public class Product {
         return images;
     }
 
-    public void setImages(ProductImage image) {
-        this.images = new ArrayList<ProductImage>();
-        this.images.add(image);
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
     }
 
     public List<Parameters> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Parameters parameter) {
-        this.parameters = new ArrayList<Parameters>();
-        this.parameters.add(parameter);
+    public void setParameters(List<Parameters> parameters) {
+        this.parameters = parameters;
     }
 
     public void increaseQuantity(Long quantity) {
