@@ -1,6 +1,11 @@
 jQuery(function ($) {
+    actionAdminTab();
 
-    $("#adminService").hide()
+    function actionAdminTab () {
+        if(sessionStorage.getItem("user") !== null && JSON.parse(sessionStorage.getItem("user")).role.name === "user") {
+            $("#adminService").show()
+        }else {$("#adminService").hide()}
+    }
 
     $('#btn-register').click(function (event) {
         event.preventDefault();
@@ -39,8 +44,8 @@ jQuery(function ($) {
                 success: (data)=> {
                     $("#login input").val("");
                     $("#paneltoggle").click();
-                    if(data.role.name) {$("#adminService").show()}
-                    sessionStorage.setItem("user", data)
+                    sessionStorage.setItem("user", JSON.stringify(data));
+                    actionAdminTab();
                 },
                 error: ()=> {
                     $('#login input[name=email]').css("color","red").effect("shake");

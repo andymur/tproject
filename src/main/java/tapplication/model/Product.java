@@ -1,7 +1,5 @@
 package tapplication.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,7 +53,6 @@ public class Product {
     private Long quantity;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(style = "yyyy:mm:dd")
     @Column(name = CHANGE_DATE)
     private Date changeDate;
 

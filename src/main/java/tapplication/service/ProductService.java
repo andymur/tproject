@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.model.Product;
-import tapplication.repositories.CategoryDao;
-import tapplication.repositories.ParametersDao;
 import tapplication.repositories.ProductDao;
-import tapplication.repositories.ProductImageDao;
 
 /**
  * Created by alexpench on 29.03.17.
@@ -17,12 +14,6 @@ import tapplication.repositories.ProductImageDao;
 public class ProductService {
     @Autowired
     private ProductDao productDao;
-    @Autowired
-    private ParametersDao parametersDao;
-    @Autowired
-    private ProductImageDao productImageDao;
-    @Autowired
-    private CategoryDao categoryDao;
 
     @Transactional
     public Product create(final Product newProduct) throws AlreadyExistException {

@@ -10,29 +10,29 @@
 
     <title>Creative - Bootstrap Admin Template</title>
 
-    <!-- Bootstrap CSS -->    
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap theme -->
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="resources/css/bootstrap-theme.css" rel="stylesheet">
     <!--external css-->
     <!-- font icon -->
-    <link href="css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />    
+    <link href="resources/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet" />
     <!-- full calendar css-->
-    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-	<link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <link href="resources/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+	<link href="resources/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
     <!-- easy pie chart-->
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="resources/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
     <!-- owl carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-	<link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/css/owl.carousel.css" type="text/css">
+	<link href="resources/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <!-- Custom styles -->
-	<link rel="stylesheet" href="css/fullcalendar.css">
-	<link href="css/widgets.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
-	<link href="css/xcharts.min.css" rel=" stylesheet">	
-	<link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="resources/css/fullcalendar.css">
+	<link href="resources/css/widgets.css" rel="stylesheet">
+    <link href="resources/css/style.css" rel="stylesheet">
+    <link href="resources/css/style-responsive.css" rel="stylesheet" />
+	<link href="resources/css/xcharts.min.css" rel=" stylesheet">
+	<link href="resources/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
     <!-- =======================================================
         Theme Name: NiceAdmin
         Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -44,8 +44,8 @@
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
+
+
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
@@ -57,20 +57,20 @@
 
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
-                <ul class="nav top-menu">                    
+                <ul class="nav top-menu">
                     <li>
                         <form class="navbar-form">
                             <input class="form-control" placeholder="Search" type="text">
                         </form>
-                    </li>                    
+                    </li>
                 </ul>
-                <!--  search form end -->                
+                <!--  search form end -->
             </div>
 
-            <div class="top-nav notification-row">                
+            <div class="top-nav notification-row">
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
-                    
+
                     <!-- task notificatoin start -->
                     <li id="task_notificatoin_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -169,7 +169,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="resources/img/avatar-mini.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Greg  Martin</span>
                                     <span class="time">1 min</span>
@@ -181,7 +181,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini2.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="resources/img/avatar-mini2.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Bob   Mckenzie</span>
                                     <span class="time">5 mins</span>
@@ -193,7 +193,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini3.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="resources/img/avatar-mini3.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Phillip   Park</span>
                                     <span class="time">2 hrs</span>
@@ -205,7 +205,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="photo"><img alt="avatar" src="./img/avatar-mini4.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="resources/img/avatar-mini4.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Ray   Munoz</span>
                                     <span class="time">1 day</span>
@@ -235,32 +235,32 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="label label-primary"><i class="icon_profile"></i></span> 
+                                    <span class="label label-primary"><i class="icon_profile"></i></span>
                                     Friend Request
                                     <span class="small italic pull-right">5 mins</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="label label-warning"><i class="icon_pin"></i></span>  
+                                    <span class="label label-warning"><i class="icon_pin"></i></span>
                                     John location.
                                     <span class="small italic pull-right">50 mins</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="label label-danger"><i class="icon_book_alt"></i></span> 
+                                    <span class="label label-danger"><i class="icon_book_alt"></i></span>
                                     Project 3 Completed.
                                     <span class="small italic pull-right">1 hr</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="label label-success"><i class="icon_like"></i></span> 
+                                    <span class="label label-success"><i class="icon_like"></i></span>
                                     Mick appreciated your work.
                                     <span class="small italic pull-right"> Today</span>
                                 </a>
-                            </li>                            
+                            </li>
                             <li>
                                 <a href="#">See all notifications</a>
                             </li>
@@ -271,7 +271,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
+                                <img alt="" src="resources/img/avatar1_small.jpg">
                             </span>
                             <span class="username">Jenifer Smith</span>
                             <b class="caret"></b>
@@ -305,14 +305,14 @@
                 </ul>
                 <!-- notificatoin dropdown end-->
             </div>
-      </header>      
+      </header>
       <!--header end-->
 
       <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
-              <ul class="sidebar-menu">                
+              <ul class="sidebar-menu">
                   <li class="active">
                       <a class="" href="index.html">
                           <i class="icon_house_alt"></i>
@@ -326,10 +326,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="form_component.html">Form Elements</a></li>                          
+                          <li><a class="" href="form_component.html">Form Elements</a></li>
                           <li><a class="" href="form_validation.html">Form Validation</a></li>
                       </ul>
-                  </li>       
+                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_desktop"></i>
@@ -348,15 +348,15 @@
                           <span>Widgets</span>
                       </a>
                   </li>
-                  <li>                     
+                  <li>
                       <a class="" href="chart-chartjs.html">
                           <i class="icon_piechart"></i>
                           <span>Charts</span>
-                          
+
                       </a>
-                                         
+
                   </li>
-                             
+
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_table"></i>
@@ -367,80 +367,80 @@
                           <li><a class="" href="basic_table.html">Basic Table</a></li>
                       </ul>
                   </li>
-                  
+
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_documents_alt"></i>
                           <span>Pages</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
-                      <ul class="sub">                          
+                      <ul class="sub">
                           <li><a class="" href="profile.html">Profile</a></li>
                           <li><a class="" href="login.html"><span>Login Page</span></a></li>
                           <li><a class="" href="blank.html">Blank Page</a></li>
                           <li><a class="" href="404.html">404 Error</a></li>
                       </ul>
                   </li>
-                  
+
               </ul>
               <!-- sidebar menu end-->
           </div>
       </aside>
       <!--sidebar end-->
-      
+
       <!--main content start-->
       <section id="main-content">
-          <section class="wrapper">            
+          <section class="wrapper">
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<li><i class="fa fa-laptop"></i>Dashboard</li>						  	
+						<li><i class="fa fa-laptop"></i>Dashboard</li>
 					</ol>
 				</div>
 			</div>
-              
+
             <div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box blue-bg">
 						<i class="fa fa-cloud-download"></i>
 						<div class="count">6.674</div>
-						<div class="title">Download</div>						
-					</div><!--/.info-box-->			
+						<div class="title">Download</div>
+					</div><!--/.info-box-->
 				</div><!--/.col-->
-				
+
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box brown-bg">
 						<i class="fa fa-shopping-cart"></i>
 						<div class="count">7.538</div>
-						<div class="title">Purchased</div>						
-					</div><!--/.info-box-->			
-				</div><!--/.col-->	
-				
+						<div class="title">Purchased</div>
+					</div><!--/.info-box-->
+				</div><!--/.col-->
+
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box dark-bg">
 						<i class="fa fa-thumbs-o-up"></i>
 						<div class="count">4.362</div>
-						<div class="title">Order</div>						
-					</div><!--/.info-box-->			
+						<div class="title">Order</div>
+					</div><!--/.info-box-->
 				</div><!--/.col-->
-				
+
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box green-bg">
 						<i class="fa fa-cubes"></i>
 						<div class="count">1.426</div>
-						<div class="title">Stock</div>						
-					</div><!--/.info-box-->			
+						<div class="title">Stock</div>
+					</div><!--/.info-box-->
 				</div><!--/.col-->
-				
+
 			</div><!--/.row-->
-		
-			
+
+
            <div class="row">
 		    <div class="col-lg-9 col-md-12">
-					
+
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h2><i class="fa fa-map-marker red"></i><strong>Countries</strong></h2>
@@ -448,12 +448,12 @@
 								<a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
 								<a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
 								<a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-							</div>	
+							</div>
 						</div>
 						<div class="panel-body-map">
-							<div id="map" style="height:380px;"></div>	
+							<div id="map" style="height:380px;"></div>
 						</div>
-	
+
 					</div>
 				</div>
               <div class="col-md-3">
@@ -477,25 +477,25 @@
                 <li>
                   <div><span id="todayspark4" class="spark"></span></div>
                   <div class="datas-text">$16,00 Revenue/Day</div>
-                </li> 
+                </li>
                 <li>
                   <div><span id="todayspark5" class="spark"></span></div>
                   <div class="datas-text">12,000000 visitors every Month</div>
-                </li>                                                                                                              
+                </li>
               </ul>
               </div>
-              
-			 
-           </div>  
-            
-		  
+
+
+           </div>
+
+
 		  <!-- Today status end -->
-			
-              
-				
+
+
+
 			<div class="row">
-               	
-				<div class="col-lg-9 col-md-12">	
+
+				<div class="col-lg-9 col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h2><i class="fa fa-flag-o red"></i><strong>Registered Users</strong></h2>
@@ -515,10 +515,10 @@
 										<th>Online</th>
 										<th>Performance</th>
 									</tr>
-								</thead>   
+								</thead>
 								<tbody>
 									<tr>
-										<td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/Germany.png" style="height:18px; margin-top:-2px;"></td>
 										<td>Germany</td>
 										<td>2563</td>
 										<td>1025</td>
@@ -529,11 +529,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100" style="width: 27%">
 											  	</div>
 											</div>
-											<span class="sr-only">73%</span>   	
+											<span class="sr-only">73%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/India.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/India.png" style="height:18px; margin-top:-2px;"></td>
 										<td>India</td>
 										<td>3652</td>
 										<td>2563</td>
@@ -544,11 +544,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" style="width: 43%">
 												</div>
 											</div>
-											<span class="sr-only">57%</span>   	
+											<span class="sr-only">57%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/Spain.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/Spain.png" style="height:18px; margin-top:-2px;"></td>
 										<td>Spain</td>
 										<td>562</td>
 										<td>452</td>
@@ -559,11 +559,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100" style="width: 7%">
 											  	</div>
 											</div>
-											<span class="sr-only">93%</span>   	
+											<span class="sr-only">93%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/India.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/India.png" style="height:18px; margin-top:-2px;"></td>
 										<td>Russia</td>
 										<td>1258</td>
 										<td>958</td>
@@ -574,11 +574,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 											  	</div>
 											</div>
-											<span class="sr-only">20%</span>   	
+											<span class="sr-only">20%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/Spain.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/Spain.png" style="height:18px; margin-top:-2px;"></td>
 										<td>USA</td>
 										<td>4856</td>
 										<td>3621</td>
@@ -589,11 +589,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 											  	</div>
 											</div>
-											<span class="sr-only">20%</span>   	
+											<span class="sr-only">20%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/Germany.png" style="height:18px; margin-top:-2px;"></td>
 										<td>Brazil</td>
 										<td>265</td>
 										<td>102</td>
@@ -604,11 +604,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 											  	</div>
 											</div>
-											<span class="sr-only">20%</span>   	
+											<span class="sr-only">20%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/Germany.png" style="height:18px; margin-top:-2px;"></td>
 										<td>Coloumbia</td>
 										<td>265</td>
 										<td>102</td>
@@ -619,11 +619,11 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 											  	</div>
 											</div>
-											<span class="sr-only">20%</span>   	
+											<span class="sr-only">20%</span>
 										</td>
 									</tr>
 									<tr>
-										<td><img src="img/Germany.png" style="height:18px; margin-top:-2px;"></td>
+										<td><img src="resources/img/Germany.png" style="height:18px; margin-top:-2px;"></td>
 										<td>France</td>
 										<td>265</td>
 										<td>102</td>
@@ -634,18 +634,18 @@
 												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 											  	</div>
 											</div>
-											<span class="sr-only">20%</span>   	
+											<span class="sr-only">20%</span>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-	
-					</div>	
+
+					</div>
 
 				</div><!--/col-->
 				<div class="col-md-3">
-					
+
 					<div class="social-box facebook">
 						<i class="fa fa-facebook"></i>
 						<ul>
@@ -661,7 +661,7 @@
 					</div><!--/social-box-->
 				</div>
 				<div class="col-md-3">
-					
+
 					<div class="social-box google-plus">
 						<i class="fa fa-google-plus"></i>
 						<ul>
@@ -674,11 +674,11 @@
 								<span>circles</span>
 							</li>
 						</ul>
-					</div><!--/social-box-->			
-					
+					</div><!--/social-box-->
+
 				</div><!--/col-->
 				<div class="col-md-3">
-					
+
 					<div class="social-box twitter">
 						<i class="fa fa-twitter"></i>
 						<ul>
@@ -691,18 +691,18 @@
 								<span>tweets</span>
 							</li>
 						</ul>
-					</div><!--/social-box-->			
-					
+					</div><!--/social-box-->
+
 				</div><!--/col-->
-				
+
               </div>
 
-                    
-                   
+
+
                 <!-- statics end -->
-              
-            
-				
+
+
+
 
               <!-- project team & activity start -->
           <div class="row">
@@ -712,23 +712,23 @@
 				<div class="panel-heading">
                   <div class="pull-left">Message</div>
                   <div class="widget-icons pull-right">
-                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
                     <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                  </div>  
+                  </div>
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="panel-body">
                   <!-- Widget content -->
                   <div class="padd sscroll">
-                    
+
                     <ul class="chats">
 
                       <!-- Chat by us. Use the class "by-me". -->
                       <li class="by-me">
                         <!-- Use the class "pull-left" in avatar -->
                         <div class="avatar pull-left">
-                          <img src="img/user.jpg" alt=""/>
+                          <img src="resources/img/user.jpg" alt=""/>
                         </div>
 
                         <div class="chat-content">
@@ -737,13 +737,13 @@
                           Vivamus diam elit diam, consectetur dapibus adipiscing elit.
                           <div class="clearfix"></div>
                         </div>
-                      </li> 
+                      </li>
 
                       <!-- Chat by other. Use the class "by-other". -->
                       <li class="by-other">
                         <!-- Use the class "pull-right" in avatar -->
                         <div class="avatar pull-right">
-                          <img src="img/user22.png" alt=""/>
+                          <img src="resources/img/user22.png" alt=""/>
                         </div>
 
                         <div class="chat-content">
@@ -752,11 +752,11 @@
                           Vivamus diam elit diam, consectetur fconsectetur dapibus adipiscing elit.
                           <div class="clearfix"></div>
                         </div>
-                      </li>   
+                      </li>
 
                       <li class="by-me">
                         <div class="avatar pull-left">
-                          <img src="img/user.jpg" alt=""/>
+                          <img src="resources/img/user.jpg" alt=""/>
                         </div>
 
                         <div class="chat-content">
@@ -764,12 +764,12 @@
                           Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
                           <div class="clearfix"></div>
                         </div>
-                      </li>  
+                      </li>
 
                       <li class="by-other">
                         <!-- Use the class "pull-right" in avatar -->
                         <div class="avatar pull-right">
-                          <img src="img/user22.png" alt=""/>
+                          <img src="resources/img/user22.png" alt=""/>
                         </div>
 
                         <div class="chat-content">
@@ -778,14 +778,14 @@
                           Vivamus diam elit diam, consectetur fermentum sed dapibus eget, Vivamus consectetur dapibus adipiscing elit.
                           <div class="clearfix"></div>
                         </div>
-                      </li>                                                                                  
+                      </li>
 
                     </ul>
 
                   </div>
                   <!-- Widget footer -->
                   <div class="widget-foot">
-                      
+
                       <form class="form-inline">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Type your message here...">
@@ -798,7 +798,7 @@
                 </div>
 
 
-              </div> 
+              </div>
             </div>
 
                   <div class="col-lg-8">
@@ -807,13 +807,13 @@
                           <div class="panel-body progress-panel">
                             <div class="row">
                               <div class="col-lg-8 task-progress pull-left">
-                                  <h1>To Do Everyday</h1>                                  
+                                  <h1>To Do Everyday</h1>
                               </div>
                               <div class="col-lg-4">
                                 <span class="profile-ava pull-right">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
+                                        <img alt="" class="simple" src="resources/img/avatar1_small.jpg">
                                         Jenifer smith
-                                </span>                                
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -829,7 +829,7 @@
                                   </td>
                                   <td>
                                     <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
+                                        <img alt="" class="simple" src="resources/img/avatar1_small.jpg">
                                     </span>
                                   </td>
                               </tr>
@@ -856,7 +856,7 @@
                                   <td>
                                       <div id="work-progress3"></div>
                                   </td>
-                              </tr>                              
+                              </tr>
                               <tr>
                                   <td>22-10-14</td>
                                   <td>
@@ -867,7 +867,7 @@
                                   </td>
                                   <td>
                                       <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
+                                        <img alt="" class="simple" src="resources/img/avatar1_small.jpg">
                                       </span>
                                   </td>
                               </tr>
@@ -882,7 +882,7 @@
                                   <td>
                                       <div id="work-progress4"></div>
                                   </td>
-                              </tr>                              
+                              </tr>
                               <tr>
                                   <td>28-10-14</td>
                                   <td>
@@ -917,7 +917,7 @@
                                   </td>
                                   <td>
                                       <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
+                                        <img alt="" class="simple" src="resources/img/avatar1_small.jpg">
                                       </span>
                                   </td>
                               </tr>
@@ -927,72 +927,72 @@
                       <!--Project Activity end-->
                   </div>
               </div><br><br>
-		
+
 		<div class="row">
 			<div class="col-md-6 portlets">
             <div class="panel panel-default">
 				<div class="panel-heading">
                   <h2><strong>Calendar</strong></h2>
 				<div class="panel-actions">
-                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
                     <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                </div>  
-                 
+                </div>
+
                 </div><br><br><br>
                 <div class="panel-body">
                   <!-- Widget content -->
-                  
+
                     <!-- Below line produces calendar. I am using FullCalendar plugin. -->
                     <div id="calendar"></div>
-                  
+
                 </div>
-              </div> 
-               
+              </div>
+
             </div>
-			
+
 				 <div class="col-md-6 portlets">
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <div class="pull-left">Quick Post</div>
                   <div class="widget-icons pull-right">
-                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
                     <a href="#" class="wclose"><i class="fa fa-times"></i></a>
-                  </div>  
+                  </div>
                   <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">
                   <div class="padd">
-                    
+
                       <div class="form quick-post">
                                       <!-- Edit profile form (not working)-->
                                       <form class="form-horizontal">
                                           <!-- Title -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="title">Title</label>
-                                            <div class="col-lg-10"> 
+                                            <div class="col-lg-10">
                                               <input type="text" class="form-control" id="title">
                                             </div>
-                                          </div>   
+                                          </div>
                                           <!-- Content -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="content">Content</label>
                                             <div class="col-lg-10">
                                               <textarea class="form-control" id="content"></textarea>
                                             </div>
-                                          </div>                           
+                                          </div>
                                           <!-- Cateogry -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2">Category</label>
-                                            <div class="col-lg-10">                               
+                                            <div class="col-lg-10">
                                                 <select class="form-control">
                                                   <option value="">- Choose Cateogry -</option>
                                                   <option value="1">General</option>
                                                   <option value="2">News</option>
                                                   <option value="3">Media</option>
                                                   <option value="4">Funny</option>
-                                                </select>  
+                                                </select>
                                             </div>
-                                          </div>              
+                                          </div>
                                           <!-- Tags -->
                                           <div class="form-group">
                                             <label class="control-label col-lg-2" for="tags">Tags</label>
@@ -1000,7 +1000,7 @@
                                               <input type="text" class="form-control" id="tags">
                                             </div>
                                           </div>
-                                          
+
                                           <!-- Buttons -->
                                           <div class="form-group">
                                              <!-- Buttons -->
@@ -1012,7 +1012,7 @@
                                           </div>
                                       </form>
                                     </div>
-                  
+
 
                   </div>
                   <div class="widget-foot">
@@ -1020,17 +1020,17 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
-                        
-          </div> 
+
+          </div>
               <!-- project team & activity end -->
 
           </section>
           <div class="text-right">
           <div class="credits">
-                <!-- 
-                    All the links in the footer should remain intact. 
+                <!--
+                    All the links in the footer should remain intact.
                     You can delete the links only if you purchased the pro version.
                     Licensing information: https://bootstrapmade.com/license/
                     Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
@@ -1044,51 +1044,51 @@
   <!-- container section start -->
 
     <!-- javascripts -->
-    <script src="js/jquery.js"></script>
-	<script src="js/jquery-ui-1.10.4.min.js"></script>
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="resources/js/jquery.js"></script>
+	<script src="resources/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="resources/js/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-ui-1.9.2.custom.min.js"></script>
     <!-- bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
     <!-- nice scroll -->
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="resources/js/jquery.scrollTo.min.js"></script>
+    <script src="resources/js/jquery.nicescroll.js" type="text/javascript"></script>
     <!-- charts scripts -->
-    <script src="assets/jquery-knob/js/jquery.knob.js"></script>
-    <script src="js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-    <script src="js/owl.carousel.js" ></script>
+    <script src="resources/assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="resources/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="resources/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="resources/js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
-	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+    <<script src="resources/js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+	<script src="resources/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
-    <script src="js/calendar-custom.js"></script>
-	<script src="js/jquery.rateit.min.js"></script>
+    <script src="resources/js/calendar-custom.js"></script>
+	<script src="resources/js/jquery.rateit.min.js"></script>
     <!-- custom select -->
-    <script src="js/jquery.customSelect.min.js" ></script>
-	<script src="assets/chart-master/Chart.js"></script>
-   
+    <script src="resources/js/jquery.customSelect.min.js" ></script>
+	<script src="resources/assets/chart-master/Chart.js"></script>
+
     <!--custome script for all page-->
-    <script src="js/scripts.js"></script>
+    <script src="resources/js/scripts.js"></script>
     <!-- custom script for this page-->
-    <script src="js/sparkline-chart.js"></script>
-    <script src="js/easy-pie-chart.js"></script>
-	<script src="js/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="js/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="js/xcharts.min.js"></script>
-	<script src="js/jquery.autosize.min.js"></script>
-	<script src="js/jquery.placeholder.min.js"></script>
-	<script src="js/gdp-data.js"></script>	
-	<script src="js/morris.min.js"></script>
-	<script src="js/sparklines.js"></script>	
-	<script src="js/charts.js"></script>
-	<script src="js/jquery.slimscroll.min.js"></script>
+    <script src="resources/js/sparkline-chart.js"></script>
+    <script src="resources/js/easy-pie-chart.js"></script>
+	<script src="resources/js/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="resources/js/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="resources/js/xcharts.min.js"></script>
+	<script src="resources/js/jquery.autosize.min.js"></script>
+	<script src="resources/js/jquery.placeholder.min.js"></script>
+	<script src="resources/js/gdp-data.js"></script>
+	<script src="resources/js/morris.min.js"></script>
+	<script src="resources/js/sparklines.js"></script>
+	<script src="resources/js/charts.js"></script>
+	<script src="resources/js/jquery.slimscroll.min.js"></script>
   <script>
 
       //knob
       $(function() {
         $(".knob").knob({
-          'draw' : function () { 
+          'draw' : function () {
             $(this.i).val(this.cv + '%')
           }
         })
@@ -1110,7 +1110,7 @@
       $(function(){
           $('select.styled').customSelect();
       });
-	  
+
 	  /* ---------- Map ---------- */
 	$(function(){
 	  $('#map').vectorMap({
