@@ -209,7 +209,7 @@ ALTER TABLE "order" ADD CONSTRAINT "order_fk3" FOREIGN KEY ("payment_type_id") R
 ALTER TABLE "order" ADD CONSTRAINT "order_fk4" FOREIGN KEY ("customer_id") REFERENCES "customer"("id");
 ALTER TABLE "order" ADD CONSTRAINT "order_fk5" FOREIGN KEY ("payment_status_id") REFERENCES "payment_status"("id");
 
-ALTER TABLE "product" ADD CONSTRAINT "product_fk0" FOREIGN KEY ("brand_id") REFERENCES "brand"("id");
+ALTER TABLE "product" ADD CONSTRAINT "product_fk0" FOREIGN KEY (brand_id) REFERENCES "brand"("id");
 
 ALTER TABLE "ordered_product" ADD CONSTRAINT "ordered_product_fk0" FOREIGN KEY ("order_id") REFERENCES "order"("id");
 ALTER TABLE "ordered_product" ADD CONSTRAINT "ordered_product_fk1" FOREIGN KEY ("product_id") REFERENCES "product"("id");

@@ -3,6 +3,7 @@ package tapplication.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tapplication.exceptions.InvalidDataException;
 import tapplication.model.Customer;
 import tapplication.repositories.CustomerDao;
 import tapplication.model.Role;
@@ -21,14 +22,26 @@ public class LoginServiceImpl implements LoginService {
     private RoleDao roleDao;
 
     @Transactional
-    public Customer create(String name, String email, String password, Role role) throws AlreadyExistException{
+    public Customer create(Customer customer) throws AlreadyExistException{
 
-        Customer customer = new Customer(name, email, password, role);
-
-        if (customerDao.isUserExsist(customer.getEmail())) {
+        customer.setRole(new Role(1l));
+        if (customerDao.isExsist(customer.getEmail())) {
             throw new AlreadyExistException();
         }
         customerDao.persist(customer);
         return customer;
+    }
+
+    @Transactional
+    public Customer getCustomerByEmail(Customer customer) throws InvalidDataException {
+
+        if(!isValid(customer)){
+            throw new InvalidDataException();
+        }
+        return customerDao.findByEmail(customer);
+    }
+
+    public boolean isValid(Customer customer) {
+        return customerDao.validate(customer);
     }
 }

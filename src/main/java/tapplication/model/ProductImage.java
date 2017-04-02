@@ -13,6 +13,7 @@ public class ProductImage {
     public static final String PRODUCT_ID = "product_id";
     public static final String ID = "id";
     public static final String TABLE_PRODUCT_IMAGE = "product_image";
+    public static final String REFERENCED_ID = "id";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID)
@@ -24,8 +25,8 @@ public class ProductImage {
     @Column(name = IMAGE)
     private String image;
 
-    @ManyToOne()
-    @JoinColumn(name = PRODUCT_ID, referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = PRODUCT_ID, referencedColumnName = REFERENCED_ID)
     private Product product;
 
     public ProductImage() {}
@@ -70,8 +71,8 @@ public class ProductImage {
         this.image = image;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProduct() {
+        return product.getId();
     }
 
     public void setProduct(Product product) {

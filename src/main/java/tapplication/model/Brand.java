@@ -12,6 +12,7 @@ public class Brand {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String BRAND_IMAGE = "brand_image";
+    public static final String PRODUCT_ID = "product_id";
     @Id
     @Column(name = ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +23,18 @@ public class Brand {
 
     @Column(name = BRAND_IMAGE)
     private String brandImage;
+
+    @OneToOne
+    @JoinColumn(name = PRODUCT_ID)
+    private Product product;
+
+    public Long getProduct() {
+        return product.getId();
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Brand(){}
 

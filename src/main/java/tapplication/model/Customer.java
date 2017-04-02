@@ -15,6 +15,14 @@ public class Customer {
     public static final String CUSTOMER = "customer";
     public static final String ID = "id";
     public static final String FIRST_NAME = "first_name";
+    public static final String LAST_NAME = "last_name";
+    public static final String BIRTH_DATE = "birth_date";
+    public static final String EMAIL = "email";
+    public static final String PHONE_NUMBER = "phone_number";
+    public static final String PASSWORD = "password";
+    public static final String ROLE_ID = "role_id";
+    public static final String CUSTOMER1 = "customer";
+    public static final String BASKET_ID = "basket_id";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID)
@@ -23,31 +31,31 @@ public class Customer {
     @Column(name = FIRST_NAME)
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = LAST_NAME)
     private String secondName;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date")
+    @Column(name = BIRTH_DATE)
     private Date birthDate;
 
-    @Column(name = "email")
+    @Column(name = EMAIL)
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = PHONE_NUMBER)
     private String phoneNumber;
 
-    @Column(name = "password")
+    @Column(name = PASSWORD)
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = ROLE_ID)
     private Role role;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = CUSTOMER1, fetch = FetchType.EAGER)
     private List<Address> addresses = new ArrayList<Address>();
 
     @OneToOne
-    @JoinColumn(name = "basket_id")
+    @JoinColumn(name = BASKET_ID)
     private Basket basket;
 
     public Role getRole() {
@@ -75,6 +83,18 @@ public class Customer {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.role = role;
+        this.addresses = addresses;
+        this.basket = basket;
+    }
+
+    //without password
+    public Customer(String name, String secondName, Date birthDate, String email, String phoneNumber, Role role, List<Address> addresses, Basket basket) {
+        this.name = name;
+        this.secondName = secondName;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.role = role;
         this.addresses = addresses;
         this.basket = basket;

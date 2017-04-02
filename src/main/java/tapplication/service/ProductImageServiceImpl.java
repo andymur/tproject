@@ -16,26 +16,26 @@ import java.util.List;
 @Service("productImageService")
 public class ProductImageServiceImpl implements CoreService<ProductImage> {
     @Autowired
-    private ProductImageDao productImageDao;
+    private ProductImageDao repo;
 
     public ProductImage findOne(Long id) throws NotFoundException {
-        return productImageDao.find(id);
+        return repo.find(id);
     }
 
     @Transactional
-    public ProductImage create(ProductImage productImage) throws AlreadyExistException{
-        if (productImageDao.isExist(productImage.getName())) {
+    public ProductImage create(ProductImage entity) throws AlreadyExistException{
+        if (repo.isExist(entity.getName())) {
            throw new AlreadyExistException();
         }
-        productImageDao.persist(productImage);
-        return productImage;
+        repo.persist(entity);
+        return entity;
     }
 
     @Transactional
     public ProductImage update(ProductImage productImage) throws NotFoundException {
-        ProductImage imageToBeMerged = productImageDao.find(productImage.getId());
+        ProductImage imageToBeMerged = repo.find(productImage.getId());
         if (imageToBeMerged != null) {
-            productImageDao.merge(productImage);
+            repo.merge(productImage);
         } else {
             throw new NotFoundException();
         }
@@ -44,15 +44,15 @@ public class ProductImageServiceImpl implements CoreService<ProductImage> {
 
     @Transactional
     public void delete(ProductImage productImage) throws NotFoundException {
-        ProductImage imageToBeDeleted = productImageDao.find(productImage.getId());
+        ProductImage imageToBeDeleted = repo.find(productImage.getId());
         if (imageToBeDeleted != null) {
-            productImageDao.delete(imageToBeDeleted);
+            repo.delete(imageToBeDeleted);
         } else {
             throw new NotFoundException();
         }
     }
 
     public List<ProductImage> findAll() {
-        return productImageDao.selectAll();
+        return repo.selectAll();
     }
 }

@@ -1,6 +1,9 @@
 package tapplication.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,13 +55,14 @@ public class Product {
     private Long quantity;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(style = "yyyy:mm:dd")
     @Column(name = CHANGE_DATE)
     private Date changeDate;
 
     @ManyToMany(mappedBy= PRODUCTS)
     private List<Category> categories;
 
-    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = TABLE_PRODUCT)
     private List<ProductImage> images;
 
     @OneToMany(mappedBy = TABLE_PRODUCT)
@@ -78,7 +82,29 @@ public class Product {
         this.color = color;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", brand=" + brand +
+                ", name='" + name + '\'' +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", changeDate=" + changeDate +
+                ", categories=" + categories +
+                ", images=" + images +
+                ", parameters=" + parameters +
+                '}';
+    }
+
     public Product() {
+    }
+
+    public Product(Long productId) {
+        this.id = productId;
     }
 
     public String getModel() {
@@ -157,24 +183,27 @@ public class Product {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setCategories(Category category) {
+        this.categories = new ArrayList<Category>();
+        this.categories.add(category);
     }
 
     public List<ProductImage> getImages() {
         return images;
     }
 
-    public void setImages(List<ProductImage> images) {
-        this.images = images;
+    public void setImages(ProductImage image) {
+        this.images = new ArrayList<ProductImage>();
+        this.images.add(image);
     }
 
     public List<Parameters> getParameters() {
         return parameters;
     }
 
-    public void setParameters(List<Parameters> parameters) {
-        this.parameters = parameters;
+    public void setParameters(Parameters parameter) {
+        this.parameters = new ArrayList<Parameters>();
+        this.parameters.add(parameter);
     }
 
     public void increaseQuantity(Long quantity) {

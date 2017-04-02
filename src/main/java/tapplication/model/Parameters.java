@@ -31,10 +31,10 @@ public class Parameters {
 
     public Parameters(){}
 
-    public Parameters(String size, Long weight, Product product) {
+    public Parameters(String size, Long weight, Long productId) {
         this.size = size;
         this.weight = weight;
-        this.product = product;
+        this.product = new Product(productId);
     }
 
     @Override
@@ -71,8 +71,9 @@ public class Parameters {
         this.weight = weight;
     }
 
-    public Product getProduct() {
-        return product;
+//    @JsonIgnore
+    public Long getProduct() {
+        return product.getId();
     }
 
     public void setProduct(Product product) {

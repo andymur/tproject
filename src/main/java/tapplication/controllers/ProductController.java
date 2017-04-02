@@ -17,7 +17,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "createProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "product/create", method = RequestMethod.POST)
     public Object createProduct(@RequestBody Product newProduct) throws AlreadyExistException {
         Product product = productService.create(newProduct);
         return product;

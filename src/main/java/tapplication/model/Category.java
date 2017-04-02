@@ -1,8 +1,7 @@
 package tapplication.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public class Category {
     @Column(name = CATEGORY_IMAGE)
     private String categoryImage;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = PRODUCT_CATEGORY, joinColumns = {@JoinColumn(name = CATEGORY_ID)},
             inverseJoinColumns = {@JoinColumn(name = PRODUCT_ID)})
     private List<Product> products;
@@ -39,7 +38,8 @@ public class Category {
         this.categoryImage = categoryImage;
     }
 
-    public Category() {}
+    public Category() {
+    }
 
     @Override
     public String toString() {
@@ -74,12 +74,15 @@ public class Category {
         this.categoryImage = categoryImage;
     }
 
-    @JsonIgnore
-    public List<Product> getProducts() {
-        return products;
+    //    @JsonIgnore
+    public List<Long> getProducts() {
+        List<Long> productIds = new ArrayList<>();
+        products.forEach(p -> productIds.add(p.getId()));
+        return productIds;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProducts(Product product) {
+        this.products = new ArrayList<>();
+        this.products.add(product);
     }
 }
