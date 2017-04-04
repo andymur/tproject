@@ -8,7 +8,9 @@ jQuery(function ($) {
         var category = {
             id: $('#cat-select option:selected').data('category-id'),
             name: $('#cat-select option:selected').data('category-name'),
-            categoryImage: $('#cat-select option:selected').data('category-image')
+            categoryImage: $('#cat-select option:selected').data('category-image'),
+            categoryProducts: $('#cat-select option:selected').data('category-products')
+
         }
         var image = {
             "name": $('#form-product input[name=imagename]').val(),
