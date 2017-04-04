@@ -22,9 +22,9 @@ public class ProductService {
             throw new AlreadyExistException();
         }
         productDao.persist(newProduct);
-        newProduct.getBrand().setProduct(newProduct);
+//        newProduct.getBrand().setProduct(newProduct);
         newProduct.getImages().forEach(item->item.setProduct(newProduct));
-        newProduct.getCategories().forEach(item->item.setProducts(newProduct));
+        newProduct.getCategory().setProducts(newProduct);
         newProduct.getParameters().forEach(item->item.setProduct(newProduct));
         return newProduct;
     }

@@ -24,17 +24,17 @@ public class Brand {
     @Column(name = BRAND_IMAGE)
     private String brandImage;
 
-    @OneToOne
-    @JoinColumn(name = PRODUCT_ID)
-    private Product product;
-
-    public Long getProduct() {
-        return product.getId();
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+//    @OneToOne
+//    @JoinColumn(name = PRODUCT_ID)
+//    private Product product;
+//
+//    public Long getProduct() {
+//        return product.getId();
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 
     public Brand(){}
 

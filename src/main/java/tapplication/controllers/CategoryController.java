@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import tapplication.exceptions.AlreadyExistException;
+import tapplication.exceptions.NotFoundException;
 import tapplication.model.Category;
 import tapplication.service.CategoryServiceImpl;
 
@@ -26,6 +27,16 @@ public class CategoryController {
     @RequestMapping(value = "category")
     public Object findAll() {
         return categoryService.findAll();
+    }
+
+    @RequestMapping(value = "category/update", method = RequestMethod.POST)
+    public Object update(@RequestBody Category category) throws NotFoundException {
+        return categoryService.update(category);
+    }
+
+    @RequestMapping(value = "category/delete", method = RequestMethod.POST)
+    public void delete(@RequestBody Category category) throws NotFoundException {
+        categoryService.delete(category);
     }
 
 }

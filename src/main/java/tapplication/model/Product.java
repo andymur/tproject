@@ -1,7 +1,6 @@
 package tapplication.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +23,8 @@ public class Product {
     public static final String QUANTITY = "quantity";
     public static final String PRODUCTS = "products";
     public static final String COLOR = "color";
+    public static final String CATEGORY_ID = "category_id";
+    public static final String ID1 = "id";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,27 +57,28 @@ public class Product {
     @Column(name = CHANGE_DATE)
     private Date changeDate;
 
-    @ManyToMany(mappedBy= PRODUCTS)
-    private List<Category> categories;
+    @ManyToOne
+    @JoinColumn(name = CATEGORY_ID, referencedColumnName = ID1)
+    private Category category;
 
     @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.PERSIST)
     private List<ProductImage> images;
 
-    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.ALL)
     private List<Parameters> parameters;
 
-    public Product(Brand brand, String name, String model, String color, String description, Long price, Long quantity, Date changeDate, List<Category> categories, List<ProductImage> images, List<Parameters> parameters) {
+    public Product(Brand brand, String name, String model, String color, String description, Long price, Long quantity, Date changeDate, Category category, List<ProductImage> images, List<Parameters> parameters) {
         this.brand = brand;
         this.name = name;
+        this.model = model;
+        this.color = color;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.changeDate = changeDate;
-        this.categories = categories;
+        this.category = category;
         this.images = images;
         this.parameters = parameters;
-        this.model = model;
-        this.color = color;
     }
 
     @Override
@@ -91,7 +93,7 @@ public class Product {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", changeDate=" + changeDate +
-                ", categories=" + categories +
+                ", category=" + category +
                 ", images=" + images +
                 ", parameters=" + parameters +
                 '}';
@@ -176,13 +178,12 @@ public class Product {
         this.changeDate = changeDate;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(Category category) {
-        this.categories = new ArrayList<Category>();
-        this.categories.add(category);
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public List<ProductImage> getImages() {

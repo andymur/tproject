@@ -17,6 +17,7 @@ public class Category {
     public static final String PRODUCT_CATEGORY = "product_category";
     public static final String PRODUCT_ID = "product_id";
     public static final String CATEGORY_ID = "category_id";
+    public static final String CATEGORY = "category";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID)
@@ -28,15 +29,20 @@ public class Category {
     @Column(name = CATEGORY_IMAGE)
     private String categoryImage;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = PRODUCT_CATEGORY,
-            joinColumns = {@JoinColumn(name = CATEGORY_ID)},
-            inverseJoinColumns = {@JoinColumn(name = PRODUCT_ID)})
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = PRODUCT_CATEGORY,
+//            joinColumns = {@JoinColumn(name = CATEGORY_ID)},
+//            inverseJoinColumns = {@JoinColumn(name = PRODUCT_ID)})
+//    private List<Product> products;
+
+    @OneToMany(mappedBy = CATEGORY, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Product> products;
 
-    public Category(String name, String categoryImage) {
+
+    public Category(String name, String categoryImage, List<Product> products) {
         this.name = name;
         this.categoryImage = categoryImage;
+        this.products = products;
     }
 
     public Category() {
@@ -48,6 +54,7 @@ public class Category {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", categoryImage='" + categoryImage + '\'' +
+                ", products=" + products +
                 '}';
     }
 
@@ -76,14 +83,31 @@ public class Category {
     }
 
     //    @JsonIgnore
+//    public List<Long> getProducts() {
+//        List<Long> productIds = new ArrayList<>();
+//        products.forEach(p -> productIds.add(p.getId()));
+//        return productIds;
+//    }
+//
+//    public void setProducts(Product product) {
+//        this.products = new ArrayList<>();
+//        this.products.add(product);
+//    }
+
+
     public List<Long> getProducts() {
         List<Long> productIds = new ArrayList<>();
-        products.forEach(p -> productIds.add(p.getId()));
+        if(products != null) {
+            products.forEach(p -> productIds.add(p.getId()));
+        }
         return productIds;
     }
 
     public void setProducts(Product product) {
-        this.products = new ArrayList<>();
-        this.products.add(product);
+        if (this.products == null) {
+            this.products = new ArrayList<>();
+        } else {
+            this.products.add(product);
+        }
     }
 }
