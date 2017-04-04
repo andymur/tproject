@@ -26,7 +26,7 @@ public class ProductService {
         productDao.persist(newProduct);
 //        newProduct.getBrand().setProduct(newProduct);
         newProduct.getImages().forEach(item->item.setProduct(newProduct));
-        newProduct.getCategory().setProducts(newProduct);
+        newProduct.getCategory().getProducts().add(newProduct.getId());
         newProduct.getParameters().forEach(item->item.setProduct(newProduct));
         return newProduct;
     }

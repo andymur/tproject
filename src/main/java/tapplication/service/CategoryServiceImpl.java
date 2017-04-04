@@ -53,7 +53,7 @@ public class CategoryServiceImpl implements CoreService<Category> {
     }
 
     public List<Category> findAll() {
-        return categoryDao.selectAll();
+        return categoryDao.findAll();
     }
 }
 

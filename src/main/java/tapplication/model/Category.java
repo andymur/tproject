@@ -36,7 +36,7 @@ public class Category {
 //    private List<Product> products;
 
     @OneToMany(mappedBy = CATEGORY, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
 
     public Category(String name, String categoryImage, List<Product> products) {
@@ -93,21 +93,14 @@ public class Category {
 //        this.products = new ArrayList<>();
 //        this.products.add(product);
 //    }
-
-
+//    @JsonIgnore
     public List<Long> getProducts() {
         List<Long> productIds = new ArrayList<>();
-        if(products != null) {
-            products.forEach(p -> productIds.add(p.getId()));
-        }
+        products.forEach(p -> productIds.add(p.getId()));
         return productIds;
     }
 
-    public void setProducts(Product product) {
-        if (this.products == null) {
-            this.products = new ArrayList<>();
-        } else {
-            this.products.add(product);
-        }
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
