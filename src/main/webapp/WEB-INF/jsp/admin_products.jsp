@@ -8,9 +8,7 @@
     </jsp:attribute>
     <jsp:body>
 
-        <!-- container section start -->
         <section id="container" class="">
-            <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
                     <div class="row">
@@ -196,7 +194,6 @@
                 </div>
             </div>
         </section>
-
 
         <script type="text/javascript" src="resources/admin_products.js"></script>
     </jsp:body>

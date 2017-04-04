@@ -7,6 +7,8 @@ import tapplication.exceptions.AlreadyExistException;
 import tapplication.model.Product;
 import tapplication.repositories.ProductDao;
 
+import java.util.List;
+
 /**
  * Created by alexpench on 29.03.17.
  */
@@ -27,5 +29,13 @@ public class ProductService {
         newProduct.getCategory().setProducts(newProduct);
         newProduct.getParameters().forEach(item->item.setProduct(newProduct));
         return newProduct;
+    }
+
+    public List<Product> findAll() {
+        return productDao.selectAll();
+    }
+
+    public List<Product> findAllByCategory(String category) {
+        return null;
     }
 }

@@ -153,10 +153,10 @@
 
                         <ul class="wrapper">
                             <li class="submenu">
-                                <a href="index.jsp">Home</a>
+                                <a href="index">Home</a>
                                 <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                 <ul>
-                                    <li><a href="index.jsp">Home Parallax</a></li>
+                                    <li><a href="index">Home Parallax</a></li>
                                     <li><a href="index-slider.html">Home With Slider</a></li>
                                     <li><a href="index_content_slider.html">Home Content Slider</a></li>
                                     <li><a href="index-static.html">Home Static Background</a></li>
@@ -196,14 +196,10 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="#">Shop</a>
+                                <a href="shop">Shop</a>
                                 <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                 <ul>
-                                    <li><a href="shop.html">Shop Without Sidebar</a></li>
                                     <li><a href="shop-3.html">Shop With Left Sidebar</a></li>
-                                    <li><a href="shop-2.html">Shop With Right Sidebar</a></li>
-                                    <li><a href="shop-parallax.html">Shop Parallax</a></li>
-                                    <li><a href="shop-slider.html">Shop With Slider</a></li>
                                     <li><a href="shop-single.html">Shop Product Page</a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>

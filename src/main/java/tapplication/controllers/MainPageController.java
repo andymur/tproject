@@ -17,5 +17,4 @@ public class MainPageController {
     public Object goToDashboardAdminPage(){
         return "admin_dashboard";
     }
-
 }

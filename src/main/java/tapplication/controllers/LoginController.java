@@ -19,7 +19,7 @@ public class LoginController {
     @Autowired
     private LoginServiceImpl loginService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
     public Object redirect() {
         return "index";
     }
