@@ -199,7 +199,6 @@
                                 <a href="shop">Shop</a>
                                 <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                 <ul>
-                                    <li><a href="shop-3.html">Shop With Left Sidebar</a></li>
                                     <li><a href="shop-single.html">Shop Product Page</a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>

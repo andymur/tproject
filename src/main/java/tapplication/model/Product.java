@@ -25,6 +25,9 @@ public class Product {
     public static final String COLOR = "color";
     public static final String CATEGORY_ID = "category_id";
     public static final String ID1 = "id";
+    public static final String PRODUCT_CATEGORY = "category";
+    public static final String PARAMETERS = "parameters";
+    public static final String BRAND = "brand";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +67,7 @@ public class Product {
     @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.PERSIST)
     private List<ProductImage> images;
 
-    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Parameters> parameters;
 
     public Product(Brand brand, String name, String model, String color, String description, Long price, Long quantity, Date changeDate, Category category, List<ProductImage> images, List<Parameters> parameters) {

@@ -7,17 +7,6 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <div class="shop">
-            <div class="container">
-                <div class="col-md-12 welcome-msg">
-                    <h2>The <span class="color">Pronto</span></h2>
-                    <p>introducing</p>
-                    <a href="#" class="welcome-button">LEARN MORE</a>
-
-                </div>
-            </div>
-        </div>
-
         <div class="arrivals">
             <div class="container">
 
@@ -27,8 +16,7 @@
 
                 <div class="new">
                     <div class="col-md-12">
-                        <h2>Our Latest <span class="color">Products</span></h2>
-                        <p>You will fall in love with our new products.</p>
+                        <h2>The<span class="color">Bicycle</span></h2>
                     </div>
 
                     <div class="clearfix"></div>
@@ -36,33 +24,28 @@
                     <div class="shop-products">
 
                         <div class="col-md-3 sidebar">
-                            <div class="input-group">
-                                <input type="text" class="form-control">
-                                <span class="input-group-btn">
-							<button class="btn btn-default" type="button">Search</button>
-						</span>
-                            </div><!-- /input-group -->
-
                             <div class="sidebar-block top-10">
-                                <h3>CATEGORIES</h3>
-                                <ul class="categories">
-                                    <li><a href="catalog?categoryId=2">Bicycles<kbd>27</kbd></a></li>
-                                    <li><a href="/catalog/categoryId">Helmets<kbd>15</kbd></a></li>
-                                    <li><a href="/catalog/categoryId">Baskets<kbd>21</kbd></a></li>
-                                    <li><a href="/catalog/categoryId">Lights<kbd>05</kbd></a></li>
-                                    <li><a href="/catalog/categoryId">Saddles<kbd>11</kbd></a></li>
-                                </ul>
-                            </div>
-
-                            <div class="sidebar-block">
-                                <h3>TAGS</h3>
-                                <ul class="tags">
-                                    <li><a href="#">Classic</a></li>
-                                    <li><a href="#">Modern</a></li>
-                                    <li><a href="#">Speed</a></li>
-                                    <li><a href="#">New</a></li>
-                                    <li><a href="#">Best seller</a></li>
-                                </ul>
+                                <h3>FILTER</h3>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Brand</label>
+                                    <div class="col-sm-10">
+                                        <select id="br-select" class="form-control m-bot15">
+                                            <c:forEach var="brand" items="${brands}">
+                                                <option data-brand-id=${brand.id} data-brand-name=${brand.name} data-brand-image=${brand.brandImage}>${brand.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Size</label>
+                                    <div class="col-sm-10">
+                                        <select id="size-select" class="form-control m-bot15">
+                                            <c:forEach var="size" items="${Size}">
+                                                <option data-size-id=${size.id} data-size-name=${size.name}>${size.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="clearfix"></div>
 
@@ -97,7 +80,7 @@
                                     <li class="cbp-item graphic" style="width: 397px; height: 474px; transform: translate3d(427px, 0px, 0px);"><div class="cbp-item-wrapper">
                                         <div class="cbp-caption">
                                             <div class="cbp-caption-defaultWrap">
-                                                <img src="resources/images/shop/2.jpg" alt="">
+                                                <img src="resources/resources/images/shop/2.jpg" alt="">
                                             </div>
                                             <div class="cbp-caption-activeWrap">
                                                 <div class="cbp-l-caption-alignCenter">
@@ -114,7 +97,7 @@
                                     <li class="cbp-item graphic" style="width: 397px; height: 474px; transform: translate3d(0px, 474px, 0px);"><div class="cbp-item-wrapper">
                                         <div class="cbp-caption">
                                             <div class="cbp-caption-defaultWrap">
-                                                <img src="resources/images/shop/3.jpg" alt="">
+                                                <img src="resources/resources/images/shop/3.jpg" alt="">
                                             </div>
 
                                             <div class="cbp-caption-activeWrap">
@@ -245,6 +228,5 @@
 
             </div>
         </div>
-
     </jsp:body>
 </t:genericpage>

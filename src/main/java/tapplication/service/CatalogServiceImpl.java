@@ -2,9 +2,11 @@ package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
+import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.NotFoundException;
-import tapplication.model.Category;
+import tapplication.model.Product;
+
+import java.util.List;
 
 /**
  * Created by alexpench on 04.04.17.
@@ -13,12 +15,11 @@ import tapplication.model.Category;
 public class CatalogServiceImpl implements Catalogervice {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CategoryServiceImpl categoryService;
-    @Override
-    public Object preparePage(Model model, Long categoryId) throws NotFoundException {
-        Category category = categoryService.findOne(categoryId);
-        category.getProducts();
-        return null;
+
+    @Transactional
+    public List<Product> getProductsByCategoryId(Long categoryId) throws NotFoundException {
+        List<Product> products = productService.findAllByCategory(categoryId);
+        products.forEach(p->{p.getImages();p.getParameters();});
+        return products;
     }
 }
