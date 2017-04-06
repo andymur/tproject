@@ -12,7 +12,7 @@ import java.util.List;
  * Created by alexpench on 04.04.17.
  */
 @Service("catalogService")
-public class CatalogServiceImpl implements Catalogervice {
+public class CatalogServiceImpl implements CatalogService {
     @Autowired
     private ProductService productService;
 
