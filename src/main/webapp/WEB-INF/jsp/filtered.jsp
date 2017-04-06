@@ -4,7 +4,6 @@
 <c:forEach var="product" items="${products}">
     <option data-product-id=${product.id} data-product-name=${product.name}>${product.name}</option>
 </c:forEach>
-<div class="col-md-9">
     <div id="grid-container-10" class="cbp-l-grid-projects cbp cbp-chrome cbp-caption-overlayBottomReveal cbp-animation-flipOut cbp-ready" style="height: 1896px;">
         <ul class="cbp-wrapper" style="opacity: 1;">
             <li class="cbp-item graphic" style="width: 397px; height: 474px; transform: translate3d(0px, 0px, 0px);"><div class="cbp-item-wrapper">
@@ -167,8 +166,5 @@
                 <div class="cbp-l-grid-projects-desc">Clothes / Women</div>
             </div></li>
         </ul>
-    </div>
-
-
 </div>
 

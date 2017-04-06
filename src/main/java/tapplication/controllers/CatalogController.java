@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.Brand;
 import tapplication.model.Product;
+import tapplication.service.CategoryServiceImpl;
 import tapplication.service.ProductService;
 
 import java.util.HashSet;
@@ -23,6 +24,8 @@ import java.util.Set;
 public class CatalogController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryServiceImpl categoryService;
 
     @RequestMapping(method = RequestMethod.GET)
     public Object getCatalogPage(@RequestParam(value = "categoryId") Long categoryId,
@@ -40,8 +43,9 @@ public class CatalogController {
         model.addAttribute("colors", colors);
         model.addAttribute("brands", brands);
         model.addAttribute("sizes", sizes);
+        model.addAttribute("category", categoryService.findOne(categoryId));
 
-        return "category";
+        return "catalog";
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
