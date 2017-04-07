@@ -10,7 +10,7 @@ public class Address {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "country")
     private String country;
     @Column(name = "city")
@@ -27,11 +27,11 @@ public class Address {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -102,19 +102,5 @@ public class Address {
     }
 
     public Address() {
-    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", building='" + building + '\'' +
-                ", apartment='" + apartment + '\'' +
-                ", zipCode=" + zipCode +
-                ", customer=" + customer +
-                '}';
     }
 }

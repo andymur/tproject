@@ -2,14 +2,20 @@ package tapplication.model;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by alexpench on 22.03.17.
  */
 @Entity
-@Table(name = "order")
+@Table(name = "customer_order")
 public class Order {
+    public enum DeliveryTypeCode {SELF, DELIVER}
+    public enum PaymentTypeCode {CASH, CARD}
+    public enum OrderStatusCode {AWAIT_PAYMENT, AWAIT_SHIPMENT, SHIPPED, DELIVERED}
+    public enum PaymentStatusCode {AWAIT_PAYMENT, PAID}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -23,59 +29,30 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
-    private Instant orderDate;
+    private Date orderDate;
 
-    @PrePersist
-    public void prePersist() {
-        orderDate = Instant.now();
-    }
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderedProduct> orderedProducts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderedProduct> orderedProducts;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "order_status_id")
+    private OrderStatusCode orderStatus;
 
-    @OneToOne
-    @JoinColumn(name = "order_status_id")
-    private OrderStatus orderStatus;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "payment_status_id")
+    private PaymentStatusCode paymentStatus;
 
-    @OneToOne
-    @JoinColumn(name = "payment_status_id")
-    private PaymentStatus paymentStatus;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "payment_type_id")
+    private PaymentTypeCode paymentType;
 
-    @OneToOne
-    @JoinColumn(name = "payment_type_id")
-    private PaymentType paymentType;
-
-    @OneToOne
-    @JoinColumn(name = "delivery_type_id")
-    private DeliveryType deliveryType;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "delivery_type_id")
+    private DeliveryTypeCode deliveryType;
 
     public Order(){}
-
-    public Order(Address address, Customer customer, List<OrderedProduct> orderedProducts, OrderStatus orderStatus, PaymentStatus paymentStatus, PaymentType paymentType, DeliveryType deliveryType) {
-        this.address = address;
-        this.customer = customer;
-        this.orderedProducts = orderedProducts;
-        this.orderStatus = orderStatus;
-        this.paymentStatus = paymentStatus;
-        this.paymentType = paymentType;
-        this.deliveryType = deliveryType;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", address=" + address +
-                ", customer=" + customer +
-                ", orderDate=" + orderDate +
-                ", orderedProducts=" + orderedProducts +
-                ", orderStatus=" + orderStatus +
-                ", paymentStatus=" + paymentStatus +
-                ", paymentType=" + paymentType +
-                ", deliveryType=" + deliveryType +
-                '}';
-    }
 
     public Long getId() {
         return id;
@@ -101,8 +78,12 @@ public class Order {
         this.customer = customer;
     }
 
-    public Instant getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 
     public List<OrderedProduct> getOrderedProducts() {
@@ -113,35 +94,35 @@ public class Order {
         this.orderedProducts = orderedProducts;
     }
 
-    public OrderStatus getOrderStatus() {
+    public OrderStatusCode getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(OrderStatusCode orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public PaymentStatus getPaymentStatus() {
+    public PaymentStatusCode getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
+    public void setPaymentStatus(PaymentStatusCode paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
-    public PaymentType getPaymentType() {
+    public PaymentTypeCode getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(PaymentType paymentType) {
+    public void setPaymentType(PaymentTypeCode paymentType) {
         this.paymentType = paymentType;
     }
 
-    public DeliveryType getDeliveryType() {
+    public DeliveryTypeCode getDeliveryType() {
         return deliveryType;
     }
 
-    public void setDeliveryType(DeliveryType deliveryType) {
+    public void setDeliveryType(DeliveryTypeCode deliveryType) {
         this.deliveryType = deliveryType;
     }
 }

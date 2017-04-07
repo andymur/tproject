@@ -26,10 +26,9 @@ public class OrderedProduct {
 
     public OrderedProduct(){}
 
-    public OrderedProduct(Product product, Long quantity, Order order) {
+    public OrderedProduct(Product product, Long quantity) {
         this.product = product;
         this.quantity = quantity;
-        this.order = order;
     }
 
     @Override

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "delivery_type")
 public class DeliveryType {
-    enum DeliveryTypeCode {SELF, DELIVER}
+    public enum DeliveryTypeCode {SELF, DELIVER}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class DeliveryType {
     private Long id;
 
     @Column(name = "type_code")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private DeliveryTypeCode typeCode;
 
     @Column(name = "description")

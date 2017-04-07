@@ -30,7 +30,7 @@ OIDS = FALSE
 );
 
 
-CREATE TABLE "order" (
+CREATE TABLE "customer_order" (
   "id"                  SERIAL NOT NULL,
   "payment_status_id"   BIGINT NOT NULL,
   "delivery_address_id" BIGINT NOT NULL,
@@ -189,17 +189,17 @@ ALTER TABLE "customer"
 ALTER TABLE "address"
   ADD CONSTRAINT "address_fk0" FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
 
-ALTER TABLE "order"
+ALTER TABLE customer_order
   ADD CONSTRAINT "order_fk0" FOREIGN KEY ("delivery_address_id") REFERENCES "address" ("id");
-ALTER TABLE "order"
+ALTER TABLE customer_order
   ADD CONSTRAINT "order_fk1" FOREIGN KEY ("order_status_id") REFERENCES "order_status" ("id");
-ALTER TABLE "order"
+ALTER TABLE customer_order
   ADD CONSTRAINT "order_fk2" FOREIGN KEY ("delivery_type_id") REFERENCES "delivery_type" ("id");
-ALTER TABLE "order"
+ALTER TABLE customer_order
   ADD CONSTRAINT "order_fk3" FOREIGN KEY ("payment_type_id") REFERENCES "payment_type" ("id");
-ALTER TABLE "order"
+ALTER TABLE customer_order
   ADD CONSTRAINT "order_fk4" FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
-ALTER TABLE "order"
+ALTER TABLE customer_order
   ADD CONSTRAINT "order_fk5" FOREIGN KEY ("payment_status_id") REFERENCES "payment_status" ("id");
 
 ALTER TABLE "product"
@@ -208,7 +208,7 @@ ALTER TABLE "product"
   ADD CONSTRAINT "product_fk1" FOREIGN KEY (category_id) REFERENCES "category" ("id");
 
 ALTER TABLE "ordered_product"
-  ADD CONSTRAINT "ordered_product_fk0" FOREIGN KEY ("order_id") REFERENCES "order" ("id");
+  ADD CONSTRAINT "ordered_product_fk0" FOREIGN KEY ("order_id") REFERENCES customer_order ("id");
 ALTER TABLE "ordered_product"
   ADD CONSTRAINT "ordered_product_fk1" FOREIGN KEY ("product_id") REFERENCES "product" ("id");
 
