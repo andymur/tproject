@@ -17,7 +17,7 @@ public class BasketProduct {
     @Column(name = ID)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = CUSTOMER_ID, referencedColumnName = "id")
     private Customer customer;
 

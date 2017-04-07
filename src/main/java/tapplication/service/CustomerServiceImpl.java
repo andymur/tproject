@@ -10,18 +10,14 @@ import tapplication.exceptions.NotFoundException;
 import tapplication.model.Customer;
 import tapplication.model.Role;
 import tapplication.repositories.CustomerDao;
-import tapplication.repositories.RoleDao;
 
 /**
  * Created by alexpench on 23.03.17.
  */
-@Service
+@Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDao;
-
-    @Autowired
-    private RoleDao roleDao;
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Customer create(Customer customer) throws AlreadyExistException {

@@ -5,19 +5,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.controllers.dto.BasketProductDto;
-import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.BasketProduct;
 import tapplication.repositories.BasketDao;
 
 import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by alexpench on 06.04.17.
  */
 @Service("basketService")
-public class BasketServiceImpl implements CoreService<BasketProduct> {
+public class BasketServiceImpl {
     @Autowired
     private BasketDao basketDao;
     @Autowired
@@ -26,55 +26,84 @@ public class BasketServiceImpl implements CoreService<BasketProduct> {
     private CustomerServiceImpl customerService;
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void addProducts(BasketProductDto productToBasket) throws NotFoundException {
-        Long productId = productToBasket.getProductId();
-        Long customerId = productToBasket.getCustomerId();
-        Long quantity = productToBasket.getQuantity();
+    public BasketProductDto addProducts(BasketProductDto productDto) throws NotFoundException {
 
-        BasketProduct newBasketProduct = new BasketProduct();
-        newBasketProduct.setProduct(productService.findOne(productId));
-        newBasketProduct.setCustomer(customerService.findOne(customerId));
-        newBasketProduct.setQuantity(quantity);
-
-        BasketProduct basketProduct = null;
-        try {
-            basketProduct = basketDao.findOne("product", productId, "customer", customerId);
-        } catch (NoResultException e) {
+        BasketProduct basketProduct = returnIfExist(productDto);
+        if (basketProduct != null) {
+            basketProduct.setQuantity(productDto.getQuantity() + basketProduct.getQuantity());
+            basketDao.merge(basketProduct);
+        } else {
+            BasketProduct newBasketProduct = new BasketProduct();
+            newBasketProduct.setProduct(productService.findOne(productDto.getProductId()));
+            newBasketProduct.setCustomer(customerService.findOne(productDto.getCustomerId()));
+            newBasketProduct.setQuantity(productDto.getQuantity());
             basketDao.persist(newBasketProduct);
         }
-        basketProduct.setQuantity(quantity + basketProduct.getQuantity());
-        update(basketProduct);
+        return productDto;
     }
 
-    @Override
-    public BasketProduct findOne(Long id) throws NotFoundException {
-        return null;
-    }
-
-    @Override
-    public BasketProduct create(BasketProduct entity) throws AlreadyExistException {
-        return null;
-    }
-
-    @Override
-    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
-    public BasketProduct update(BasketProduct entity) throws NotFoundException {
-        BasketProduct basketProduct = basketDao.findOne(entity.getId());
-        if(basketProduct != null){
-            basketDao.merge(basketProduct);
-        } else  {
-            throw new NotFoundException();
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    private BasketProduct returnIfExist(BasketProductDto productToBasket) {
+        BasketProduct basketProduct;
+        try {
+            basketProduct = basketDao
+                    .findByAndParams("product", productToBasket.getProductId(), "customer", productToBasket.getCustomerId());
+        } catch (NoResultException e) {
+            return null;
         }
         return basketProduct;
     }
 
-    @Override
-    public void delete(BasketProduct entity) throws NotFoundException {
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public BasketProduct findOne(Long id) throws NotFoundException {
+        return basketDao.findOne(id);
+    }
+
+//    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+//    public BasketProduct update(BasketProduct entity) throws NotFoundException {
+//        BasketProduct basketProduct = findOne(entity.getId());
+//        if (basketProduct != null) {
+//            basketDao.merge(basketProduct);
+//        } else {
+//            throw new NotFoundException();
+//        }
+//        return basketProduct;
+//    }
+
+    @Transactional
+    public void remove(BasketProductDto basketProductDto) throws NotFoundException {
+        BasketProduct basketProduct = basketDao.findOne(basketProductDto.getRecordId());
+        if (basketProduct != null) {
+            basketDao.delete(basketProduct);
+        } else {
+            throw new NotFoundException();
+        }
 
     }
 
-    @Override
-    public List<BasketProduct> findAll() {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public List<BasketProductDto> findBasketProducts(Long customerId) {
+        List<BasketProductDto> basketProductDetails = new ArrayList<>();
+        List<BasketProduct> basketProducts = findByCustomerId(customerId);
+        if (!basketProducts.isEmpty()) {
+            basketProducts
+                    .forEach(basketProduct -> basketProductDetails
+                            .add(new BasketProductDto(
+                                    basketProduct.getId(),
+                                    basketProduct.getProduct().getName(),
+                                    basketProduct.getQuantity(),
+                                    basketProduct.getCustomer().getId(),
+                                    basketProduct.getProduct().getId()
+                                    )
+                                )
+                    );
+        }
+        return basketProductDetails;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    private List<BasketProduct> findByCustomerId(Long customerId) {
+        List<BasketProduct> basketProducts = basketDao.find("customer", customerId);
+        return basketProducts;
     }
 }

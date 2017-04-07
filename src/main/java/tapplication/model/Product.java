@@ -84,24 +84,6 @@ public class Product {
         this.parameters = parameters;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", brand=" + brand +
-                ", name='" + name + '\'' +
-                ", model='" + model + '\'' +
-                ", color='" + color + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", changeDate=" + changeDate +
-                ", category=" + category +
-                ", images=" + images +
-                ", parameters=" + parameters +
-                '}';
-    }
-
     public Product() {
     }
 

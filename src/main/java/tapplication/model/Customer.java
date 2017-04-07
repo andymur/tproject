@@ -54,7 +54,7 @@ public class Customer {
     @OneToMany(mappedBy = CUSTOMER1, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<BasketProduct> basketProducts;
 
     public Role getRole() {

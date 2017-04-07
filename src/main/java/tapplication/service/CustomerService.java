@@ -1,6 +1,7 @@
 package tapplication.service;
 
 import tapplication.exceptions.AlreadyExistException;
+import tapplication.exceptions.NotFoundException;
 import tapplication.model.Customer;
 
 /**
@@ -8,4 +9,6 @@ import tapplication.model.Customer;
  */
 public interface CustomerService {
     Customer create(Customer customer) throws AlreadyExistException;
+
+    Customer findOne(Long customerId) throws NotFoundException;
 }

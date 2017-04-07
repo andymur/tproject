@@ -51,7 +51,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
         Root<Product> product = query.from(Product.class);
         Join<Product, Parameters> parameters = product.join(Product.PARAMETERS);
         Join<Product, Brand> brands = product.join(Product.BRAND);
-        List<Predicate> predList = new LinkedList<Predicate>();
+        List<Predicate> predList = new LinkedList<>();
         if (categoryId != null) {
             predList.add(builder.and(builder.equal(product.get(Product.PRODUCT_CATEGORY), categoryId)));
         }

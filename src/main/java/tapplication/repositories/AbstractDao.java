@@ -4,15 +4,14 @@ package tapplication.repositories;
  * Created by alexpench on 29.03.17.
  */
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-
-        import javax.persistence.*;
-        import javax.persistence.criteria.CriteriaBuilder;
-        import javax.persistence.criteria.CriteriaQuery;
-        import javax.persistence.criteria.Path;
-        import javax.persistence.criteria.Root;
-        import java.util.List;
-        import java.util.Map;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractDao<Entity, ID> {
     private final Class entryClass;
@@ -103,6 +102,24 @@ public abstract class AbstractDao<Entity, ID> {
             Object parameterValue = keysAndValues[i + 1];
             criteriaQuery.where(criteriaBuilder.equal(parameterPath, parameterValue));
         }
+    }
+
+    public Entity findByAndParams(Object... keysAndValues) {
+        CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
+        CriteriaQuery<Entity> query = criteriaBuilder.createQuery(entryClass);
+        Root<Entity> entity = query.from(entryClass);
+        List<Predicate> predList = new LinkedList<>();
+        if (keysAndValues.length % 2 != 0) {
+            throw new IllegalArgumentException("Expected even count argument, receive odd");
+        }
+        for (int i = 0; i < keysAndValues.length; i += 2) {
+            predList.add(criteriaBuilder.and(criteriaBuilder.equal(entity.get((String) keysAndValues[i]), keysAndValues[i + 1])));
+        }
+        Predicate[] predArray = new Predicate[predList.size()];
+        predList.toArray(predArray);
+        query.where(predArray);
+
+        return findOne(query);
     }
 
     private Object[] toArray(Map<String, Object> parameters) {
