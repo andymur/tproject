@@ -2,6 +2,7 @@ package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
@@ -19,10 +20,10 @@ public class BrandServiceImpl implements CoreService<Brand> {
     private BrandDao brandDao;
 
     public Brand findOne(Long id) throws NotFoundException {
-        return brandDao.find(id);
+        return brandDao.findOne(id);
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Brand create(Brand brand) throws AlreadyExistException {
         if (brandDao.isBrandExist(brand.getName())) {
             throw new AlreadyExistException();
@@ -35,9 +36,9 @@ public class BrandServiceImpl implements CoreService<Brand> {
         return brandDao.selectAll();
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Brand update(Brand brand) throws NotFoundException {
-        Brand brandToBeMerged = brandDao.find(brand.getId());
+        Brand brandToBeMerged = brandDao.findOne(brand.getId());
         if (brandToBeMerged != null) {
             brandDao.merge(brand);
         } else {
@@ -46,9 +47,9 @@ public class BrandServiceImpl implements CoreService<Brand> {
         return brand;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public void delete(Brand brand) throws NotFoundException {
-        Brand brandToBeDeleted = brandDao.find(brand.getId());
+        Brand brandToBeDeleted = brandDao.findOne(brand.getId());
         if (brandToBeDeleted != null) {
             brandDao.delete(brandToBeDeleted);
         } else {

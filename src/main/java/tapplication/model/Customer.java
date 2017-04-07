@@ -51,12 +51,11 @@ public class Customer {
     @JoinColumn(name = ROLE_ID)
     private Role role;
 
-    @OneToMany(mappedBy = CUSTOMER1, fetch = FetchType.EAGER)
-    private List<Address> addresses = new ArrayList<Address>();
+    @OneToMany(mappedBy = CUSTOMER1, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = BASKET_ID)
-    private Basket basket;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<BasketProduct> basketProducts;
 
     public Role getRole() {
         return role;
@@ -74,45 +73,6 @@ public class Customer {
         this.email = email;
         this.password = password;
         this.role = role;
-    }
-
-    public Customer(String name, String secondName, Date birthDate, String email, String phoneNumber, String password, Role role, List<Address> addresses, Basket basket) {
-        this.name = name;
-        this.secondName = secondName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.role = role;
-        this.addresses = addresses;
-        this.basket = basket;
-    }
-
-    //without password
-    public Customer(String name, String secondName, Date birthDate, String email, String phoneNumber, Role role, List<Address> addresses, Basket basket) {
-        this.name = name;
-        this.secondName = secondName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
-        this.addresses = addresses;
-        this.basket = basket;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", birthDate=" + birthDate +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", role=" + role +
-                ", addresses=" + addresses +
-                ", basket=" + basket +
-                '}';
     }
 
     public Long getId() {
@@ -179,11 +139,11 @@ public class Customer {
         this.addresses = addresses;
     }
 
-    public Basket getBasket() {
-        return basket;
+    public List<BasketProduct> getBasketProducts() {
+        return basketProducts;
     }
 
-    public void setBasket(Basket basket) {
-        this.basket = basket;
+    public void setBasketProducts(List<BasketProduct> basketProducts) {
+        this.basketProducts = basketProducts;
     }
 }

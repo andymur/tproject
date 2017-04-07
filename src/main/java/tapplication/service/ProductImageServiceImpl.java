@@ -2,6 +2,7 @@ package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
@@ -19,10 +20,10 @@ public class ProductImageServiceImpl implements CoreService<ProductImage> {
     private ProductImageDao repo;
 
     public ProductImage findOne(Long id) throws NotFoundException {
-        return repo.find(id);
+        return repo.findOne(id);
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public ProductImage create(ProductImage entity) throws AlreadyExistException{
         if (repo.isExist(entity.getName())) {
            throw new AlreadyExistException();
@@ -31,9 +32,9 @@ public class ProductImageServiceImpl implements CoreService<ProductImage> {
         return entity;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public ProductImage update(ProductImage productImage) throws NotFoundException {
-        ProductImage imageToBeMerged = repo.find(productImage.getId());
+        ProductImage imageToBeMerged = repo.findOne(productImage.getId());
         if (imageToBeMerged != null) {
             repo.merge(productImage);
         } else {
@@ -42,9 +43,9 @@ public class ProductImageServiceImpl implements CoreService<ProductImage> {
         return productImage;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public void delete(ProductImage productImage) throws NotFoundException {
-        ProductImage imageToBeDeleted = repo.find(productImage.getId());
+        ProductImage imageToBeDeleted = repo.findOne(productImage.getId());
         if (imageToBeDeleted != null) {
             repo.delete(imageToBeDeleted);
         } else {

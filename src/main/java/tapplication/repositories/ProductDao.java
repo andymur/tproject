@@ -15,7 +15,7 @@ import java.util.List;
  * Created by alexpench on 29.03.17.
  */
 @Repository("productDao")
-public class ProductDao extends AbstractDao<Product, Id> {
+public class ProductDao extends AbstractDao<Product, Long> {
 
     public ProductDao() {
         super(Product.class);

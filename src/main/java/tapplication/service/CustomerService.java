@@ -6,6 +6,6 @@ import tapplication.model.Customer;
 /**
  * Created by alexpench on 31.03.17.
  */
-public interface LoginService {
+public interface CustomerService {
     Customer create(Customer customer) throws AlreadyExistException;
 }

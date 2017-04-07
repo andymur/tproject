@@ -85,13 +85,13 @@ public class Category {
     //    @JsonIgnore
 //    public List<Long> getProducts() {
 //        List<Long> productIds = new ArrayList<>();
-//        products.forEach(p -> productIds.add(p.getId()));
+//        products.forEach(p -> productIds.addProducts(p.getId()));
 //        return productIds;
 //    }
 //
 //    public void setProducts(Product product) {
 //        this.products = new ArrayList<>();
-//        this.products.add(product);
+//        this.products.addProducts(product);
 //    }
 //    @JsonIgnore
     public List<Long> getProducts() {

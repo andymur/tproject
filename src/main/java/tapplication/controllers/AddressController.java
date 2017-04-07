@@ -9,7 +9,7 @@ package tapplication.controllers;
 //    private AddressService addressService;
 //
 //    @RequestMapping(path = "address")
-//    public Object add(@RequestBody Address address){
+//    public Object addProducts(@RequestBody Address address){
 //        return addressService.addAddress(address);
 //    }
 //}

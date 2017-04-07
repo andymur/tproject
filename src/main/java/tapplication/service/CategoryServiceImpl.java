@@ -2,6 +2,7 @@ package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
@@ -19,10 +20,10 @@ public class CategoryServiceImpl implements CoreService<Category> {
     private CategoryDao categoryDao;
 
     public Category findOne(Long id) throws NotFoundException {
-        return categoryDao.find(id);
+        return categoryDao.findOne(id);
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Category create(Category category) throws AlreadyExistException {
         if (categoryDao.isExist(category.getName())) {
             throw new AlreadyExistException();
@@ -31,9 +32,9 @@ public class CategoryServiceImpl implements CoreService<Category> {
         return category;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Category update(Category category) throws NotFoundException {
-        Category categoryToBeMerged = categoryDao.find(category.getId());
+        Category categoryToBeMerged = categoryDao.findOne(category.getId());
         if (categoryToBeMerged != null) {
             categoryDao.merge(category);
         } else {
@@ -42,9 +43,9 @@ public class CategoryServiceImpl implements CoreService<Category> {
         return category;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public void delete(Category category) throws NotFoundException {
-        Category categoryToBeDeleted = categoryDao.find(category.getId());
+        Category categoryToBeDeleted = categoryDao.findOne(category.getId());
         if (categoryToBeDeleted != null) {
             categoryDao.delete(categoryToBeDeleted);
         } else {

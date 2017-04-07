@@ -28,7 +28,7 @@
 //    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 //        Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 //        Customer user = customerDao.findByEmail(email);
-//        setAuths.add(new SimpleGrantedAuthority(user.getRole().getName()));
+//        setAuths.addProducts(new SimpleGrantedAuthority(user.getRole().getName()));
 //        return new User(user.getName(), user.getPassword(),true,true,true,true, new ArrayList<GrantedAuthority>(setAuths));
 //    }
 //}

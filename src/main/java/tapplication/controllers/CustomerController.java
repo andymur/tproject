@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.model.Customer;
-import tapplication.service.LoginServiceImpl;
+import tapplication.service.CustomerServiceImpl;
 
 /**
  * Created by alexpench on 23.03.17.
@@ -16,7 +16,7 @@ import tapplication.service.LoginServiceImpl;
 @Controller
 public class CustomerController {
     @Autowired
-    private LoginServiceImpl loginService;
+    private CustomerServiceImpl loginService;
 
     @ResponseBody
     @RequestMapping(path = "register", method = RequestMethod.POST)

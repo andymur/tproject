@@ -11,7 +11,7 @@ import javax.persistence.Query;
  */
 
 @Repository("customerDao")
-public class CustomerDao extends AbstractDao<Customer, Id> {
+public class CustomerDao extends AbstractDao<Customer, Long> {
 
     public CustomerDao() {
         super(Customer.class);

@@ -2,6 +2,7 @@ package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
@@ -18,16 +19,15 @@ public class ParametersServiceImpl{
     @Autowired
     private ParametersDao repo;
 
-    @Transactional
     public Parameters findOne(Long id) throws NotFoundException {
-        Parameters parameters = repo.find(id);
+        Parameters parameters = repo.findOne(id);
         if (parameters == null) {
             throw new NotFoundException();
         }
         return parameters;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Parameters create(String size,Long weight,Long productId) throws AlreadyExistException {
         Parameters entity = new Parameters(size, weight, productId);
 
@@ -38,12 +38,12 @@ public class ParametersServiceImpl{
         return entity;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Parameters update(Parameters entity) throws NotFoundException {
         return null;
     }
 
-    @Transactional
+    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public void delete(Parameters entity) throws NotFoundException {
 
     }

@@ -136,8 +136,9 @@ OIDS = FALSE
 
 CREATE TABLE "basket_product" (
   "id"         SERIAL NOT NULL,
-  "product_id" BIGINT NOT NULL,
-  "quantity"   BIGINT NOT NULL,
+  "customer_id" BIGINT NOT NULL,
+  "product_id" BIGINT,
+  "quantity"   BIGINT,
   CONSTRAINT basket_product_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS = FALSE
@@ -184,8 +185,6 @@ OIDS = FALSE
 
 ALTER TABLE "customer"
   ADD CONSTRAINT "customer_fk0" FOREIGN KEY ("role_id") REFERENCES "role" ("id");
-ALTER TABLE "customer"
-  ADD CONSTRAINT "customer_fk1" FOREIGN KEY ("basket_id") REFERENCES "basket_product" ("id");
 
 ALTER TABLE "address"
   ADD CONSTRAINT "address_fk0" FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
@@ -218,6 +217,9 @@ ALTER TABLE "parameters"
 
 ALTER TABLE "basket_product"
   ADD CONSTRAINT "basket_product_fk0" FOREIGN KEY ("product_id") REFERENCES "product" ("id");
+
+ALTER TABLE "basket_product"
+  ADD CONSTRAINT "basket_product_fk1" FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
 
 -- ALTER TABLE "product_category"
 --   ADD CONSTRAINT "product_category_fk0" FOREIGN KEY ("product_id") REFERENCES "product" ("id");

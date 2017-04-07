@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tapplication.exceptions.InvalidDataException;
 import tapplication.model.Customer;
-import tapplication.service.LoginServiceImpl;
+import tapplication.service.CustomerServiceImpl;
 
 /**
  * Created by alexpench on 23.03.17.
@@ -17,7 +17,7 @@ import tapplication.service.LoginServiceImpl;
 @Controller
 public class LoginController {
     @Autowired
-    private LoginServiceImpl loginService;
+    private CustomerServiceImpl loginService;
 
     @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
     public Object redirect() {

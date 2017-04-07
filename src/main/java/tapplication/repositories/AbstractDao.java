@@ -43,7 +43,7 @@ public abstract class AbstractDao<Entity, ID> {
 
 
     @SuppressWarnings("unchecked")
-    public Entity find(ID id) {
+    public Entity findOne(ID id) {
         return (Entity) entityManager.find(entryClass, id);
     }
 
@@ -52,12 +52,25 @@ public abstract class AbstractDao<Entity, ID> {
         return query.getResultList();
     }
 
+    public Entity findOne(CriteriaQuery<Entity> criteriaQuery) throws NoResultException {
+        TypedQuery<Entity> query = entityManager.createQuery(criteriaQuery);
+        return query.getSingleResult();
+    }
+
     public List<Entity> find(Object... keysAndValues) {
         CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
         CriteriaQuery<Entity> criteriaQuery = this.createCriteriaQuery();
         Root root = criteriaQuery.from(entryClass);
         fillQuery(criteriaQuery, keysAndValues, root, criteriaBuilder);
         return find(criteriaQuery);
+    }
+
+    public Entity findOne(Object... keysAndValues) throws NoResultException {
+        CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
+        CriteriaQuery<Entity> criteriaQuery = this.createCriteriaQuery();
+        Root root = criteriaQuery.from(entryClass);
+        fillQuery(criteriaQuery, keysAndValues, root, criteriaBuilder);
+        return findOne(criteriaQuery);
     }
 
 
