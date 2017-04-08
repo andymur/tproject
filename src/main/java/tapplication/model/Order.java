@@ -1,7 +1,6 @@
 package tapplication.model;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +13,8 @@ import java.util.List;
 public class Order {
     public enum DeliveryTypeCode {SELF, DELIVER}
     public enum PaymentTypeCode {CASH, CARD}
-    public enum OrderStatusCode {AWAIT_PAYMENT, AWAIT_SHIPMENT, SHIPPED, DELIVERED}
-    public enum PaymentStatusCode {AWAIT_PAYMENT, PAID}
+    public enum OrderStatusCode {ORDER_AWAIT_PAYMENT, ORDER_AWAIT_SHIPMENT, ORDER_SHIPPED, ORDER_DELIVERED}
+    public enum PaymentStatusCode {PAYMENT_AWAIT_PAYMENT, PAYMENT_PAID}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -33,7 +32,7 @@ public class Order {
     @Column(name = "order_date")
     private Date orderDate;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderedProduct> orderedProducts = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)

@@ -1,6 +1,5 @@
 package tapplication.controllers.dto;
 
-import org.aspectj.weaver.ast.Or;
 import tapplication.model.Order;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public class OrderDto {
     private Long customerId;
     private Long orderId;
 
-    public OrderDto copyDetails(Order newOrder) {
+    public OrderDto setNewOrderDetails(Order newOrder) {
         OrderDto newOrderDto = new OrderDto();
         newOrderDto.setOrderId(newOrder.getId());
         newOrderDto.setCustomerId(newOrder.getCustomer().getId());

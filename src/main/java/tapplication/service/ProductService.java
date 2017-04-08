@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
+import tapplication.exceptions.PlaceToOrderException;
 import tapplication.model.Product;
 import tapplication.repositories.ProductDao;
 
@@ -26,7 +27,6 @@ public class ProductService implements CoreService<Product> {
             throw new AlreadyExistException();
         }
         productDao.persist(newProduct);
-//        newProduct.getBrand().setProduct(newProduct);
         newProduct.getImages().forEach(item -> item.setProduct(newProduct));
         newProduct.getCategory().getProducts().add(newProduct.getId());
         newProduct.getParameters().forEach(item -> item.setProduct(newProduct));
@@ -62,11 +62,23 @@ public class ProductService implements CoreService<Product> {
         return productDao.findByParams(categoryId, brand, color, size);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Product findOne(Long productId) throws NotFoundException {
         Product product = productDao.findOne(productId);
         if (product == null) {
             throw new NotFoundException();
+        }
+        return product;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Product moveToOrder(Long productId, Long quantity) throws NotFoundException, PlaceToOrderException {
+        Product product = findOne(productId);
+        if(product.getQuantity() < quantity){
+            throw new PlaceToOrderException();
+        } else {
+            product.setQuantity(product.getQuantity() - quantity);
+            productDao.merge(product);
         }
         return product;
     }

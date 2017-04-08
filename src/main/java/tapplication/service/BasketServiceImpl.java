@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.controllers.dto.BasketProductDto;
+import tapplication.controllers.dto.OrderDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.BasketProduct;
 import tapplication.repositories.BasketDao;
@@ -59,17 +60,6 @@ public class BasketServiceImpl {
         return basketDao.findOne(id);
     }
 
-//    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-//    public BasketProduct update(BasketProduct entity) throws NotFoundException {
-//        BasketProduct basketProduct = findOne(entity.getId());
-//        if (basketProduct != null) {
-//            basketDao.merge(basketProduct);
-//        } else {
-//            throw new NotFoundException();
-//        }
-//        return basketProduct;
-//    }
-
     @Transactional
     public void remove(BasketProductDto basketProductDto) throws NotFoundException {
         BasketProduct basketProduct = basketDao.findOne(basketProductDto.getRecordId());
@@ -78,7 +68,6 @@ public class BasketServiceImpl {
         } else {
             throw new NotFoundException();
         }
-
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -89,13 +78,13 @@ public class BasketServiceImpl {
             basketProducts
                     .forEach(basketProduct -> basketProductDetails
                             .add(new BasketProductDto(
-                                    basketProduct.getId(),
-                                    basketProduct.getProduct().getName(),
-                                    basketProduct.getQuantity(),
-                                    basketProduct.getCustomer().getId(),
-                                    basketProduct.getProduct().getId()
+                                            basketProduct.getId(),
+                                            basketProduct.getProduct().getName(),
+                                            basketProduct.getQuantity(),
+                                            basketProduct.getCustomer().getId(),
+                                            basketProduct.getProduct().getId()
                                     )
-                                )
+                            )
                     );
         }
         return basketProductDetails;
@@ -105,5 +94,15 @@ public class BasketServiceImpl {
     private List<BasketProduct> findByCustomerId(Long customerId) {
         List<BasketProduct> basketProducts = basketDao.find("customer", customerId);
         return basketProducts;
+    }
+
+    public void cleanBasket(OrderDto orderDto) {
+        orderDto.getBasketProductsDtoList().forEach(basketProductDto -> {
+            try {
+                remove(basketProductDto);
+            } catch (NotFoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
