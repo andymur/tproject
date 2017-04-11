@@ -24,11 +24,12 @@ import static tapplication.model.Order.PaymentStatusCode.PAYMENT_AWAIT_PAYMENT;
  * Created by alexpench on 07.04.17.
  */
 @Service("orderService")
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class OrderServiceImpl {
     @Autowired
     private OrderDao orderDao;
     @Autowired
-    private CustomerServiceImpl customerService;
+    private UserServiceImpl userService;
     @Autowired
     private AddressService addressService;
     @Autowired
@@ -36,11 +37,11 @@ public class OrderServiceImpl {
     @Autowired
     private BasketServiceImpl basketService;
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+
     public Object create(OrderDto orderDto) throws NotFoundException, PlaceToOrderException {
         Order newOrder = new Order();
         putProductsToNewOrder(orderDto, newOrder);
-        newOrder.setCustomer(customerService.findOne(orderDto.getCustomerId()));
+        newOrder.setUser(userService.findById(orderDto.getUserId()));
         newOrder.setAddress(addressService.findOne(orderDto.getDeliveryAddressId()));
         newOrder.setDeliveryType(orderDto.getDeliveryType());
         newOrder.setPaymentType(orderDto.getPaymentType());
@@ -54,7 +55,6 @@ public class OrderServiceImpl {
         return orderDto;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) throws NotFoundException, PlaceToOrderException {
         List<OrderedProduct> orderedProductList = new ArrayList<>();
         OrderedProduct orderedProduct = new OrderedProduct();
@@ -66,18 +66,5 @@ public class OrderServiceImpl {
             orderedProductList.add(orderedProduct);
         }
         newOrder.setOrderedProducts(orderedProductList);
-//
-//        orderDto.getBasketProductsDtoList()
-//                .forEach(p -> {
-//                    try {
-//                        newOrder.getOrderedProducts()
-//                                .add(
-//                                        new OrderedProduct(productService.moveToOrder(p.getProductId(), p.getQuantity()), p.getQuantity()));
-//                    } catch (NotFoundException e) {
-//                        e.printStackTrace();
-//                    } catch (PlaceToOrderException e1) {
-//                        e1.printStackTrace();
-//                    }
-//                });
     }
 }

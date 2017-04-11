@@ -43,7 +43,7 @@
             <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
             <!--logo end-->
 
-            <div class="nav search-row" id="top_menu">
+            <div class="nav search-rows" id="top_menu">
                 <!--  search form start -->
                 <ul class="nav top-menu">
                     <li>
@@ -55,7 +55,7 @@
                 <!--  search form end -->
             </div>
 
-            <div class="top-nav notification-row">
+            <div class="top-nav notification-rows">
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
 
@@ -378,7 +378,7 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-		  <div class="row">
+		  <div class="rows">
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
 					<ol class="breadcrumb">
@@ -389,7 +389,7 @@
 				</div>
 			</div>
               <!-- page start-->
-              <div class="row">
+              <div class="rows">
                   <div class="col-sm-6">
                       <section class="panel">
                           <header class="panel-heading">
@@ -465,7 +465,7 @@
                       </section>
                   </div>
               </div>
-              <div class="row">
+              <div class="rows">
                   <div class="col-sm-6">
                       <section class="panel">
                           <header class="panel-heading no-border">
@@ -550,7 +550,7 @@
                       </section>
                   </div>
               </div>
-              <div class="row">
+              <div class="rows">
                 <div class="col-sm-6">
                       <section class="panel">
                           <header class="panel-heading">
@@ -637,7 +637,7 @@
                       </section>
                   </div>
               </div>
-              <div class="row">
+              <div class="rows">
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
@@ -691,7 +691,7 @@
                       </section>
                   </div>
               </div>
-              <div class="row">
+              <div class="rows">
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">

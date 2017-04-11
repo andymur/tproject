@@ -4,21 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tapplication.controllers.dto.BasketDto;
+import tapplication.controllers.dto.ProductDto;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
+import tapplication.model.Brand;
 import tapplication.model.Product;
 import tapplication.repositories.ProductDao;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by alexpench on 29.03.17.
  */
 @Service("productService")
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductService implements CoreService<Product> {
     @Autowired
     private ProductDao productDao;
+    private Set<String> colors = new HashSet<>();
+    private Set<Brand> brands = new HashSet<>();
+    private Set<String> sizes = new HashSet<>();
+//    List<ProductDto> productDtoList = new ArrayList<>();
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Product create(final Product newProduct) throws AlreadyExistException {
@@ -52,17 +61,27 @@ public class ProductService implements CoreService<Product> {
 
     }
 
-    public List<Product> getProductsByCategoryId(Long categoryId) throws NotFoundException {
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public List<ProductDto> getProductsByCategoryId(Long categoryId) throws NotFoundException {
         List<Product> products = findAllByCategory(categoryId);
-//        products.forEach(p->{p.getImages();p.getParameters();});
-        return products;
+        colors.clear();
+        brands.clear();
+        sizes.clear();
+        products.forEach(pr -> pr.getParameters().forEach(par -> sizes.add(par.getSize())));
+        products.forEach(pr -> colors.add(pr.getColor()));
+        products.forEach(pr -> brands.add(pr.getBrand()));
+        return products.stream().map(ProductDto::new).collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getAllProductsDtoList() {
+        List<Product> products = productDao.selectAll();
+        return products.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
     public List<Product> findAllByParams(Long categoryId, String brand, String color, String size) {
         return productDao.findByParams(categoryId, brand, color, size);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Product findOne(Long productId) throws NotFoundException {
         Product product = productDao.findOne(productId);
         if (product == null) {
@@ -71,10 +90,9 @@ public class ProductService implements CoreService<Product> {
         return product;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Product moveToOrder(Long productId, Long quantity) throws NotFoundException, PlaceToOrderException {
         Product product = findOne(productId);
-        if(product.getQuantity() < quantity){
+        if (product.getQuantity() < quantity) {
             throw new PlaceToOrderException();
         } else {
             product.setQuantity(product.getQuantity() - quantity);
@@ -82,4 +100,39 @@ public class ProductService implements CoreService<Product> {
         }
         return product;
     }
+
+    public  List<ProductDto> getProductsForBasket(BasketDto basketDto) {
+        return basketDto.getRows().stream()
+                .map(entry-> new ProductDto(productDao.findOne(entry.getProductId()), entry.getCount()))
+                .collect(Collectors.toList());
+    }
+
+    public void setProductDao(ProductDao productDao) {
+        this.productDao = productDao;
+    }
+
+    public Set<String> getColors() {
+        return colors;
+    }
+
+    public void setColors(Set<String> colors) {
+        this.colors = colors;
+    }
+
+    public Set<Brand> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(Set<Brand> brands) {
+        this.brands = brands;
+    }
+
+    public Set<String> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(Set<String> sizes) {
+        this.sizes = sizes;
+    }
+
 }

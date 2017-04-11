@@ -12,7 +12,7 @@ import tapplication.service.CategoryServiceImpl;
  * Created by alexpench on 02.04.17.
  */
 @Controller
-public class ProductsAdminController {
+public class ProductsAdminController extends CoreController{
     @Autowired
     private BrandServiceImpl brandService;
 
@@ -20,8 +20,10 @@ public class ProductsAdminController {
     private CategoryServiceImpl categoryService;
     @RequestMapping(path = "/admin_products", method = RequestMethod.GET)
     public Object goToProductsAdminPage(Model model){
+        model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("brands", brandService.findAll());
         model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         return  "admin_products";
     }
 }

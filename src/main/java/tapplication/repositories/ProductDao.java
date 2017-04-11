@@ -17,6 +17,8 @@ import java.util.List;
 @Repository("productDao")
 public class ProductDao extends AbstractDao<Product, Long> {
 
+    public static final String NAME = "name";
+
     public ProductDao() {
         super(Product.class);
     }
@@ -56,7 +58,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
             predList.add(builder.and(builder.equal(product.get(Product.PRODUCT_CATEGORY), categoryId)));
         }
         if (brand != null) {
-            predList.add(builder.and(builder.equal(brands.get("name"), brand)));
+            predList.add(builder.and(builder.equal(brands.get(NAME), brand)));
         }
         if (color != null) {
             predList.add(builder.and(builder.equal(product.get(Product.COLOR), color)));

@@ -1,6 +1,7 @@
 package tapplication.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by alexpench on 25.03.17.
@@ -8,22 +9,36 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role")
 public class Role {
+
+    public static final String TYPE = "type";
+
+    public enum UserRoleType implements Serializable {
+        USER("USER"),
+        DBA("DBA"),
+        ADMIN("ADMIN");
+
+        String userProfileType;
+
+        private UserRoleType(String userRoleType){
+            this.userProfileType = userRoleType;
+        }
+
+        public String getUserRoleType(){
+            return userProfileType;
+        }
+
+    }
+
     @Id
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name= TYPE, length=15, unique=true, nullable=false)
+    private String type = UserRoleType.USER.getUserRoleType();
 
     public Role(){}
-
-    public Role(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Role(Long id) {
-        this.id = id;
+    public Role(String type){
+        this.type = type;
     }
 
     public Long getId() {
@@ -34,19 +49,19 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

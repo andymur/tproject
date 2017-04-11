@@ -153,4 +153,6 @@ public abstract class AbstractDao<Entity, ID> {
     public CriteriaBuilder getCriteriaBuilder() {
         return this.entityManager.getCriteriaBuilder();
     }
+
+
 }

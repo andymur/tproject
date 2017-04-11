@@ -1,8 +1,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@tag description="Overall Page template" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@tag description="Overall Page template" pageEncoding="UTF-8" %>
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
 <%@attribute name="bodyfr" fragment="true" %>
+
 <html>
 <head>
     <title>Linus</title>
@@ -11,13 +13,15 @@
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
     <meta name="author" content=""/>
-
+    <meta name="_csrf" content="${_csrf.token}" />
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript" src="resources/js/jquery-2.1.3.min.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="icon" href="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png">
 
     <!-- bootstrap magic -->
     <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css"/>
@@ -29,6 +33,7 @@
 
     <!-- theme custom -->
     <link rel="stylesheet" href="resources/css/style.css"/>
+    <link rel="stylesheet" href="resources/css/cart.css"/>
 
 
     <!-- fonts -->
@@ -52,278 +57,309 @@
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
 
-
-    <!--[if lte IE 8]>
-
-    <style>
-
-        /* Hide panel from IE8 and below */
-
-        div.css3droppanel {
-            display: none;
-        }
-
-    </style>
-
-    <![endif]-->
-
-
 </head>
 <body>
-<div id="pageheader">
-    <jsp:invoke fragment="header"/>
-    <!-- PRELOADER -->
-    <div id="preloader">
-        <div class="container">
-            <div class="col-md-12">
-                <div class="sbook">
-                    <h2>LIN<span class="color">US</span></h2>
-                    <p>HTML TEMPLATE</p>
-                    <div class="spinner">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END PRELOADER -->
-    <div class="css3droppanel">
-        <input type="checkbox" id="paneltoggle"/>
-        <label for="paneltoggle" title="Click to open Panel"></label>
-
-        <div class="content">
+    <div id="body">
+        <div id="preloader">
             <div class="container">
-                <!--panel content goes here-->
-                <div class="col-md-4">
-                    <h3>ABOUT <span class="color">US</span></h3>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad velit, sed quia
-                        non numqua eius modi tempora.</p>
-                </div>
-
-                <div class="col-md-2" id="login">
-                    <h3>LOG<span class="color">IN</span></h3>
-                    <input type="text" name="email" class="input-1" placeholder="email.."/>
-                    <input type="password" name="password" class="input-1" placeholder="Password.."/>
-                    <div><a id="btn-login" href="#" class="c-btn-1">LOGIN</a> <a href="#" class="f-pass">Forget
-                        Password?</a></div>
-                </div>
-                <div id="register" class="col-md-6 last-col">
-                    <h3>REGIS<span class="color">TER</span></h3>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="First Name">
+                <div class="col-md-12">
+                    <div class="sbook">
+                        <h2>LIN<span class="color">US</span></h2>
+                        <p>THE BICYCLE</p>
+                        <div class="spinner">
+                            <div class="double-bounce1"></div>
+                            <div class="double-bounce2"></div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="secondName" placeholder="Last Name">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" name="password" placeholder="Password">
-                        </div>
-                        <div><a id="btn-register" href="#" class="c-btn-1">REGISTER</a></div>
                     </div>
-
-                    <img src="resources/images/lamp.png" class="lamp" alt=""/>
                 </div>
-
-                    <img src="resources/images/lamp.png" class="lamp" alt=""/>
-                </div>
-
             </div>
-            <!-- end panel content -->
         </div>
+        <div class="css3droppanel">
+                <input type="checkbox" id="paneltoggle"/>
+                <label for="paneltoggle" title="Click to open Panel"></label>
+                <div class="content">
+                    <div class="container">
+                        <!--panel content goes here-->
 
-    </div>
-    <header id="header">
-        <div class="container">
-            <div class="col-md-12">
-                <div class="main-menu">
-                    <!-- START - MINIMAL CSS3 MENU -->
-                    <label class="minimal-menu-button" for="mobile-nav">Menu</label>
-                    <input class="minimal-menu-button" type="checkbox" id="mobile-nav" name="mobile-nav"/>
+                        <sec:authorize access="isAnonymous()">
+                            <div class="col-md-2">
+                                <h3>LOG<span class="color">IN</span></h3>
+                                <c:url var="loginUrl" value="/loginme"/>
+                                <form action="${loginUrl}" method="post" class="form-horizontal">
+                                    <input type="text" class="input-1" id="username" name="ssoId" placeholder="Enter Username"
+                                           required>
+                                    <input type="password" class="input-1" id="password" name="password"
+                                           placeholder="Enter Password" required>
+                                    <input type="submit" class="c-btn-1" value="LOGIN">
+                                    <a href="/newuser" class="f-pass">Register</a>
+                                    <c:if test="${param.error != null}">
+                                        <p>Invalid username and password.</p>
+                                    </c:if>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </form>
+                            </div>
+                        </sec:authorize>
 
-                    <div class="minimal-menu">
-                        <div class="logo">
-                            <a href="#"><img src="resources/images/logo.png" alt=""></a>
-                        </div>
-
-                        <ul class="wrapper">
-                            <li class="submenu">
-                                <a href="index">Home</a>
-                                <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
-                                <ul>
-                                    <li><a href="index">Home Parallax</a></li>
-                                    <li><a href="index-slider.html">Home With Slider</a></li>
-                                    <li><a href="index_content_slider.html">Home Content Slider</a></li>
-                                    <li><a href="index-static.html">Home Static Background</a></li>
-                                    <li><a href="index_scroll_animations.html">Home Scroll Animations</a></li>
-                                    <li class="submenu">
-                                        <a href="#">More</a>
-                                        <input class="show-submenu" type="checkbox" name="show-submenu-3"/>
-                                        <ul>
-                                            <li><a href="index_portfolio.html">Home Portfolio</a></li>
-                                            <li><a href="index_blog.html">Home Blog</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#">Pages</a>
-                                <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
-                                <ul>
-                                    <li><a href="about.html">About Us 1</a></li>
-                                    <li><a href="about-2.html">About Us 2</a></li>
-                                    <li><a href="pricing-table-3.html">Pricing Table 4 Column</a></li>
-                                    <li><a href="pricing-table-1.html">Pricing Table 3 Column</a></li>
-                                    <li><a href="pricing-table-2.html">Pricing Table 2 Column</a></li>
-                                    <li><a href="page-sidebar-right.html">Page With Right Sidebar</a></li>
-                                    <li><a href="page-sidebar-left.html">Page With Left Sidebar</a></li>
-                                    <li><a href="page-fullwidth.html">Page Full Width</a></li>
-                                    <li class="submenu">
-                                        <a href="#">404 Pages</a>
-                                        <input class="show-submenu" type="checkbox" name="show-submenu-3"/>
-                                        <ul>
-                                            <li><a href="404-error.html">404 Page v1</a></li>
-                                            <li><a href="404-error-v2.html">404 Page v2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="coming-soon.html">Under Construction Page</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="shop">Shop</a>
-                                <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
-                                <ul>
-                                    <li><a href="shop-single.html">Shop Product Page</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="submenu">
-                                <a href="#">Blog</a>
-                                <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
-                                <ul>
-                                    <li><a href="blog.html">Blog Version 1</a></li>
-                                    <li><a href="blog-2.html">Blog Version 2</a></li>
-                                    <li><a href="blog-3.html">Blog Version 3</a></li>
-                                    <li><a href="blog-4.html">Blog Version 4</a></li>
-                                    <li><a href="blog-5.html">Blog Version 5</a></li>
-                                    <li class="submenu">
-                                        <a href="#">Blog Single</a>
-                                        <input class="show-submenu" type="checkbox" name="show-submenu-3"/>
-                                        <ul>
-                                            <li><a href="blog-post-1.html">Single Right Sidebar</a></li>
-                                            <li><a href="blog-post-2.html">Single Left Sidebar</a></li>
-                                        </ul>
-                                    </li>
-
-
-                                </ul>
-                            </li>
-
-                            <li class="submenu">
-                                <a href="#">Contacts</a>
-                                <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
-                                <ul>
-                                    <li><a href="contact.html">Contact Us 1</a></li>
-                                    <li><a href="contact-2.html">Contact Us 2</a></li>
-                                    <li><a href="contact-3.html">Contact Us 3</a></li>
-                                </ul>
-                            </li>
-
-                            <li id="adminService" class="submenu">
-                                <a href="">Dashboard</a>
-                                <input class="show-submenu" type="checkbox" name="show-submenu-2"/>
-                                <ul>
-                                    <li><a href="admin_products">Products</a></li>
-                                    <li><a href="admin_orders">Orders</a></li>
-                                    <li><a href="dashboard">Statistics</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <div class="popover_parent">
-                                    <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
-                                    <fieldset class="popover search">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <input type="submit" class="btn-1" value="Go">
-                                    </fieldset>
+                        <sec:authorize access="isAuthenticated()">
+                            <div id="logout" class="col-md-1">
+                                <h3>LOG<span class="color">OUT</span></h3>
+                                <div class="form-inline">
+                                    <div class="authbar">
+                            <span class="floatRight">
+                                    <a href="<c:url value="/logout" />" class="c-btn-1">Logout</a>
+                                </span>
+                                    </div>
                                 </div>
-                            </li>
-
-
-                        </ul>
+                            </div>
+                        </sec:authorize>
+                        <%--<sec:authorize access="isAnonymous()">--%>
+                        <%--<li><a href="/newuser">Register</a></li>--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<div id="register" class="col-md-6 last-col">&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<h3>REGIS<span class="color">TER</span></h3>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<div class="form-inline">&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<div class="form-horizontal">&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<input type="text" class="input-1" id="firstName" name="firstName" placeholder="Enter First Name"&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;required>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<input type="text" class="input-1" id="ssoId" name="ssoId" placeholder="Enter Nickname"&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;required>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<input type="password" class="input-1" id="password" name="password"&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;placeholder="Enter Password" required>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<input type="text" class="input-1" id="lastName" name="lastName" placeholder="Enter Last Name"&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;required>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<input type="email" class="input-1" id="email" name="email"&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;placeholder="Enter email" required>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<c:if test="${param.error != null}">&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<p>Already exist.</p>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;</c:if>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;<div><a id="btn-register" href="#" class="c-btn-1">REGISTER</a></div>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;&lt;%&ndash;</sec:authorize>&ndash;%&gt;&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<!-- end panel content -->&ndash;%&gt;--%>
                     </div>
-                    <!-- END - MINIMAL CSS3 MENU -->
                 </div>
             </div>
-        </div>
+        <header id="header">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div class="main-menu">
+                                <!-- START - MINIMAL CSS3 MENU -->
 
-    </header>
-</div>
-<div id="body">
-    <jsp:doBody/>
+                                <div class="minimal-menu">
+                                    <div class="logo">
+                                    <a href="/"><img src="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png?12457888596116483597" alt="Linus Bike"></a>
+                                    </div>
 
-</div>
-<div id="pagefooter">
-    <jsp:invoke fragment="footer"/>
-    <div class="bottom-bar">
-        <div class="container">
-            <div class="col-md-12 left">
-                © 2015 Goodway. All rights reserved. Theme by GJ-Designs.
-                <ul class="foot-nav pull-right">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Contact</a></li>
-                </ul>
-            </div>
 
-        </div>
+                                    <ul class="wrapper">
+                                        <li class="submenu">
+                                            <a href="index">Home</a>
+                                            <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
+                                            <ul>
+                                                <li><a href="index">About</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="submenu">
+                                            <a href="shop">Shop</a>
+                                            <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
+                                            <ul class="categories">
+                                                <c:forEach var="mapitem" items="${categoriesmap}">
+                                                    <li><a href="catalog?categoryId=${mapitem.key.id}">${mapitem.key.name}</a></li>
+                                                </c:forEach>
+                                            </ul>
+                                        </li>
+                                        <li class="submenu">
+                                            <a href="#">Contacts</a>
+                                            <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
+                                            <ul>
+                                                <li><a href="contact.html">Contact Us</a></li>
+                                            </ul>
+                                        </li>
+                                        <sec:authorize access="hasRole('ADMIN')">
+                                            <li id="adminService" class="submenu">
+                                                <a href=""><strong>Admin Dashboard</strong></a>
+                                                <input class="show-submenu" type="checkbox" name="show-submenu-2"/>
+                                                <ul>
+                                                    <li><a href="admin_products">Products</a></li>
+                                                    <li><a href="admin_orders">Orders</a></li>
+                                                    <li><a href="dashboard">Statistics</a></li>
+                                                </ul>
+                                            </li>
+                                        </sec:authorize>
+                                        <sec:authorize access="isAuthenticated()">
+                                            <li class="submenu">
+                                                <a id="username" data-username="${loggedinuser}" href="#"><strong>${loggedinuser}</strong></a>
+                                                <ul>
+                                                    <li><a href="/basket">Basket</a></li>
+                                                    <li><a href="checkout.html">Checkout</a></li>
+                                                    <li><a href="/logout">Logout</a></li>
+                                                </ul>
+                                            </li>
+                                        </sec:authorize>
+                                        <li>
+                                            <div class="popover_parent">
+                                                <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                                                <fieldset class="popover search">
+                                                    <input type="text" class="form-control" placeholder="Search">
+                                                    <input type="submit" class="btn-1" value="Go">
+                                                </fieldset>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="icon-cart"></span><a id="cart" href="#" class="cart" title="Shopping Cart">Cart: <span class="cart-count">0</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- END - MINIMAL CSS3 MENU -->
+                            </div>
+                        </div>
+                    </div>
+
+                </header>
+        <jsp:doBody/>
+
     </div>
+    <div id="pagefooter">
+        <jsp:invoke fragment="footer"/>
+        <footer>
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="rows footer-blocks">
+                        <div class="col-md-3 footer-block">
+                            <h3>LATEST POSTS</h3>
+                            <div class="block foot-posts">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="resources/images/blog/small1.jpg" alt="#">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#" class="media-heading">Dollis Latter</a>
+                                        <div class="date">21 May 2015</div>
+                                    </div>
+                                </div>
 
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="resources/images/blog/small1.jpg" alt="#">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#" class="media-heading">Dollis Latter</a>
+                                        <div class="date">21 May 2015</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-</div>
+                        <div class="col-md-3 footer-block">
+                            <h3>ABOUT COMPANY</h3>
+                            <div class="block">
+                                <p class="mid-para">At Linus we see bicycles not only for recreation and sport, but as a legitimate form of transportation. In our every day life we take numerous little journeys, under 5 miles…. to the store, the cafe, to work, etc. Besides the obvious joy of riding a bicycle, these small bicycle trips reduce carbon emissions, congestion, noise pollution, and make for a happier, more connected city experience.</p>
+                            </div>
+                        </div>
 
-<!-- Jquery Libs -->
-<!-- Latest Version Of Jquery -->
+                        <div class="col-md-3 footer-block">
+                            <h3>GET IN TOUCH</h3>
+                            <div class="block">
+                                <p class="right-para">
+                                    1046 Princeton Dr. Unit 108
+                                    Marina Del Rey, California USA 90292
+                                    www.linusbike.com     hello@linusbike.com
+                                    Office Hours:  Monday - Friday   9am - 6pm
 
-<!-- Bootstrap Jquery -->
-<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-<!-- Sticky Jquery -->
-<script type="text/javascript" src="resources/js/jquery.sticky.js"></script>
-<!-- Parallax Plugin -->
-<script type="text/javascript" src="resources/js/jquery.parallax-1.1.3.js"></script>
-<!-- Counter Plugin -->
-<script type="text/javascript" src="resources/js/jquery.counterup.min.js"></script>
-<!-- Waypoints -->
-<script type="text/javascript" src="resources/js/waypoints.min.js"></script>
-<!-- Cubeportfolio -->
-<script type="text/javascript" src="resources/js/jquery.cubeportfolio.min.js"></script>
-<script type="text/javascript" src="resources/js/cbp-3.js"></script>
-<!--To-Top Button Plugin -->
-<script type="text/javascript" src="resources/js/jquery.ui.totop.js"></script>
-<!--Easing animations Plugin -->
-<script type="text/javascript" src="resources/js/easing.js"></script>
+                                    <a href="https://www.google.com/maps/place/1046+Princeton+Dr,+Marina+del+Rey,+CA+90292/@33.9861534,-118.4456324,17z/data=!3m1!4b1!4m2!3m1!1s0x80c2ba85fd16ac39:0x4ddb2da55798c255">Google Map </a></p>
+                                <ul class="address-ul">
+                                    <li><i class="fa fa-globe"></i> 1046 Princeton Dr. Unit 108</li>
+                                    <li><i class="fa fa-phone"></i> +1.310.822.7722</li>
+                                    <li><i class="fa fa-paper-plane-o"></i> hello@linusbike.com</li>
+                                </ul>
+                            </div>
+                        </div>
 
-<!-- Owl Carousel Plugin -->
-<script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
-<!-- Theme Custom -->
-<script type="text/javascript" src="resources/js/preloader.js"></script>
-<script type="text/javascript" src="resources/js/switcher.js"></script>
-<script type="text/javascript" src="resources/js/custom.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!--login/registration-->
-<script type="text/javascript" src="resources/login.js"></script>
+                        <div class="col-md-3 footer-block">
+                            <h3>NEWSLETTER SIGNUP</h3>
+                            <div class="block newsletter">
+                                <p>Subscribe to Our Newsletter to get Important News, Amazing Offers & Inside Scoops.</p>
+                                <div class="n-area-right">
+                                    <input type="text" placeholder="Enter Email ...">
+                                    <a href="#" class="n-btn"><i class="fa  fa-arrow-right"></i></a>
+                                </div>
+                                <div class="socials">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-</div>
+                </div>
+            </div>
+        </footer>
+        <div class="bottom-bar">
+            <div class="container">
+                <div class="col-md-12 left">
+                    © 2017 Linus.
+                    <ul class="foot-nav pull-right">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Services</a></li>
+                        <li><a href="">Blog</a></li>
+                        <li><a href="">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Jquery Libs -->
+        <!-- Latest Version Of Jquery -->
+
+        <script type="text/javascript" src="resources/cart.js"></script>
+        <!-- Bootstrap Jquery -->
+        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+        <!-- Sticky Jquery -->
+        <script type="text/javascript" src="resources/js/jquery.sticky.js"></script>
+        <!-- Parallax Plugin -->
+        <script type="text/javascript" src="resources/js/jquery.parallax-1.1.3.js"></script>
+        <!-- Counter Plugin -->
+        <script type="text/javascript" src="resources/js/jquery.counterup.min.js"></script>
+        <!-- Waypoints -->
+        <script type="text/javascript" src="resources/js/waypoints.min.js"></script>
+        <!-- Cubeportfolio -->
+        <script type="text/javascript" src="resources/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="resources/js/cbp-10.js"></script>
+        <!--To-Top Button Plugin -->
+        <script type="text/javascript" src="resources/js/jquery.ui.totop.js"></script>
+        <!--Easing animations Plugin -->
+        <script type="text/javascript" src="resources/js/easing.js"></script>
+
+        <!-- Owl Carousel Plugin -->
+        <script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
+        <!-- Theme Custom -->
+        <script type="text/javascript" src="resources/js/preloader.js"></script>
+        <script type="text/javascript" src="resources/js/switcher.js"></script>
+        <script type="text/javascript" src="resources/js/custom.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <!--login/registration-->
+        <%--<script type="text/javascript" src="resources/login.js"></script>--%>
+
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                $(document).ajaxSend(function(e, xhr, options) {
+                    xhr.setRequestHeader(header, token);
+                });
+            });
+        </script>
+    </div>
 </body>
 </html>

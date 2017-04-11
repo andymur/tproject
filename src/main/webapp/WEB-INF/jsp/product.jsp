@@ -9,20 +9,13 @@
     <jsp:body>
         <div class="arrivals">
             <div class="container">
-
-
-
                 <div class="clearfix"></div>
-
                 <div class="new">
                     <div class="col-md-12">
                         <h2>The<span class="color">Bicycle</span></h2>
                     </div>
-
                     <div class="clearfix"></div>
-
                     <div class="shop-products">
-
                         <div class="col-md-3 sidebar">
                             <div class="sidebar-block top-10">
                                 <h3>FILTER</h3>
@@ -48,9 +41,7 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-
                         </div>
-
                         <div class="col-md-9">
                             <div id="grid-container-10" class="cbp-l-grid-projects cbp cbp-chrome cbp-caption-overlayBottomReveal cbp-animation-flipOut cbp-ready" style="height: 1896px;">
                                 <ul class="cbp-wrapper" style="opacity: 1;">

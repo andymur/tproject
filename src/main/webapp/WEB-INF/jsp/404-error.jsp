@@ -325,7 +325,7 @@
 	<footer>
 		<div class="container">
 			<div class="col-md-12">
-				<div class="row footer-blocks">
+				<div class="rows footer-blocks">
 					<div class="col-md-3 footer-block">
 						<h3>LATEST POSTS</h3>
 						<div class="block foot-posts">

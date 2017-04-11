@@ -8,6 +8,7 @@ import tapplication.controllers.dto.BasketProductDto;
 import tapplication.controllers.dto.OrderDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.BasketProduct;
+import tapplication.model.User;
 import tapplication.repositories.BasketDao;
 
 import javax.persistence.NoResultException;
@@ -24,7 +25,7 @@ public class BasketServiceImpl {
     @Autowired
     private ProductService productService;
     @Autowired
-    private CustomerServiceImpl customerService;
+    private UserServiceImpl userService;
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public BasketProductDto addProducts(BasketProductDto productDto) throws NotFoundException {
@@ -36,7 +37,7 @@ public class BasketServiceImpl {
         } else {
             BasketProduct newBasketProduct = new BasketProduct();
             newBasketProduct.setProduct(productService.findOne(productDto.getProductId()));
-            newBasketProduct.setCustomer(customerService.findOne(productDto.getCustomerId()));
+            newBasketProduct.setUser(userService.findById(productDto.getUserId()));
             newBasketProduct.setQuantity(productDto.getQuantity());
             basketDao.persist(newBasketProduct);
         }
@@ -48,7 +49,7 @@ public class BasketServiceImpl {
         BasketProduct basketProduct;
         try {
             basketProduct = basketDao
-                    .findByAndParams("product", productToBasket.getProductId(), "customer", productToBasket.getCustomerId());
+                    .findByAndParams("product", productToBasket.getProductId(), "user", productToBasket.getUserId());
         } catch (NoResultException e) {
             return null;
         }
@@ -71,9 +72,10 @@ public class BasketServiceImpl {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public List<BasketProductDto> findBasketProducts(Long customerId) {
+    public List<BasketProductDto> findBasketProducts(String userName) {
+        User user = userService.findBySSO(userName);
         List<BasketProductDto> basketProductDetails = new ArrayList<>();
-        List<BasketProduct> basketProducts = findByCustomerId(customerId);
+        List<BasketProduct> basketProducts = findByUserId(user.getId());
         if (!basketProducts.isEmpty()) {
             basketProducts
                     .forEach(basketProduct -> basketProductDetails
@@ -81,7 +83,7 @@ public class BasketServiceImpl {
                                             basketProduct.getId(),
                                             basketProduct.getProduct().getName(),
                                             basketProduct.getQuantity(),
-                                            basketProduct.getCustomer().getId(),
+                                            basketProduct.getUser().getId(),
                                             basketProduct.getProduct().getId()
                                     )
                             )
@@ -91,8 +93,8 @@ public class BasketServiceImpl {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    private List<BasketProduct> findByCustomerId(Long customerId) {
-        List<BasketProduct> basketProducts = basketDao.find("customer", customerId);
+    private List<BasketProduct> findByUserId(Long userId) {
+        List<BasketProduct> basketProducts = basketDao.find("user", userId);
         return basketProducts;
     }
 

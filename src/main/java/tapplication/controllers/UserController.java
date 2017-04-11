@@ -7,22 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tapplication.exceptions.AlreadyExistException;
-import tapplication.model.Customer;
-import tapplication.service.CustomerServiceImpl;
+import tapplication.model.User;
+import tapplication.service.UserServiceImpl;
 
 /**
  * Created by alexpench on 23.03.17.
  */
 @Controller
-public class CustomerController {
+public class UserController {
     @Autowired
-    private CustomerServiceImpl loginService;
+    private UserServiceImpl userService;
 
     @ResponseBody
     @RequestMapping(path = "register", method = RequestMethod.POST)
-    public Object register(@RequestBody Customer customer) throws AlreadyExistException {
-        Customer newCustomer = loginService.create(customer);
-        newCustomer.setPassword("");
-        return newCustomer;
+    public void register(@RequestBody User user) throws AlreadyExistException {
+        userService.saveUser(user);
     }
 }

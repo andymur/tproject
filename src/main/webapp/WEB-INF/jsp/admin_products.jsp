@@ -7,17 +7,13 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-
-        <section id="container" class="">
-            <section id="main-content">
-                <section class="wrapper">
-                    <div class="row">
+        <section id="main-content">
+                    <div class="rows">
                         <div class="col-lg-12">
                             <h3 class="page-header"><i class="fa fa-file-text-o"></i>PRODUCTS MANAGEMENT</h3>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
+                        <section class="col-lg-12">
                             <section class="panel">
                                 <header class="panel-heading">
                                     Add product
@@ -94,7 +90,7 @@
                                             <div class="col-sm-10">
                                                 <select id="cat-select" class="form-control m-bot15">
                                                     <c:forEach var="category" items="${categories}">
-                                                        <option data-category-id=${category.id} data-category-name=${category.name} data-category-image=${category.categoryImage} data-category-products='${category.products}'>${category.name}</option>
+                                                        <option data-category-id=${category.id} data-category-name=${category.name} data-category-image=${category.imageUrl} data-category-products='${category.products}'>${category.name}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -115,7 +111,7 @@
                                 </div>
 
                             </section>
-                            <div class="panel">
+                            <section class="panel">
                                 <header class="panel-heading">
                                     Add category
                                 </header>
@@ -131,7 +127,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Image url</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="categoryImage">
+                                                <input type="text" class="form-control" name="imageUrl">
                                             </div>
                                         </div>
                                             <div class="col-lg-offset-2 col-lg-10">
@@ -141,18 +137,18 @@
                                         </div>
                                 </div>
                             </section>
-                <section class="panel">
-                <header class="panel-heading">
-                    Edit category
-                </header>
-                    <div class="panel-body">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    Edit category
+                                </header>
+                                <div class="panel-body">
                 <div id="form-edit-category" class="form-horizontal">
                     <div id="cat-ed-div" class="form-group">
                         <label class="col-sm-2 control-label">Category</label>
                         <div id="sel-div" class="col-sm-10">
                             <select id="cat-edit-select" class="form-control m-bot15">
                                 <c:forEach var="category" items="${categories}">
-                                    <option data-category-id=${category.id} data-category-name=${category.name} data-category-image=${category.categoryImage} data-category-products='${category.products}'>${category.name}</option>
+                                    <option data-category-id=${category.id} data-category-name=${category.name} data-category-image=${category.imageUrl} data-category-products='${category.products}'>${category.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -165,36 +161,37 @@
                     </div>
                 </div>
                 </div>
-            </section>
-        <section class="panel">
-            <header class="panel-heading">
-                Add brand
-            </header>
-            <div class="panel-body">
-                <div id="form-brand" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Name<span
-                                class="required">*</span></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" required>
+                            </section>
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    Add brand
+                                </header>
+                                <div class="panel-body">
+                    <div id="form-brand" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Name<span
+                                    class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Image url</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="brandImage">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Image url</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="brandImage">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-offset-2 col-lg-10">
-                            <button id="btn-save-brand" class="btn btn-primary">Save</button>
-                            <button id="btn-cancel-brand" class="btn btn-default" type="button">Cancel</button>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button id="btn-save-brand" class="btn btn-primary">Save</button>
+                                <button id="btn-cancel-brand" class="btn btn-default" type="button">Cancel</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                            </section>
+                        </section>
         </section>
-
         <script type="text/javascript" src="resources/admin_products.js"></script>
     </jsp:body>
 </t:genericpage>

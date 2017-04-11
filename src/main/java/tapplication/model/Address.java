@@ -24,8 +24,8 @@ public class Address {
     @Column(name = "zip_code")
     private Long zipCode;
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -83,22 +83,22 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Address(String country, String city, String street, String building, String apartment, long zipCode, Customer customer) {
+    public Address(String country, String city, String street, String building, String apartment, long zipCode, User user) {
         this.country = country;
         this.city = city;
         this.street = street;
         this.building = building;
         this.apartment = apartment;
         this.zipCode = zipCode;
-        this.customer = customer;
+        this.user = user;
     }
 
     public Address() {

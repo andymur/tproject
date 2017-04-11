@@ -1,5 +1,7 @@
 package tapplication.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,10 +11,10 @@ import java.util.List;
  * Created by alexpench on 22.03.17.
  */
 @Entity
-@Table(name = Customer.CUSTOMER)
-public class Customer {
+@Table(name = User.TABLE_APP_USER)
+public class User {
 
-    public static final String CUSTOMER = "customer";
+    public static final String TABLE_APP_USER = "app_user";
     public static final String ID = "id";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
@@ -21,29 +23,36 @@ public class Customer {
     public static final String PHONE_NUMBER = "phone_number";
     public static final String PASSWORD = "password";
     public static final String ROLE_ID = "role_id";
-    public static final String CUSTOMER1 = "customer";
-    public static final String BASKET_ID = "basket_id";
+    public static final String USER = "user";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID)
     private Long id;
 
+    @NotEmpty
+    @Column(name="SSO_ID", unique=true, nullable=false)
+    private String ssoId;
+
+    @NotEmpty
     @Column(name = FIRST_NAME)
     private String name;
 
+    @NotEmpty
     @Column(name = LAST_NAME)
-    private String secondName;
+    private String lastName;
 
     @Temporal(TemporalType.DATE)
     @Column(name = BIRTH_DATE)
     private Date birthDate;
 
+    @NotEmpty
     @Column(name = EMAIL)
     private String email;
 
     @Column(name = PHONE_NUMBER)
     private String phoneNumber;
 
+    @NotEmpty
     @Column(name = PASSWORD)
     private String password;
 
@@ -51,10 +60,10 @@ public class Customer {
     @JoinColumn(name = ROLE_ID)
     private Role role;
 
-    @OneToMany(mappedBy = CUSTOMER1, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = USER, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<BasketProduct> basketProducts;
 
     public Role getRole() {
@@ -65,10 +74,10 @@ public class Customer {
         this.role = role;
     }
 
-    public Customer() {
+    public User() {
     }
 
-    public Customer(String name, String email, String password, Role role) {
+    public User(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -83,6 +92,14 @@ public class Customer {
         this.id = id;
     }
 
+    public String getSsoId() {
+        return ssoId;
+    }
+
+    public void setSsoId(String ssoId) {
+        this.ssoId = ssoId;
+    }
+
     public String getName() {
         return name;
     }
@@ -91,12 +108,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getBirthDate() {

@@ -55,7 +55,7 @@
             <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
             <!--logo end-->
 
-            <div class="nav search-row" id="top_menu">
+            <div class="nav search-rows" id="top_menu">
                 <!--  search form start -->
                 <ul class="nav top-menu">
                     <li>
@@ -67,7 +67,7 @@
                 <!--  search form end -->
             </div>
 
-            <div class="top-nav notification-row">
+            <div class="top-nav notification-rows">
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
 
@@ -392,7 +392,7 @@
       <section id="main-content">
           <section class="wrapper">
               <!--overview start-->
-			  <div class="row">
+			  <div class="rows">
 				<div class="col-lg-12">
 					<h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
 					<ol class="breadcrumb">
@@ -402,7 +402,7 @@
 				</div>
 			</div>
 
-            <div class="row">
+            <div class="rows">
 				<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box blue-bg">
 						<i class="fa fa-cloud-download"></i>
@@ -435,10 +435,10 @@
 					</div><!--/.info-box-->
 				</div><!--/.col-->
 
-			</div><!--/.row-->
+			</div><!--/.rows-->
 
 
-           <div class="row">
+           <div class="rows">
 		    <div class="col-lg-9 col-md-12">
 
 					<div class="panel panel-default">
@@ -493,7 +493,7 @@
 
 
 
-			<div class="row">
+			<div class="rows">
 
 				<div class="col-lg-9 col-md-12">
 					<div class="panel panel-default">
@@ -705,7 +705,7 @@
 
 
               <!-- project team & activity start -->
-          <div class="row">
+          <div class="rows">
             <div class="col-md-4 portlets">
               <!-- Widget -->
               <div class="panel panel-default">
@@ -805,7 +805,7 @@
                       <!--Project Activity start-->
                       <section class="panel">
                           <div class="panel-body progress-panel">
-                            <div class="row">
+                            <div class="rows">
                               <div class="col-lg-8 task-progress pull-left">
                                   <h1>To Do Everyday</h1>
                               </div>
@@ -928,7 +928,7 @@
                   </div>
               </div><br><br>
 
-		<div class="row">
+		<div class="rows">
 			<div class="col-md-6 portlets">
             <div class="panel panel-default">
 				<div class="panel-heading">

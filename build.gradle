@@ -77,7 +77,7 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
     providedCompile "javax.servlet:javax.servlet-api:3.0.1",
-            "javax.servlet.jsp:jsp-api:2.1"
+                    "javax.servlet.jsp:jsp-api:2.1"
     compile "org.springframework:spring-core:$springVersion",
             "org.springframework:spring-context:${springVersion}",
             "org.springframework:spring-webmvc:${springVersion}",
@@ -85,15 +85,19 @@ dependencies {
             "org.springframework:spring-tx:${springVersion}",
             "org.springframework.security:spring-security-web:${springSecurityVersion}",
             "org.springframework.security:spring-security-config:${springSecurityVersion}",
+            "org.springframework.security:spring-security-taglibs:${springSecurityVersion}",
             "org.slf4j:slf4j-simple:1.7.25",
             "org.hibernate:hibernate-core:${hibernateVersion}",
             "org.hibernate:hibernate-entitymanager:${hibernateVersion}",
             "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}",
             "javax:javaee-api:${javaxVersion}",
             "javax.servlet:jstl:1.2",
+            "javax.validation:validation-api:1.1.0.Final",
+            "org.hibernate:hibernate-validator:${hibernateVersion}",
             "com.fasterxml.jackson.core:jackson-databind:2.5.0",
             "org.apache.tomcat:dbcp:6.0.35",
-            "org.aspectj:aspectjweaver:1.7.2"
+            "org.aspectj:aspectjweaver:1.7.2",
+            'commons-logging:commons-logging:1.1.1'
     runtime "org.postgresql:postgresql:${postgresVersion}"
     liquibase "org.postgresql:postgresql:${postgresVersion}"
     liquibase "org.liquibase:liquibase-core:3.2.2"
@@ -103,12 +107,9 @@ dependencies {
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
             "javax.servlet:jstl:1.2",
-//            for JNDI datasource
-            "org.apache.tomcat:tomcat-dbcp:7.0.11"
+            "org.springframework.security:spring-security-taglibs:${springSecurityVersion}",
+            "org.springframework:spring-webmvc:${springVersion}"
 
-//    [
-//            tomcatRun
-//    ]*.with{
-//        configFile = file("/Users/alexpench/Documents/tproject/src/main/webapp/META-INF/context.xml")
-//    }
+//            for JNDI datasource
+//            "org.apache.tomcat:tomcat-dbcp:7.0.11"
 }

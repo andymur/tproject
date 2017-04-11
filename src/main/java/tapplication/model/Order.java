@@ -9,7 +9,7 @@ import java.util.List;
  * Created by alexpench on 22.03.17.
  */
 @Entity
-@Table(name = "customer_order")
+@Table(name = "user_order")
 public class Order {
     public enum DeliveryTypeCode {SELF, DELIVER}
     public enum PaymentTypeCode {CASH, CARD}
@@ -25,8 +25,8 @@ public class Order {
     private Address address;
 
     @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
@@ -69,12 +69,12 @@ public class Order {
         this.address = address;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getOrderDate() {

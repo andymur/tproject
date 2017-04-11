@@ -27,7 +27,7 @@ public class Category {
     private String name;
 
     @Column(name = CATEGORY_IMAGE)
-    private String categoryImage;
+    private String imageUrl;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = PRODUCT_CATEGORY,
@@ -41,7 +41,7 @@ public class Category {
 
     public Category(String name, String categoryImage, List<Product> products) {
         this.name = name;
-        this.categoryImage = categoryImage;
+        this.imageUrl = categoryImage;
         this.products = products;
     }
 
@@ -53,7 +53,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", categoryImage='" + categoryImage + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", products=" + products +
                 '}';
     }
@@ -74,12 +74,12 @@ public class Category {
         this.name = name;
     }
 
-    public String getCategoryImage() {
-        return categoryImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setCategoryImage(String categoryImage) {
-        this.categoryImage = categoryImage;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     //    @JsonIgnore

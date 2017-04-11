@@ -8,21 +8,21 @@ public class BasketProductDto {
     private Long recordId;
     private Long productId;
     private Long quantity;
-    private Long customerId;
+    private Long userId;
     private String productName;
     public BasketProductDto(){}
 
-    public BasketProductDto(Long productId, Long quantity, Long customerId) {
+    public BasketProductDto(Long productId, Long quantity, Long userId) {
         this.productId = productId;
         this.quantity = quantity;
-        this.customerId = customerId;
+        this.userId = userId;
     }
 
-    public BasketProductDto( Long recordId, String productName, Long quantity, Long customerId, Long productId) {
+    public BasketProductDto(Long recordId, String productName, Long quantity, Long userId, Long productId) {
         this.recordId = recordId;
         this.productName = productName;
         this.quantity = quantity;
-        this.customerId = customerId;
+        this.userId = userId;
         this.productId = productId;
     }
 
@@ -42,12 +42,12 @@ public class BasketProductDto {
         this.quantity = quantity;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getRecordId() {

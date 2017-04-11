@@ -16,7 +16,7 @@
                     </div>
                     <div class="shop-products">
                         <div class="col-md-3 sidebar">
-                            <div id="cat-filter" data-category-id="${category.id}" class="sidebar-block top-10">
+                            <div id="cat-filter" data-category-id="${category.categoryId}" class="sidebar-block top-10">
                                 <h3>FILTER</h3>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Brand</label>
@@ -54,7 +54,9 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div id="pr-div" class="col-md-9"></div>
+                        <div id="pr-div" class="col-md-9">
+
+                        </div>
                     </div>
                 </div>
             </div>

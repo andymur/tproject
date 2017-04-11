@@ -12,13 +12,13 @@ public class OrderDto {
     private Long deliveryAddressId;
     private Order.DeliveryTypeCode deliveryType;
     private Order.PaymentTypeCode paymentType;
-    private Long customerId;
+    private Long userId;
     private Long orderId;
 
     public OrderDto setNewOrderDetails(Order newOrder) {
         OrderDto newOrderDto = new OrderDto();
         newOrderDto.setOrderId(newOrder.getId());
-        newOrderDto.setCustomerId(newOrder.getCustomer().getId());
+        newOrderDto.setUserId(newOrder.getUser().getId());
         return newOrderDto;
     }
 
@@ -64,12 +64,12 @@ public class OrderDto {
         this.paymentType = paymentType;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 

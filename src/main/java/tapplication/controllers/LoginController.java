@@ -1,34 +1,221 @@
 package tapplication.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import tapplication.exceptions.InvalidDataException;
-import tapplication.model.Customer;
-import tapplication.service.CustomerServiceImpl;
+import tapplication.model.Role;
+import tapplication.model.User;
+import tapplication.service.CategoryServiceImpl;
+import tapplication.service.RoleServiceImpl;
+import tapplication.service.UserServiceImpl;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by alexpench on 23.03.17.
  */
 @Controller
-public class LoginController {
+public class LoginController extends CoreController {
     @Autowired
-    private CustomerServiceImpl loginService;
+    private MessageSource messageSource;
+
+    @Autowired
+    private UserServiceImpl userService;
+
+    @Autowired
+    private RoleServiceImpl roleService;
+
+    @Autowired
+    private CategoryServiceImpl categoryService;
+
+    @Autowired
+    PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+
+    @Autowired
+    AuthenticationTrustResolver authenticationTrustResolver;
 
     @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
-    public Object redirect() {
+    public Object redirect(Model model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         return "index";
     }
 
-    @ResponseBody
-    @RequestMapping(path = "login", method = RequestMethod.POST)
-    public Object login(@RequestBody Customer customer, Model model) throws InvalidDataException {
-        customer = loginService.getCustomerByEmail(customer);
-        customer.setPassword("");
-        return customer;
+    /**
+     * This method will list all existing users.
+     */
+    @RequestMapping(value = { "/list" }, method = RequestMethod.GET)
+    public String listUsers(ModelMap model) {
+
+        List<User> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "userslist";
     }
+
+    /**
+     * This method will provide the medium to add a new user.
+     */
+    @RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
+    public String newUser(ModelMap model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        model.addAttribute("edit", false);
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "registration";
+    }
+
+    /**
+     * This method will be called on form submission, handling POST request for
+     * saving user in database. It also validates the user input
+     */
+    @RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
+    public String saveUser(@Valid User user, BindingResult result,
+                           ModelMap model) {
+
+        if (result.hasErrors()) {
+            return "registration";
+        }
+
+        /*
+         * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
+         * and applying it on field [sso] of Model class [User].
+         *
+         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
+         * framework as well while still using internationalized messages.
+         *
+         */
+        if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
+            FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+            result.addError(ssoError);
+            return "registration";
+        }
+        /*
+        * if user doing self registration, then role will be USER
+        *
+        * */
+        if(user.getRole() == null) {
+            List<Role> roles = (List<Role>) model.get("roles");
+            Role userRole = new Role();
+            for (Role role : roles) {
+                if (role.getType().equals(Role.UserRoleType.USER.name())) {
+                    userRole = role;
+                }
+            }
+            user.setRole(userRole);
+        }
+        userService.saveUser(user);
+
+        model.addAttribute("loggedinuser", getPrincipal());
+        //return "success";
+        return "redirect:/";
+    }
+
+
+    /**
+     * This method will provide the medium to update an existing user.
+     */
+    @RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.GET)
+    public String editUser(@PathVariable String ssoId, ModelMap model) {
+        User user = userService.findBySSO(ssoId);
+        model.addAttribute("user", user);
+        model.addAttribute("edit", true);
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "registration";
+    }
+
+    /**
+     * This method will be called on form submission, handling POST request for
+     * updating user in database. It also validates the user input
+     */
+    @RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
+    public String updateUser(@Valid User user, BindingResult result,
+                             ModelMap model, @PathVariable String ssoId) {
+
+        if (result.hasErrors()) {
+            return "registration";
+        }
+
+        /*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
+        if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
+            FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+            result.addError(ssoError);
+            return "registration";
+        }*/
+
+
+        userService.updateUser(user);
+
+        model.addAttribute("success", "User " + user.getName() + " "+ user.getLastName() + " updated successfully");
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "registrationsuccess";
+    }
+
+
+    /**
+     * This method will delete an user by it's SSOID value.
+     */
+    @RequestMapping(value = { "/delete-user-{ssoId}" }, method = RequestMethod.GET)
+    public String deleteUser(@PathVariable String ssoId) {
+        userService.deleteUserBySSO(ssoId);
+        return "redirect:/list";
+    }
+
+
+    /**
+     * This method will provide UserProfile list to views
+     */
+    @ModelAttribute("roles")
+    public List<Role> initializeProfiles() {
+        return roleService.findAll();
+    }
+
+    /**
+     * This method handles Access-Denied redirect.
+     */
+    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+    public String accessDeniedPage(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "accessDenied";
+    }
+
+    /**
+     * This method handles logout requests.
+     * Toggle the handlers if you are RememberMe functionality is useless in your app.
+     */
+    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    public String logoutPage (HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            persistentTokenBasedRememberMeServices.logout(request, response, auth);
+            SecurityContextHolder.getContext().setAuthentication(null);
+        }
+        return "redirect:/";
+    }
+
+    /**
+     * This method returns true if users is already authenticated [logged-in], else false.
+     */
+    private boolean isCurrentAuthenticationAnonymous() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authenticationTrustResolver.isAnonymous(authentication);
+    }
+
+
 }

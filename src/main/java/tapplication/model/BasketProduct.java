@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "basket_product")
 public class BasketProduct {
     public static final String ID = "id";
-    public static final String CUSTOMER_ID = "customer_id";
+    public static final String USER_ID = "user_id";
     public static final String PRODUCT_ID = "product_id";
     public static final String QUANTITY = "quantity";
     @Id
@@ -18,8 +18,8 @@ public class BasketProduct {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = CUSTOMER_ID, referencedColumnName = "id")
-    private Customer customer;
+    @JoinColumn(name = USER_ID, referencedColumnName = "id")
+    private User user;
 
     @OneToOne
     @JoinColumn(name = PRODUCT_ID)
@@ -38,12 +38,12 @@ public class BasketProduct {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Product getProduct() {

@@ -1209,11 +1209,12 @@ h2{
 
 .under-heading{
 	padding:0px 30px 0px 30px;
+	transition: width .3s;
 }
 
-.logo {
+#header .logo img{
+	width: 60px;
 	float:left;
-	padding-top:33px;
 }
 
 .is-sticky  .minimal-menu {
@@ -1258,7 +1259,7 @@ h2{
 .welcome .shadow-man{
 	position:absolute;
 	left:-20px;
-	z-index:2;
+	top:-120px;
 }
 
 .welcome h2{
@@ -4539,7 +4540,7 @@ footer .foot-logo{
 
 .arrivals{
 	background:#f3f4f7;
-	padding-top:60px;
+	padding-top:0px;
 	padding-bottom:60px;
 }
 
@@ -5227,10 +5228,8 @@ footer .foot-logo{
 
 /*--- Cart Page --*/
 .cart{
-	background-color: #f3f4f7;
 	padding-top:60px;
 	padding-bottom:60px;
-	box-shadow: 0px -10px 26px 0px rgba(0,0,0,0.05);
 }
 
 .cart .headlines{
