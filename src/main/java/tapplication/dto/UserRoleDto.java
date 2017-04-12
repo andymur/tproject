@@ -1,4 +1,4 @@
-package tapplication.controllers.dto;
+package tapplication.dto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -469,6 +469,10 @@ header {
 	color:#fff;
 }
 
+.not-active{
+	pointer-events: none;
+	cursor: default;
+}
 .w-btn .welcome-button-2{
 	display:inline-block;
 	background:#bea473;

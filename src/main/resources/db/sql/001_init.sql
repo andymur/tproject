@@ -72,7 +72,7 @@ OIDS = FALSE
 
 CREATE TABLE "ordered_product" (
   "id"         SERIAL NOT NULL,
-  "order_id"   BIGINT NOT NULL,
+  "order_id"   BIGINT ,
   "product_id" BIGINT NOT NULL,
   "quantity"   BIGINT NOT NULL,
   CONSTRAINT ordered_product_pk PRIMARY KEY ("id")

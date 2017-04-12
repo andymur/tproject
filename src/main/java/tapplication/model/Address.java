@@ -7,24 +7,34 @@ import javax.persistence.*;
  */
 @Entity
 public class Address {
+    public static final String ID = "id";
+    public static final String COUNTRY = "country";
+    public static final String CITY = "city";
+    public static final String STREET = "street";
+    public static final String BUILDING = "building";
+    public static final String APARTMENT = "apartment";
+    public static final String ZIP_CODE = "zip_code";
+    public static final String USER_ID = "user_id";
+    public static final String ID1 = "id";
+    public static final String USER_ENTITY = "user";
     @Id
-    @Column(name = "id")
+    @Column(name = ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "country")
+    @Column(name = COUNTRY)
     private String country;
-    @Column(name = "city")
+    @Column(name = CITY)
     private String city;
-    @Column(name = "street")
+    @Column(name = STREET)
     private String street;
-    @Column(name = "building")
+    @Column(name = BUILDING)
     private String building;
-    @Column(name = "apartment")
+    @Column(name = APARTMENT)
     private String apartment;
-    @Column(name = "zip_code")
+    @Column(name = ZIP_CODE)
     private Long zipCode;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = USER_ID, referencedColumnName = ID1)
     private User user;
 
     public Long getId() {

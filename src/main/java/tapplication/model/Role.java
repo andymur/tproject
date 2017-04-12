@@ -17,14 +17,14 @@ public class Role {
         DBA("DBA"),
         ADMIN("ADMIN");
 
-        String userProfileType;
+        String UserRoleType;
 
         private UserRoleType(String userRoleType){
-            this.userProfileType = userRoleType;
+            this.UserRoleType = userRoleType;
         }
 
         public String getUserRoleType(){
-            return userProfileType;
+            return UserRoleType;
         }
 
     }

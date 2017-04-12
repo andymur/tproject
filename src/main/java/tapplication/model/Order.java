@@ -1,5 +1,10 @@
 package tapplication.model;
 
+import tapplication.service.DeliveryTypeCode;
+import tapplication.service.OrderStatusCode;
+import tapplication.service.PaymentStatusCode;
+import tapplication.service.PaymentTypeCode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,10 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "user_order")
 public class Order {
-    public enum DeliveryTypeCode {SELF, DELIVER}
-    public enum PaymentTypeCode {CASH, CARD}
-    public enum OrderStatusCode {ORDER_AWAIT_PAYMENT, ORDER_AWAIT_SHIPMENT, ORDER_SHIPPED, ORDER_DELIVERED}
-    public enum PaymentStatusCode {PAYMENT_AWAIT_PAYMENT, PAYMENT_PAID}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -51,7 +53,8 @@ public class Order {
     @Column(name = "delivery_type_id")
     private DeliveryTypeCode deliveryType;
 
-    public Order(){}
+    public Order() {
+    }
 
     public Long getId() {
         return id;

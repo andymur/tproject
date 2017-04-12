@@ -1,4 +1,4 @@
-package tapplication.controllers.dto;
+package tapplication.dto;
 
 /**
  * Created by alexpench on 11.04.17.

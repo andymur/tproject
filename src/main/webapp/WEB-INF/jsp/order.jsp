@@ -7,43 +7,92 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <h1>Your Order</h1>
+        <div id="wrapper">
+        <div class="container">
+            <div class="col-md-12 headlines">
+                <h2>OR<span class="color-bg">DER</span></h2>
+            </div>
 
-        <table id="checkout-cart" class="shopping-cart">
-            <thead>
-            <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+            <div id="checkout-order-form">
 
-        <div id="pricing">
-            <p id="shipping">
-                <strong>Shipping</strong>: <span id="sshipping"></span>
-            </p>
+                <h2 id="details" >Your Details</h2>
+                <div id="wrapper">
+                </div>
+                <fieldset id="fieldset-billing">
+                    <legend>Shipping</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Country</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="country">
+                        </div>
+                    </div>
 
-            <p id="sub-total">
-                <strong>Total</strong>: <span id="stotal"></span>
-            </p>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">City</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="city">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Street</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="street">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Building</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="building">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Apartment</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="apartment">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">ZIP-CODE</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="zipCode">
+                        </div>
+                    </div>
+
+                    <div id="paymentType" class="form-group">
+                        <label class="col-sm-2 control-label">PaymentType</label>
+                        <div id="sel-div" class="col-sm-10">
+                            <select id="paymentTypeSelect" class="form-control m-bot15">
+                                <c:forEach var="type" items="${paymentTypes}">
+                                    <option data-payment-type=${type} >${type}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="deliveryType" class="form-group">
+                        <label class="col-sm-2 control-label">DeliveryType</label>
+                        <div id="sel-div" class="col-sm-10">
+                            <select id="deliveryTypeSelect" class="form-control m-bot15">
+                                <c:forEach var="type" items="${deliveryTypes}">
+                                    <option data-delivery-type=${type}>${type}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button id="submit-order" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </div>
+            <a id="cart1" href="#" title="Shopping Cart"><span class="icon-cart"></span></a>
         </div>
-
-        <div id="user-details">
-            <h2>Your Data</h2>
-            <div id="user-details-content"></div>
         </div>
-
-
-        <form id="paypal-form" action="" method="post">
-            <input type="hidden" name="cmd" value="_cart" />
-            <input type="hidden" name="upload" value="1" />
-            <input type="hidden" name="business" value="" />
-
-            <input type="hidden" name="currency_code" value="" />
-            <input type="submit" id="paypal-btn" class="btn" value="Pay with PayPal" />
-        </form>
+        <script type="text/javascript" src="resources/order.js"></script>
     </jsp:body>
 </t:genericpage>

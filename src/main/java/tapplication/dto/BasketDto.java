@@ -1,4 +1,4 @@
-package tapplication.controllers.dto;
+package tapplication.dto;
 
 import java.util.List;
 

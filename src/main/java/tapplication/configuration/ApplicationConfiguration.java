@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import tapplication.controllers.dto.UserRoleDto;
+import tapplication.dto.UserRoleDto;
 
 /**
  * Created by alexpench on 30.03.17.

@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.controllers.dto.BasketProductDto;
-import tapplication.controllers.dto.OrderDto;
+import tapplication.dto.BasketProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.BasketProduct;
 import tapplication.model.User;
@@ -98,13 +97,13 @@ public class BasketServiceImpl {
         return basketProducts;
     }
 
-    public void cleanBasket(OrderDto orderDto) {
-        orderDto.getBasketProductsDtoList().forEach(basketProductDto -> {
-            try {
-                remove(basketProductDto);
-            } catch (NotFoundException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+//    public void cleanBasket(OrderDto orderDto) {
+//        orderDto.getBasketDto().getRows().forEach(basketProductDto -> {
+//            try {
+//                remove(basketProductDto);
+//            } catch (NotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
 }

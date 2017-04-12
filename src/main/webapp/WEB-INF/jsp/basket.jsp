@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <div id="wrapper">
 <div class="cart">
@@ -50,9 +51,13 @@
                 </c:forEach>
                 </tbody>
             </table>
-
-            <a href="#" class="welcome-button-2 hvr-shutter-in-horizontal-2">PROCEED</a>
-
+            <sec:authorize access="isAuthenticated()">
+            <a id="orderBtn" href="order" class="welcome-button-2 hvr-shutter-in-horizontal-2">PROCEED</a>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <a href="#" disabled="true" class="welcome-button-2 hvr-shutter-in-horizontal-2 not-active">PROCEED</a>
+                <p>Please login to proceed</p>
+            </sec:authorize>
         </div>
     </div>
 </div>

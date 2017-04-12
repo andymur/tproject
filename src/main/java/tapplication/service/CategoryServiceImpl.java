@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.controllers.dto.CategoryDto;
+import tapplication.dto.CategoryDto;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.Category;
