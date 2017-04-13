@@ -21,10 +21,10 @@
                             <tr>
                                 <th>ORDER ID</th>
                                 <th>ORDER DATE</th>
-                                <th>USER NICKNAME</th>
-                                <th>USER PHONE</th>
                                 <th>DELIVERY ADDRESS</th>
                                 <th>PRODUCTS</th>
+                                <th>ORDER STATUS</th>
+                                <th>ACTION</th>
                             </tr>
                                 <tr>
                                     <td>
@@ -34,16 +34,28 @@
                                         ${order.orderDate}
                                     </td>
                                     <td>
-                                        ${order.firstName}
-                                    </td>
-                                    <td>
-                                        ${order.phoneNumber}
-                                    </td>
-                                    <td>
                                         ${order.deliveryAddressDto}
                                     </td>
                                     <td>
                                         ${order.products}
+                                    </td>
+                                    <td>
+                                        <div id="orderStatus" class="form-group">
+                                            <label class="col-sm-2 control-label">PaymentType</label>
+                                            <div id="sel-div" class="col-sm-10">
+                                                <select id="orderStatusSelect" class="form-control m-bot15">
+                                                    <option data-order-status=${order.orderStatusCode} selected >${order.orderStatusCode}</option>
+                                                    <c:forEach var="status" items="${orderStatuses}">
+                                                        <c:if test="${status != order.orderStatusCode}">
+                                                        <option data-order-status=${status} >${status}</option>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="saveOrderStatus" value="${order.orderId}"  type="button">Save</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -52,5 +64,6 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="resources/orders.js"></script>
     </jsp:body>
 </t:genericpage>

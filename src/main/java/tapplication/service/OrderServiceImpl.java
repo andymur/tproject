@@ -19,8 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static tapplication.service.OrderStatusCode.ORDER_AWAIT_PAYMENT;
-import static tapplication.service.PaymentStatusCode.PAYMENT_AWAIT_PAYMENT;
+import static tapplication.service.PaymentStatusCode.AWAIT_PAYMENT;
 
 /**
  * Created by alexpench on 07.04.17.
@@ -46,26 +45,13 @@ public class OrderServiceImpl {
         newOrder.setAddress(addressService.save(orderDto));
         newOrder.setDeliveryType(orderDto.getDeliveryType());
         newOrder.setPaymentType(orderDto.getPaymentType());
-        newOrder.setPaymentStatus(PAYMENT_AWAIT_PAYMENT);
-        newOrder.setOrderStatus(ORDER_AWAIT_PAYMENT);
+        newOrder.setPaymentStatus(AWAIT_PAYMENT);
+        newOrder.setOrderStatus(OrderStatusCode.AWAIT_PAYMENT);
         newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         orderDao.persist(newOrder);
         newOrder.getOrderedProducts().forEach(orderedProduct -> orderedProduct.setOrder(newOrder));
 //        basketService.cleanBasket(orderDto);
         return orderDto.setNewOrderDetails(newOrder);
-    }
-
-    private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) throws NotFoundException, PlaceToOrderException {
-        List<OrderedProduct> orderedProductList = new ArrayList<>();
-        OrderedProduct orderedProduct = new OrderedProduct();
-        for (ProductAndAmount productAndAmount : orderDto.getBasketDto().getRows()) {
-            Long quantity = productAndAmount.getCount();
-            Product product = productService.moveToOrder(productAndAmount.getProductId(), quantity);
-            orderedProduct.setProduct(product);
-            orderedProduct.setQuantity(quantity);
-            orderedProductList.add(orderedProduct);
-        }
-        newOrder.setOrderedProducts(orderedProductList);
     }
 
     public List<OrderDto> getUserOrders(String ssoId) {
@@ -80,5 +66,27 @@ public class OrderServiceImpl {
 
     public OrderDto getOne(Long orderId) {
         return new OrderDto().prepareForAdmin(orderDao.findOne(orderId));
+    }
+
+    public void update(OrderDto orderToUpdate) {
+        Order order = orderDao.findOne(orderToUpdate.getOrderId());
+        if (order == null){
+            throw new NotFoundException();
+        }
+        order.setOrderStatus(orderToUpdate.getOrderStatusCode());
+        orderDao.merge(order);
+    }
+
+    private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) throws NotFoundException, PlaceToOrderException {
+        List<OrderedProduct> orderedProductList = new ArrayList<>();
+        OrderedProduct orderedProduct = new OrderedProduct();
+        for (ProductAndAmount productAndAmount : orderDto.getBasketDto().getRows()) {
+            Long quantity = productAndAmount.getCount();
+            Product product = productService.moveToOrder(productAndAmount.getProductId(), quantity);
+            orderedProduct.setProduct(product);
+            orderedProduct.setQuantity(quantity);
+            orderedProductList.add(orderedProduct);
+        }
+        newOrder.setOrderedProducts(orderedProductList);
     }
 }
