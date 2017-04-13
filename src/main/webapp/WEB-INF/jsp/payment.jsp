@@ -7,12 +7,12 @@
 <div id="wrapper">
     <div class="cart">
         <div class="container">
-            <div class="col-md-12 headlines">
+            <div id="payment" class="col-md-12 headlines">
                 <h2>CHECK<span class="color-bg">OUT</span></h2>
                 <h2>OrderId : ${order.orderId}</h2>
             </div>
 
-            <div class="col-md-12">
+            <div id="payment-form" class="col-md-12">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Card number</label>
                     <div class="col-sm-10">
@@ -34,7 +34,7 @@
                 <sec:authorize access="isAuthenticated()">
                     <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
-                            <button id="submit-order" class="btn btn-primary" value="${order.orderId}">Submit</button>
+                            <button id="submitPayment" class="btn btn-primary" value="${order.orderId}">Submit</button>
                         </div>
                     </div>
                 </sec:authorize>

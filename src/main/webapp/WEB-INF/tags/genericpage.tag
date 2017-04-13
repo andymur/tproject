@@ -189,9 +189,9 @@
                                         </sec:authorize>
                                         <sec:authorize access="isAuthenticated()">
                                             <li class="submenu">
-                                                <a id="username" data-username="${loggedinuser}" href="#"><strong>${loggedinuser}</strong></a>
+                                                <a id="username" data-username="${loggedinuser}" href="/user"><strong>${loggedinuser}</strong></a>
                                                 <ul>
-                                                    <li><a href="basket">Basket</a></li>
+                                                    <li><a id="usercart" href="#">Cart</a></li>
                                                     <li><a href="orders">Orders</a></li>
                                                 </ul>
                                             </li>

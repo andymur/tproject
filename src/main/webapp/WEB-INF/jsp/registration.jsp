@@ -10,7 +10,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>User Registration Form</title>
     <link href="<c:url value='/resources/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/resources/css/app.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -86,6 +85,20 @@
                 </div>
             </div>
         </div>
+        <sec:authorize access="hasRole('USER')">
+            <div class="rows">
+                <div class="form-group col-md-12">
+                    <label class="col-md-3 control-lable" for="role">Roles</label>
+                    <div class="col-md-7">
+                        <form:select path="role" items="${userrole}" multiple="true" itemValue="id" itemLabel="type"
+                                     class="form-control input-sm"/>
+                        <div class="has-error">
+                            <form:errors path="role" class="help-inline"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
             <div class="rows">
                 <div class="form-group col-md-12">

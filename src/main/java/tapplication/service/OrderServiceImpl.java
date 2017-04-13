@@ -50,7 +50,6 @@ public class OrderServiceImpl {
         newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         orderDao.persist(newOrder);
         newOrder.getOrderedProducts().forEach(orderedProduct -> orderedProduct.setOrder(newOrder));
-//        basketService.cleanBasket(orderDto);
         return orderDto.setNewOrderDetails(newOrder);
     }
 
@@ -72,6 +71,9 @@ public class OrderServiceImpl {
         Order order = orderDao.findOne(orderToUpdate.getOrderId());
         if (order == null){
             throw new NotFoundException();
+        }
+        if(orderToUpdate.getPaymentStatusCode() != null){
+            order.setPaymentStatus(orderToUpdate.getPaymentStatusCode());
         }
         order.setOrderStatus(orderToUpdate.getOrderStatusCode());
         orderDao.merge(order);

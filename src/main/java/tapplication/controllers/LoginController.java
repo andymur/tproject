@@ -24,6 +24,7 @@ import tapplication.service.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,6 +68,15 @@ public class LoginController extends CoreController {
         model.addAttribute("users", users);
         model.addAttribute("loggedinuser", getPrincipal());
         return "userslist";
+    }
+
+    @RequestMapping(value = { "/user" }, method = RequestMethod.GET)
+    public String userDetails(ModelMap model) {
+
+        User user = userService.findBySSO(getPrincipal());
+        model.addAttribute("user", user);
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "user";
     }
 
     /**
@@ -140,6 +150,15 @@ public class LoginController extends CoreController {
         return "registration";
     }
 
+    @RequestMapping(value = { "/edit-details-user-{ssoId}" }, method = RequestMethod.GET)
+        public String editUserDetails(@PathVariable String ssoId, ModelMap model) {
+            User user = userService.findBySSO(getPrincipal());
+            model.addAttribute("user", user);
+            model.addAttribute("edit", true);
+            model.addAttribute("loggedinuser", getPrincipal());
+            return "registration";
+        }
+
     /**
      * This method will be called on form submission, handling POST request for
      * updating user in database. It also validates the user input
@@ -151,17 +170,20 @@ public class LoginController extends CoreController {
         if (result.hasErrors()) {
             return "registration";
         }
-
-        /*//Uncomment below 'if block' if you WANT TO ALLOW UPDATING SSO_ID in UI which is a unique key to a User.
-        if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-            FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-            result.addError(ssoError);
-            return "registration";
-        }*/
-
-
         userService.updateUser(user);
+        model.addAttribute("success", "User " + user.getName() + " "+ user.getLastName() + " updated successfully");
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "registrationsuccess";
+    }
 
+    @RequestMapping(value = { "/edit-details-user-{ssoId}" }, method = RequestMethod.POST)
+    public String updateUserDetails(@Valid User user, BindingResult result,
+                             ModelMap model, @PathVariable String ssoId) {
+
+        if (result.hasErrors()) {
+            return "registration";
+        }
+        userService.updateUser(user);
         model.addAttribute("success", "User " + user.getName() + " "+ user.getLastName() + " updated successfully");
         model.addAttribute("loggedinuser", getPrincipal());
         return "registrationsuccess";
@@ -182,8 +204,15 @@ public class LoginController extends CoreController {
      * This method will provide UserProfile list to views
      */
     @ModelAttribute("roles")
-    public List<Role> initializeProfiles() {
+    public List<Role> initializeRoles() {
         return roleService.findAll();
+    }
+
+    @ModelAttribute("userrole")
+    public List<Role> initializeUserRole() {
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleService.findById(1L));
+        return roles;
     }
 
     /**

@@ -1,17 +1,3 @@
-
-    // $('#btnAddToCart').click(()=>{
-    //
-    //     var product = $(this).val()
-    //     if(sessionStorage.getItem(product.productid) === null){
-    //         sessionStorage.setItem(product.productid, 1)
-    //     } else {
-    //     var total = parseInt( sessionStorage.getItem(product.productid) );
-    //     total++;
-    //     sessionStorage.setItem( product.productid, total );
-    //         $('.cart-count').text(total);
-    // }
-    // })
-
     var assignClickHandler = function (selector, handler) {
         // selector is a jquery object
         selector = selector || $(".some-class-which-doesnot-exist");
@@ -21,9 +7,7 @@
     };
 
     var restoreCart = function () {
-        // var cart = getCart();
-        // $('.cart-count').text(cart.amount);
-        var arr = getArr();
+        var arr = getCart();
         var amount = 0;
         for (var key in arr) {
             amount += arr[key];
@@ -56,12 +40,13 @@
         restoreCart();
         assignClickHandler($(".addToCart"), addToCart_Handler);
         assignClickHandler($("#cart"), loadCardPage_Handler);
+        assignClickHandler($("#usercart"), loadCardPage_Handler);
     });
 
     function loadCardPage(event) {
         event.preventDefault();
         // var cart = JSON.stringify(getCart());
-        var cart = getArr();
+        var cart = getCart();
         var rows = [];
 
         for(var key in cart){
@@ -85,7 +70,7 @@
     }
 
     function addToCart(productId) {
-        var assoArray = getArr();
+        var assoArray = getCart();
 
         if(assoArray[productId] == undefined)
         {
@@ -94,22 +79,22 @@
         else {
             assoArray[productId] =assoArray[productId]+1
         };
-        setArr(assoArray);
+        setCart(assoArray);
     }
 
     function removeFromCart(productId) {
-        var assoArray = getArr();
+        var assoArray = getCart();
         delete assoArray[productId];
-        setArr(assoArray);
+        setCart(assoArray);
         loadCardPage(event);
     }
 
-    function getArr(){
+    function getCart(){
         var arr = JSON.parse(localStorage.getItem("arr"));
         return (arr === null) ? {} : arr;
     }
 
-    function setArr(arr){
+    function setCart(arr){
         var amount = 0;
         for (var key in arr) {
             amount += arr[key];

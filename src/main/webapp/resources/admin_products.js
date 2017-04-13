@@ -73,6 +73,7 @@ jQuery(function ($) {
         function appendCategory(data) {
             let dataToAppend = '<option data-category-id=' + data.id + ' data-category-name=' + data.name + ' data-category-products=' + data.products + ' data-category-image=' + data.categoryImage + '>' + data.name + '</option>'
             $('#cat-select').append(dataToAppend);
+            $('#cat-edit-select').append(dataToAppend);
         }
     })
 

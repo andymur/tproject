@@ -23,6 +23,7 @@ jQuery(function ($) {
                 success: (data)=> {
                 $("#grid-container-10").remove()
                 $('#pr-div').append(data)
+                assignClickHandler($(".addToCart"), addToCart_Handler);
     }
     })
     })
