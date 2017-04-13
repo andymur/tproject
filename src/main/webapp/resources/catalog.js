@@ -10,7 +10,7 @@ jQuery(function ($) {
         if ($('#br-select option:selected').is(':disabled') == false) {
             var brand = $('#br-select option:selected').val()
         }
-        var filterParams = 'catalog/filter?categoryId=' + categoryId + '&size=' + size + '&brand=' + brand + '$color=' + color
+        var filterParams = 'catalog/filter?categoryId=' + categoryId + '&size=' + size + '&brand=' + brand + '&color=' + color
         var dataFilter = JSON.stringify({
             categoryId: categoryId,
             color: color,

@@ -17,40 +17,49 @@ import java.util.List;
 @Table(name = "user_order")
 public class Order {
 
+    public static final String DELIVERY_ADDRESS_ID = "delivery_address_id";
+    public static final String USER_ID = "user_id";
+    public static final String ORDER_DATE = "order_date";
+    public static final String ORDER = "order";
+    public static final String ORDER_STATUS_ID = "order_status_id";
+    public static final String PAYMENT_STATUS_ID = "payment_status_id";
+    public static final String PAYMENT_TYPE_ID = "payment_type_id";
+    public static final String DELIVERY_TYPE_ID = "delivery_type_id";
+    public static final String USER_ENTITY = "user";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "delivery_address_id")
+    @JoinColumn(name = DELIVERY_ADDRESS_ID)
     private Address address;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = USER_ID)
     private User user;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "order_date")
+    @Column(name = ORDER_DATE)
     private Date orderDate;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = ORDER, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderedProduct> orderedProducts = new ArrayList<>();
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "order_status_id")
+    @Column(name = ORDER_STATUS_ID)
     private OrderStatusCode orderStatus;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "payment_status_id")
+    @Column(name = PAYMENT_STATUS_ID)
     private PaymentStatusCode paymentStatus;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "payment_type_id")
+    @Column(name = PAYMENT_TYPE_ID)
     private PaymentTypeCode paymentType;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "delivery_type_id")
+    @Column(name = DELIVERY_TYPE_ID)
     private DeliveryTypeCode deliveryType;
 
     public Order() {

@@ -113,4 +113,16 @@ public class Address {
 
     public Address() {
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", building='" + building + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", zipCode=" + zipCode +
+                '}';
+    }
 }

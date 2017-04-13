@@ -47,9 +47,7 @@ public class Brand {
     public String toString() {
         return "Brand{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", brandImage='" + brandImage + '\'' +
-                '}';
+                ", name='" + name + "}";
     }
 
     public Long getId() {

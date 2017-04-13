@@ -78,8 +78,9 @@ public class ProductService implements CoreService<Product> {
         return products.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
-    public List<Product> findAllByParams(Long categoryId, String brand, String color, String size) {
-        return productDao.findByParams(categoryId, brand, color, size);
+    public List<ProductDto> findAllByParams(Long categoryId, String brand, String color, String size) {
+        List<Product> products = productDao.findByParams(categoryId, brand, color, size);
+        return products.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
     public Product findOne(Long productId) throws NotFoundException {

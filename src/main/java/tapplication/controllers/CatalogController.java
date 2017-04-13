@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
-import tapplication.model.Product;
 import tapplication.service.CategoryServiceImpl;
 import tapplication.service.ProductService;
 
@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "catalog")
-public class CatalogController {
+public class CatalogController extends CoreController {
     @Autowired
     private ProductService productService;
     @Autowired
@@ -33,6 +33,7 @@ public class CatalogController {
         model.addAttribute("sizes", productService.getSizes());
         model.addAttribute("category", categoryService.getCategoryDtoById(categoryId));
         model.addAttribute("categoriesmap", categoryService.getCategoryMap());
+        model.addAttribute("loggedinuser", getPrincipal());
 
         return "catalog";
     }
@@ -44,7 +45,7 @@ public class CatalogController {
             @RequestParam(value = "color", required = false) String color,
             @RequestParam(value = "size", required = false) String size,
                                  Model model) throws NotFoundException {
-        List<Product> products = productService.findAllByParams(categoryId,brand,color,size);
+        List<ProductDto> products = productService.findAllByParams(categoryId,brand,color,size);
         model.addAttribute("products", products);
         return "filtered";
     }

@@ -191,9 +191,8 @@
                                             <li class="submenu">
                                                 <a id="username" data-username="${loggedinuser}" href="#"><strong>${loggedinuser}</strong></a>
                                                 <ul>
-                                                    <li><a href="/basket">Basket</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                    <li><a href="/logout">Logout</a></li>
+                                                    <li><a href="basket">Basket</a></li>
+                                                    <li><a href="orders">Orders</a></li>
                                                 </ul>
                                             </li>
                                         </sec:authorize>

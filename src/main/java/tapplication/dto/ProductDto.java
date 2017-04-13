@@ -35,6 +35,7 @@ public class ProductDto {
         this.color = product.getColor();
         this.description = product.getDescription();
         this.category = product.getCategory().getName();
+        this.price = product.getPrice();
         product.getImages().forEach(productImage -> this.images.add(productImage.getImage()));
         product.getParameters().forEach(parameter -> this.parameters.add(new ParametersDto(parameter)));
         this.mainImage = product.getImages().stream()
@@ -157,5 +158,19 @@ public class ProductDto {
 
     public void setCount(Long count) {
         this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductDto{" +
+                "productId=" + productId +
+                ", brand='" + brand + '\'' +
+                ", name='" + name + '\'' +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", category='" + category + '\'' +
+                ", parameters=" + parameters +
+                '}';
     }
 }

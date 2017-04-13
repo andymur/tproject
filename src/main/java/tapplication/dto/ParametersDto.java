@@ -45,4 +45,13 @@ public class ParametersDto {
     public void setWeights(List<Long> weights) {
         this.weights = weights;
     }
+
+    @Override
+    public String toString() {
+        return "ParametersDto{" +
+                "productId=" + productId +
+                ", sizes=" + sizes +
+                ", weights=" + weights +
+                '}';
+    }
 }

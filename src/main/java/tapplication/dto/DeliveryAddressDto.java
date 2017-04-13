@@ -1,5 +1,7 @@
 package tapplication.dto;
 
+import tapplication.model.Address;
+
 /**
  * Created by alexpench on 12.04.17.
  */
@@ -12,6 +14,16 @@ public class DeliveryAddressDto {
     private Long zipCode;
 
     public DeliveryAddressDto() {
+    }
+
+
+    public DeliveryAddressDto(Address address) {
+        this.country = address.getCountry();
+        this.city = address.getCity();
+        this.street = address.getStreet();
+        this.building = address.getBuilding();
+        this.apartment = address.getApartment();
+        this.zipCode = address.getZipCode();
     }
 
     public String getCountry() {
@@ -60,5 +72,17 @@ public class DeliveryAddressDto {
 
     public void setZipCode(Long zipCode) {
         this.zipCode = zipCode;
+    }
+
+    @Override
+    public String toString() {
+        return "DeliveryAddressDto{" +
+                "country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", building='" + building + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", zipCode=" + zipCode +
+                '}';
     }
 }

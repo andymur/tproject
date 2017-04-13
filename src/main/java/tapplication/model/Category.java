@@ -52,9 +52,7 @@ public class Category {
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", products=" + products +
+                ", name='" + name +
                 '}';
     }
 

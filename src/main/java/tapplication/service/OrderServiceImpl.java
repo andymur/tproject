@@ -11,11 +11,13 @@ import tapplication.exceptions.PlaceToOrderException;
 import tapplication.model.Order;
 import tapplication.model.OrderedProduct;
 import tapplication.model.Product;
+import tapplication.model.User;
 import tapplication.repositories.OrderDao;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static tapplication.service.OrderStatusCode.ORDER_AWAIT_PAYMENT;
 import static tapplication.service.PaymentStatusCode.PAYMENT_AWAIT_PAYMENT;
@@ -34,8 +36,6 @@ public class OrderServiceImpl {
     private AddressService addressService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private BasketServiceImpl basketService;
 
 
     public Object create(OrderDto orderDto) throws NotFoundException, PlaceToOrderException {
@@ -52,8 +52,7 @@ public class OrderServiceImpl {
         orderDao.persist(newOrder);
         newOrder.getOrderedProducts().forEach(orderedProduct -> orderedProduct.setOrder(newOrder));
 //        basketService.cleanBasket(orderDto);
-        orderDto.setNewOrderDetails(newOrder);
-        return orderDto;
+        return orderDto.setNewOrderDetails(newOrder);
     }
 
     private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) throws NotFoundException, PlaceToOrderException {
@@ -67,5 +66,19 @@ public class OrderServiceImpl {
             orderedProductList.add(orderedProduct);
         }
         newOrder.setOrderedProducts(orderedProductList);
+    }
+
+    public List<OrderDto> getUserOrders(String ssoId) {
+        User user = userService.findBySSO(ssoId);
+        List<Order> orders = orderDao.find(Order.USER_ENTITY, user);
+        return orders.stream().map(order -> new OrderDto().prepareForUser(order)).collect(Collectors.toList());
+    }
+
+    public List<OrderDto> getAllOrders() {
+        return orderDao.selectAll().stream().map(order -> new OrderDto().prepareForUser(order)).collect(Collectors.toList());
+    }
+
+    public OrderDto getOne(Long orderId) {
+        return new OrderDto().prepareForAdmin(orderDao.findOne(orderId));
     }
 }

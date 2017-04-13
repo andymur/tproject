@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import tapplication.service.BrandServiceImpl;
 import tapplication.service.CategoryServiceImpl;
 import tapplication.service.ProductService;
 
@@ -19,8 +18,6 @@ public class ShopPageController extends CoreController{
     private CategoryServiceImpl categoryService;
     @Autowired
     private ProductService productService;
-    @Autowired
-    private BrandServiceImpl brandService;
 @RequestMapping(method = RequestMethod.GET)
     public Object redirect(Model model) {
     model.addAttribute("loggedinuser", getPrincipal());

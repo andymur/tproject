@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Country</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="country">
+                            <input type="text" class="form-control" name="country" required="">
                         </div>
                     </div>
 

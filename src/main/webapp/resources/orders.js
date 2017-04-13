@@ -66,9 +66,9 @@ function submitOrder(event) {
             data: orderDto,
             success: (data)=> {
             $('.cart-count').text("0");
-            localStorage.removeItem("arr")
-            $("#wrapper").remove();
-            $("#body").append(data);
+    localStorage.removeItem("arr")
+    $("#wrapper").remove();
+    $("#body").append(data);
     // assignClickHandler($(".removeItem"), removeFromCart_Handler);
 }
 })

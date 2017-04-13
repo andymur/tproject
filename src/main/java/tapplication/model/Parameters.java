@@ -42,9 +42,7 @@ public class Parameters {
         return "Parameters{" +
                 "id=" + id +
                 ", size='" + size + '\'' +
-                ", weight=" + weight +
-                ", product=" + product +
-                '}';
+                ", weight=" + weight +'}';
     }
 
     public Long getId() {

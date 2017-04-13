@@ -54,16 +54,16 @@ public class ProductDao extends AbstractDao<Product, Long> {
         Join<Product, Parameters> parameters = product.join(Product.PARAMETERS);
         Join<Product, Brand> brands = product.join(Product.BRAND);
         List<Predicate> predList = new LinkedList<>();
-        if (categoryId != null) {
+        if (!categoryId.equals("undefined")) {
             predList.add(builder.and(builder.equal(product.get(Product.PRODUCT_CATEGORY), categoryId)));
         }
-        if (brand != null) {
+        if (!brand.equals("undefined")) {
             predList.add(builder.and(builder.equal(brands.get(NAME), brand)));
         }
-        if (color != null) {
+        if (!color.equals("undefined")) {
             predList.add(builder.and(builder.equal(product.get(Product.COLOR), color)));
         }
-        if (size != null) {
+        if (!size.equals("undefined")) {
             predList.add(builder.and(builder.equal(parameters.get(Parameters.SIZE), size)));
         }
         Predicate[] predArray = new Predicate[predList.size()];

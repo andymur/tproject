@@ -105,7 +105,7 @@
     }
 
     function getArr(){
-        var arr = JSON.parse(sessionStorage.getItem("arr"));
+        var arr = JSON.parse(localStorage.getItem("arr"));
         return (arr === null) ? {} : arr;
     }
 
@@ -115,5 +115,5 @@
             amount += arr[key];
         }
         $('.cart-count').text(amount);
-        sessionStorage.setItem("arr", JSON.stringify(arr))
+        localStorage.setItem("arr", JSON.stringify(arr))
     }

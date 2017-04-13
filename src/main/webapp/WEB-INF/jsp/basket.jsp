@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-12">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-advance table-hover">
                 <tbody>
                 <tr>
                     <th>PRODUCT NAME</th>
