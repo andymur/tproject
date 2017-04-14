@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<div id="wrapper">
 <div class="cart">
     <div class="container">
         <div class="col-md-12 headlines">
@@ -60,5 +59,4 @@
             </sec:authorize>
         </div>
     </div>
-</div>
 </div>

@@ -7,7 +7,7 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <div id="wrapper">
+        <div id="mainWrapper">
         <div class="container welcome">
             <div class="col-md-12">
                 <img src="resources/images/man-shadow.png" class="shadow-man" alt=""/>
