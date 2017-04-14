@@ -60,8 +60,8 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "orderdetails", method = RequestMethod.GET)
-    public Object getCatalogPage(@RequestParam(value = "orderId") Long orderId,
-                                 Model model) throws NotFoundException {
+    public Object getOrderDetails(@RequestParam(value = "orderId") Long orderId,
+                                  Model model) throws NotFoundException {
         model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("order", orderService.getOne(orderId));

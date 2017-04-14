@@ -27,9 +27,7 @@ public class ProductService implements CoreService<Product> {
     private Set<String> colors = new HashSet<>();
     private Set<Brand> brands = new HashSet<>();
     private Set<String> sizes = new HashSet<>();
-//    List<ProductDto> productDtoList = new ArrayList<>();
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Product create(final Product newProduct) throws AlreadyExistException {
 
         if (productDao.isProductExist(newProduct.getBrand().getName(), newProduct.getModel(), newProduct.getColor())) {//TODO:change to Product product
@@ -61,7 +59,6 @@ public class ProductService implements CoreService<Product> {
 
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public List<ProductDto> getProductsByCategoryId(Long categoryId) throws NotFoundException {
         List<Product> products = findAllByCategory(categoryId);
         colors.clear();

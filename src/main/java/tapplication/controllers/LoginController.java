@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by alexpench on 23.03.17.
@@ -102,17 +101,8 @@ public class LoginController extends CoreController {
         if (result.hasErrors()) {
             return "registration";
         }
-
-        /*
-         * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
-         * and applying it on field [sso] of Model class [User].
-         *
-         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-         * framework as well while still using internationalized messages.
-         *
-         */
         if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-            FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+            FieldError ssoError =new FieldError("user","ssoId", "Non unique username");
             result.addError(ssoError);
             return "registration";
         }

@@ -41,7 +41,7 @@ public class ProductDto {
         this.mainImage = product.getImages().stream()
                 .filter(im -> im.getName().equals("main"))
                 .map(ProductImage::getImage)
-                .findFirst().orElse("/dummy.png");
+                .findFirst().orElse("/new.png");
     }
 
     public ProductDto(Product product, Long count) {

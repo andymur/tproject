@@ -19,6 +19,8 @@ import java.util.List;
  */
 @Service("basketService")
 public class BasketServiceImpl {
+    public static final String PRODUCT = "product";
+    public static final String USER = "user";
     @Autowired
     private BasketDao basketDao;
     @Autowired
@@ -48,7 +50,7 @@ public class BasketServiceImpl {
         BasketProduct basketProduct;
         try {
             basketProduct = basketDao
-                    .findByAndParams("product", productToBasket.getProductId(), "user", productToBasket.getUserId());
+                    .findByAndParams(PRODUCT, productToBasket.getProductId(), USER, productToBasket.getUserId());
         } catch (NoResultException e) {
             return null;
         }

@@ -23,6 +23,11 @@ var submitOrder_Handler = function (event) {
     submitOrder(event);
 };
 
+var submitPayment_Handler = function (event) {
+    var orderId = this.value;
+    submitPayment(orderId);
+};
+
 $(function () {
     assignClickHandler($("#cart1"), loadCardPage_Handler);
     assignClickHandler($("#submit-order"), submitOrder_Handler);
@@ -69,11 +74,11 @@ function submitOrder(event) {
             localStorage.removeItem("arr")
             $("#wrapper").remove();
             $("#body").append(data);
-    // assignClickHandler($(".removeItem"), removeFromCart_Handler);
+            assignClickHandler($("#submitPayment"), submitPayment_Handler);
+
 }
 })
 }
-
 
 function loadCardPage(event) {
     event.preventDefault();
@@ -95,10 +100,32 @@ function loadCardPage(event) {
             data: dataToPush,
             success:(data)=>{
             $("#wrapper").remove();
-    $("#body").append(data);
-    assignClickHandler($(".removeItem"), removeFromCart_Handler);
+            $("#body").append(data);
+            assignClickHandler($(".removeItem"), removeFromCart_Handler);
 }
 })
+}
+
+function submitPayment(orderId) {
+
+    var orderStatusData = JSON.stringify({
+        orderId: orderId,
+        orderStatusCode: "AWAIT_SHIPMENT",
+        paymentStatusCode : "PAID"
+    })
+    $.ajax({
+        type: "PUT",
+        url: "order",
+        contentType: "application/json",
+        data: orderStatusData,
+        success:()=>{
+            $('#payment-form').remove()
+            $('#payment').append(
+                'Order successfully paid. Email confirmation has been sent to your box.' +
+                'Continue <a href="shop">shopping</a>'
+            )
+        }
+    })
 }
 
 function getArr(){

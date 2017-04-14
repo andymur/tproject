@@ -36,7 +36,7 @@
                                 <div class="item">
                                     <div class="about-box">
                                         <div><i class="fa fa-bookmark-o"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">BRANDING</div>
+                                        <div class="box-heading hvr-bounce-to-top">BICYCLES</div>
                                         <p></p>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                 <div class="item">
                                     <div class="about-box">
                                         <div><i class="fa fa-code-fork"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">DESIGNING</div>
+                                        <div class="box-heading hvr-bounce-to-top">NATURE</div>
                                         <p></p>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                 <div class="item">
                                     <div class="about-box">
                                         <div><i class="fa fa-connectdevelop"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">DEVELOPING</div>
+                                        <div class="box-heading hvr-bounce-to-top">PEOPLE</div>
                                         <p>.</p>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="item">
                                     <div class="about-box">
                                         <div><i class="fa fa-line-chart"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">SEO</div>
+                                        <div class="box-heading hvr-bounce-to-top">ADVENTURES</div>
                                         <p></p>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                 <div class="item">
                                     <div class="about-box">
                                         <div><i class="fa fa-bar-chart-o"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">MARKETING</div>
+                                        <div class="box-heading hvr-bounce-to-top">SPORT</div>
                                         <p></p>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                 <div class="item">
                                     <div class="about-box">
                                         <div><i class="fa fa-code"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">CODING</div>
+                                        <div class="box-heading hvr-bounce-to-top">STYLE</div>
                                         <p></p>
                                     </div>
                                 </div>
