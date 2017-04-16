@@ -82,8 +82,8 @@
                 contentType: "application/json",
                 data: dataToPush,
                 success:(data)=>{
-                    $("#mainWrapper").empty();
-                    $("#mainWrapper").append(data);
+                    $("#wrapper").empty();
+                    $("#wrapper").append(data);
                     assignClickHandler($(".removeItem"), removeFromCart_Handler);
                     assignClickHandler($(".sub"), subtract_Handler);
                     assignClickHandler($(".add"), add_Handler);
