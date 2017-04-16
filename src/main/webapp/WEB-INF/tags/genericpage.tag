@@ -18,22 +18,22 @@
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script type="text/javascript" src="resources/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/resources/js/jquery-2.1.3.min.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="icon" href="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png">
 
     <!-- bootstrap magic -->
-    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css"/>
     <!-- cubeportfolio -->
-    <link rel="stylesheet" type="text/css" href="resources/css/cubeportfolio.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/cubeportfolio.css"/>
     <!-- Owl Carousel Assets -->
-    <link rel="stylesheet" href="resources/css/owl.carousel.css">
-    <link rel="stylesheet" href="resources/css/owl.theme.css">
+    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
+    <link rel="stylesheet" href="/resources/css/owl.theme.css">
 
     <!-- theme custom -->
-    <link rel="stylesheet" href="resources/css/style.css"/>
-    <link rel="stylesheet" href="resources/css/cart.css"/>
+    <link rel="stylesheet" href="/resources/css/style.css"/>
+    <link rel="stylesheet" href="/resources/css/cart.css"/>
 
 
     <!-- fonts -->
@@ -42,10 +42,10 @@
 
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="resources/fonts/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome/css/font-awesome.min.css"/>
 
     <!--[if LTE IE 8]>
-    <link rel="stylesheet" href="resources/css/menu-ie.css"/>
+    <link rel="stylesheet" href="/resources/css/menu-ie.css"/>
     <![endif]-->
 
 
@@ -231,7 +231,7 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img class="media-object" src="resources/images/blog/small1.jpg" alt="#">
+                                            <img class="media-object" src="/resources/images/blog/small1.jpg" alt="#">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -243,7 +243,7 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img class="media-object" src="resources/images/blog/small1.jpg" alt="#">
+                                            <img class="media-object" src="/resources/images/blog/small1.jpg" alt="#">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -320,34 +320,34 @@
         <!-- Jquery Libs -->
         <!-- Latest Version Of Jquery -->
 
-        <script type="text/javascript" src="resources/cart.js"></script>
+        <script type="text/javascript" src="/resources/cart.js"></script>
         <!-- Bootstrap Jquery -->
-        <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
         <!-- Sticky Jquery -->
-        <script type="text/javascript" src="resources/js/jquery.sticky.js"></script>
+        <script type="text/javascript" src="/resources/js/jquery.sticky.js"></script>
         <!-- Parallax Plugin -->
-        <script type="text/javascript" src="resources/js/jquery.parallax-1.1.3.js"></script>
+        <script type="text/javascript" src="/resources/js/jquery.parallax-1.1.3.js"></script>
         <!-- Counter Plugin -->
-        <script type="text/javascript" src="resources/js/jquery.counterup.min.js"></script>
+        <script type="text/javascript" src="/resources/js/jquery.counterup.min.js"></script>
         <!-- Waypoints -->
-        <script type="text/javascript" src="resources/js/waypoints.min.js"></script>
+        <script type="text/javascript" src="/resources/js/waypoints.min.js"></script>
         <!-- Cubeportfolio -->
-        <script type="text/javascript" src="resources/js/jquery.cubeportfolio.min.js"></script>
-        <script type="text/javascript" src="resources/js/cbp-10.js"></script>
+        <script type="text/javascript" src="/resources/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="/resources/js/cbp-10.js"></script>
         <!--To-Top Button Plugin -->
-        <script type="text/javascript" src="resources/js/jquery.ui.totop.js"></script>
+        <script type="text/javascript" src="/resources/js/jquery.ui.totop.js"></script>
         <!--Easing animations Plugin -->
-        <script type="text/javascript" src="resources/js/easing.js"></script>
+        <script type="text/javascript" src="/resources/js/easing.js"></script>
 
         <!-- Owl Carousel Plugin -->
-        <script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
         <!-- Theme Custom -->
-        <script type="text/javascript" src="resources/js/preloader.js"></script>
-        <script type="text/javascript" src="resources/js/switcher.js"></script>
-        <script type="text/javascript" src="resources/js/custom.js"></script>
+        <script type="text/javascript" src="/resources/js/preloader.js"></script>
+        <script type="text/javascript" src="/resources/js/switcher.js"></script>
+        <script type="text/javascript" src="/resources/js/custom.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <!--login/registration-->
-        <%--<script type="text/javascript" src="resources/login.js"></script>--%>
+        <%--<script type="text/javascript" src="/resources/login.js"></script>--%>
 
         <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type="text/javascript">
