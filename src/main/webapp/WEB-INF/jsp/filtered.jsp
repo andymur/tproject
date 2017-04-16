@@ -55,3 +55,4 @@
         </c:forEach>
     </ul>
 </div>
+<script type="text/javascript" src="resources/js/cbp-10.js"></script>
