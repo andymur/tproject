@@ -1,9 +1,13 @@
 package tapplication.controllers;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import tapplication.dto.OrderDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
@@ -12,6 +16,8 @@ import tapplication.service.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by alexpench on 07.04.17.
@@ -24,7 +30,7 @@ public class OrderController extends CoreController {
     private UserServiceImpl userService;
     @Autowired
     private CategoryServiceImpl categoryService;
-
+    static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = "order/create", method = RequestMethod.POST)
     public Object create(@RequestBody OrderDto orderDto, Model model) throws NotFoundException, PlaceToOrderException {
@@ -44,7 +50,7 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "orders", method = RequestMethod.GET)
-    public Object getUserOrders(Model model){
+    public Object getUserOrders(Model model) {
         String ssoId = getPrincipal();
         model.addAttribute("orders", orderService.getUserOrders(ssoId));
         model.addAttribute("loggedinuser", getPrincipal());
@@ -52,8 +58,12 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "admin_orders", method = RequestMethod.GET)
-    public Object getAllOrders(Model model){
+    public Object getAllOrders(Model model) {
+        logger.info("Getting all orders.start : {}", LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
         model.addAttribute("orders", orderService.getAllOrders());
+        logger.info("Getting all orders.stop : {}", LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         return "orders";

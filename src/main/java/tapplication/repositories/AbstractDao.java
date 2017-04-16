@@ -60,6 +60,7 @@ public abstract class AbstractDao<Entity, ID> {
         CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
         CriteriaQuery<Entity> criteriaQuery = this.createCriteriaQuery();
         Root root = criteriaQuery.from(entryClass);
+        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("id")));
         fillQuery(criteriaQuery, keysAndValues, root, criteriaBuilder);
         return find(criteriaQuery);
     }
@@ -137,7 +138,8 @@ public abstract class AbstractDao<Entity, ID> {
 
     public List<Entity> selectAll() {
         CriteriaQuery<Entity> criteriaQuery = createCriteriaQuery();
-        criteriaQuery.from(entryClass);
+        Root<Entity> root = criteriaQuery.from(entryClass);
+        criteriaQuery.orderBy(getCriteriaBuilder().desc(root.get("id")));
         return find(criteriaQuery);
     }
 

@@ -28,7 +28,7 @@
                             </tr>
                             <c:set var="orders" scope="session" value="${orders}"/>
                             <c:set var="totalCount" scope="session" value="${fn:length(orders)}"/>
-                            <c:set var="perPage" scope="session" value="${10}"/>
+                            <c:set var="perPage" scope="session" value="${20}"/>
                             <c:set var="pageStart" value="${param.start}"/>
                             <c:if test="${empty pageStart or pageStart < 0}">
                                 <c:set var="pageStart" value="0"/>

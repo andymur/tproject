@@ -1,4 +1,4 @@
-jQuery(function ($) {
+jQluery(function ($) {
     // actionAdminTab();
 
     // function actionAdminTab () {

@@ -1,5 +1,6 @@
 package tapplication.service;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -35,6 +36,8 @@ public class OrderServiceImpl {
     private AddressService addressService;
     @Autowired
     private ProductService productService;
+
+    static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
 
     public Object create(OrderDto orderDto) throws NotFoundException, PlaceToOrderException {
