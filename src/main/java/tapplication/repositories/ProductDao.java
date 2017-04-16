@@ -57,13 +57,13 @@ public class ProductDao extends AbstractDao<Product, Long> {
         if (!categoryId.equals("undefined")) {
             predList.add(builder.and(builder.equal(product.get(Product.PRODUCT_CATEGORY), categoryId)));
         }
-        if (!brand.equals("undefined")) {
+        if (brand != null && !brand.equals("undefined")) {
             predList.add(builder.and(builder.equal(brands.get(NAME), brand)));
         }
-        if (!color.equals("undefined")) {
+        if (color != null && !color.equals("undefined")) {
             predList.add(builder.and(builder.equal(product.get(Product.COLOR), color)));
         }
-        if (!size.equals("undefined")) {
+        if (size != null && !size.equals("undefined")) {
             predList.add(builder.and(builder.equal(parameters.get(Parameters.SIZE), size)));
         }
         Predicate[] predArray = new Predicate[predList.size()];

@@ -27,10 +27,11 @@ public class CatalogController extends CoreController {
     @RequestMapping(method = RequestMethod.GET)
     public Object getCatalogPage(@RequestParam(value = "categoryId") Long categoryId,
                                  Model model) throws NotFoundException {
-        model.addAttribute("products", productService.getProductsByCategoryId(categoryId));
-        model.addAttribute("colors", productService.getColors());
-        model.addAttribute("brands", productService.getBrands());
-        model.addAttribute("sizes", productService.getSizes());
+        List<ProductDto> products = productService.getProductsByCategoryId(categoryId);
+        model.addAttribute("products", products);
+        model.addAttribute("colors", productService.getColors(products));
+        model.addAttribute("brands", productService.getBrands(products));
+        model.addAttribute("sizes", productService.getSizes(products));
         model.addAttribute("category", categoryService.getCategoryDtoById(categoryId));
         model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         model.addAttribute("loggedinuser", getPrincipal());
@@ -47,6 +48,13 @@ public class CatalogController extends CoreController {
                                  Model model) throws NotFoundException {
         List<ProductDto> products = productService.findAllByParams(categoryId,brand,color,size);
         model.addAttribute("products", products);
+        model.addAttribute("color", color);
+        model.addAttribute("brand", brand);
+        model.addAttribute("size", size);
+        model.addAttribute("category", categoryService.getCategoryDtoById(categoryId));
+        model.addAttribute("colors", productService.getColors(products));
+        model.addAttribute("brands", productService.getBrands(products));
+        model.addAttribute("sizes", productService.getSizes(products));
         return "filtered";
     }
 }

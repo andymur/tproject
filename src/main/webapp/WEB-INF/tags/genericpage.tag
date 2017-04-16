@@ -321,6 +321,7 @@
         <!-- Latest Version Of Jquery -->
 
         <script type="text/javascript" src="/resources/cart.js"></script>
+        <script type="text/javascript" src="resources/catalog.js"></script>
         <!-- Bootstrap Jquery -->
         <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
         <!-- Sticky Jquery -->

@@ -1,5 +1,4 @@
-jQuery(function ($) {
-    $('#cat-filter select').change(function () {
+    $(document).on('change','select',function () {
         var categoryId = $('#cat-filter').data('category-id')
         if ($('#color-select option:selected').is(':disabled') == false) {
             var color = $('#color-select option:selected').val()
@@ -21,10 +20,9 @@ jQuery(function ($) {
                 type: "GET",
                 url: filterParams,
                 success: (data)=> {
-                $("#grid-container-10").remove()
-                $('#pr-div').append(data)
+                $("#wrapper").empty()
+                $('#wrapper').append(data)
                 assignClickHandler($(".addToCart"), addToCart_Handler);
-    }
+                }
+        })
     })
-    })
-})

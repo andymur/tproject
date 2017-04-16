@@ -9,11 +9,12 @@ import tapplication.dto.ProductDto;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
-import tapplication.model.Brand;
 import tapplication.model.Product;
 import tapplication.repositories.ProductDao;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -24,9 +25,6 @@ import java.util.stream.Collectors;
 public class ProductService implements CoreService<Product> {
     @Autowired
     private ProductDao productDao;
-    private Set<String> colors = new HashSet<>();
-    private Set<Brand> brands = new HashSet<>();
-    private Set<String> sizes = new HashSet<>();
 
     public Product create(final Product newProduct) throws AlreadyExistException {
 
@@ -47,7 +45,6 @@ public class ProductService implements CoreService<Product> {
 
     @Override
     public void delete(Product entity) throws NotFoundException {
-
     }
 
     public List<Product> findAll() {
@@ -61,12 +58,6 @@ public class ProductService implements CoreService<Product> {
 
     public List<ProductDto> getProductsByCategoryId(Long categoryId) throws NotFoundException {
         List<Product> products = findAllByCategory(categoryId);
-        colors.clear();
-        brands.clear();
-        sizes.clear();
-        products.forEach(pr -> pr.getParameters().forEach(par -> sizes.add(par.getSize())));
-        products.forEach(pr -> colors.add(pr.getColor()));
-        products.forEach(pr -> brands.add(pr.getBrand()));
         return products.stream().map(ProductDto::new).collect(Collectors.toList());
     }
 
@@ -105,32 +96,23 @@ public class ProductService implements CoreService<Product> {
                 .collect(Collectors.toList());
     }
 
-    public void setProductDao(ProductDao productDao) {
-        this.productDao = productDao;
-    }
-
-    public Set<String> getColors() {
+    public Set<String> getColors(List<ProductDto> products) {
+        Set<String> colors = new HashSet<>();
+        products.forEach(pr -> colors.add(pr.getColor()));
         return colors;
     }
 
-    public void setColors(Set<String> colors) {
-        this.colors = colors;
-    }
-
-    public Set<Brand> getBrands() {
+    public Set<String> getBrands(List<ProductDto> products) {
+        Set<String> brands = new HashSet<>();
+        products.forEach(pr -> brands.add(pr.getBrand()));
         return brands;
     }
 
-    public void setBrands(Set<Brand> brands) {
-        this.brands = brands;
-    }
-
-    public Set<String> getSizes() {
+    public Set<String> getSizes(List<ProductDto> products) {
+        Set<String> sizes = new HashSet<>();
+        products.forEach(pr -> pr.getParameters().forEach(par -> sizes.addAll(par.getSizes())));
         return sizes;
     }
 
-    public void setSizes(Set<String> sizes) {
-        this.sizes = sizes;
-    }
 
 }
