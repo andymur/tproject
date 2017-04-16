@@ -36,6 +36,26 @@
         loadCardPage(event);
     };
 
+    function subtractProduct(event) {
+        var productId = event.currentTarget.id;
+        removeOne(productId);
+        var count = $('#qty'+productId).val();
+        $('#qty'+productId).val(count - 1);
+    }
+    var subtract_Handler = function (event) {
+        subtractProduct(event);
+    };
+    function addProduct(event) {
+        var productId = event.currentTarget.id;
+        addToCart(productId);
+        var count = Number($('#qty'+productId).val());
+        $('#qty'+productId).val(count + 1);
+
+    }
+    var add_Handler = function (event) {
+        addProduct(event);
+    };
+
     $(function () {
         restoreCart();
         assignClickHandler($(".addToCart"), addToCart_Handler);
@@ -65,6 +85,8 @@
                     $("#wrapper").remove();
                     $("#body").append(data);
                     assignClickHandler($(".removeItem"), removeFromCart_Handler);
+                    assignClickHandler($(".sub"), subtract_Handler);
+                    assignClickHandler($(".add"), add_Handler);
                 }
         })
     }
@@ -87,6 +109,21 @@
         delete assoArray[productId];
         setCart(assoArray);
         loadCardPage(event);
+    }
+
+    function removeOne(productId) {
+        var assoArray = getCart();
+
+        if(assoArray[productId] === 1)
+        {
+            delete assoArray[productId];
+            setCart(assoArray);
+            loadCardPage(event);
+        }
+        else {
+            assoArray[productId] =assoArray[productId]-1
+        };
+        setCart(assoArray);
     }
 
     function getCart(){

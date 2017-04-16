@@ -38,7 +38,9 @@
                     <td>${product.model}</td>
                     <td>
                         <form class="f1">
-                            <input type="text" name="qty" id="qty" value="${product.count}">
+                            <input id="${product.productId}" class="sub" type="button" name="subtract" value="-">
+                            <input id="qty${product.productId}" class="qty" type="text" name="qty" value="${product.count}">
+                            <input id="${product.productId}" class="add" type="button" name="add" value="+">
                         </form>
                     </td>
                     <td>
