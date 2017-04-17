@@ -14,7 +14,7 @@ import tapplication.service.ProductService;
  * Created by alexpench on 30.03.17.
  */
 @Controller
-public class ProductController {
+public class ProductController extends CoreController{
     @Autowired
     private ProductService productService;
     @Autowired

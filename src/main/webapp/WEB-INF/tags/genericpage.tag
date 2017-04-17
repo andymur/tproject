@@ -154,14 +154,14 @@
 
                                     <ul class="wrapper">
                                         <li class="submenu">
-                                            <a href="index">Home</a>
+                                            <a href="/">Home</a>
                                             <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                             <ul>
                                                 <li><a href="index">About</a></li>
                                             </ul>
                                         </li>
                                         <li class="submenu">
-                                            <a href="shop">Shop</a>
+                                            <a href="/shop">Shop</a>
                                             <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                             <ul class="categories">
                                                 <c:forEach var="mapitem" items="${categoriesmap}">
