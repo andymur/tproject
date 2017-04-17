@@ -106,14 +106,14 @@
                                                         <div class="cbp-item-wrapper">
                                                             <div class="cbp-caption">
                                                                 <div class="cbp-caption-defaultWrap">
-                                                                    <img src="resources/images/shop${product.mainImage}">
+                                                                    <img src="/resources/images/shop/${product.mainImage}">
                                                                 </div>
 
                                                                 <div class="cbp-caption-activeWrap">
                                                                     <div class="cbp-l-caption-alignCenter">
                                                                         <div class="cbp-l-caption-body">
                                                                             <button type="button"
-                                                                                    class="cbp-l-caption-buttonLeft"
+                                                                                    class="cbp-l-caption-buttonLeft productButton"
                                                                                     value="${product.productId}">
                                                                                 Large View
                                                                             </button>
@@ -158,4 +158,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="resources/js/cbp-10.js"></script>
+<script type="text/javascript" src="/resources/js/cbp-10.js"></script>

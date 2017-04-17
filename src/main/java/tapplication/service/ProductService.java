@@ -79,6 +79,14 @@ public class ProductService implements CoreService<Product> {
         return product;
     }
 
+    public ProductDto findOneDto(Long productId){
+        Product product = productDao.findOne(productId);
+        if(product == null){
+            throw new NotFoundException();
+        }
+        return new ProductDto(product);
+    }
+
     public Product moveToOrder(Long productId, Long quantity) throws NotFoundException, PlaceToOrderException {
         Product product = findOne(productId);
         if (product.getQuantity() < quantity) {

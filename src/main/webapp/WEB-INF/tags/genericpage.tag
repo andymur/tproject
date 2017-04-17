@@ -320,8 +320,10 @@
         <!-- Jquery Libs -->
         <!-- Latest Version Of Jquery -->
 
+        <script type="text/javascript" src="/resources/js/jquery.elevateZoom-3.0.8.min.js"></script>
         <script type="text/javascript" src="/resources/cart.js"></script>
-        <script type="text/javascript" src="resources/catalog.js"></script>
+        <script type="text/javascript" src="/resources/catalog.js"></script>
+        <script type="text/javascript" src="/resources/product.js"></script>
         <!-- Bootstrap Jquery -->
         <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
         <!-- Sticky Jquery -->
@@ -339,7 +341,8 @@
         <script type="text/javascript" src="/resources/js/jquery.ui.totop.js"></script>
         <!--Easing animations Plugin -->
         <script type="text/javascript" src="/resources/js/easing.js"></script>
-
+        <!-- Image Zoom Plugin -->
+        <script type="text/javascript" src="/resources/js/jquery.elevateZoom-3.0.8.min.js"></script>
         <!-- Owl Carousel Plugin -->
         <script type="text/javascript" src="/resources/js/owl.carousel.min.js"></script>
         <!-- Theme Custom -->
