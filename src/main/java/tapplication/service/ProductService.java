@@ -1,5 +1,7 @@
 package tapplication.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,6 +14,8 @@ import tapplication.exceptions.PlaceToOrderException;
 import tapplication.model.Product;
 import tapplication.repositories.ProductDao;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +29,8 @@ import java.util.stream.Collectors;
 public class ProductService implements CoreService<Product> {
     @Autowired
     private ProductDao productDao;
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     public Product create(final Product newProduct) throws AlreadyExistException {
 
@@ -96,6 +102,13 @@ public class ProductService implements CoreService<Product> {
             productDao.merge(product);
         }
         return product;
+    }
+
+    public void moveFromExpiredOrder(Product product, Long quantity){
+        product.setQuantity(product.getQuantity() + quantity);
+        productDao.merge(product);
+        logger.info("{} Product {} quantity {} moved back to Product", LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")),product.getId(), quantity);
     }
 
     public  List<ProductDto> getProductsForBasket(BasketDto basketDto) {

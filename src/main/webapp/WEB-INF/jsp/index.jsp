@@ -7,7 +7,7 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <div id="mainWrapper">
+        <div id="wrapper">
 
         <div class="container welcome">
             <div class="col-md-12">

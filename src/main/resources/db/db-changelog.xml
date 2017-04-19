@@ -12,5 +12,11 @@
     <changeSet id="2" author="alexPench">
     <sqlFile path="sql/002_roles.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="3" author="alexPench">
+    <sqlFile path="sql/003_alter_ordered_product.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
+    <changeSet id="4" author="alexPench">
+    <sqlFile path="sql/004_alter_description_size.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 
 </databaseChangeLog>

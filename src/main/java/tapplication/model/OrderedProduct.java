@@ -24,11 +24,15 @@ public class OrderedProduct {
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
 
+    @Column(name = "price")
+    private Long price;
+
     public OrderedProduct(){}
 
-    public OrderedProduct(Product product, Long quantity) {
+    public OrderedProduct(Product product, Long quantity, Long price) {
         this.product = product;
         this.quantity = quantity;
+        this.price = price;
     }
 
     @Override
@@ -71,5 +75,13 @@ public class OrderedProduct {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 }

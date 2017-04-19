@@ -50,7 +50,7 @@ public class BasketServiceImpl {
         BasketProduct basketProduct;
         try {
             basketProduct = basketDao
-                    .findByAndParams(PRODUCT, productToBasket.getProductId(), USER, productToBasket.getUserId());
+                    .findOneByAndParams(PRODUCT, productToBasket.getProductId(), USER, productToBasket.getUserId());
         } catch (NoResultException e) {
             return null;
         }

@@ -5,6 +5,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <div id="wrapper">
+    <div id="countdown" class="countdownHolder">
+    </div>
     <div class="cart">
         <div class="container">
             <div id="payment" class="col-md-12 headlines">
@@ -46,3 +48,5 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="/resources/countdown.js"></script>
+<script type="text/javascript" src="/resources/cd-script.js"></script>

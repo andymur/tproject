@@ -132,3 +132,4 @@ function getArr(){
     var arr = JSON.parse(localStorage.getItem("arr"));
     return (arr === null) ? {} : arr;
 }
+

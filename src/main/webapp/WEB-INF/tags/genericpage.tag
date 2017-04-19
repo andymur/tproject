@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="icon" href="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png">
-
+    <link rel="stylesheet" type="text/css" href="/resources/css/countdown.css"/>
     <!-- bootstrap magic -->
     <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css"/>
     <!-- cubeportfolio -->
@@ -181,9 +181,9 @@
                                                 <a href=""><strong>Admin Dashboard</strong></a>
                                                 <input class="show-submenu" type="checkbox" name="show-submenu-2"/>
                                                 <ul>
-                                                    <li><a href="admin_products">Products</a></li>
-                                                    <li><a href="admin_orders">Orders</a></li>
-                                                    <li><a href="dashboard">Statistics</a></li>
+                                                    <li><a href="/admin_products">Products</a></li>
+                                                    <li><a href="/admin_orders">Orders</a></li>
+                                                    <li><a href="/dashboard">Statistics</a></li>
                                                 </ul>
                                             </li>
                                         </sec:authorize>

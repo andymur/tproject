@@ -40,7 +40,7 @@ public class Order {
     @JoinColumn(name = USER_ID)
     private User user;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = ORDER_DATE)
     private Date orderDate;
 

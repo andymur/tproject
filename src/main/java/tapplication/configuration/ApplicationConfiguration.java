@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -22,6 +23,7 @@ import tapplication.dto.UserRoleDto;
 @EnableWebMvc
 @ComponentScan(basePackages = "tapplication")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableScheduling
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
 
     @Autowired

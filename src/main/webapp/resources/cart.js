@@ -38,19 +38,24 @@
 
     function subtractProduct(event) {
         var productId = event.currentTarget.id;
+        var price = event.target.dataset.price;
         removeOne(productId);
         var count = $('#qty'+productId).val();
         $('#qty'+productId).val(count - 1);
+        var subtotal = price * ($('#qty'+productId).val())
+        $('#subtotal'+productId).html('$'+subtotal);
     }
     var subtract_Handler = function (event) {
         subtractProduct(event);
     };
     function addProduct(event) {
         var productId = event.currentTarget.id;
+        var price = event.target.dataset.price;
         addToCart(productId);
         var count = Number($('#qty'+productId).val());
         $('#qty'+productId).val(count + 1);
-
+        var subtotal = price * ($('#qty'+productId).val())
+        $('#subtotal'+productId).html('$'+subtotal);
     }
     var add_Handler = function (event) {
         addProduct(event);

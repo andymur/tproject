@@ -37,12 +37,12 @@
                     <td>${product.model}</td>
                     <td>
                         <form class="f1">
-                            <input id="${product.productId}" class="sub" type="button" name="subtract" value="-">
+                            <input id="${product.productId}" data-price="${product.price}" class="sub" type="button" name="subtract" value="-">
                             <input id="qty${product.productId}" class="qty" type="text" name="qty" value="${product.count}">
-                            <input id="${product.productId}" class="add" type="button" name="add" value="+">
+                            <input id="${product.productId}" data-price="${product.price}" class="add" type="button" name="add" value="+">
                         </form>
                     </td>
-                    <td>
+                    <td id="subtotal${product.productId}">
                         $${product.price * product.count}
                     </td>
                     <td>

@@ -29,12 +29,11 @@ public class UserServiceImpl implements UserService {
 
     public User findBySSO(String sso) {
         User user;
-        try{
-         user = dao.findOne("ssoId", sso);
-        }catch (NoResultException e){
+        try {
+            user = dao.findOne("ssoId", sso);
+        } catch (NoResultException e) {
             user = null;
         }
-
         return user;
     }
 

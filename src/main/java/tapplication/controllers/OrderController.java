@@ -25,11 +25,12 @@ import java.time.format.DateTimeFormatter;
 @Controller
 public class OrderController extends CoreController {
     @Autowired
-    private OrderServiceImpl orderService;
+    private OrderService orderService;
     @Autowired
     private UserServiceImpl userService;
     @Autowired
     private CategoryServiceImpl categoryService;
+
     static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = "order/create", method = RequestMethod.POST)
@@ -53,6 +54,7 @@ public class OrderController extends CoreController {
     public Object getUserOrders(Model model) {
         String ssoId = getPrincipal();
         model.addAttribute("orders", orderService.getUserOrders(ssoId));
+        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         model.addAttribute("loggedinuser", getPrincipal());
         return "orders";
     }

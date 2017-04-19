@@ -11,3 +11,15 @@ target/
 *.iws
 *.iml
 *.ipr
+.DS_Store
+.gradle/
+build/
+src/.DS_Store
+src/main/.DS_Store
+src/main/resources/.DS_Store
+src/main/webapp/.DS_Store
+src/main/webapp/WEB-INF/.DS_Store
+src/main/webapp/WEB-INF/jsp/.DS_Store
+src/main/webapp/resources/.DS_Store
+src/main/webapp/resources/images/.DS_Store
+src/main/webapp/resources/images/shop/.DS_Store

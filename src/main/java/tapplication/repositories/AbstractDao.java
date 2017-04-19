@@ -105,7 +105,7 @@ public abstract class AbstractDao<Entity, ID> {
         }
     }
 
-    public Entity findByAndParams(Object... keysAndValues) {
+    public Entity findOneByAndParams(Object... keysAndValues) {
         CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
         CriteriaQuery<Entity> query = criteriaBuilder.createQuery(entryClass);
         Root<Entity> entity = query.from(entryClass);
@@ -121,6 +121,24 @@ public abstract class AbstractDao<Entity, ID> {
         query.where(predArray);
 
         return findOne(query);
+    }
+
+    public List<Entity> findAllByAndParams(Object... keysAndValues) {
+        CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
+        CriteriaQuery<Entity> query = criteriaBuilder.createQuery(entryClass);
+        Root<Entity> entity = query.from(entryClass);
+        List<Predicate> predList = new LinkedList<>();
+        if (keysAndValues.length % 2 != 0) {
+            throw new IllegalArgumentException("Expected even count argument, receive odd");
+        }
+        for (int i = 0; i < keysAndValues.length; i += 2) {
+            predList.add(criteriaBuilder.and(criteriaBuilder.equal(entity.get((String) keysAndValues[i]), keysAndValues[i + 1])));
+        }
+        Predicate[] predArray = new Predicate[predList.size()];
+        predList.toArray(predArray);
+        query.where(predArray);
+
+        return find(query);
     }
 
     private Object[] toArray(Map<String, Object> parameters) {
@@ -155,6 +173,7 @@ public abstract class AbstractDao<Entity, ID> {
     public CriteriaBuilder getCriteriaBuilder() {
         return this.entityManager.getCriteriaBuilder();
     }
+
 
 
 }
