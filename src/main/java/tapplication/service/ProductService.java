@@ -3,6 +3,7 @@ package tapplication.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,10 +94,10 @@ public class ProductService implements CoreService<Product> {
         return new ProductDto(product);
     }
 
-    public Product moveToOrder(Long productId, Long quantity) throws NotFoundException, PlaceToOrderException {
+    public Product moveToOrder(Long productId, Long quantity){
         Product product = findOne(productId);
         if (product.getQuantity() < quantity) {
-            throw new PlaceToOrderException();
+            throw new PlaceToOrderException("Product model: "+product.getModel()+" is less then requested. Available now: " + product.getQuantity(), HttpStatus.NOT_FOUND);
         } else {
             product.setQuantity(product.getQuantity() - quantity);
             productDao.merge(product);

@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tapplication.dto.OrderDto;
 import tapplication.dto.ProductAndAmount;
 import tapplication.exceptions.NotFoundException;
-import tapplication.exceptions.PlaceToOrderException;
 import tapplication.model.Order;
 import tapplication.model.OrderedProduct;
 import tapplication.model.Product;
@@ -43,7 +42,7 @@ public class OrderService {
     Logger logger = LoggerFactory.getLogger(getClass());
 
 
-    public Object create(OrderDto orderDto) throws NotFoundException, PlaceToOrderException {
+    public Object create(OrderDto orderDto){
         Order newOrder = new Order();
         putProductsToNewOrder(orderDto, newOrder);
         newOrder.setUser(userService.findBySSO(userService.getPrincipal()));
@@ -103,7 +102,7 @@ public class OrderService {
         orders.forEach(order -> order.getOrderedProducts().forEach(orderedProduct -> productService.moveFromExpiredOrder(orderedProduct.getProduct(), orderedProduct.getQuantity())));
     }
 
-    private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) throws NotFoundException, PlaceToOrderException {
+    private void putProductsToNewOrder(OrderDto orderDto, Order newOrder){
         List<OrderedProduct> orderedProductList = new ArrayList<>();
         OrderedProduct orderedProduct = new OrderedProduct();
         for (ProductAndAmount productAndAmount : orderDto.getBasketDto().getRows()) {

@@ -81,7 +81,8 @@ function submitOrder(event) {
     }
     localStorage.removeItem("arr")
 
-}
+},
+            error:(data)=>{alert(data.responseText);}
 })
 }
 

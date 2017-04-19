@@ -4,14 +4,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import tapplication.dto.OrderDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
-import tapplication.model.User;
 import tapplication.service.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +30,7 @@ public class OrderController extends CoreController {
     static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = "order/create", method = RequestMethod.POST)
-    public Object create(@RequestBody OrderDto orderDto, Model model) throws NotFoundException, PlaceToOrderException {
+    public Object create(@RequestBody OrderDto orderDto, Model model){
         model.addAttribute("order", orderService.create(orderDto));
         return "payment";
     }
@@ -83,5 +79,12 @@ public class OrderController extends CoreController {
     public void updateStatus(@RequestBody OrderDto order, HttpServletResponse resp) throws NotFoundException {
         orderService.update(order);
         resp.setStatus(200);
+    }
+
+    @ExceptionHandler(PlaceToOrderException.class)
+    @ResponseBody()
+    public String handleCommunicationException(PlaceToOrderException ex, HttpServletResponse response) throws IOException{
+        response.setStatus(ex.getStatus().value());
+        return ex.getMessage();
     }
 }
