@@ -11,6 +11,8 @@ public class DeliveryAddressDto {
     private String street;
     private String building;
     private String apartment;
+    private String email;
+    private String phoneNumber;
     private Long zipCode;
 
     public DeliveryAddressDto() {
@@ -24,6 +26,8 @@ public class DeliveryAddressDto {
         this.building = address.getBuilding();
         this.apartment = address.getApartment();
         this.zipCode = address.getZipCode();
+        this.email = address.getEmail();
+        this.phoneNumber = address.getPhoneNumber();
     }
 
     public String getCountry() {
@@ -72,6 +76,22 @@ public class DeliveryAddressDto {
 
     public void setZipCode(Long zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override

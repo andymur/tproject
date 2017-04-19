@@ -5,12 +5,14 @@ import tapplication.model.Order;
 import tapplication.service.OrderStatusCode;
 import tapplication.service.PaymentTypeCode;
 
+import javax.ejb.Local;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,26 +26,12 @@ public class OrderDao extends AbstractDao<Order, Long> {
         super(Order.class);
     }
 
-//    public List<Order> findAllExpired() {
-//        Query query = super.getEntityManager().createQuery(
-//                "Select b.product.id, b.quantity from Order p JOIN OrderedProduct b on p.id = b.order.id " +
-//                        "where p.orderStatus = :orderStatus and p.paymentType = :paymentType and p.orderDate > :date")
-//                .setParameter("orderStatus", OrderStatusCode.AWAIT_PAYMENT)
-//                .setParameter("paymentType", PaymentTypeCode.CARD)
-//                .setParameter("date", new Date(System.currentTimeMillis() - 900000) );
-//        return query.getResultList();
-//    }
-
     public List<Order> findAllExpired() {
-        Date in = new Date();
-        LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault()).minusMinutes(15L);
-        Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
-
         CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
         CriteriaQuery<Order> query = criteriaBuilder.createQuery(Order.class);
         Root<Order> order = query.from(Order.class);
         List<Predicate> predList = new LinkedList<>();
-        predList.add(criteriaBuilder.and(criteriaBuilder.lessThan(order.get("orderDate"), out)));
+        predList.add(criteriaBuilder.and(criteriaBuilder.lessThan(order.get("orderDate"), new Date (System.currentTimeMillis() - 15 * 60 * 1000))));
         predList.add(criteriaBuilder.and(criteriaBuilder.equal(order.get("orderStatus"), OrderStatusCode.AWAIT_PAYMENT.ordinal())));
         predList.add(criteriaBuilder.and(criteriaBuilder.equal(order.get("paymentType"), PaymentTypeCode.CARD.ordinal())));
         Predicate[] predArray = new Predicate[predList.size()];

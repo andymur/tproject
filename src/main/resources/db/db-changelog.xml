@@ -18,5 +18,8 @@
     <changeSet id="4" author="alexPench">
     <sqlFile path="sql/004_alter_description_size.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="5" author="alexPench">
+    <sqlFile path="sql/005_alter_address.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 
 </databaseChangeLog>

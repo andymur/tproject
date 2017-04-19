@@ -2,7 +2,7 @@ $(function () {
     assignClickHandler($(".productButton"), goToProduct_Handler);
 })
 
-$(document).on('change', 'select', function () {
+$(document).on('change', '#cat-filter select', function () {
     var categoryId = $('#cat-filter').data('category-id')
     if ($('#color-select option:selected').is(':disabled') == false) {
         var color = $('#color-select option:selected').val()

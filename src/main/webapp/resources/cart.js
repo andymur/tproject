@@ -15,6 +15,17 @@
         $('.cart-count').text(amount);
     }
 
+    var checkCartSize = function () {
+        var arr = getCart();
+        var amount = 0;
+        for (var key in arr) {
+            amount += arr[key];
+        }
+        if(amount <= 0 ){
+            $("#orderBtn").addClass('disabled');
+        }
+    }
+
     var removeClickHandler = function (selector, handler) {
         // selector is a jquery object
         selector = selector || $(".some-class-which-doesnot-exist");
@@ -34,6 +45,9 @@
     };
     var loadCardPage_Handler = function (event) {
         loadCardPage(event);
+    };
+    var loadOrder_Handler = function (event) {
+        loadOrder(event);
     };
 
     function subtractProduct(event) {
@@ -92,6 +106,8 @@
                     assignClickHandler($(".removeItem"), removeFromCart_Handler);
                     assignClickHandler($(".sub"), subtract_Handler);
                     assignClickHandler($(".add"), add_Handler);
+                    assignClickHandler($("#orderBtn"), loadOrder_Handler);
+                    checkCartSize();
                 }
         })
     }
@@ -143,4 +159,17 @@
         }
         $('.cart-count').text(amount);
         localStorage.setItem("arr", JSON.stringify(arr))
+    }
+    
+    function loadOrder(event) {
+      event.preventDefault();
+        $.ajax({
+                type: "GET",
+                url: "order",
+                contentType: "application/json",
+                success:(data)=>{
+                    $("#wrapper").html(data);
+                    assignClickHandler($("#submit-order"), submitOrder_Handler);
+                }
+    })
     }

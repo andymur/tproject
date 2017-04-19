@@ -46,8 +46,11 @@ public class OrderService {
     public Object create(OrderDto orderDto) throws NotFoundException, PlaceToOrderException {
         Order newOrder = new Order();
         putProductsToNewOrder(orderDto, newOrder);
-        newOrder.setUser(userService.findById(orderDto.getUserId()));
-        newOrder.setAddress(addressService.save(orderDto));
+        newOrder.setUser(userService.findBySSO(userService.getPrincipal()));
+        orderDto.setUserId(newOrder.getUser().getId());
+        if (orderDto.getDeliveryAddressDto() != null) {
+            newOrder.setAddress(addressService.save(orderDto));
+        } else {newOrder.setAddress(addressService.findOne(1L));} //in case of self we setup shop address which is created at the init.
         newOrder.setDeliveryType(orderDto.getDeliveryType());
         newOrder.setPaymentType(orderDto.getPaymentType());
         newOrder.setPaymentStatus(AWAIT_PAYMENT);
@@ -55,8 +58,9 @@ public class OrderService {
         newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         orderDao.persist(newOrder);
         newOrder.getOrderedProducts().forEach(orderedProduct -> orderedProduct.setOrder(newOrder));
-        logger.info("New order: {} has been created", orderDto.getOrderId());
-        return orderDto.setNewOrderDetails(newOrder);
+        logger.info("New order: {} has been created", newOrder.getId());
+        orderDto.setOrderId(newOrder.getId());
+        return orderDto;
     }
 
     public List<OrderDto> getUserOrders(String ssoId) {

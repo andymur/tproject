@@ -35,8 +35,6 @@ public class OrderController extends CoreController {
 
     @RequestMapping(value = "order/create", method = RequestMethod.POST)
     public Object create(@RequestBody OrderDto orderDto, Model model) throws NotFoundException, PlaceToOrderException {
-        User user = userService.findBySSO(getPrincipal());
-        orderDto.setUserId(user.getId());
         model.addAttribute("order", orderService.create(orderDto));
         return "payment";
     }

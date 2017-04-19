@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>Linus</title>
-    <link rel="icon" href="images/favicon.ico">
+    <link rel="icon" href="/resources/images/favicon.ico">
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
@@ -157,7 +157,7 @@
                                             <a href="/">Home</a>
                                             <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                             <ul>
-                                                <li><a href="index">About</a></li>
+                                                <li><a href="/">About</a></li>
                                             </ul>
                                         </li>
                                         <li class="submenu">
@@ -165,7 +165,7 @@
                                             <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                             <ul class="categories">
                                                 <c:forEach var="mapitem" items="${categoriesmap}">
-                                                    <li><a href="catalog?categoryId=${mapitem.key.id}">${mapitem.key.name}</a></li>
+                                                    <li><a href="/catalog?categoryId=${mapitem.key.id}">${mapitem.key.name}</a></li>
                                                 </c:forEach>
                                             </ul>
                                         </li>
@@ -173,7 +173,7 @@
                                             <a href="#">Contacts</a>
                                             <input class="show-submenu" type="checkbox" name="show-submenu-1"/>
                                             <ul>
-                                                <li><a href="contact.html">Contact Us</a></li>
+                                                <li><a href="/contact.html">Contact Us</a></li>
                                             </ul>
                                         </li>
                                         <sec:authorize access="hasRole('ADMIN')">
@@ -192,7 +192,7 @@
                                                 <a id="username" data-username="${loggedinuser}" href="/user"><strong>${loggedinuser}</strong></a>
                                                 <ul>
                                                     <li><a id="usercart" href="#">Cart</a></li>
-                                                    <li><a href="orders">Orders</a></li>
+                                                    <li><a href="/orders">Orders</a></li>
                                                 </ul>
                                             </li>
                                         </sec:authorize>
@@ -324,6 +324,7 @@
         <script type="text/javascript" src="/resources/cart.js"></script>
         <script type="text/javascript" src="/resources/catalog.js"></script>
         <script type="text/javascript" src="/resources/product.js"></script>
+        <script type="text/javascript" src="/resources/order.js"></script>
         <!-- Bootstrap Jquery -->
         <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
         <!-- Sticky Jquery -->

@@ -53,7 +53,7 @@
                 </tbody>
             </table>
             <sec:authorize access="isAuthenticated()">
-            <a id="orderBtn" href="order" class="welcome-button-2 hvr-shutter-in-horizontal-2">PROCEED</a>
+            <a id="orderBtn" href="/order" class="welcome-button-2 hvr-shutter-in-horizontal-2">PROCEED</a>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <a href="#" disabled="true" class="welcome-button-2 hvr-shutter-in-horizontal-2 not-active">PROCEED</a>

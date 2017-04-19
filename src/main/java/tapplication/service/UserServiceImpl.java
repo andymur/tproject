@@ -1,6 +1,8 @@
 package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tapplication.model.User;
@@ -74,4 +76,17 @@ public class UserServiceImpl implements UserService {
         User user = findBySSO(sso);
         return (user == null || ((id != null) && (user.getId() == id)));
     }
+
+    public String getPrincipal(){
+        String userName = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails)principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        return userName;
+    }
+
 }

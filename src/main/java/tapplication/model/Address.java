@@ -17,6 +17,8 @@ public class Address {
     public static final String USER_ID = "user_id";
     public static final String ID1 = "id";
     public static final String USER_ENTITY = "user";
+    public static final String EMAIL = "email";
+    public static final String PHONE_NUMBER = "phone_number";
     @Id
     @Column(name = ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,11 @@ public class Address {
     private String apartment;
     @Column(name = ZIP_CODE)
     private Long zipCode;
+    @Column(name = EMAIL)
+    private String email;
+    @Column(name = PHONE_NUMBER)
+    private String phoneNumber;
+
     @ManyToOne
     @JoinColumn(name = USER_ID, referencedColumnName = ID1)
     private User user;
@@ -101,16 +108,21 @@ public class Address {
         this.user = user;
     }
 
-    public Address(String country, String city, String street, String building, String apartment, long zipCode, User user) {
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.building = building;
-        this.apartment = apartment;
-        this.zipCode = zipCode;
-        this.user = user;
+    public String getEmail() {
+        return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
     public Address() {
     }
 

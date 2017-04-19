@@ -39,6 +39,8 @@ public class AddressService {
         address.setApartment(deliveryAddress.getApartment());
         address.setZipCode(deliveryAddress.getZipCode());
         address.setUser(userService.findById(orderDto.getUserId()));
+        address.setEmail(deliveryAddress.getEmail());
+        address.setPhoneNumber(deliveryAddress.getPhoneNumber());
         addressDao.persist(address);
         return address;
     }

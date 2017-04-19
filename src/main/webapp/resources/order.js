@@ -1,3 +1,4 @@
+var deliveryType;
 var assignClickHandler = function (selector, handler) {
     // selector is a jquery object
     selector = selector || $(".some-class-which-doesnot-exist");
@@ -15,9 +16,9 @@ var removeClickHandler = function (selector, handler) {
 };
 
 
-var loadCardPage_Handler = function (event) {
-    loadCardPage(event);
-};
+// var loadCardPage_Handler = function (event) {
+//     loadCardPage(event);
+// };
 
 var submitOrder_Handler = function (event) {
     submitOrder(event);
@@ -27,12 +28,6 @@ var submitPayment_Handler = function (event) {
     var orderId = this.value;
     submitPayment(orderId);
 };
-
-$(function () {
-    assignClickHandler($("#cart1"), loadCardPage_Handler);
-    assignClickHandler($("#submit-order"), submitOrder_Handler);
-
-});
 
 function submitOrder(event) {
     var cart = getArr();
@@ -44,17 +39,19 @@ function submitOrder(event) {
         row.count = cart[key];
         rows.push(row);
     }
-
-    var paymentType = $('#paymentTypeSelect option:selected').data('payment-type');
-    var deliveryType = $('#deliveryTypeSelect option:selected').data('delivery-type');
-
-    var deliveryAddressDto = {
-        country: $('#checkout-order-form input[name=country]').val(),
-        city: $('#checkout-order-form input[name=city]').val(),
-        street: $('#checkout-order-form input[name=street]').val(),
-        building: $('#checkout-order-form input[name=building]').val(),
-        zipCode: $('#checkout-order-form input[name=zipCode]').val(),
-        apartment: $('#checkout-order-form input[name=apartment]').val()
+    deliveryType = $('#deliveryTypeSelect option:selected').val();
+    var paymentType = $('input[name=payment]:checked').val();
+    if(deliveryType === 'DELIVERY'){
+        var deliveryAddressDto = {
+            country: $('#checkout-order-form input[name=country]').val(),
+            city: $('#checkout-order-form input[name=city]').val(),
+            street: $('#checkout-order-form input[name=street]').val(),
+            building: $('#checkout-order-form input[name=building]').val(),
+            zipCode: $('#checkout-order-form input[name=zipCode]').val(),
+            apartment: $('#checkout-order-form input[name=appartment]').val(),
+            email: $('#checkout-order-form input[name=email]').val(),
+            phoneNumber: $('#checkout-order-form input[name=phonenumber]').val()
+        }
     }
     var basketDto = {rows: rows};
 
@@ -71,37 +68,19 @@ function submitOrder(event) {
             data: orderDto,
             success: (data)=> {
             $('.cart-count').text("0");
-            localStorage.removeItem("arr")
-            $("#wrapper").remove();
-            $("#body").append(data);
-            assignClickHandler($("#submitPayment"), submitPayment_Handler);
-
-}
-})
-}
-
-function loadCardPage(event) {
-    event.preventDefault();
-    // var cart = JSON.stringify(getCart());
-    var cart = getArr();
-    var rows = [];
-
-    for(var key in cart){
-        var row = {}
-        row.productId = parseInt(key);
-        row.count = cart[key];
-        rows.push(row);
+    if(paymentType === 'CARD'){
+        $("#wrapper").html(data);
+        assignClickHandler($("#submitPayment"), submitPayment_Handler);
+    } else {
+        $("#wrapper").html(
+            '</br></br></br></br></br>' +
+            'Order successfully paid. Email confirmation has been sent to your box.' +
+            'Continue <a href="shop">shopping</a>' +
+            '</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>'
+        );
     }
-    var dataToPush = JSON.stringify({rows : rows});
-    $.ajax({
-            type: "POST",
-            url: "basket",
-            contentType: "application/json",
-            data: dataToPush,
-            success:(data)=>{
-            $("#wrapper").remove();
-            $("#body").append(data);
-            assignClickHandler($(".removeItem"), removeFromCart_Handler);
+    localStorage.removeItem("arr")
+
 }
 })
 }
@@ -133,3 +112,33 @@ function getArr(){
     return (arr === null) ? {} : arr;
 }
 
+$(document).on('change', '#form-deliveryTypes select', function () {
+    deliveryType = $('#deliveryTypeSelect option:selected').val();
+    if(deliveryType === 'DELIVERY'){
+        $('#deliveryForm').html(
+            '<div class="col-md-6">'+
+            '<div class="heading">Billing Details</div>'+
+            '<div id="checkout-order-form">'+
+            '<label>Country</label>'+
+            '<input type="text" class="form-control" name="country" placeholder="Enter your country">'+
+            '<label>Street</label>'+
+            '<input type="text" class="form-control" name="street" placeholder="Enter your street">'+
+            '<label>Building</label>'+
+            '<input type="text" class="form-control" name="building" placeholder="Enter your building">'+
+            '<label>Appartment</label>'+
+            '<input type="text" class="form-control" name="appartment" placeholder="Enter your appartment">'+
+            '<label>Town/City</label>'+
+            '<input type="text" class="form-control" name="city" placeholder="Enter your town/city name">'+
+            '<label>Zip Code</label>'+
+            '<input type="text" class="form-control" name="zipCode" placeholder="Enter your zipcode">'+
+            '<label>Email Address</label>'+
+            '<input type="text" class="form-control" name="email" placeholder="Enter your  email address">'+
+            '<label>Phone Nmber</label>'+
+            '<input type="text" class="form-control" name="phonenumber" placeholder="Enter your phone number">'+
+            '</div>'+
+            '</div>'
+        )
+    } else {
+        $('#deliveryForm').html('');
+    }
+})

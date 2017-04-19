@@ -25,12 +25,6 @@ public class OrderDto {
     private Date orderDate;
     private List<ProductDto> products;
 
-    public OrderDto setNewOrderDetails(Order newOrder) {
-        OrderDto newOrderDto = new OrderDto();
-        newOrderDto.setOrderId(newOrder.getId());
-        return newOrderDto;
-    }
-
     public OrderDto prepareForUser(Order newOrder) {
         OrderDto newOrderDto = new OrderDto();
         newOrderDto.setOrderId(newOrder.getId());
