@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tapplication.dto.BasketDto;
 import tapplication.dto.OrderDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
@@ -26,6 +27,8 @@ public class OrderController extends CoreController {
     private UserServiceImpl userService;
     @Autowired
     private CategoryServiceImpl categoryService;
+    @Autowired
+    private ProductService productService;
 
     static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -35,12 +38,13 @@ public class OrderController extends CoreController {
         return "payment";
     }
 
-    @RequestMapping(value = "order", method = RequestMethod.GET)
-    public Object getOrderPage(Model model, HttpServletResponse resp) throws IOException {
+    @RequestMapping(value = "order", method = RequestMethod.POST)
+    public Object getOrderPage(@RequestBody BasketDto basketDto, Model model, HttpServletResponse resp) throws IOException {
         model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
         model.addAttribute("paymentTypes", PaymentTypeCode.values());
         model.addAttribute("userAddresses", userService.findBySSO(getPrincipal()).getAddresses());
         model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("products", productService.getProductsForBasket(basketDto));
         return "order";
     }
 
@@ -76,9 +80,8 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "order", method = RequestMethod.PUT)
-    public void updateStatus(@RequestBody OrderDto order, HttpServletResponse resp) throws NotFoundException {
+    public void updateStatus(@RequestBody OrderDto order){
         orderService.update(order);
-        resp.setStatus(200);
     }
 
     @ExceptionHandler(PlaceToOrderException.class)

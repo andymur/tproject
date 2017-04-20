@@ -20,19 +20,6 @@
                 </div>
             </div>
             <div id="deliveryForm"></div>
-            <div class="col-md-6 area-2">
-                <div class="heading-2">WANT DISCOUNT ? ENTER COUPON CODE</div>
-                <form>
-                    <input type="text" class="form-control" placeholder="Enter your coupon code here">
-                    <a href="#" class="coupon-submit">SUBMIT</a>
-                </form>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisc elit. Fusce scelerisque nibh et neque faucibus
-                    suscipit nulla pariatur cillum. Lorem ipsum dolor sit amet, consectetur adipisc elit. Fusce
-                    scelerisque nibh et neque faucibus suscipit nulla pariatur cillum.</p>
-                <div class="heading-3">ORDER NOTES</div>
-                <textarea name="comment" placeholder="Notes About Your Order. Special Notes On Delivery"></textarea>
-
-            </div>
 
             <div class="col-md-12 order">
                 <div class="heading">Your Order</div>
@@ -43,23 +30,28 @@
                         <th>PRODUCT</th>
                         <th>TOTAL</th>
                     </tr>
-                    <tr class="tr-1">
-                        <td>Blue Skirt x 1</td>
-                        <td>$120.00</td>
+                    <tr id="orderedProducts" class="tr-1">
+                        <c:forEach var="product" items="${products}">
+                        <td>${product.name} | ${product.model}</td>
+                        <td>$${product.price}</td>
+                    </tr>
+                    <tr>
+                        <td>PRODUCT AMOUNT</td>
+                        <td>${product.count}</td>
                     </tr>
                     <tr>
                         <td>SUBTOTAL</td>
-                        <td>$120.00</td>
+                        <td>$${product.price * product.count}</td>
                     </tr>
-                    <tr>
-                        <td>SHIPPING</td>
-                        <td>Free</td>
-                    </tr>
+                    </c:forEach>
                     <tr>
                         <td>TOTAL</td>
-                        <td>$120.00</td>
+                        <c:set var="total" value="${0}"/>
+                        <c:forEach var="product" items="${products}">
+                            <c:set var="total" value="${total + (product.price * product.count)}" />
+                        </c:forEach>
+                        <td>$${total}</td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>

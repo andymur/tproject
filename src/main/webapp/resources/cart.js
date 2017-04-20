@@ -161,15 +161,27 @@
         localStorage.setItem("arr", JSON.stringify(arr))
     }
     
-    function loadOrder(event) {
+function loadOrder(event) {
       event.preventDefault();
+    var cart = getCart();
+    var rows = [];
+
+    for(var key in cart){
+        var row = {}
+        row.productId = parseInt(key);
+        row.count = cart[key];
+        rows.push(row);
+    }
+    var dataToPush = JSON.stringify({rows : rows});
         $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "order",
                 contentType: "application/json",
+                data:dataToPush,
                 success:(data)=>{
                     $("#wrapper").html(data);
                     assignClickHandler($("#submit-order"), submitOrder_Handler);
                 }
     })
     }
+
