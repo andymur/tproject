@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tapplication.dto.BasketDto;
 import tapplication.dto.OrderDto;
 import tapplication.dto.ProductAndAmount;
+import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.Order;
 import tapplication.model.OrderedProduct;
@@ -42,14 +44,16 @@ public class OrderService {
     Logger logger = LoggerFactory.getLogger(getClass());
 
 
-    public Object create(OrderDto orderDto){
+    public OrderDto create(OrderDto orderDto) {
         Order newOrder = new Order();
         putProductsToNewOrder(orderDto, newOrder);
         newOrder.setUser(userService.findBySSO(userService.getPrincipal()));
         orderDto.setUserId(newOrder.getUser().getId());
         if (orderDto.getDeliveryAddressDto() != null) {
             newOrder.setAddress(addressService.save(orderDto));
-        } else {newOrder.setAddress(addressService.findOne(1L));} //in case of self we setup shop address which is created at the init.
+        } else {
+            newOrder.setAddress(addressService.findOne(1L));
+        } //in case of self we setup shop address which is created at the init.
         newOrder.setDeliveryType(orderDto.getDeliveryType());
         newOrder.setPaymentType(orderDto.getPaymentType());
         newOrder.setPaymentStatus(AWAIT_PAYMENT);
@@ -102,7 +106,7 @@ public class OrderService {
         orders.forEach(order -> order.getOrderedProducts().forEach(orderedProduct -> productService.moveFromExpiredOrder(orderedProduct.getProduct(), orderedProduct.getQuantity())));
     }
 
-    private void putProductsToNewOrder(OrderDto orderDto, Order newOrder){
+    private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) {
         List<OrderedProduct> orderedProductList = new ArrayList<>();
         OrderedProduct orderedProduct = new OrderedProduct();
         for (ProductAndAmount productAndAmount : orderDto.getBasketDto().getRows()) {
@@ -114,5 +118,13 @@ public class OrderService {
             orderedProductList.add(orderedProduct);
         }
         newOrder.setOrderedProducts(orderedProductList);
+    }
+
+    public List<ProductDto> repeatOrder(OrderDto orderDto) {
+        List<ProductAndAmount> productAndAmounts = new ArrayList<>();
+        Order order = orderDao.findOne(orderDto.getOrderId());
+        order.getOrderedProducts().forEach(orderedProduct -> productAndAmounts.add(new ProductAndAmount(orderedProduct.getProduct().getId(), orderedProduct.getQuantity())));
+        BasketDto basketDto = new BasketDto(productAndAmounts);
+        return productService.getProductsForBasket(basketDto);
     }
 }

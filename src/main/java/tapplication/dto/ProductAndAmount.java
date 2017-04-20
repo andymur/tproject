@@ -10,6 +10,11 @@ public class ProductAndAmount {
     public ProductAndAmount() {
     }
 
+    public ProductAndAmount(Long productId, Long count) {
+        this.productId = productId;
+        this.count = count;
+    }
+
     public Long getProductId() {
         return productId;
     }

@@ -99,7 +99,8 @@ function submitPayment(orderId) {
         contentType: "application/json",
         data: orderStatusData,
         success:()=>{
-            $('#payment-form').remove()
+            $('#payment-form').remove();
+            $('#countdown').remove();
             $('#payment').append(
                 'Order successfully paid. Email confirmation has been sent to your box.' +
                 'Continue <a href="shop">shopping</a>'

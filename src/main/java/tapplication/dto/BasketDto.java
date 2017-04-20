@@ -12,7 +12,11 @@ public class BasketDto {
     public BasketDto() {
     }
 
-//    public Long getAmount() {
+    public BasketDto(List<ProductAndAmount> rows) {
+        this.rows = rows;
+    }
+
+    //    public Long getAmount() {
 //        return amount;
 //    }
 

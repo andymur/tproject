@@ -25,9 +25,7 @@
                                 <th>DELIVERY ADDRESS</th>
                                 <th>PRODUCTS</th>
                                 <th>ORDER STATUS</th>
-                                <sec:authorize access="hasRole('ADMIN')">
                                 <th>ACTION</th>
-                                </sec:authorize>
                             </tr>
                                 <tr>
                                     <td>
@@ -59,11 +57,14 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <sec:authorize access="hasRole('ADMIN')">
                                     <td>
+                                    <sec:authorize access="hasRole('ADMIN')">
                                         <button class="saveOrderStatus" value="${order.orderId}"  type="button">Save</button>
-                                    </td>
                                     </sec:authorize>
+                                    <sec:authorize access="hasAnyRole('ADMIN', 'USER')">
+                                        <button class="repeatOrder" value="${order.orderId}"  type="button">Repeat</button>
+                                    </sec:authorize>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

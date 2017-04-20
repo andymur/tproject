@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tapplication.dto.BasketDto;
 import tapplication.dto.OrderDto;
+import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
 import tapplication.service.*;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Created by alexpench on 07.04.17.
@@ -80,8 +82,20 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "order", method = RequestMethod.PUT)
-    public void updateStatus(@RequestBody OrderDto order){
+    public void updateStatus(@RequestBody OrderDto order, HttpServletResponse resp){
         orderService.update(order);
+        resp.setStatus(200);
+    }
+
+    @RequestMapping(value = "order/repeat", method = RequestMethod.POST)
+    public Object repeatOrder(@RequestBody OrderDto order, Model model){
+        List<ProductDto> products =  orderService.repeatOrder(order);
+        model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
+        model.addAttribute("paymentTypes", PaymentTypeCode.values());
+        model.addAttribute("userAddresses", userService.findBySSO(getPrincipal()).getAddresses());
+        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("products", products);
+        return "order";
     }
 
     @ExceptionHandler(PlaceToOrderException.class)

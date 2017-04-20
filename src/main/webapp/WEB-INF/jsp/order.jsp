@@ -7,15 +7,17 @@
             <div class="col-md-12 headlines">
                 <h2>CHECK<span class="color-bg">OUT</span></h2>
             </div>
-            <div id="form-deliveryTypes" class="form-horizontal">
-                <div id="deliveryType" class="form-group">
-                    <label class="col-sm-2 control-label">DeliveryType</label>
-                    <div id="sel-div" class="col-sm-10">
-                        <select id="deliveryTypeSelect" class="form-control m-bot15">
-                            <c:forEach var="type" items="${deliveryTypes}">
-                                <option data-delivery-type=${type}>${type}</option>
-                            </c:forEach>
-                        </select>
+            <div class="col-md-2">
+                <div id="form-deliveryTypes" class="form-horizontal">
+                    <div id="deliveryType" class="form-group">
+                        <div id="sel-div" class="col-sm-10">
+                            <label>DELIVERY TYPE</label>
+                            <select id="deliveryTypeSelect" class="autowidht m-bot15">
+                                <c:forEach var="type" items="${deliveryTypes}">
+                                    <option data-delivery-type=${type}>${type}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@
                         <td>TOTAL</td>
                         <c:set var="total" value="${0}"/>
                         <c:forEach var="product" items="${products}">
-                            <c:set var="total" value="${total + (product.price * product.count)}" />
+                            <c:set var="total" value="${total + (product.price * product.count)}"/>
                         </c:forEach>
                         <td>$${total}</td>
                     </tr>
