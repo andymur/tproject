@@ -54,12 +54,13 @@ function submitOrder(event) {
         }
     }
     var basketDto = {rows: rows};
-
+    var orderId = event.target.dataset.repOrderId;
     var orderDto = JSON.stringify({
         basketDto: basketDto,
         deliveryAddressDto: deliveryAddressDto,
         paymentType: paymentType,
-        deliveryType: deliveryType
+        deliveryType: deliveryType,
+        orderId : orderId
     })
     $.ajax({
             type: "POST",

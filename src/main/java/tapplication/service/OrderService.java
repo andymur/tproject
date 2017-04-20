@@ -45,6 +45,10 @@ public class OrderService {
 
 
     public OrderDto create(OrderDto orderDto) {
+        //check if it is repeating order, then collecting products from target order to new order
+        if (orderDto.getOrderId() != null) {
+            orderDto.setBasketDto(repeatOrder(orderDto));
+        }
         Order newOrder = new Order();
         putProductsToNewOrder(orderDto, newOrder);
         newOrder.setUser(userService.findBySSO(userService.getPrincipal()));
@@ -63,6 +67,7 @@ public class OrderService {
         newOrder.getOrderedProducts().forEach(orderedProduct -> orderedProduct.setOrder(newOrder));
         logger.info("New order: {} has been created", newOrder.getId());
         orderDto.setOrderId(newOrder.getId());
+
         return orderDto;
     }
 
@@ -120,11 +125,10 @@ public class OrderService {
         newOrder.setOrderedProducts(orderedProductList);
     }
 
-    public List<ProductDto> repeatOrder(OrderDto orderDto) {
+    public BasketDto repeatOrder(OrderDto orderDto) {
         List<ProductAndAmount> productAndAmounts = new ArrayList<>();
         Order order = orderDao.findOne(orderDto.getOrderId());
         order.getOrderedProducts().forEach(orderedProduct -> productAndAmounts.add(new ProductAndAmount(orderedProduct.getProduct().getId(), orderedProduct.getQuantity())));
-        BasketDto basketDto = new BasketDto(productAndAmounts);
-        return productService.getProductsForBasket(basketDto);
+        return new BasketDto(productAndAmounts);
     }
 }
