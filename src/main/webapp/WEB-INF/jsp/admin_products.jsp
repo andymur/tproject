@@ -70,6 +70,11 @@
                                         <input type="text" class="form-control" name="imageurl">
                                     </div>
                                 </div>
+                                <form action="/upload.php">
+                                    <div id="dropZone">
+                                        Для загрузки, перетащите файл сюда.
+                                    </div>
+                                </form>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Image name</label>
                                     <div class="col-sm-10">
@@ -220,5 +225,6 @@
             </div>
         </div>
         <script type="text/javascript" src="resources/admin_products.js"></script>
+        <script type="text/javascript" src="/resources/drag.js"></script>
     </jsp:body>
 </t:genericpage>
