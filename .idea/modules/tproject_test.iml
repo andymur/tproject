@@ -15,6 +15,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-webmvc:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-orm:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-tx:4.3.7.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-jms:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.security:spring-security-web:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.security:spring-security-config:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.security:spring-security-taglibs:4.2.2.RELEASE" level="project" />
@@ -31,13 +32,15 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.aspectj:aspectjweaver:1.7.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:javax.servlet-api:3.0.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet.jsp:jsp-api:2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.jms:javax.jms-api:2.0" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-aop:4.3.7.RELEASE" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.postgresql:postgresql:9.3-1102-jdbc41" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-beans:4.3.7.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.postgresql:postgresql:9.3-1102-jdbc41" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-expression:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-web:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-jdbc:4.3.7.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-messaging:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.security:spring-security-core:4.2.2.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.security:spring-security-acl:4.2.2.RELEASE" level="project" />

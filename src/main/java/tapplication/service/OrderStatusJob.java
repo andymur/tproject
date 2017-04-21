@@ -24,6 +24,4 @@ public class OrderStatusJob {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
         orderService.updateExpiredOrders();
     }
-
-
 }

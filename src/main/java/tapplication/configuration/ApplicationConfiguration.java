@@ -19,7 +19,7 @@ import tapplication.dto.UserRoleDto;
  * Created by alexpench on 30.03.17.
  */
 @Configuration
-@Import(JpaConfiguration.class)
+@Import({JpaConfiguration.class,MessagingConfiguration.class})
 @EnableWebMvc
 @ComponentScan(basePackages = "tapplication")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
@@ -48,5 +48,6 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter{
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
 
 }
