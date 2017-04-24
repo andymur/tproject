@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="icon" href="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png">
     <link rel="stylesheet" type="text/css" href="/resources/css/countdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/drag.css"/>
     <!-- bootstrap magic -->
     <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css"/>
     <!-- cubeportfolio -->

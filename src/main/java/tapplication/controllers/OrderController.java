@@ -89,13 +89,14 @@ public class OrderController extends CoreController {
 
     @RequestMapping(value = "order/repeat", method = RequestMethod.POST)
     public Object repeatOrder(@RequestBody OrderDto order, Model model){
-        List<ProductDto> products =  orderService.repeatOrder(order);
+        List<ProductDto> products =   productService.getProductsForBasket(orderService.repeatOrder(order));
         model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
         model.addAttribute("paymentTypes", PaymentTypeCode.values());
         model.addAttribute("userAddresses", userService.findBySSO(getPrincipal()).getAddresses());
         model.addAttribute("loggedinuser", getPrincipal());
         model.addAttribute("products", products);
-        return "order";
+        model.addAttribute("orderId", order.getOrderId());
+        return "orderRepeat";
     }
 
     @ExceptionHandler(PlaceToOrderException.class)
