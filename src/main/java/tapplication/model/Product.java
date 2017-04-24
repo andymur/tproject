@@ -56,7 +56,7 @@ public class Product {
     @Column(name = QUANTITY)
     private Long quantity;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = CHANGE_DATE)
     private Date changeDate;
 

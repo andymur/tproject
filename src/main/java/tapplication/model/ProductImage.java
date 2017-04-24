@@ -31,10 +31,9 @@ public class ProductImage {
 
     public ProductImage() {}
 
-    public ProductImage(String name, String image, Product product) {
+    public ProductImage(String name, String image) {
         this.name = name;
         this.image = image;
-        this.product = product;
     }
 
     @Override
@@ -71,8 +70,8 @@ public class ProductImage {
         this.image = image;
     }
 
-    public Long getProduct() {
-        return product.getId();
+    public Product getProduct() {
+        return product;
     }
 
     public void setProduct(Product product) {

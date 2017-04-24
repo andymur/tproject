@@ -32,9 +32,9 @@
                         <th>PRODUCT</th>
                         <th>TOTAL</th>
                     </tr>
-                    <tr id="orderedProducts" class="tr-1">
                         <c:forEach var="product" items="${products}">
-                        <td>${product.name} | ${product.model}</td>
+                    <tr id="orderedProducts" class="tr-1">
+                        <td>${product.name} | ${product.model} | ${product.size}</td>
                         <td>$${product.price}</td>
                     </tr>
                     <tr>

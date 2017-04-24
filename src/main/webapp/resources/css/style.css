@@ -7592,3 +7592,14 @@ box-shadow: 0px 0px 25px 1px rgba(0,0,0,0.35);
 .pattern4 {
 	background: url(../images/patterns/5.png) repeat;
 }
+.table-cust{
+	width: auto;
+}
+.zoomPic{
+	width:450px;
+	height:450px;
+	position: absolute;
+	left: 225px;
+	top: 225px;
+	margin: -225px 0 0 -225px;
+}

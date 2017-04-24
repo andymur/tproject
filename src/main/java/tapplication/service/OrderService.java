@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.dto.BasketDto;
 import tapplication.dto.OrderDto;
 import tapplication.dto.ProductAndAmount;
 import tapplication.dto.ProductDto;
@@ -39,7 +38,7 @@ public class OrderService {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -109,12 +108,14 @@ public class OrderService {
     private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) {
         List<OrderedProduct> orderedProductList = new ArrayList<>();
         OrderedProduct orderedProduct = new OrderedProduct();
-        for (ProductAndAmount productAndAmount : orderDto.getBasketDto().getRows()) {
+        for (ProductAndAmount productAndAmount : orderDto.getProductAndAmounts()) {
             Long quantity = productAndAmount.getCount();
-            Product product = productService.moveToOrder(productAndAmount.getProductId(), quantity);
+            String size = productAndAmount.getSize();
+            Product product = productService.moveToOrder(productAndAmount.getProductId(), quantity, size);
             orderedProduct.setProduct(product);
             orderedProduct.setQuantity(quantity);
             orderedProduct.setPrice(product.getPrice());
+            orderedProduct.setSize(size);
             orderedProductList.add(orderedProduct);
         }
         newOrder.setOrderedProducts(orderedProductList);
@@ -123,8 +124,7 @@ public class OrderService {
     public List<ProductDto> repeatOrder(OrderDto orderDto) {
         List<ProductAndAmount> productAndAmounts = new ArrayList<>();
         Order order = orderDao.findOne(orderDto.getOrderId());
-        order.getOrderedProducts().forEach(orderedProduct -> productAndAmounts.add(new ProductAndAmount(orderedProduct.getProduct().getId(), orderedProduct.getQuantity())));
-        BasketDto basketDto = new BasketDto(productAndAmounts);
-        return productService.getProductsForBasket(basketDto);
+        order.getOrderedProducts().forEach(orderedProduct -> productAndAmounts.add(new ProductAndAmount(orderedProduct.getProduct().getId(), orderedProduct.getQuantity(), orderedProduct.getSize())));
+        return productService.getProductsForBasket(productAndAmounts);
     }
 }

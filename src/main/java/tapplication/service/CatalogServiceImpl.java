@@ -13,7 +13,7 @@ import java.util.List;
 @Service("catalogService")
 public class CatalogServiceImpl implements CatalogService {
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     public List<Product> getProductsByCategoryId(Long categoryId) throws NotFoundException {
         List<Product> products = productService.findAllByCategory(categoryId);

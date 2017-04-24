@@ -7,11 +7,8 @@
     };
 
     var restoreCart = function () {
-        var arr = getCart();
-        var amount = 0;
-        for (var key in arr) {
-            amount += arr[key];
-        }
+        var cart = getCart();
+        var amount = countAmount(cart);
         $('.cart-count').text(amount);
     }
 
@@ -39,9 +36,9 @@
         addToCart(buttonValue);
     };
 
-    var removeFromCart_Handler = function () {
+    var removeFromCart_Handler = function (event) {
         var buttonValue = this.value;
-        removeFromCart(buttonValue);
+        removeFromCart(buttonValue, event);
     };
     var loadCardPage_Handler = function (event) {
         loadCardPage(event);
@@ -53,11 +50,13 @@
     function subtractProduct(event) {
         var productId = event.currentTarget.id;
         var price = event.target.dataset.price;
-        removeOne(productId);
-        var count = $('#qty'+productId).val();
-        $('#qty'+productId).val(count - 1);
-        var subtotal = price * ($('#qty'+productId).val())
-        $('#subtotal'+productId).html('$'+subtotal);
+        var size = event.target.dataset.size;
+        removeOne(productId, event);
+        var selector = '#qty'+productId+size;
+        var count = Number($(selector).val());
+        $(selector).val(count - 1);
+        var subtotal = price * ($(selector).val())
+        $('#subtotal'+productId+size).html('$'+subtotal);
     }
     var subtract_Handler = function (event) {
         subtractProduct(event);
@@ -65,11 +64,13 @@
     function addProduct(event) {
         var productId = event.currentTarget.id;
         var price = event.target.dataset.price;
-        addToCart(productId);
-        var count = Number($('#qty'+productId).val());
-        $('#qty'+productId).val(count + 1);
-        var subtotal = price * ($('#qty'+productId).val())
-        $('#subtotal'+productId).html('$'+subtotal);
+        var size = event.target.dataset.size;
+        addToCart(productId, event);
+        var selector = '#qty'+productId+size;
+        var count = Number($(selector).val());
+        $(selector).val(count + 1);
+        var subtotal = price * ($(selector).val())
+        $('#subtotal'+productId+size).html('$'+subtotal);
     }
     var add_Handler = function (event) {
         addProduct(event);
@@ -85,19 +86,10 @@
     function loadCardPage(event) {
         event.preventDefault();
         // var cart = JSON.stringify(getCart());
-        var cart = getCart();
-        var rows = [];
-
-        for(var key in cart){
-            var row = {}
-            row.productId = parseInt(key);
-            row.count = cart[key];
-            rows.push(row);
-        }
-           var dataToPush = JSON.stringify({rows : rows});
+        var dataToPush = JSON.stringify(getCart());
         $.ajax({
                 type: "POST",
-                url: "basket",
+                url: "/basket",
                 contentType: "application/json",
                 data: dataToPush,
                 success:(data)=>{
@@ -112,70 +104,92 @@
         })
     }
 
-    function addToCart(productId) {
-        var assoArray = getCart();
-
-        if(assoArray[productId] == undefined)
-        {
-            assoArray[productId] = 1;
+    function addToCart(productId, event) {
+        var cart = getCart();
+        var customSelect  = '#size'+parseInt(productId)+' option:selected';
+        var size = $(customSelect).data('size');
+        if(size === undefined){
+            size = event.target.dataset.size;
         }
-        else {
-            assoArray[productId] =assoArray[productId]+1
-        };
-        setCart(assoArray);
+        var cartRow = findElement(cart, productId, size);
+        if(cartRow === undefined){
+            var row = {}
+            row.productId = productId;
+            row.size = size;
+            row.count = 1;
+            cart.push(row);
+        } else {
+            cartRow.count++;
+        }
+        setCart(cart);
     }
 
-    function removeFromCart(productId) {
-        var assoArray = getCart();
-        delete assoArray[productId];
-        setCart(assoArray);
+    function findElement(cart, productId, size) {
+        for(var i=0; i < (cart.length) && (cart.length > 0);i++){
+            if(cart[i].productId === productId && cart[i].size === size){
+                return cart[i];
+            }
+        }
+        return undefined;
+    }
+
+    function removeFromCart(productId, event) {
+        var cart = getCart();
+        var size = event.target.dataset.size;
+        $.each(cart,(i)=>{
+            if(cart[i].productId === productId && cart[i].size === size){
+            cart.splice(i,1);
+            return false;
+            }
+        })
+        setCart(cart);
         loadCardPage(event);
     }
 
-    function removeOne(productId) {
-        var assoArray = getCart();
-
-        if(assoArray[productId] === 1)
-        {
-            delete assoArray[productId];
-            setCart(assoArray);
+    function removeOne(productId, event) {
+        var cart = getCart();
+        var size = event.target.dataset.size;
+        var cartRow = findElement(cart, productId, size);
+        if(cartRow.count === 1){
+            $.each(cart,(i)=>{
+                if(cart[i].productId === productId && cart[i].size === size && cart[i].count === 1){
+                    cart.splice(i,1);
+                    return false;
+                }
+            })
+            setCart(cart);
             loadCardPage(event);
+        } else{
+            cartRow.count--;
         }
-        else {
-            assoArray[productId] =assoArray[productId]-1
-        };
-        setCart(assoArray);
+        setCart(cart);
     }
 
     function getCart(){
         var arr = JSON.parse(localStorage.getItem("arr"));
-        return (arr === null) ? {} : arr;
+        return (arr === null) ? [] : arr;
     }
 
-    function setCart(arr){
-        var amount = 0;
-        for (var key in arr) {
-            amount += arr[key];
-        }
+    function setCart(cart){
+        var amount = countAmount(cart);
         $('.cart-count').text(amount);
-        localStorage.setItem("arr", JSON.stringify(arr))
+        localStorage.setItem("arr", JSON.stringify(cart))
+    }
+
+    function countAmount(cart) {
+        var amount = 0;
+        for(var i=0; i < (cart.length) && (cart.length > 0);i++){
+           amount += cart[i].count;
+        }
+        return amount;
     }
     
 function loadOrder(event) {
       event.preventDefault();
-    var cart = getCart();
-    var rows = [];
-
-    for(var key in cart){
-        var row = {}
-        row.productId = parseInt(key);
-        row.count = cart[key];
-        rows.push(row);
-    }
-    var dataToPush = JSON.stringify({rows : rows});
+    var dataToPush = JSON.stringify(getCart());
         $.ajax({
                 type: "POST",
-                url: "order",
+                url: "/order",
                 contentType: "application/json",
                 data:dataToPush,
                 success:(data)=>{

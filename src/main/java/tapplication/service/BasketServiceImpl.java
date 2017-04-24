@@ -24,7 +24,7 @@ public class BasketServiceImpl {
     @Autowired
     private BasketDao basketDao;
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
     @Autowired
     private UserServiceImpl userService;
 

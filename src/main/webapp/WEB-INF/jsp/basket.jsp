@@ -15,6 +15,7 @@
                 <tr>
                     <th>PRODUCT NAME</th>
                     <th>PRODUCT MODEL</th>
+                    <th>SIZE</th>
                     <th>QUANTITY</th>
                     <th>SUBTOTAL</th>
                     <th>REMOVE</th>
@@ -35,18 +36,21 @@
                         </div>
                     </td>
                     <td>${product.model}</td>
+                    <td id="sizep{product.productId}" data-sizep="${product.size}">
+                        ${product.size}
+                    </td>
                     <td>
                         <form class="f1">
-                            <input id="${product.productId}" data-price="${product.price}" class="sub" type="button" name="subtract" value="-">
-                            <input id="qty${product.productId}" class="qty" type="text" name="qty" value="${product.count}">
-                            <input id="${product.productId}" data-price="${product.price}" class="add" type="button" name="add" value="+">
+                            <input id="${product.productId}" data-price="${product.price}" data-size="${product.size}" class="sub" type="button" name="subtract" value="-">
+                            <input id="qty${product.productId}${product.size}" class="qty" type="text" name="qty" value="${product.count}">
+                            <input id="${product.productId}" data-price="${product.price}" data-size="${product.size}" class="add" type="button" name="add" value="+">
                         </form>
                     </td>
-                    <td id="subtotal${product.productId}">
+                    <td id="subtotal${product.productId}${product.size}">
                         $${product.price * product.count}
                     </td>
                     <td>
-                        <button class="removeItem"  type="button" value="${product.productId}"><i class="fa fa-times fa-lg"></i></button>
+                        <button class="removeItem" data-size="${product.size}"  type="button" value="${product.productId}"><i data-size="${product.size}" class="fa fa-times fa-lg"></i></button>
                     </td>
                 </tr>
                 </c:forEach>

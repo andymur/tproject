@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Created by alexpench on 07.04.17.
  */
 public class OrderDto {
-    private BasketDto basketDto;
+    private List<ProductAndAmount> productAndAmounts;
     private DeliveryAddressDto deliveryAddressDto;
     private DeliveryTypeCode deliveryType;
     private PaymentTypeCode paymentType;
@@ -80,12 +80,12 @@ public class OrderDto {
         this.orderId = orderId;
     }
 
-    public BasketDto getBasketDto() {
-        return basketDto;
+    public List<ProductAndAmount> getProductAndAmounts() {
+        return productAndAmounts;
     }
 
-    public void setBasketDto(BasketDto basketDto) {
-        this.basketDto = basketDto;
+    public void setProductAndAmounts(List<ProductAndAmount> productAndAmounts) {
+        this.productAndAmounts = productAndAmounts;
     }
 
     public DeliveryAddressDto getDeliveryAddressDto() {

@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import tapplication.dto.BasketDto;
 import tapplication.dto.BasketProductDto;
+import tapplication.dto.ProductAndAmount;
 import tapplication.exceptions.NotFoundException;
 import tapplication.service.BasketServiceImpl;
-import tapplication.service.ProductService;
+import tapplication.service.ProductServiceImpl;
+
+import java.util.List;
 
 /**
  * Created by alexpench on 06.04.17.
@@ -21,11 +23,11 @@ public class BasketController extends CoreController {
     @Autowired
     private BasketServiceImpl basketService;
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Object getBasket(@RequestBody BasketDto basketDto, Model model){
-        model.addAttribute("products", productService.getProductsForBasket(basketDto));
+    public Object getBasket(@RequestBody List<ProductAndAmount> basketProducts, Model model){
+        model.addAttribute("products", productService.getProductsForBasket(basketProducts));
         return "basket";
     }
 

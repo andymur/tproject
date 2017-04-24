@@ -6,13 +6,15 @@ package tapplication.dto;
 public class ProductAndAmount {
     private Long productId;
     private Long count;
+    private String size;
 
     public ProductAndAmount() {
     }
 
-    public ProductAndAmount(Long productId, Long count) {
+    public ProductAndAmount(Long productId, Long count, String size) {
         this.productId = productId;
         this.count = count;
+        this.size = size;
     }
 
     public Long getProductId() {
@@ -29,5 +31,13 @@ public class ProductAndAmount {
 
     public void setCount(Long count) {
         this.count = count;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

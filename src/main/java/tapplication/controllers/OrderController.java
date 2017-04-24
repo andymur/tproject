@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import tapplication.dto.BasketDto;
 import tapplication.dto.OrderDto;
+import tapplication.dto.ProductAndAmount;
 import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
@@ -30,7 +30,7 @@ public class OrderController extends CoreController {
     @Autowired
     private CategoryServiceImpl categoryService;
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 
     static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
 
@@ -41,12 +41,12 @@ public class OrderController extends CoreController {
     }
 
     @RequestMapping(value = "order", method = RequestMethod.POST)
-    public Object getOrderPage(@RequestBody BasketDto basketDto, Model model, HttpServletResponse resp) throws IOException {
+    public Object getOrderPage(@RequestBody List<ProductAndAmount> productAndAmounts, Model model, HttpServletResponse resp) throws IOException {
         model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
         model.addAttribute("paymentTypes", PaymentTypeCode.values());
         model.addAttribute("userAddresses", userService.findBySSO(getPrincipal()).getAddresses());
         model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("products", productService.getProductsForBasket(basketDto));
+        model.addAttribute("products", productService.getProductsForOrder(productAndAmounts));
         return "order";
     }
 

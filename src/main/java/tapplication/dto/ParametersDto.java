@@ -2,24 +2,24 @@ package tapplication.dto;
 
 import tapplication.model.Parameters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by alexpench on 10.04.17.
  */
 public class ParametersDto {
+    private Long id;
     private Long productId;
-    private List<String> sizes = new ArrayList<>();
-    private List<Long> weights = new ArrayList<>();
+    private String size ;
+    private Long weight;
+    private Long quantity;
 
     public ParametersDto() {
     }
 
     public ParametersDto(Parameters parameters) {
+        this.id = parameters.getId();
         this.productId = parameters.getProduct();
-        this.sizes.add(parameters.getSize());
-        this.weights.add(parameters.getWeight());
+        this.size = parameters.getSize();
+        this.weight = parameters.getWeight();
     }
 
     public Long getProductId() {
@@ -30,28 +30,45 @@ public class ParametersDto {
         this.productId = productId;
     }
 
-    public List<String> getSizes() {
-        return sizes;
+
+    public String getSize() {
+        return size;
     }
 
-    public void setSizes(List<String> sizes) {
-        this.sizes = sizes;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    public List<Long> getWeights() {
-        return weights;
+    public Long getWeight() {
+        return weight;
     }
 
-    public void setWeights(List<Long> weights) {
-        this.weights = weights;
+    public void setWeight(Long weight) {
+        this.weight = weight;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "ParametersDto{" +
                 "productId=" + productId +
-                ", sizes=" + sizes +
-                ", weights=" + weights +
+                ", size='" + size + '\'' +
+                ", weight=" + weight +
                 '}';
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 }

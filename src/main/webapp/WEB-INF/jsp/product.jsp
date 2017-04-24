@@ -22,31 +22,34 @@
                             <div class="col-md-8">
                                 <ul id="gal1">
                                     <c:forEach var="image" items="${product.images}">
-                                    <li>
-                                        <a class="active" href="#" data-image="/resources/images/shop/1-${image}"
-                                           data-zoom-image="/resources/images/shop/${image}">
-                                            <img id="img_01" src="/resources/images/shop/small-${image}" alt=""/>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a class="active" href="#"
+                                               data-image="/resources/images/shop/1-${image.url}"
+                                               data-zoom-image="/resources/images/shop/${image.url}">
+                                                <img id="img_01" src="/resources/images/shop/small-${image.url}"
+                                                     alt=""/>
+                                            </a>
+                                        </li>
                                     </c:forEach>
                                 </ul>
-                                <%--public ProductDto(Product product) {--%>
-                                <%--this.productId = product.getId();--%>
-                                <%--this.brand = product.getBrand().getName();--%>
-                                <%--this.name = product.getName();--%>
-                                <%--this.model = product.getModel();--%>
-                                <%--this.color = product.getColor();--%>
-                                <%--this.description = product.getDescription();--%>
-                                <%--this.category = product.getCategory().getName();--%>
-                                <%--this.price = product.getPrice();--%>
-                                <%--product.getImages().forEach(productImage -> this.images.add(productImage.getImage()));--%>
-                                <%--product.getParameters().forEach(parameter -> this.parameters.add(new ParametersDto(parameter)));--%>
-                                <%--this.mainImage = product.getImages().stream()--%>
-                                <%--.filter(im -> im.getName().equals("main"))--%>
-                                <%--.map(ProductImage::getImage)--%>
-                                <%--.findFirst().orElse("/new.png");--%>
-                                <%--}--%>
-                                <img id="zoom_02" src="/resources/images/shop/1-${product.mainImage}" data-zoom-image="/resources/images/shop/${product.mainImage}" alt=""/>
+                                    <%--public ProductDto(Product product) {--%>
+                                    <%--this.productId = product.getId();--%>
+                                    <%--this.brand = product.getBrand().getName();--%>
+                                    <%--this.name = product.getName();--%>
+                                    <%--this.model = product.getModel();--%>
+                                    <%--this.color = product.getColor();--%>
+                                    <%--this.description = product.getDescription();--%>
+                                    <%--this.category = product.getCategory().getName();--%>
+                                    <%--this.price = product.getPrice();--%>
+                                    <%--product.getImages().forEach(productImage -> this.images.add(productImage.getImage()));--%>
+                                    <%--product.getParameters().forEach(parameter -> this.parameters.add(new ParametersDto(parameter)));--%>
+                                    <%--this.mainImage = product.getImages().stream()--%>
+                                    <%--.filter(im -> im.getName().equals("main"))--%>
+                                    <%--.map(ProductImage::getImage)--%>
+                                    <%--.findFirst().orElse("/new.png");--%>
+                                    <%--}--%>
+                                <img id="zoom_02" src="/resources/images/shop/1-${product.mainImage}"
+                                     data-zoom-image="/resources/images/shop/${product.mainImage}" alt=""/>
 
                             </div>
 
@@ -63,14 +66,23 @@
                                 </div>
                                 <p>some review</p>
                                 <div class="divider-2"></div>
-                                <form class="f1">
-                                    <input class="sub" type='button' name='subtract'
-                                           onclick='javascript: subtractQty();' value='-'/>
-                                    <input type='text' name='qty' id='qty' value='0'/>
-                                    <input class="add" type='button' name='add'
-                                           onclick='javascript: document.getElementById("qty").value++;' value='+'/>
-                                </form>
-                                <a href="#" class="cart-btn">Add To Cart</a>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">SIZE</label>
+                                    <div class="col-sm-10">
+                                        <select id="size${product.productId}" class="form-control m-bot15">
+                                            <c:forEach var="size" items="${product.sizes}">
+                                                <option data-size="${size}">${size}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="divider-2"></div>
+                                <button type="button"
+                                        data-productId="${product.productId}"
+                                        value="${product.productId}"
+                                        class="cbp-l-caption-buttonRight addToCart">
+                                    Add To Cart
+                                </button>
                                 <div class="clearfix"></div>
                                 <div class="user-option">
                                     <a href="#" class="op-1"><i class="fa fa-heart"></i> ADD TO WISHLIST</a>
@@ -106,20 +118,13 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="description">
                                             <p>${product.description}</p>
-                                            <ol class="dec-ol">
-                                                <li>Vestibulum ornare, neque a consequat fermentum.</li>
-                                                <li>Nullam id libero id lectus blandit fringilla eu nec felis.</li>
-                                                <li>Sed elementum tempor ante, et volutpat sem hendrerit in.</li>
-                                                <li>Nullam leo justo, sodales ut imperdiet non, porta eget urna.</li>
-                                                <li>Phasellus dictum est eu nibh ullamcorper id commodo erat pretium.
-                                                </li>
-                                            </ol>
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="reviews">
                                             <div class="heading">4 Reviews From Buyers</div>
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/resources/images/about/1.png" alt="/">
+                                                    <img class="media-object" src="/resources/images/about/1.png"
+                                                         alt="/">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading">Jessica Fernando</h4>
@@ -133,7 +138,8 @@
 
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/resources/images/about/2.png" alt="/">
+                                                    <img class="media-object" src="/resources/images/about/2.png"
+                                                         alt="/">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading">Jessica Fernando</h4>
@@ -147,7 +153,8 @@
 
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/resources/images/about/3.png" alt="/">
+                                                    <img class="media-object" src="/resources/images/about/3.png"
+                                                         alt="/">
                                                 </a>
                                                 <div class="media-body">
                                                     <h4 class="media-heading">Jessica Fernando</h4>
@@ -177,22 +184,27 @@
                                                     <td>${product.color}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>FEATURES</td>
-                                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit porta.
-                                                        Pellentesque non dui at sapien tempor gravida ut vel arcu.
-                                                        Pellentesque non dui at sapien tempor gravida ut vel arcu.
-                                                        <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                                        porta. Pellentesque non dui at sapien tempor gravida ut vel
-                                                        arcu.
-                                                    </td>
-                                                </tr>
-                                                <tr>
                                                     <td>SHIPMENT</td>
                                                     <td>FREE GROUND SHIPPING</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>SIZE</td>
-                                                    <td>MEDIUM</td>
+                                                    <td>PARAMETERS</td>
+                                                    <td><c:forEach var="parameter" items="${product.parameters}">
+                                                        <table id="par${parameter.id}"
+                                                               class="table table-bordered table-striped table-advance table-hover">
+                                                            <tr>
+                                                                <th>Size</th>
+                                                                <td><input class="form-control" type="text" name="size"
+                                                                           value="${parameter.size}" disabled="disabled">
+                                                                </td>
+                                                                <th>Weight</th>
+                                                                <td><input class="form-control" type="text"
+                                                                           name="weight"
+                                                                           value="${parameter.weight}" disabled="disabled"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </c:forEach>
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>

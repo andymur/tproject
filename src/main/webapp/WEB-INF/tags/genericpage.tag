@@ -325,6 +325,7 @@
         <script type="text/javascript" src="/resources/catalog.js"></script>
         <script type="text/javascript" src="/resources/product.js"></script>
         <script type="text/javascript" src="/resources/order.js"></script>
+        <script type="text/javascript" src="/resources/productedit.js"></script>
         <!-- Bootstrap Jquery -->
         <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
         <!-- Sticky Jquery -->

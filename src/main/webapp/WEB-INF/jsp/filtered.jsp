@@ -2,6 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div id="wrapper">
     <div class="arrivals">
         <div class="container">
@@ -123,6 +124,14 @@
                                                                                     class="cbp-l-caption-buttonRight addToCart">
                                                                                 Add To Cart
                                                                             </button>
+                                                                            <sec:authorize access="hasRole('ADMIN')">
+                                                                            <button type="button"
+                                                                                    data-productId="${product.productId}"
+                                                                                    value="${product.productId}"
+                                                                                    class="cbp-l-caption-buttonRight editProduct">
+                                                                                Edit
+                                                                            </button>
+                                                                            </sec:authorize>
                                                                         </div>
                                                                     </div>
                                                                 </div>

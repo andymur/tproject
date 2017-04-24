@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tapplication.service.CategoryServiceImpl;
-import tapplication.service.ProductService;
+import tapplication.service.ProductServiceImpl;
 
 /**
  * Created by alexpench on 04.04.17.
@@ -17,7 +17,7 @@ public class ShopPageController extends CoreController{
     @Autowired
     private CategoryServiceImpl categoryService;
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
 @RequestMapping(method = RequestMethod.GET)
     public Object redirect(Model model) {
     model.addAttribute("loggedinuser", getPrincipal());

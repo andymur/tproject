@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.service.CategoryServiceImpl;
-import tapplication.service.ProductService;
+import tapplication.service.ProductServiceImpl;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping(value = "catalog")
 public class CatalogController extends CoreController {
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
     @Autowired
     private CategoryServiceImpl categoryService;
 

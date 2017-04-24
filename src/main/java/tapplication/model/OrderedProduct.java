@@ -27,13 +27,10 @@ public class OrderedProduct {
     @Column(name = "price")
     private Long price;
 
-    public OrderedProduct(){}
+    @Column(name = "size")
+    private String size;
 
-    public OrderedProduct(Product product, Long quantity, Long price) {
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-    }
+    public OrderedProduct(){}
 
     @Override
     public String toString() {
@@ -83,5 +80,13 @@ public class OrderedProduct {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }

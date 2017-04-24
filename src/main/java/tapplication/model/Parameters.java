@@ -14,6 +14,7 @@ public class Parameters {
     public static final String WEIGHT = "weight";
     public static final String PRODUCT_ID = "product_id";
     public static final String REFERENCED_ID = "id";
+    public static final String QUANTITY = "quantity";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ID)
@@ -25,16 +26,26 @@ public class Parameters {
     @Column(name = WEIGHT)
     private Long weight;
 
+    @Column(name = QUANTITY)
+    private Long quantity;
+
     @ManyToOne
     @JoinColumn(name = PRODUCT_ID, referencedColumnName = REFERENCED_ID)
     private Product product;
 
     public Parameters(){}
 
-    public Parameters(String size, Long weight, Long productId) {
+    public Parameters(String size, Long weight, Long quantity, Product product) {
         this.size = size;
         this.weight = weight;
-        this.product = new Product(productId);
+        this.quantity = quantity;
+        this.product = product;
+    }
+
+    public Parameters(String size, Long weight, Long quantity) {
+        this.size = size;
+        this.weight = weight;
+        this.quantity = quantity;
     }
 
     @Override
@@ -69,12 +80,19 @@ public class Parameters {
         this.weight = weight;
     }
 
-//    @JsonIgnore
     public Long getProduct() {
         return product.getId();
     }
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 }

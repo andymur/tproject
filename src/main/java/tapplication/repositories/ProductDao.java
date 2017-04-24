@@ -1,6 +1,7 @@
 package tapplication.repositories;
 
 import org.springframework.stereotype.Repository;
+import tapplication.dto.ProductDto;
 import tapplication.model.Brand;
 import tapplication.model.Parameters;
 import tapplication.model.Product;
@@ -29,13 +30,25 @@ public class ProductDao extends AbstractDao<Product, Long> {
         super.persist(product);
     }
 
-    public boolean isProductExist(String brandName, String model, String color) {
+    public boolean isProductExistWithSameSize(ProductDto productDto) {
+        CriteriaBuilder builder = super.getCriteriaBuilder();
+        CriteriaQuery<Product> query = builder.createQuery(Product.class);
+        Root<Product> product = query.distinct(true).from(Product.class);
+        Join<Product, Parameters> parameters = product.join(Product.PARAMETERS);
+        List<Predicate> predList = new LinkedList<>();
+        predList.add(builder.and(builder.equal(product.get(Product.MODEL), productDto.getModel())));
+        predList.add(builder.and(builder.equal(parameters.get(Parameters.SIZE), productDto.getParameters().get(0).getSize())));
+        Predicate[] predArray = new Predicate[predList.size()];
+        predList.toArray(predArray);
+        query.where(predArray);
+        return super.find(query).size() > 0;
+    }
 
+    public boolean isNewSizeForExistingProduct(ProductDto product) {
         Query query = super.getEntityManager().createQuery(
-                "Select count(*) from Product p JOIN Brand b on p.brand.id = b.id where b.name = :brandName and p.model = :model and p.color = :color")
-                .setParameter("brandName", brandName)
-                .setParameter("model", model)
-                .setParameter("color", color);
+                "Select count(*) from Product p " +
+                        "where p.model = :model ")
+                .setParameter("model", product.getModel());
         Long count = (Long) query.getSingleResult();
         return count != 0;
     }
@@ -50,7 +63,7 @@ public class ProductDao extends AbstractDao<Product, Long> {
     public List<Product> findByParams(Long categoryId, String brand, String color, String size) {
         CriteriaBuilder builder = super.getCriteriaBuilder();
         CriteriaQuery<Product> query = builder.createQuery(Product.class);
-        Root<Product> product = query.from(Product.class);
+        Root<Product> product = query.distinct(true).from(Product.class);
         Join<Product, Parameters> parameters = product.join(Product.PARAMETERS);
         Join<Product, Brand> brands = product.join(Product.BRAND);
         List<Predicate> predList = new LinkedList<>();

@@ -2,6 +2,7 @@ package tapplication.repositories;
 
 import org.springframework.stereotype.Repository;
 import tapplication.model.Parameters;
+import tapplication.model.Product;
 
 /**
  * Created by alexpench on 01.04.17.
@@ -13,8 +14,7 @@ public class ParametersDao extends AbstractDao<Parameters, Long>{
         super(Parameters.class);
     }
 
-
-    public boolean isExist(String size, Long weight) {
-        return count(Parameters.SIZE, size, Parameters.WEIGHT, weight) > 0;
+    public boolean isExist(String size, Long weight, Product product) {
+        return super.findAllByAndParams(Parameters.SIZE, size, Parameters.WEIGHT, weight, "product", product).size() > 0;
     }
 }

@@ -1,10 +1,11 @@
 package tapplication.dto;
 
+import tapplication.model.Parameters;
 import tapplication.model.Product;
 import tapplication.model.ProductImage;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by alexpench on 10.04.17.
@@ -20,9 +21,12 @@ public class ProductDto {
     private String category;
     private String mainImage;
     private String icon;
-    private List<String> images = new ArrayList<>();
-    private List<ParametersDto> parameters = new ArrayList<>();
+    private List<ProductImageDto> images;
+    private List<ParametersDto> parameters;
     private Long count;
+    private Long quantity;
+    private List<String> sizes;
+    private String size;
 
     public ProductDto() {
     }
@@ -36,12 +40,36 @@ public class ProductDto {
         this.description = product.getDescription();
         this.category = product.getCategory().getName();
         this.price = product.getPrice();
-        product.getImages().forEach(productImage -> this.images.add(productImage.getImage()));
-        product.getParameters().forEach(parameter -> this.parameters.add(new ParametersDto(parameter)));
+        this.quantity = product.getQuantity();
+        this.parameters = product.getParameters().stream()
+                .map(ParametersDto::new)
+                .collect(Collectors.toList());
+        this.sizes = product.getParameters().stream()
+                .map(Parameters::getSize).collect(Collectors.toList());
+        this.images = product.getImages().stream()
+                .map(image->new ProductImageDto(image.getName(),image.getImage(),image.getProduct().getId()))
+                .collect(Collectors.toList());
         this.mainImage = product.getImages().stream()
                 .filter(im -> im.getName().equals("main"))
                 .map(ProductImage::getImage)
                 .findFirst().orElse("/new.png");
+        this.icon = product.getImages().stream()
+                .filter(im -> im.getName().equals("icon"))
+                .map(ProductImage::getImage)
+                .findFirst().orElse("/dummy_icon.png");
+    }
+
+    public ProductDto(Product product, Long count, String size) {
+        this.productId = product.getId();
+        this.price = product.getPrice();
+        this.count = count;
+        this.name = product.getName();
+        this.model = product.getModel();
+        this.size = size;
+        this.icon = product.getImages().stream()
+                .filter(im -> im.getName().equals("icon"))
+                .map(ProductImage::getImage)
+                .findFirst().orElse("/dummy_icon.png");
     }
 
     public ProductDto(Product product, Long count) {
@@ -50,6 +78,8 @@ public class ProductDto {
         this.count = count;
         this.name = product.getName();
         this.model = product.getModel();
+        this.sizes = product.getParameters().stream()
+                .map(Parameters::getSize).collect(Collectors.toList());
         this.icon = product.getImages().stream()
                 .filter(im -> im.getName().equals("icon"))
                 .map(ProductImage::getImage)
@@ -120,12 +150,20 @@ public class ProductDto {
         this.category = category;
     }
 
-    public List<String> getImages() {
+    public List<ProductImageDto> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<ProductImageDto> images) {
         this.images = images;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 
     public List<ParametersDto> getParameters() {
@@ -160,7 +198,21 @@ public class ProductDto {
         this.count = count;
     }
 
+    public List<String> getSizes() {
+        return sizes;
+    }
 
+    public void setSizes(List<String> sizes) {
+        this.sizes = sizes;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     @Override
     public String toString() {

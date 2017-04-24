@@ -21,5 +21,14 @@
     <changeSet id="5" author="alexPench">
     <sqlFile path="sql/005_alter_address.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="6" author="alexPench">
+    <sqlFile path="sql/006_alter_product.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
+    <changeSet id="7" author="alexPench">
+    <sqlFile path="sql/007_alter_ordered_product.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
+    <changeSet id="8" author="alexPench">
+    <sqlFile path="sql/008_alter_parameters.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 
 </databaseChangeLog>

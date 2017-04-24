@@ -6,9 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tapplication.dto.ProductDto;
 import tapplication.exceptions.AlreadyExistException;
-import tapplication.model.Product;
 import tapplication.service.CategoryServiceImpl;
-import tapplication.service.ProductService;
+import tapplication.service.ProductServiceImpl;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by alexpench on 30.03.17.
@@ -16,15 +17,14 @@ import tapplication.service.ProductService;
 @Controller
 public class ProductController extends CoreController{
     @Autowired
-    private ProductService productService;
+    private ProductServiceImpl productService;
     @Autowired
     private CategoryServiceImpl categoryService;
 
     @ResponseBody
     @RequestMapping(value = "product/create", method = RequestMethod.POST)
-    public Object createProduct(@RequestBody Product newProduct) throws AlreadyExistException {
-        Product product = productService.create(newProduct);
-        return product;
+    public ProductDto createProduct(@RequestBody ProductDto newProduct) throws AlreadyExistException {
+        return productService.create(newProduct);
     }
 
     @RequestMapping(path = "product/{id}")
@@ -33,5 +33,19 @@ public class ProductController extends CoreController{
         model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         model.addAttribute("product", product);
         return "product";
+    }
+
+    @RequestMapping(path = "product/edit/{id}", method = RequestMethod.GET)
+    public Object getProductToEdit(@PathVariable("id") String id, Model model){
+        ProductDto product = productService.findOneDto(Long.parseLong(id));
+        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
+        model.addAttribute("product", product);
+        return "productedit";
+    }
+
+    @RequestMapping(path = "product/update", method = RequestMethod.POST)
+    public void getProductToUpdate(@RequestBody ProductDto productDto, HttpServletResponse resp){
+        productService.update(productDto);
+        resp.setStatus(200);
     }
 }

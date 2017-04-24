@@ -1,6 +1,23 @@
 $(function () {
     assignClickHandler($(".productButton"), goToProduct_Handler);
+    assignClickHandler($(".editProduct"), editProduct_Handler);
 })
+
+var editProduct_Handler = function (event) {
+    editProduct(event);
+};
+
+function editProduct(event) {
+    var productId = event.currentTarget.dataset.productid;
+    $.ajax({
+            type: "GET",
+            url: "product/edit/"+productId,
+            contentType: "application/json",
+            success:(data)=>{
+            $("#wrapper").html(data);
+}
+})
+}
 
 $(document).on('change', '#cat-filter select', function () {
     var categoryId = $('#cat-filter').data('category-id')

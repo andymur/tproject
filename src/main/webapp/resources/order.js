@@ -30,15 +30,6 @@ var submitPayment_Handler = function (event) {
 };
 
 function submitOrder(event) {
-    var cart = getArr();
-    var rows = [];
-
-    for (var key in cart) {
-        var row = {}
-        row.productId = parseInt(key);
-        row.count = cart[key];
-        rows.push(row);
-    }
     deliveryType = $('#deliveryTypeSelect option:selected').val();
     var paymentType = $('input[name=payment]:checked').val();
     if(deliveryType === 'DELIVERY'){
@@ -53,17 +44,15 @@ function submitOrder(event) {
             phoneNumber: $('#checkout-order-form input[name=phonenumber]').val()
         }
     }
-    var basketDto = {rows: rows};
-
     var orderDto = JSON.stringify({
-        basketDto: basketDto,
+        productAndAmounts: getCart(),
         deliveryAddressDto: deliveryAddressDto,
         paymentType: paymentType,
         deliveryType: deliveryType
     })
     $.ajax({
             type: "POST",
-            url: "order/create",
+            url: "/order/create",
             contentType: "application/json",
             data: orderDto,
             success: (data)=> {
@@ -95,7 +84,7 @@ function submitPayment(orderId) {
     })
     $.ajax({
         type: "PUT",
-        url: "order",
+        url: "/order",
         contentType: "application/json",
         data: orderStatusData,
         success:()=>{
