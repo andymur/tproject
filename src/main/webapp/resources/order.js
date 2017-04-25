@@ -39,7 +39,7 @@ function submitOrder(event) {
             street: $('#checkout-order-form input[name=street]').val(),
             building: $('#checkout-order-form input[name=building]').val(),
             zipCode: $('#checkout-order-form input[name=zipCode]').val(),
-            apartment: $('#checkout-order-form input[name=appartment]').val(),
+            appartment: $('#checkout-order-form input[name=appartment]').val(),
             email: $('#checkout-order-form input[name=email]').val(),
             phoneNumber: $('#checkout-order-form input[name=phonenumber]').val()
         }

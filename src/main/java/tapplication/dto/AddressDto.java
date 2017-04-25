@@ -3,31 +3,56 @@ package tapplication.dto;
 import tapplication.model.Address;
 
 /**
- * Created by alexpench on 12.04.17.
+ * Created by alexpench on 25.04.17.
  */
-public class DeliveryAddressDto {
+public class AddressDto {
+    private Long id;
     private String country;
     private String city;
     private String street;
     private String building;
-    private String apartment;
+    private String appartment;
+    private Long zipCode;
     private String email;
     private String phoneNumber;
-    private Long zipCode;
 
-    public DeliveryAddressDto() {
+    public AddressDto() {
     }
 
-
-    public DeliveryAddressDto(Address address) {
+    public AddressDto(Address address) {
+        this.id = address.getId();
         this.country = address.getCountry();
         this.city = address.getCity();
         this.street = address.getStreet();
         this.building = address.getBuilding();
-        this.apartment = address.getApartment();
+        this.appartment = address.getAppartment();
         this.zipCode = address.getZipCode();
         this.email = address.getEmail();
         this.phoneNumber = address.getPhoneNumber();
+
+    }
+
+    @Override
+    public String toString() {
+        return "AddressDto{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", building='" + building + '\'' +
+                ", appartment='" + appartment + '\'' +
+                ", zipCode=" + zipCode +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCountry() {
@@ -62,12 +87,12 @@ public class DeliveryAddressDto {
         this.building = building;
     }
 
-    public String getApartment() {
-        return apartment;
+    public String getAppartment() {
+        return appartment;
     }
 
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
+    public void setAppartment(String appartment) {
+        this.appartment = appartment;
     }
 
     public Long getZipCode() {
@@ -92,17 +117,5 @@ public class DeliveryAddressDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "DeliveryAddressDto{" +
-                "country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", building='" + building + '\'' +
-                ", apartment='" + apartment + '\'' +
-                ", zipCode=" + zipCode +
-                '}';
     }
 }

@@ -8,6 +8,6 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
-        <%@include file="userDetails.jsp" %>
+        <%@include file="addressdetails.jsp" %>
     </jsp:body>
 </t:genericpage>

@@ -31,9 +31,9 @@
         selector.off("click", handler);
     };
 
-    var addToCart_Handler = function () {
+    var addToCart_Handler = function (event) {
         var buttonValue = this.value;
-        addToCart(buttonValue);
+        addToCart(buttonValue, event);
     };
 
     var removeFromCart_Handler = function (event) {

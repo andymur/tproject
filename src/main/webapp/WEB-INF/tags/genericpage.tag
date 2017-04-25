@@ -197,6 +197,7 @@
                                                 <ul>
                                                     <li><a id="usercart" href="#">Cart</a></li>
                                                     <li><a href="/orders">Orders</a></li>
+                                                    <li><a href="/address">Address</a></li>
                                                 </ul>
                                             </li>
                                         </sec:authorize>
@@ -330,6 +331,7 @@
         <script type="text/javascript" src="/resources/product.js"></script>
         <script type="text/javascript" src="/resources/order.js"></script>
         <script type="text/javascript" src="/resources/productedit.js"></script>
+        <script type="text/javascript" src="/resources/datepicker.js"></script>
         <!-- Bootstrap Jquery -->
         <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
         <!-- Sticky Jquery -->

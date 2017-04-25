@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.dto.DeliveryAddressDto;
-import tapplication.dto.OrderDto;
+import tapplication.dto.AddressDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.Address;
 import tapplication.repositories.AddressDao;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by alexpench on 26.03.17.
@@ -20,6 +22,8 @@ public class AddressService {
     private AddressDao addressDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DataHelperService dataHelperService;
 
     public Address findOne(Long deliveryAddressId) throws NotFoundException {
         Address address = addressDao.findOne(deliveryAddressId);
@@ -29,30 +33,23 @@ public class AddressService {
         return address;
     }
 
-    public Address save(OrderDto orderDto) {
-        DeliveryAddressDto deliveryAddress = orderDto.getDeliveryAddressDto();
+    public Address save(AddressDto addressDto) {
         Address address = new Address();
-        address.setCountry(deliveryAddress.getCountry());
-        address.setCity(deliveryAddress.getCity());
-        address.setStreet(deliveryAddress.getStreet());
-        address.setBuilding(deliveryAddress.getBuilding());
-        address.setApartment(deliveryAddress.getApartment());
-        address.setZipCode(deliveryAddress.getZipCode());
-        address.setUser(userService.findById(orderDto.getUserId()));
-        address.setEmail(deliveryAddress.getEmail());
-        address.setPhoneNumber(deliveryAddress.getPhoneNumber());
+        address.setCountry(addressDto.getCountry());
+        address.setCity(addressDto.getCity());
+        address.setStreet(addressDto.getStreet());
+        address.setBuilding(addressDto.getBuilding());
+        address.setAppartment(addressDto.getAppartment());
+        address.setZipCode(addressDto.getZipCode());
+        address.setUser(userService.findBySSO(dataHelperService.getPrincipal()));
+        address.setEmail(addressDto.getEmail());
+        address.setPhoneNumber(addressDto.getPhoneNumber());
         addressDao.persist(address);
         return address;
     }
 
-//    public Address findUserAddress(String ssoId) {
-//        Address address = new Address();
-//        List<Address> = userService.findBySSO(ssoId).getAddresses();
-//        try {
-//            addressDao.findOne(Address.USER_ENTITY, userId);
-//        }catch (NoResultException e){
-//            address = null;
-//        }
-//        return address;
-//    }
+    public List<AddressDto> findUserAddress() {
+       return addressDao.findAllByAndParams(Address.USER_ENTITY,userService.findBySSO(dataHelperService.getPrincipal())).stream()
+                .map(AddressDto::new).collect(Collectors.toList());
+    }
 }

@@ -165,15 +165,9 @@ public class ProductServiceImpl implements ProductService {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")), product.getId(), quantity);
     }
 
-    public List<ProductDto> getProductsForOrder(List<ProductAndAmount> productAndAmounts) {
+    public List<ProductDto> getProducts(List<ProductAndAmount> productAndAmounts) {
         return productAndAmounts.stream()
                 .map(entry -> new ProductDto(productDao.findOne(entry.getProductId()), entry.getCount(), entry.getSize()))
-                .collect(Collectors.toList());
-    }
-
-    public List<ProductDto> getProductsForBasket(List<ProductAndAmount> productsAndAmount) {
-        return productsAndAmount.stream()
-                .map(p -> new ProductDto(productDao.findOne(p.getProductId()), p.getCount(), p.getSize()))
                 .collect(Collectors.toList());
     }
 

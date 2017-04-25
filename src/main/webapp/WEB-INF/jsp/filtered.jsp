@@ -120,6 +120,7 @@
                                                                             </button>
                                                                             <button type="button"
                                                                                     data-productId="${product.productId}"
+                                                                                    data-size="${product.sizes[0]}"
                                                                                     value="${product.productId}"
                                                                                     class="cbp-l-caption-buttonRight addToCart">
                                                                                 Add To Cart
@@ -141,7 +142,7 @@
                                                                     class="pull-right text">$${product.price}</span>
                                                             </div>
                                                             <div class="cbp-l-grid-projects-desc">${product.brand}
-                                                                / ${product.model}</div>
+                                                                / ${product.model} / ${product.sizes[0]}</div>
                                                         </div>
                                                     </li>
                                                 </c:forEach>

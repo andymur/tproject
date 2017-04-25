@@ -63,7 +63,7 @@
                                     <ul class="cbp-wrapper" style="opacity: 1;">
                                         <c:set var="products" scope="session" value="${products}"/>
                                         <c:set var="totalCount" scope="session" value="${fn:length(products)}"/>
-                                        <c:set var="perPage" scope="session" value="${5}"/>
+                                        <c:set var="perPage" scope="session" value="${6}"/>
                                         <c:set var="pageStart" value="${param.start}"/>
                                         <c:if test="${empty pageStart or pageStart < 0}">
                                             <c:set var="pageStart" value="0"/>

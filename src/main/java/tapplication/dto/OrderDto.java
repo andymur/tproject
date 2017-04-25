@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class OrderDto {
     private List<ProductAndAmount> productAndAmounts;
-    private DeliveryAddressDto deliveryAddressDto;
+    private AddressDto deliveryAddressDto;
     private DeliveryTypeCode deliveryType;
     private PaymentTypeCode paymentType;
     private Long userId;
@@ -40,7 +40,7 @@ public class OrderDto {
         OrderDto newOrderDto = new OrderDto();
         newOrderDto.setOrderId(order.getId());
         newOrderDto.setOrderDate(order.getOrderDate());
-        newOrderDto.setDeliveryAddressDto(new DeliveryAddressDto(order.getAddress()));
+        newOrderDto.setDeliveryAddressDto(new AddressDto(order.getAddress()));
         newOrderDto.setProducts(order.getOrderedProducts().stream().map(pr->new ProductDto(pr.getProduct())).collect(Collectors.toList()));
         newOrderDto.setOrderStatusCode(order.getOrderStatus());
         return newOrderDto;
@@ -88,11 +88,11 @@ public class OrderDto {
         this.productAndAmounts = productAndAmounts;
     }
 
-    public DeliveryAddressDto getDeliveryAddressDto() {
+    public AddressDto getDeliveryAddressDto() {
         return deliveryAddressDto;
     }
 
-    public void setDeliveryAddressDto(DeliveryAddressDto deliveryAddressDto) {
+    public void setDeliveryAddressDto(AddressDto deliveryAddressDto) {
         this.deliveryAddressDto = deliveryAddressDto;
     }
 

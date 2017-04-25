@@ -22,20 +22,16 @@ import java.util.List;
  * Created by alexpench on 07.04.17.
  */
 @Controller
-public class OrderController extends CoreController {
+public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private UserServiceImpl userService;
-    @Autowired
-    private CategoryServiceImpl categoryService;
-    @Autowired
-    private ProductServiceImpl productService;
+    private DataHelperService dataHelperService;
 
     static final org.slf4j.Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = "order/create", method = RequestMethod.POST)
-    public Object create(@RequestBody OrderDto orderDto, Model model){
+    public Object create(@RequestBody OrderDto orderDto, Model model) {
         model.addAttribute("order", orderService.create(orderDto));
         return "payment";
     }
@@ -44,18 +40,17 @@ public class OrderController extends CoreController {
     public Object getOrderPage(@RequestBody List<ProductAndAmount> productAndAmounts, Model model, HttpServletResponse resp) throws IOException {
         model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
         model.addAttribute("paymentTypes", PaymentTypeCode.values());
-        model.addAttribute("userAddresses", userService.findBySSO(getPrincipal()).getAddresses());
-        model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("products", productService.getProductsForOrder(productAndAmounts));
+        model.addAttribute("userAddresses", dataHelperService.getUserAddresses());
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
+        model.addAttribute("products", dataHelperService.getProducts(productAndAmounts));
         return "order";
     }
 
     @RequestMapping(value = "orders", method = RequestMethod.GET)
     public Object getUserOrders(Model model) {
-        String ssoId = getPrincipal();
-        model.addAttribute("orders", orderService.getUserOrders(ssoId));
-        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("orders", orderService.getUserOrders());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
         return "orders";
     }
 
@@ -66,34 +61,34 @@ public class OrderController extends CoreController {
         model.addAttribute("orders", orderService.getAllOrders());
         logger.info("Getting all orders.stop : {}", LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
-        model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
         return "orders";
     }
 
     @RequestMapping(value = "orderdetails", method = RequestMethod.GET)
     public Object getOrderDetails(@RequestParam(value = "orderId") Long orderId,
                                   Model model) throws NotFoundException {
-        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
         model.addAttribute("order", orderService.getOne(orderId));
         model.addAttribute("orderStatuses", OrderStatusCode.values());
         return "orderdetails";
     }
 
     @RequestMapping(value = "order", method = RequestMethod.PUT)
-    public void updateStatus(@RequestBody OrderDto order, HttpServletResponse resp){
+    public void updateStatus(@RequestBody OrderDto order, HttpServletResponse resp) {
         orderService.update(order);
         resp.setStatus(200);
     }
 
     @RequestMapping(value = "order/repeat", method = RequestMethod.POST)
-    public Object repeatOrder(@RequestBody OrderDto order, Model model){
-        List<ProductDto> products =   productService.getProductsForBasket(orderService.repeatOrder(order));
+    public Object repeatOrder(@RequestBody OrderDto order, Model model) {
+        List<ProductDto> products = dataHelperService.getProducts(orderService.repeatOrder(order));
         model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
         model.addAttribute("paymentTypes", PaymentTypeCode.values());
-        model.addAttribute("userAddresses", userService.findBySSO(getPrincipal()).getAddresses());
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute("userAddresses", dataHelperService.getUserAddresses());
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
         model.addAttribute("products", products);
         model.addAttribute("orderId", order.getOrderId());
         return "orderRepeat";
@@ -101,7 +96,7 @@ public class OrderController extends CoreController {
 
     @ExceptionHandler(PlaceToOrderException.class)
     @ResponseBody()
-    public String handleCommunicationException(PlaceToOrderException ex, HttpServletResponse response) throws IOException{
+    public String handleCommunicationException(PlaceToOrderException ex, HttpServletResponse response) throws IOException {
         response.setStatus(ex.getStatus().value());
         return ex.getMessage();
     }

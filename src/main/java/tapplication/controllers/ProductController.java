@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import tapplication.dto.ProductDto;
 import tapplication.exceptions.AlreadyExistException;
-import tapplication.service.CategoryServiceImpl;
+import tapplication.service.DataHelperService;
 import tapplication.service.ProductServiceImpl;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductController extends CoreController{
     @Autowired
     private ProductServiceImpl productService;
+
     @Autowired
-    private CategoryServiceImpl categoryService;
+    private DataHelperService dataHelperService;
 
     @ResponseBody
     @RequestMapping(value = "product/create", method = RequestMethod.POST)
@@ -30,7 +31,8 @@ public class ProductController extends CoreController{
     @RequestMapping(path = "product/{id}")
     public Object getProductPage(@PathVariable("id") String id, Model model){
         ProductDto product = productService.findOneDto(Long.parseLong(id));
-        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
         model.addAttribute("product", product);
         return "product";
     }
@@ -38,7 +40,7 @@ public class ProductController extends CoreController{
     @RequestMapping(path = "product/edit/{id}", method = RequestMethod.GET)
     public Object getProductToEdit(@PathVariable("id") String id, Model model){
         ProductDto product = productService.findOneDto(Long.parseLong(id));
-        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
         model.addAttribute("product", product);
         return "productedit";
     }

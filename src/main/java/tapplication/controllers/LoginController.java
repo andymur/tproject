@@ -141,7 +141,7 @@ public class LoginController extends CoreController {
     }
 
     @RequestMapping(value = { "/edit-details-user-{ssoId}" }, method = RequestMethod.GET)
-        public String editUserDetails(@PathVariable String ssoId, ModelMap model) {
+        public String editUserDetails(ModelMap model) {
             User user = userService.findBySSO(getPrincipal());
             model.addAttribute("user", user);
             model.addAttribute("edit", true);

@@ -10,7 +10,7 @@ import tapplication.dto.BasketProductDto;
 import tapplication.dto.ProductAndAmount;
 import tapplication.exceptions.NotFoundException;
 import tapplication.service.BasketServiceImpl;
-import tapplication.service.ProductServiceImpl;
+import tapplication.service.DataHelperService;
 
 import java.util.List;
 
@@ -19,22 +19,22 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "basket")
-public class BasketController extends CoreController {
+public class BasketController{
     @Autowired
     private BasketServiceImpl basketService;
     @Autowired
-    private ProductServiceImpl productService;
+    private DataHelperService dataHelperService;
 
     @RequestMapping(method = RequestMethod.POST)
     public Object getBasket(@RequestBody List<ProductAndAmount> basketProducts, Model model){
-        model.addAttribute("products", productService.getProductsForBasket(basketProducts));
+        model.addAttribute("products", dataHelperService.getProducts(basketProducts));
         return "basket";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Object add(@RequestBody BasketProductDto productToBasket) throws NotFoundException {
         basketService.addProducts(productToBasket);
-        return basketService.findBasketProducts(getPrincipal());
+        return basketService.findBasketProducts(dataHelperService.getUserName());
     }
 
 

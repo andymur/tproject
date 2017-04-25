@@ -39,16 +39,19 @@ public class OrderService {
     @Autowired
     private ProductServiceImpl productService;
 
+    @Autowired
+    private DataHelperService dataHelperService;
+
     Logger logger = LoggerFactory.getLogger(getClass());
 
 
     public OrderDto create(OrderDto orderDto) {
         Order newOrder = new Order();
         putProductsToNewOrder(orderDto, newOrder);
-        newOrder.setUser(userService.findBySSO(userService.getPrincipal()));
+        newOrder.setUser(userService.findBySSO(dataHelperService.getPrincipal()));
         orderDto.setUserId(newOrder.getUser().getId());
         if (orderDto.getDeliveryAddressDto() != null) {
-            newOrder.setAddress(addressService.save(orderDto));
+            newOrder.setAddress(addressService.save(orderDto.getDeliveryAddressDto()));
         } else {
             newOrder.setAddress(addressService.findOne(1L));
         } //in case of self we setup shop address which is created at the init.
@@ -64,8 +67,8 @@ public class OrderService {
         return orderDto;
     }
 
-    public List<OrderDto> getUserOrders(String ssoId) {
-        User user = userService.findBySSO(ssoId);
+    public List<OrderDto> getUserOrders() {
+        User user = userService.findBySSO(dataHelperService.getPrincipal());
         List<Order> orders = orderDao.find(Order.USER_ENTITY, user);
         return orders.stream().map(order -> new OrderDto().prepareForUser(order)).collect(Collectors.toList());
     }

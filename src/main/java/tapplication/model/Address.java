@@ -12,7 +12,7 @@ public class Address {
     public static final String CITY = "city";
     public static final String STREET = "street";
     public static final String BUILDING = "building";
-    public static final String APARTMENT = "apartment";
+    public static final String APARTMENT = "appartment";
     public static final String ZIP_CODE = "zip_code";
     public static final String USER_ID = "user_id";
     public static final String ID1 = "id";
@@ -23,20 +23,28 @@ public class Address {
     @Column(name = ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = COUNTRY)
     private String country;
+
     @Column(name = CITY)
     private String city;
+
     @Column(name = STREET)
     private String street;
+
     @Column(name = BUILDING)
     private String building;
+
     @Column(name = APARTMENT)
-    private String apartment;
+    private String appartment;
+
     @Column(name = ZIP_CODE)
     private Long zipCode;
+
     @Column(name = EMAIL)
     private String email;
+
     @Column(name = PHONE_NUMBER)
     private String phoneNumber;
 
@@ -84,12 +92,12 @@ public class Address {
         this.building = building;
     }
 
-    public String getApartment() {
-        return apartment;
+    public String getAppartment() {
+        return appartment;
     }
 
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
+    public void setAppartment(String appartment) {
+        this.appartment = appartment;
     }
 
     public Long getZipCode() {
@@ -133,7 +141,7 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", building='" + building + '\'' +
-                ", apartment='" + apartment + '\'' +
+                ", appartment='" + appartment + '\'' +
                 ", zipCode=" + zipCode +
                 '}';
     }
