@@ -35,10 +35,15 @@ jQuery(function ($) {
                 success: ()=> {
                     $("#form-product input").val("");
                     $('#description').val("");
+                    swal("Product has been crated", "success");
                 },
                 error: ()=>{
-                    $('#form-product input[name=model]').css("color", "red").effect("shake");
-                    $('#form-product input[name=size]').css("color", "red").effect("shake");
+            swal({
+                title: "Error!",
+                text: "Product already exist",
+                type: "error",
+                confirmButtonText: "OK"
+            });
                 }
         })
     })
@@ -137,4 +142,3 @@ jQuery(function ($) {
     })
     })
 })
-});

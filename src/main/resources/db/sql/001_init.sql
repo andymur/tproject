@@ -30,7 +30,7 @@ CREATE TABLE "address" (
   "city"      VARCHAR(30)   NOT NULL,
   "street"    VARCHAR(30)   NOT NULL,
   "building"  VARCHAR(30)   NOT NULL,
-  "apartment" VARCHAR(30)   NOT NULL,
+  "appartment" VARCHAR(30)   NOT NULL,
   "zip_code"  BIGINT,
   CONSTRAINT address_pk PRIMARY KEY ("id")
 ) WITH (

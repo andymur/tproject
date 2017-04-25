@@ -171,7 +171,7 @@
                                         <select id="cat-edit-select" class="form-control m-bot15">
                                             <c:forEach var="category" items="${categories}">
                                                 <option data-category-id=${category.id} data-category-name=${category.name}
-                                                        data-category-image=${category.imageUrl} data-category-products='${category.products}'>${category.name}</option>
+                                                        data-category-image='${category.imageUrl}' data-category-products='${category.products}'>${category.name}</option>
                                             </c:forEach>
                                         </select>
                                     </div>

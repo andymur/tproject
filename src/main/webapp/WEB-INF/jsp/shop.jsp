@@ -78,7 +78,7 @@
                                                 <div class="cbp-item-wrapper">
                                                     <div class="cbp-caption">
                                                         <div class="cbp-caption-defaultWrap">
-                                                            <img src="resources/images/shop${product.mainImage}">
+                                                            <img src="/resources/images/shop/${product.mainImage}">
                                                         </div>
 
                                                         <div class="cbp-caption-activeWrap">

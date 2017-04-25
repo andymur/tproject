@@ -52,11 +52,11 @@ public class ProductDto {
         this.mainImage = product.getImages().stream()
                 .filter(im -> im.getName().equals("main"))
                 .map(ProductImage::getImage)
-                .findFirst().orElse("/new.png");
+                .findFirst().orElse("new.png");
         this.icon = product.getImages().stream()
                 .filter(im -> im.getName().equals("icon"))
                 .map(ProductImage::getImage)
-                .findFirst().orElse("/dummy_icon.png");
+                .findFirst().orElse("dummy_icon.png");
     }
 
     public ProductDto(Product product, Long count, String size) {

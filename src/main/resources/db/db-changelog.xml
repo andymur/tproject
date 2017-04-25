@@ -30,5 +30,8 @@
     <changeSet id="8" author="alexPench">
     <sqlFile path="sql/008_alter_parameters.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="9" author="alexPench">
+    <sqlFile path="sql/009_init_data.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 
 </databaseChangeLog>

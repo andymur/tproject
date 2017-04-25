@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="/resources/css/style.css"/>
     <link rel="stylesheet" href="/resources/css/cart.css"/>
 
+    <%--Sweet alert--%>
+    <link rel="stylesheet" type="text/css" href="/resources/css/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/google.css"/>
 
     <!-- fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -353,6 +356,9 @@
         <script type="text/javascript" src="/resources/js/switcher.js"></script>
         <script type="text/javascript" src="/resources/js/custom.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <%--sweet alert--%>
+        <script type="text/javascript" src="/resources/js/sweetalert.min.js"></script>
         <!--login/registration-->
         <%--<script type="text/javascript" src="/resources/login.js"></script>--%>
 

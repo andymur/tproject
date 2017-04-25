@@ -1,5 +1,7 @@
 package tapplication.dto;
 
+import tapplication.model.OrderedProduct;
+
 /**
  * Created by alexpench on 11.04.17.
  */
@@ -11,10 +13,10 @@ public class ProductAndAmount {
     public ProductAndAmount() {
     }
 
-    public ProductAndAmount(Long productId, Long count, String size) {
-        this.productId = productId;
-        this.count = count;
-        this.size = size;
+    public ProductAndAmount(OrderedProduct product) {
+        this.productId = product.getId();
+        this.count = product.getQuantity();
+        this.size = product.getSize();
     }
 
     public Long getProductId() {

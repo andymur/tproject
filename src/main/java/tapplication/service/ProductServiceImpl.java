@@ -44,6 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductDto create(final ProductDto newProduct) {
         if (productDao.isProductExistWithSameSize(newProduct)) {
+            logger.warn("Product already exist");
             throw new AlreadyExistException();
         } else if (productDao.isNewSizeForExistingProduct(newProduct)) {
             addNewParameters(newProduct);
@@ -57,6 +58,11 @@ public class ProductServiceImpl implements ProductService {
         Product product = productDao.findOneByAndParams(Product.MODEL, newProduct.getModel());
         parametersService.create(newProduct.getParameters().get(0), product);
         product.setQuantity(product.getQuantity() + newProduct.getQuantity());
+        logger.info("New parameters: size:{},quantity:{},weight:{} added for Product id:{}.",
+                newProduct.getParameters().get(0).getSize(),
+                newProduct.getParameters().get(0).getQuantity(),
+                newProduct.getParameters().get(0).getWeight(),
+                product.getId());
     }
 
     private void createIfTotallyNew(ProductDto newProduct) {
@@ -80,6 +86,7 @@ public class ProductServiceImpl implements ProductService {
         product.getCategory().getProducts().add(product.getId());
         product.getParameters().forEach(item -> item.setProduct(product));
         newProduct.setProductId(product.getId());
+        logger.info("Product id{} has been created.",product.getId());
     }
 
     public void update(ProductDto productDto) {
@@ -92,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDto.getDescription());
         product.setChangeDate(new Date());
         productDao.merge(product);
+        logger.info("Product id{} is updated.",product.getId());
     }
 
     public List<Product> findAll() {
@@ -139,11 +147,12 @@ public class ProductServiceImpl implements ProductService {
 
         product.getParameters().stream().filter(p -> p.getSize().equals(size)).forEach(p -> {
             if (p.getQuantity() < quantity) {
-                throw new PlaceToOrderException("Product model: " + product.getModel() + " is less then requested. Available now: " + product.getQuantity(), HttpStatus.NOT_FOUND);
+                logger.warn("Product id:{} and size{} : quantity:{} is less then requested:{}",productId,size,p.getQuantity(),quantity);
+                throw new PlaceToOrderException("Product model: " + product.getModel() + " size:"+p.getSize() +" is less then requested. Available now: " + p.getQuantity(), HttpStatus.NOT_FOUND);
             } else {
                 p.setQuantity(p.getQuantity() - quantity);
                 product.setQuantity(product.getQuantity() - quantity);
-//                productDao.merge(product);
+             logger.info("Product id:{},size:{},quantity:{} moved to order.",productId,size,quantity);
             }
         });
         return product;

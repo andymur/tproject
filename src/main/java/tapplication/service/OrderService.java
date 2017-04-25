@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.dto.OrderDto;
 import tapplication.dto.ProductAndAmount;
-import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.Order;
 import tapplication.model.OrderedProduct;
@@ -121,10 +120,10 @@ public class OrderService {
         newOrder.setOrderedProducts(orderedProductList);
     }
 
-    public List<ProductDto> repeatOrder(OrderDto orderDto) {
-        List<ProductAndAmount> productAndAmounts = new ArrayList<>();
-        Order order = orderDao.findOne(orderDto.getOrderId());
-        order.getOrderedProducts().forEach(orderedProduct -> productAndAmounts.add(new ProductAndAmount(orderedProduct.getProduct().getId(), orderedProduct.getQuantity(), orderedProduct.getSize())));
-        return productService.getProductsForBasket(productAndAmounts);
+    public List<ProductAndAmount> repeatOrder(OrderDto orderDto) {
+        return orderDao.findOne(orderDto.getOrderId()).getOrderedProducts()
+                .stream()
+                .map(ProductAndAmount::new)
+                .collect(Collectors.toList());
     }
 }

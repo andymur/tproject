@@ -12,4 +12,5 @@ VALUES ('apenchukov', '$2a$10$u3qyeMU5s54UWNi29JfI0.YOB5LjzALyg9.YaXmITR3jhyIXgB
         (SELECT r.id
          FROM ROLE r
          WHERE r.type = 'ADMIN'));
+
 END TRANSACTION;

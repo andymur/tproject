@@ -92,7 +92,7 @@
                                             <ul class="cbp-wrapper" style="opacity: 1;">
                                                 <c:set var="products" scope="session" value="${products}"/>
                                                 <c:set var="totalCount" scope="session" value="${fn:length(products)}"/>
-                                                <c:set var="perPage" scope="session" value="${5}"/>
+                                                <c:set var="perPage" scope="session" value="${6}"/>
                                                 <c:set var="pageStart" value="${param.start}"/>
                                                 <c:if test="${empty pageStart or pageStart < 0}">
                                                     <c:set var="pageStart" value="0"/>
@@ -150,11 +150,11 @@
 
                                         <div class="text-center">
                                             <ul class="pagination">
-                                                <li><a href="?start=${pageStart - perPage}">«</a></li>
+                                                <li><a href="catalog?categoryId=${category.categoryId}&start=${pageStart - perPage}">«</a></li>
                                                 <li><a href="#">${pageStart + 1}</a></li>
                                                 <li><a href="#">-</a></li>
                                                 <li><a href="#">${pageStart + perPage}</a></li>
-                                                <li><a href="?start=${pageStart + perPage}">»</a></li>
+                                                <li><a href="catalog?categoryId=${category.categoryId}&start=${pageStart + perPage}">»</a></li>
                                             </ul>
                                         </div>
                                     </div>

@@ -71,7 +71,14 @@ function submitOrder(event) {
     localStorage.removeItem("arr")
 
 },
-            error:(data)=>{alert(data.responseText);}
+            error:(data)=>{alert();
+        swal({
+            title: "Error!",
+            text: data.responseText,
+            type: "error",
+            confirmButtonText: "OK"
+        });
+            }
 })
 }
 
