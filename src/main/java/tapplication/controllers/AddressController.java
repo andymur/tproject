@@ -30,6 +30,12 @@ public class AddressController {
         return "address";
     }
 
+    @RequestMapping(path = "addresses", method = RequestMethod.GET)
+    public Object getUserAddresses(Model model) {
+        model.addAttribute("addresses", addressService.findUserAddress());
+        return "addresses";
+    }
+
     @RequestMapping(path = "address/create", method = RequestMethod.POST)
     public void create(@RequestBody AddressDto addressDto, HttpServletResponse resp) {
         addressService.save(addressDto);

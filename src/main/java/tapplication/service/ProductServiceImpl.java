@@ -144,7 +144,6 @@ public class ProductServiceImpl implements ProductService {
 
     public Product moveToOrder(Long productId, Long quantity, String size) {
         Product product = findOne(productId);
-
         product.getParameters().stream().filter(p -> p.getSize().equals(size)).forEach(p -> {
             if (p.getQuantity() < quantity) {
                 logger.warn("Product id:{} and size{} : quantity:{} is less then requested:{}",productId,size,p.getQuantity(),quantity);
@@ -158,7 +157,11 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-    public void moveFromExpiredOrder(Product product, Long quantity) {
+    public void moveFromExpiredOrder(Product product, Long quantity, String size) {
+
+        product.getParameters().stream()
+                .filter(par->par.getSize().equals(size))
+                .forEach(par->par.setQuantity(par.getQuantity() + quantity));
         product.setQuantity(product.getQuantity() + quantity);
         productDao.merge(product);
         logger.info("{} Product {} quantity {} moved back to Product", LocalDateTime.now()

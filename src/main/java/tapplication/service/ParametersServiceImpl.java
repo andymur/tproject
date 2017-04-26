@@ -11,8 +11,6 @@ import tapplication.model.Parameters;
 import tapplication.model.Product;
 import tapplication.repositories.ParametersDao;
 
-import java.util.List;
-
 /**
  * Created by alexpench on 01.04.17.
  */
@@ -23,7 +21,7 @@ public class ParametersServiceImpl{
     @Autowired
     private ParametersDao repo;
 
-    public Parameters findOne(Long id) throws NotFoundException {
+    public Parameters findOne(Long id){
         Parameters parameters = repo.findOne(id);
         if (parameters == null) {
             throw new NotFoundException();
@@ -31,24 +29,12 @@ public class ParametersServiceImpl{
         return parameters;
     }
 
-    public Parameters create(ParametersDto parametersDto, Product product) throws AlreadyExistException {
+    public Parameters create(ParametersDto parametersDto, Product product){
         if (repo.isExist(parametersDto.getSize(), parametersDto.getWeight(), product)) {
             throw new AlreadyExistException();
         }
         Parameters entity = new Parameters(parametersDto.getSize(), parametersDto.getWeight(), parametersDto.getQuantity(), product);
         repo.persist(entity);
         return entity;
-    }
-
-    public Parameters update(Parameters entity) throws NotFoundException {
-        return null;
-    }
-
-    public void delete(Parameters entity) throws NotFoundException {
-
-    }
-
-    public List<Parameters> findAll() {
-        return repo.selectAll();
     }
 }

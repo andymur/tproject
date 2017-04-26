@@ -60,6 +60,7 @@ function repeatOrder(orderId) {
         success: (data)=>{
             $("#wrapper").html(data);
             assignClickHandler($("#submit-order"), submitOrder_Handler);
+            assignChangeHandler($("#deliveryAddressSelect"), changeAddress_Handler)
         }
     })
 }

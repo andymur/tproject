@@ -13,10 +13,10 @@ public class ProductAndAmount {
     public ProductAndAmount() {
     }
 
-    public ProductAndAmount(OrderedProduct product) {
-        this.productId = product.getId();
-        this.count = product.getQuantity();
-        this.size = product.getSize();
+    public ProductAndAmount(OrderedProduct orderedProduct) {
+        this.productId = orderedProduct.getProduct().getId();
+        this.count = orderedProduct.getQuantity();
+        this.size = orderedProduct.getSize();
     }
 
     public Long getProductId() {

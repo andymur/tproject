@@ -44,7 +44,7 @@
                                         <div id="orderStatus" class="form-group">
                                             <label class="col-sm-2 control-label">Change status</label>
                                             <div id="sel-div" class="col-sm-10">
-                                                <select id="orderStatusSelect" class="form-control m-bot15">
+                                                <select id="orderStatusSelect" class="autowidht m-bot15">
                                                     <option data-order-status=${order.orderStatusCode} selected >${order.orderStatusCode}</option>
                                                     <sec:authorize access="hasRole('ADMIN')">
                                                     <c:forEach var="status" items="${orderStatuses}">

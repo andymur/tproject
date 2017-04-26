@@ -1,4 +1,4 @@
-package tapplication.security;
+package tapplication.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/edit-details-user-*").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/list").access("hasRole('ADMIN')")
                 .antMatchers("/user").access("hasRole('ADMIN') or hasRole('USER')")
+                .antMatchers("/address").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/order").access("hasRole('USER') or hasRole('ADMIN')")
                 .antMatchers("/orders").access("hasRole('USER') or hasRole('ADMIN')")
                 .antMatchers("/orderdetails").access("hasRole('ADMIN') or hasRole('USER')")

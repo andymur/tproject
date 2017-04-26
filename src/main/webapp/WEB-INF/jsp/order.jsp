@@ -21,7 +21,10 @@
                     </div>
                 </div>
             </div>
+            <div id="shopAddress"
+                 data-id="${shopAddress.id}">${shopAddress.country}|${shopAddress.city}|${shopAddress.street}|${shopAddress.building}</div>
             <div id="deliveryForm"></div>
+            <div id="deliveryForm2"></div>
 
             <div class="col-md-12 order">
                 <div class="heading">Your Order</div>
@@ -32,19 +35,19 @@
                         <th>PRODUCT</th>
                         <th>TOTAL</th>
                     </tr>
-                        <c:forEach var="product" items="${products}">
-                    <tr id="orderedProducts" class="tr-1">
-                        <td>${product.name} | ${product.model} | ${product.size}</td>
-                        <td>$${product.price}</td>
-                    </tr>
-                    <tr>
-                        <td>PRODUCT AMOUNT</td>
-                        <td>${product.count}</td>
-                    </tr>
-                    <tr>
-                        <td>SUBTOTAL</td>
-                        <td>$${product.price * product.count}</td>
-                    </tr>
+                    <c:forEach var="product" items="${products}">
+                        <tr id="orderedProducts" class="tr-1">
+                            <td>${product.name} | ${product.model} | ${product.size}</td>
+                            <td>$${product.price}</td>
+                        </tr>
+                        <tr>
+                            <td>PRODUCT AMOUNT</td>
+                            <td>${product.count}</td>
+                        </tr>
+                        <tr>
+                            <td>SUBTOTAL</td>
+                            <td>$${product.price * product.count}</td>
+                        </tr>
                     </c:forEach>
                     <tr>
                         <td>TOTAL</td>

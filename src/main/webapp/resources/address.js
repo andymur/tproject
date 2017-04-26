@@ -3,10 +3,25 @@
  */
 $(function () {
     assignClickHandler($("#btn-save-address"), saveAddress_Handler);
+    assignClickHandler($(".btn-update-address"), updateAddress_Handler);
 })
 
-function saveAddress(event) {
-    var addressDto = {
+function saveAddress(event, id) {
+    var addressDto;
+    if(id !== undefined){
+        addressDto = {
+            id: id,
+            country: $('#'+id+' input[name=country]').val(),
+            city: $('#'+id+' input[name=city]').val(),
+            street: $('#'+id+' input[name=street]').val(),
+            building: $('#'+id+' input[name=building]').val(),
+            zipCode: $('#'+id+' input[name=zipCode]').val(),
+            appartment: $('#'+id+' input[name=appartment]').val(),
+            email: $('#'+id+' input[name=email]').val(),
+            phoneNumber: $('#'+id+' input[name=phonenumber]').val()
+        }
+    } else {
+       addressDto = {
         country: $('#newAddressForm input[name=country]').val(),
         city: $('#newAddressForm input[name=city]').val(),
         street: $('#newAddressForm input[name=street]').val(),
@@ -15,6 +30,7 @@ function saveAddress(event) {
         appartment: $('#newAddressForm input[name=appartment]').val(),
         email: $('#newAddressForm input[name=email]').val(),
         phoneNumber: $('#newAddressForm input[name=phonenumber]').val()
+    }
     }
     addressDto = JSON.stringify(addressDto);
 
@@ -40,4 +56,9 @@ function saveAddress(event) {
 }
 var saveAddress_Handler = function (event) {
     saveAddress(event);
+};
+
+var updateAddress_Handler = function (event) {
+    var buttonValue = this.value;
+    saveAddress(event,buttonValue);
 };

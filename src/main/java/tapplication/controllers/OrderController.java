@@ -33,6 +33,8 @@ public class OrderController {
     @RequestMapping(value = "order/create", method = RequestMethod.POST)
     public Object create(@RequestBody OrderDto orderDto, Model model) {
         model.addAttribute("order", orderService.create(orderDto));
+        model.addAttribute("loggedinuser", dataHelperService.getUserName());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
         return "payment";
     }
 
@@ -43,6 +45,7 @@ public class OrderController {
         model.addAttribute("userAddresses", dataHelperService.getUserAddresses());
         model.addAttribute("loggedinuser", dataHelperService.getUserName());
         model.addAttribute("products", dataHelperService.getProducts(productAndAmounts));
+        model.addAttribute("shopAddress", dataHelperService.getShopAddress());
         return "order";
     }
 
@@ -84,10 +87,12 @@ public class OrderController {
 
     @RequestMapping(value = "order/repeat", method = RequestMethod.POST)
     public Object repeatOrder(@RequestBody OrderDto order, Model model) {
-        List<ProductDto> products = dataHelperService.getProducts(orderService.repeatOrder(order));
+        List<ProductAndAmount> productAndAmounts = orderService.getHistoricalData(order);
+        List<ProductDto> products = dataHelperService.getProducts(productAndAmounts);
         model.addAttribute("deliveryTypes", DeliveryTypeCode.values());
         model.addAttribute("paymentTypes", PaymentTypeCode.values());
         model.addAttribute("userAddresses", dataHelperService.getUserAddresses());
+        model.addAttribute("shopAddress", dataHelperService.getShopAddress());
         model.addAttribute("loggedinuser", dataHelperService.getUserName());
         model.addAttribute("products", products);
         model.addAttribute("orderId", order.getOrderId());

@@ -25,8 +25,8 @@ public class AddressService {
     @Autowired
     private DataHelperService dataHelperService;
 
-    public Address findOne(Long deliveryAddressId) throws NotFoundException {
-        Address address = addressDao.findOne(deliveryAddressId);
+    public Address findOne(Long id){
+        Address address = addressDao.findOne(id);
         if (address == null) {
             throw new NotFoundException();
         }
@@ -35,21 +35,31 @@ public class AddressService {
 
     public Address save(AddressDto addressDto) {
         Address address = new Address();
+        if (addressDto.getId() != null) {
+            address = addressDao.findOne(addressDto.getId());
+            setAddressDetails(addressDto, address);
+
+        } else {
+            setAddressDetails(addressDto, address);
+            address.setUser(userService.findBySSO(dataHelperService.getPrincipal()));
+            addressDao.persist(address);
+        }
+        return address;
+    }
+
+    private void setAddressDetails(AddressDto addressDto, Address address) {
         address.setCountry(addressDto.getCountry());
         address.setCity(addressDto.getCity());
         address.setStreet(addressDto.getStreet());
         address.setBuilding(addressDto.getBuilding());
         address.setAppartment(addressDto.getAppartment());
         address.setZipCode(addressDto.getZipCode());
-        address.setUser(userService.findBySSO(dataHelperService.getPrincipal()));
-        address.setEmail(addressDto.getEmail());
         address.setPhoneNumber(addressDto.getPhoneNumber());
-        addressDao.persist(address);
-        return address;
+        address.setEmail(addressDto.getEmail());
     }
 
     public List<AddressDto> findUserAddress() {
-       return addressDao.findAllByAndParams(Address.USER_ENTITY,userService.findBySSO(dataHelperService.getPrincipal())).stream()
+        return addressDao.findAllByAndParams(Address.USER_ENTITY, userService.findBySSO(dataHelperService.getPrincipal())).stream()
                 .map(AddressDto::new).collect(Collectors.toList());
     }
 }

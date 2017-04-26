@@ -44,6 +44,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button id="btn-update-address${address.id}" value="${address.id}" class="btn btn-primary btn-update-address" >Update</button>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </c:forEach>

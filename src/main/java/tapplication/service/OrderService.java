@@ -47,24 +47,31 @@ public class OrderService {
 
     public OrderDto create(OrderDto orderDto) {
         Order newOrder = new Order();
+
         putProductsToNewOrder(orderDto, newOrder);
+
         newOrder.setUser(userService.findBySSO(dataHelperService.getPrincipal()));
-        orderDto.setUserId(newOrder.getUser().getId());
-        if (orderDto.getDeliveryAddressDto() != null) {
-            newOrder.setAddress(addressService.save(orderDto.getDeliveryAddressDto()));
-        } else {
-            newOrder.setAddress(addressService.findOne(1L));
-        } //in case of self we setup shop address which is created at the init.
+        setDeliveryAddress(orderDto, newOrder);
         newOrder.setDeliveryType(orderDto.getDeliveryType());
         newOrder.setPaymentType(orderDto.getPaymentType());
         newOrder.setPaymentStatus(AWAIT_PAYMENT);
         newOrder.setOrderStatus(OrderStatusCode.AWAIT_PAYMENT);
         newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         orderDao.persist(newOrder);
+
         newOrder.getOrderedProducts().forEach(orderedProduct -> orderedProduct.setOrder(newOrder));
-        logger.info("New order: {} has been created", newOrder.getId());
         orderDto.setOrderId(newOrder.getId());
+        logger.info("New order: {} has been created", newOrder.getId());
         return orderDto;
+    }
+
+    private void setDeliveryAddress(OrderDto orderDto, Order newOrder) {
+        Long addressId = orderDto.getDeliveryAddressDto().getId();
+        if (addressId != null) {
+            newOrder.setAddress(addressService.findOne(addressId));
+        } else {
+            newOrder.setAddress(addressService.save(orderDto.getDeliveryAddressDto()));
+        }
     }
 
     public List<OrderDto> getUserOrders() {
@@ -104,7 +111,9 @@ public class OrderService {
                             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")), order.getId());
                 }
         );
-        orders.forEach(order -> order.getOrderedProducts().forEach(orderedProduct -> productService.moveFromExpiredOrder(orderedProduct.getProduct(), orderedProduct.getQuantity())));
+        orders
+                .forEach(order -> order.getOrderedProducts()
+                        .forEach(orderedProduct -> productService.moveFromExpiredOrder(orderedProduct.getProduct(), orderedProduct.getQuantity(), orderedProduct.getSize())));
     }
 
     private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) {
@@ -123,7 +132,7 @@ public class OrderService {
         newOrder.setOrderedProducts(orderedProductList);
     }
 
-    public List<ProductAndAmount> repeatOrder(OrderDto orderDto) {
+    public List<ProductAndAmount> getHistoricalData(OrderDto orderDto) {
         return orderDao.findOne(orderDto.getOrderId()).getOrderedProducts()
                 .stream()
                 .map(ProductAndAmount::new)

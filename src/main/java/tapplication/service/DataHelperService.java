@@ -27,6 +27,13 @@ public class DataHelperService {
     @Autowired
     private ProductServiceImpl productService;
 
+    @Autowired
+    private AddressService addressService;
+
+    public AddressDto getShopAddress(){
+        return new AddressDto(addressService.findOne(1L));
+    }
+
     public String getUserName(){
         return userService.findBySSO(getPrincipal()).getName();
     }
