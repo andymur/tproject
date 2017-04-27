@@ -40,7 +40,6 @@ public class ProductDto {
         this.description = product.getDescription();
         this.category = product.getCategory().getName();
         this.price = product.getPrice();
-        this.quantity = product.getQuantity();
         this.parameters = product.getParameters().stream()
                 .map(ParametersDto::new)
                 .collect(Collectors.toList());

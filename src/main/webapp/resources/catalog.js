@@ -7,6 +7,52 @@ var editProduct_Handler = function (event) {
     editProduct(event);
 };
 
+var updateProduct_Handler = function (event) {
+    updateProduct(event);
+};
+
+function updateProduct(event){
+    event.preventDefault();
+    var productId = event.target.dataset.productId;
+
+    var parameters = [];
+    var ids = $('.paramId');
+    $.each(ids,(i)=>{
+        var paramId = ids[i].value;
+    var quantity = ids[i].parentElement.parentElement.getElementsByTagName('input')[name='quantity'].value;
+    var weight = ids[i].parentElement.parentElement.getElementsByTagName('input')[name='weight'].value;
+    var param = {
+        id : paramId,
+        quantity : quantity,
+        weight : weight
+    };
+    parameters.push(param);
+})
+    var data = JSON.stringify({
+        productId : productId,
+        parameters : parameters,
+        name: $('input[name=name]').val(),
+        model: $('input[name=model]').val(),
+        color: $('input[name=color]').val(),
+        description: $('#description').val(),
+        price: $('input[name=price]').val(),
+        changeDate: new Date()
+    })
+    $.ajax({
+            type: "POST",
+            url: "product/update",
+            contentType: "application/json",
+            data: data,
+            success: ()=> {
+            alert("Product updated");
+},
+    error: ()=>{
+
+    }
+})
+
+}
+
 function editProduct(event) {
     var productId = event.currentTarget.dataset.productid;
     $.ajax({
@@ -15,6 +61,7 @@ function editProduct(event) {
             contentType: "application/json",
             success:(data)=>{
             $("#wrapper").html(data);
+            assignClickHandler($("#updateProduct"), updateProduct_Handler)
 }
 })
 }
@@ -45,6 +92,7 @@ $(document).on('change', '#cat-filter select', function () {
     $('#wrapper').append(data)
     assignClickHandler($(".addToCart"), addToCart_Handler);
     assignClickHandler($(".productButton"), goToProduct_Handler);
+    assignClickHandler($(".editProduct"), editProduct_Handler);
 }
 })
 })

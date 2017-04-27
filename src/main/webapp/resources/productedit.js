@@ -11,34 +11,6 @@ $(function () {
         oddClick = !oddClick;
     });
 
-    $('#saveProduct').click(function(event){
-        event.preventDefault();
-        var productId = event.target.dataset.productId;
-
-        var data = JSON.stringify({
-            productId : productId,
-            name: $('input[name=name]').val(),
-            model: $('input[name=model]').val(),
-            color: $('input[name=color]').val(),
-            description: $('#description').val(),
-            quantity: $('input[name=quantity]').val(),
-            price: $('input[name=price]').val(),
-            changeDate: new Date()
-        })
-        $.ajax({
-                type: "POST",
-                url: "product/update",
-                contentType: "application/json",
-                data: data,
-                success: ()=> {
-                    alert("Product updated");
-                },
-                error: ()=>{
-
-                }
-        })
-
-    })
 })
 
 $(document).on('click', '.removeParameter', function () {

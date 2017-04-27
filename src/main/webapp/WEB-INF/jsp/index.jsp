@@ -23,75 +23,20 @@
             </div>
         </div>
             <div class="about">
-                <div class="container">
-                    <div class="col-md-12 a-welcome">
-                        <h2>We <span class="color-bg-2">Deal With</span></h2>
-                        <p></p>
-                    </div>
-
-
-                    <div class="col-md-12 about-boxes">
-                        <div class="rows">
-                            <div id="owl-3" class="owl-carousel">
-
-                                <div class="item">
-                                    <div class="about-box">
-                                        <div><i class="fa fa-bookmark-o"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">BICYCLES</div>
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="about-box">
-                                        <div><i class="fa fa-code-fork"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">NATURE</div>
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="about-box">
-                                        <div><i class="fa fa-connectdevelop"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">PEOPLE</div>
-                                        <p>.</p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="about-box">
-                                        <div><i class="fa fa-line-chart"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">ADVENTURES</div>
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="about-box">
-                                        <div><i class="fa fa-bar-chart-o"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">SPORT</div>
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="about-box">
-                                        <div><i class="fa fa-code"></i></div>
-                                        <div class="box-heading hvr-bounce-to-top">STYLE</div>
-                                        <p></p>
-                                    </div>
-                                </div>
-
+                <div class="partners">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div id="owl-2" class="owl-carousel">
+                                <div><img src="resources/images/partners/5.png" alt=""/></div>
+                                <div><img src="resources/images/partners/2.png" alt=""/></div>
+                                <div><img src="resources/images/partners/5.png" alt=""/></div>
+                                <div><img src="resources/images/partners/2.png" alt=""/></div>
+                                <div><img src="resources/images/partners/5.png" alt=""/></div>
+                                <div><img src="resources/images/partners/2.png" alt=""/></div>
                             </div>
-
                         </div>
                     </div>
-
-
                 </div>
-            </div>
-
-            <div class="unique">
                 <div class="container">
                     <div class="col-md-12 headlines">
                         <h2>WE ARE <span class="color-bg-2">UNIQUE</span></h2>
@@ -107,30 +52,16 @@
                             <h3>UNIQUE <span class="color">CONCEPT</span></h3>
                             <p>Inspired by French bicycle design of the 50s and 60s we have created a bicycle that preserves the simple elegance and pure form of that golden era, but has all the benefits of modern comfort and reliability. LINUS is the utilitarian city bike… simple and reliable, but with a personality and style that makes you feel like you’re in an old French movie… you’re floating a little from the wine you drank at lunch… maybe instead of going back to the office you’ll take a nap under a tree, go for a swim in the sea or drop by your lover’s house…<br><br>
 
-                                </p>
+                            </p>
                             <a href="#" class="r-more hvr-shutter-in-horizontal-3">Read More</a>
                         </div>
                     </div>
 
                 </div>
+
             </div>
 
             <div class="clearfix"></div>
-
-            <div class="partners">
-                <div class="container">
-                    <div class="col-md-12">
-                        <div id="owl-2" class="owl-carousel">
-                            <div><img src="resources/images/partners/5.png" alt=""/></div>
-                            <div><img src="resources/images/partners/2.png" alt=""/></div>
-                            <div><img src="resources/images/partners/5.png" alt=""/></div>
-                            <div><img src="resources/images/partners/2.png" alt=""/></div>
-                            <div><img src="resources/images/partners/5.png" alt=""/></div>
-                            <div><img src="resources/images/partners/2.png" alt=""/></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div class="say-hello">
                 <div class="container">

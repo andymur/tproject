@@ -241,9 +241,7 @@
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
-                                            dolor brunch.
+                                            We are offering free Europe wide delivery.
                                         </div>
                                     </div>
                                 </div>
@@ -258,8 +256,7 @@
                                     </div>
                                     <div id="collapseTwo" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid.
+                                            We are supporting 5 days mony back.
                                         </div>
                                     </div>
                                 </div>
@@ -274,8 +271,7 @@
                                     </div>
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                            richardson ad squid.
+                                            All card payments going thru PayPal system, which is supporting Visa and MasterCard.
                                         </div>
                                     </div>
                                 </div>

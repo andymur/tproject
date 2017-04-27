@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tapplication.dto.ParametersDto;
 import tapplication.dto.ProductAndAmount;
 import tapplication.dto.ProductDto;
 import tapplication.exceptions.AlreadyExistException;
@@ -19,10 +20,7 @@ import tapplication.repositories.ProductDao;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,7 +55,6 @@ public class ProductServiceImpl implements ProductService {
     private void addNewParameters(ProductDto newProduct) {
         Product product = productDao.findOneByAndParams(Product.MODEL, newProduct.getModel());
         parametersService.create(newProduct.getParameters().get(0), product);
-        product.setQuantity(product.getQuantity() + newProduct.getQuantity());
         logger.info("New parameters: size:{},quantity:{},weight:{} added for Product id:{}.",
                 newProduct.getParameters().get(0).getSize(),
                 newProduct.getParameters().get(0).getQuantity(),
@@ -75,7 +72,6 @@ public class ProductServiceImpl implements ProductService {
         product.setColor(newProduct.getColor());
         product.setImages(newProduct.getImages().stream().map(i -> new ProductImage(i.getName(), i.getUrl())).collect(Collectors.toList()));
         product.setParameters(newProduct.getParameters().stream().map(p -> new Parameters(p.getSize(), p.getWeight(), p.getQuantity())).collect(Collectors.toList()));
-        product.setQuantity(newProduct.getQuantity());
         product.setPrice(newProduct.getPrice());
         product.setDescription(newProduct.getDescription());
         product.setChangeDate(new Date());
@@ -86,20 +82,27 @@ public class ProductServiceImpl implements ProductService {
         product.getCategory().getProducts().add(product.getId());
         product.getParameters().forEach(item -> item.setProduct(product));
         newProduct.setProductId(product.getId());
-        logger.info("Product id{} has been created.",product.getId());
+        logger.info("Product id{} has been created.", product.getId());
     }
 
     public void update(ProductDto productDto) {
         Product product = productDao.findOne(productDto.getProductId());
+
+        Map<Long, ParametersDto> parMap = productDto.getParameters().stream().collect(Collectors.toMap(ParametersDto::getId, par -> par));
+
+        product.getParameters().forEach(par -> {
+            par.setQuantity(parMap.get(par.getId()).getQuantity());
+            par.setWeight(parMap.get(par.getId()).getWeight());
+        });
+
         product.setName(productDto.getName());
-        product.setQuantity(productDto.getQuantity());
         product.setPrice(productDto.getPrice());
         product.setColor(productDto.getColor());
         product.setModel(productDto.getModel());
         product.setDescription(productDto.getDescription());
         product.setChangeDate(new Date());
         productDao.merge(product);
-        logger.info("Product id{} is updated.",product.getId());
+        logger.info("Product id{} is updated.", product.getId());
     }
 
     public List<Product> findAll() {
@@ -146,12 +149,11 @@ public class ProductServiceImpl implements ProductService {
         Product product = findOne(productId);
         product.getParameters().stream().filter(p -> p.getSize().equals(size)).forEach(p -> {
             if (p.getQuantity() < quantity) {
-                logger.warn("Product id:{} and size{} : quantity:{} is less then requested:{}",productId,size,p.getQuantity(),quantity);
-                throw new PlaceToOrderException("Product model: " + product.getModel() + " size:"+p.getSize() +" is less then requested. Available now: " + p.getQuantity(), HttpStatus.NOT_FOUND);
+                logger.warn("Product id:{} and size{} : quantity:{} is less then requested:{}", productId, size, p.getQuantity(), quantity);
+                throw new PlaceToOrderException("Product model: " + product.getModel() + " size:" + p.getSize() + " is less then requested. Available now: " + p.getQuantity(), HttpStatus.NOT_FOUND);
             } else {
                 p.setQuantity(p.getQuantity() - quantity);
-                product.setQuantity(product.getQuantity() - quantity);
-             logger.info("Product id:{},size:{},quantity:{} moved to order.",productId,size,quantity);
+                logger.info("Product id:{},size:{},quantity:{} moved to order.", productId, size, quantity);
             }
         });
         return product;
@@ -160,9 +162,8 @@ public class ProductServiceImpl implements ProductService {
     public void moveFromExpiredOrder(Product product, Long quantity, String size) {
 
         product.getParameters().stream()
-                .filter(par->par.getSize().equals(size))
-                .forEach(par->par.setQuantity(par.getQuantity() + quantity));
-        product.setQuantity(product.getQuantity() + quantity);
+                .filter(par -> par.getSize().equals(size))
+                .forEach(par -> par.setQuantity(par.getQuantity() + quantity));
         productDao.merge(product);
         logger.info("{} Product {} quantity {} moved back to Product", LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")), product.getId(), quantity);

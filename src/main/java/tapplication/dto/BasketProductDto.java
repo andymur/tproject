@@ -12,12 +12,6 @@ public class BasketProductDto {
     private String productName;
     public BasketProductDto(){}
 
-    public BasketProductDto(Long productId, Long quantity, Long userId) {
-        this.productId = productId;
-        this.quantity = quantity;
-        this.userId = userId;
-    }
-
     public BasketProductDto(Long recordId, String productName, Long quantity, Long userId, Long productId) {
         this.recordId = recordId;
         this.productName = productName;

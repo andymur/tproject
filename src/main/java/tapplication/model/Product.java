@@ -53,9 +53,6 @@ public class Product {
     @Column(name = PRICE)
     private Long price;
 
-    @Column(name = QUANTITY)
-    private Long quantity;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = CHANGE_DATE)
     private Date changeDate;
@@ -69,20 +66,6 @@ public class Product {
 
     @OneToMany(mappedBy = TABLE_PRODUCT, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Parameters> parameters;
-
-    public Product(Brand brand, String name, String model, String color, String description, Long price, Long quantity, Date changeDate, Category category, List<ProductImage> images, List<Parameters> parameters) {
-        this.brand = brand;
-        this.name = name;
-        this.model = model;
-        this.color = color;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-        this.changeDate = changeDate;
-        this.category = category;
-        this.images = images;
-        this.parameters = parameters;
-    }
 
     public Product() {
     }
@@ -147,14 +130,6 @@ public class Product {
         this.price = price;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
     public Date getChangeDate() {
         return changeDate;
     }
@@ -187,7 +162,4 @@ public class Product {
         this.parameters = parameters;
     }
 
-    public void increaseQuantity(Long quantity) {
-        this.quantity = this.quantity + quantity;
-    }
 }

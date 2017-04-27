@@ -20,6 +20,7 @@ public class ParametersDto {
         this.productId = parameters.getProduct();
         this.size = parameters.getSize();
         this.weight = parameters.getWeight();
+        this.quantity = parameters.getQuantity();
     }
 
     public Long getProductId() {

@@ -21,7 +21,6 @@ jQuery(function ($) {
             price: $('#form-product input[name=price]').val(),
             parameters: [parameters],
             changeDate: new Date(),
-            quantity: $('#form-product input[name=quantity]').val(),
             images: [image],
             brand: brand,
             category: category,

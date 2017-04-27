@@ -43,12 +43,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>QUANTITY</th>
-                    <td>
-                        <input class="form-control" type="text" name="quantity" value="${product.quantity}">
-                    </td>
-                </tr>
-                <tr>
                     <th>PRICE</th>
                     <td>
                         <input class="form-control" type="text" name="price" value="${product.price}">
@@ -76,21 +70,23 @@
                             <table id="par${parameter.id}" class="table table-bordered table-striped table-advance table-hover">
                                 <tr>
                                     <th>ID</th>
-                                    <td><input class="form-control" type="number" disabled="disabled" name="size" value="${parameter.id}"></td>
+                                    <td><input class="form-control paramId" type="number" disabled="disabled" name="size" value="${parameter.id}"></td>
                                     <th>Size</th>
-                                    <td><input class="form-control" type="text" name="size" value="${parameter.size}">
+                                    <td><input class="form-control" disabled="disabled" type="text" name="size" value="${parameter.size}">
                                     </td>
                                     <th>Weight</th>
                                     <td><input class="form-control" type="text" name="weight"
                                                value="${parameter.weight}"></td>
-                                    <td><button class="removeParameter"  type="button" value="${parameter.id}"><i class="fa fa-times fa-lg"></i></button></td>
+                                    <th>Quantity</th>
+                                    <td><input class="form-control paramQuantity" type="text" name="quantity"
+                                               value="${parameter.quantity}"></td>
                                 </tr>
                             </table>
                         </c:forEach>
 
                     </td>
                 </tr>
-                <td><a id="saveProduct" data-product-id="${product.productId}" href="#"
+                <td><a id="updateProduct" data-product-id="${product.productId}" href="#"
                        class="welcome-button-2 hvr-shutter-in-horizontal-2">SAVE</a></td>
                 </tbody>
             </table>
