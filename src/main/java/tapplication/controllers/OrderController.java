@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 public class OrderController {
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderService;
     @Autowired
     private DataHelperService dataHelperService;
 

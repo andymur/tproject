@@ -16,6 +16,7 @@ import java.util.List;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class StatisticServiceImpl implements StatisticService {
     public static final int TOP_PRODUCTS_COUNT = 10;
+    public static final int TOP_USERS_COUNT = 10;
     @Autowired
     private ProductService productService;
 
@@ -25,6 +26,9 @@ public class StatisticServiceImpl implements StatisticService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
     @Override
     public List<ProductDto> getTopOrderedProducts() {
         List<ProductDto> productDtos = orderedProductService.getTopOrderedProducts(TOP_PRODUCTS_COUNT);
@@ -33,6 +37,7 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public List<String> getTopUsers() {
+        orderService.getTopUsers(TOP_USERS_COUNT);
         return null;
     }
 

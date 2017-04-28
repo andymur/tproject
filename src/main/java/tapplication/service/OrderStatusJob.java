@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderStatusJob {
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderService;
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Scheduled(fixedRate = 60000)
