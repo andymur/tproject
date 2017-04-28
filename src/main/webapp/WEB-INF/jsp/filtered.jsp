@@ -142,7 +142,7 @@
                                                                     class="pull-right text">$${product.price}</span>
                                                             </div>
                                                             <div class="cbp-l-grid-projects-desc">${product.brand}
-                                                                / ${product.model} / ${product.sizes[0]}</div>
+                                                                / ${product.model}</div>
                                                         </div>
                                                     </li>
                                                 </c:forEach>

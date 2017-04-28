@@ -47,15 +47,19 @@ public class OrderService {
 
     public OrderDto create(OrderDto orderDto) {
         Order newOrder = new Order();
-
+        DeliveryTypeCode deliveryType = orderDto.getDeliveryType();
         putProductsToNewOrder(orderDto, newOrder);
 
         newOrder.setUser(userService.findBySSO(dataHelperService.getPrincipal()));
         setDeliveryAddress(orderDto, newOrder);
-        newOrder.setDeliveryType(orderDto.getDeliveryType());
         newOrder.setPaymentType(orderDto.getPaymentType());
+        newOrder.setDeliveryType(deliveryType);
         newOrder.setPaymentStatus(AWAIT_PAYMENT);
-        newOrder.setOrderStatus(OrderStatusCode.AWAIT_PAYMENT);
+        if (deliveryType.equals(DeliveryTypeCode.SELF)) {
+            newOrder.setOrderStatus(OrderStatusCode.AWAIT_SHIPMENT);
+        } else {
+            newOrder.setOrderStatus(OrderStatusCode.AWAIT_PAYMENT);
+        }
         newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         orderDao.persist(newOrder);
 

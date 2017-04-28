@@ -35,6 +35,11 @@ public class DataHelperService {
     }
 
     public String getUserName(){
+        String ssoId = "";
+        if(getPrincipal().equals("anonymousUser")) {
+            return ssoId;
+        }
+
         return userService.findBySSO(getPrincipal()).getName();
     }
 

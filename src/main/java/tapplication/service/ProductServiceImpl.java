@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    public ProductDto create(final ProductDto newProduct) {
+    public ProductDto create(ProductDto newProduct) {
         if (productDao.isProductExistWithSameSize(newProduct)) {
             logger.warn("Product already exist");
             throw new AlreadyExistException();
@@ -50,39 +50,6 @@ public class ProductServiceImpl implements ProductService {
             createIfTotallyNew(newProduct);
         }
         return newProduct;
-    }
-
-    private void addNewParameters(ProductDto newProduct) {
-        Product product = productDao.findOneByAndParams(Product.MODEL, newProduct.getModel());
-        parametersService.create(newProduct.getParameters().get(0), product);
-        logger.info("New parameters: size:{},quantity:{},weight:{} added for Product id:{}.",
-                newProduct.getParameters().get(0).getSize(),
-                newProduct.getParameters().get(0).getQuantity(),
-                newProduct.getParameters().get(0).getWeight(),
-                product.getId());
-    }
-
-    private void createIfTotallyNew(ProductDto newProduct) {
-        Product product = new Product();
-
-        product.setBrand(brandDao.findOne(Brand.NAME, newProduct.getBrand()));
-        product.setCategory(categoryDao.findOne(Category.NAME, newProduct.getCategory()));
-        product.setName(newProduct.getName());
-        product.setModel(newProduct.getModel());
-        product.setColor(newProduct.getColor());
-        product.setImages(newProduct.getImages().stream().map(i -> new ProductImage(i.getName(), i.getUrl())).collect(Collectors.toList()));
-        product.setParameters(newProduct.getParameters().stream().map(p -> new Parameters(p.getSize(), p.getWeight(), p.getQuantity())).collect(Collectors.toList()));
-        product.setPrice(newProduct.getPrice());
-        product.setDescription(newProduct.getDescription());
-        product.setChangeDate(new Date());
-
-        productDao.persist(product);
-
-        product.getImages().forEach(item -> item.setProduct(product));
-        product.getCategory().getProducts().add(product.getId());
-        product.getParameters().forEach(item -> item.setProduct(product));
-        newProduct.setProductId(product.getId());
-        logger.info("Product id{} has been created.", product.getId());
     }
 
     public void update(ProductDto productDto) {
@@ -191,6 +158,38 @@ public class ProductServiceImpl implements ProductService {
         Set<String> sizes = new HashSet<>();
         products.forEach(pr -> pr.getParameters().forEach(par -> sizes.add(par.getSize())));
         return sizes;
+    }
+    private void addNewParameters(ProductDto newProduct) {
+        Product product = productDao.findOneByAndParams(Product.MODEL, newProduct.getModel());
+        parametersService.create(newProduct.getParameters().get(0), product);
+        logger.info("New parameters: size:{},quantity:{},weight:{} added for Product id:{}.",
+                newProduct.getParameters().get(0).getSize(),
+                newProduct.getParameters().get(0).getQuantity(),
+                newProduct.getParameters().get(0).getWeight(),
+                product.getId());
+    }
+
+    private void createIfTotallyNew(ProductDto newProduct) {
+        Product product = new Product();
+
+        product.setBrand(brandDao.findOne(Brand.NAME, newProduct.getBrand()));
+        product.setCategory(categoryDao.findOne(Category.NAME, newProduct.getCategory()));
+        product.setName(newProduct.getName());
+        product.setModel(newProduct.getModel());
+        product.setColor(newProduct.getColor());
+        product.setImages(newProduct.getImages().stream().map(i -> new ProductImage(i.getName(), i.getUrl())).collect(Collectors.toList()));
+        product.setParameters(newProduct.getParameters().stream().map(p -> new Parameters(p.getSize(), p.getWeight(), p.getQuantity())).collect(Collectors.toList()));
+        product.setPrice(newProduct.getPrice());
+        product.setDescription(newProduct.getDescription());
+        product.setChangeDate(new Date());
+
+        productDao.persist(product);
+
+        product.getImages().forEach(item -> item.setProduct(product));
+        product.getCategory().getProducts().add(product.getId());
+        product.getParameters().forEach(item -> item.setProduct(product));
+        newProduct.setProductId(product.getId());
+        logger.info("Product id{} has been created.", product.getId());
     }
 
 
