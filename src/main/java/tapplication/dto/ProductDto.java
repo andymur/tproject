@@ -1,5 +1,6 @@
 package tapplication.dto;
 
+import tapplication.model.OrderedProduct;
 import tapplication.model.Parameters;
 import tapplication.model.Product;
 import tapplication.model.ProductImage;
@@ -66,6 +67,19 @@ public class ProductDto {
         this.model = product.getModel();
         this.size = size;
         this.icon = product.getImages().stream()
+                .filter(im -> im.getName().equals("icon"))
+                .map(ProductImage::getImage)
+                .findFirst().orElse("/dummy_icon.png");
+    }
+
+    public ProductDto(OrderedProduct orderedProduct) {
+        this.productId = orderedProduct.getProduct().getId();
+        this.price = orderedProduct.getPrice();
+        this.count = orderedProduct.getQuantity();
+        this.name = orderedProduct.getProduct().getName();
+        this.model = orderedProduct.getProduct().getModel();
+        this.size = orderedProduct.getSize();
+        this.icon = orderedProduct.getProduct().getImages().stream()
                 .filter(im -> im.getName().equals("icon"))
                 .map(ProductImage::getImage)
                 .findFirst().orElse("/dummy_icon.png");

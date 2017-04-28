@@ -27,9 +27,8 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public List<ProductDto> getTopOrderedProducts() {
-        List<OrderedProductDto> orderedProductucts = orderedProductService.getTopOrderedProducts(TOP_PRODUCTS_COUNT);
-
-        return null ;
+        List<ProductDto> productDtos = orderedProductService.getTopOrderedProducts(TOP_PRODUCTS_COUNT);
+        return productDtos;
     }
 
     @Override

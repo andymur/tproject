@@ -55,7 +55,7 @@ public class OrderService {
         newOrder.setPaymentType(orderDto.getPaymentType());
         newOrder.setDeliveryType(deliveryType);
         newOrder.setPaymentStatus(AWAIT_PAYMENT);
-        if (deliveryType.equals(DeliveryTypeCode.SELF)) {
+        if (deliveryType.equals(DeliveryTypeCode.DELIVERY) && orderDto.getPaymentType().equals(PaymentTypeCode.CASH) ) {
             newOrder.setOrderStatus(OrderStatusCode.AWAIT_SHIPMENT);
         } else {
             newOrder.setOrderStatus(OrderStatusCode.AWAIT_PAYMENT);
