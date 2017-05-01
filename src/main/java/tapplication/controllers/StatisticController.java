@@ -20,6 +20,9 @@ public class StatisticController {
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
     public Object getStatistic(Model model){
         model.addAttribute("topProducts", statisticService.getTopOrderedProducts());
-        return statisticService.getTopOrderedProducts();
+        model.addAttribute("topUsers",statisticService.getTopUsers());
+        model.addAttribute("monthRevenue",statisticService.getMonthRevenue());
+        model.addAttribute("weekRevenue",statisticService.getWeekRevenue());
+        return statisticService.getMonthRevenue();
     }
 }

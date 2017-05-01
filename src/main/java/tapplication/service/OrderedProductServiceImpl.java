@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.dto.OrderedProductDto;
 import tapplication.dto.ProductDto;
 import tapplication.model.OrderedProduct;
 import tapplication.repositories.OrderedProductDao;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +22,7 @@ public class OrderedProductServiceImpl implements OrderedProductService {
     private OrderedProductDao orderedProductDao;
 
     @Override
-    public List<ProductDto> getTopOrderedProducts(int count) {
+    public List<ProductDto> getTopProducts(int count) {
         List<OrderedProduct> orderedProducts = orderedProductDao.findTopProducts(count);
         return (orderedProducts.size() == 0) ? Collections.emptyList() : orderedProducts.stream().map(ProductDto::new).collect(Collectors.toList());
     }

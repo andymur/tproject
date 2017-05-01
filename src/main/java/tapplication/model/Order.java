@@ -65,6 +65,10 @@ public class Order {
     public Order() {
     }
 
+    public Order(User user, long quantity) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

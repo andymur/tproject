@@ -66,11 +66,13 @@ function submitOrder(event) {
     }else {
         deliveryAddressDto = {id: deliveryAddressId}
     }
+    var orderId = event.target.dataset.reporderid;
     var orderDto = JSON.stringify({
         productAndAmounts: getCart(),
         deliveryAddressDto: deliveryAddressDto,
         paymentType: paymentType,
-        deliveryType: deliveryType
+        deliveryType: deliveryType,
+        orderId : orderId
     })
     $.ajax({
             type: "POST",

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tapplication.dto.OrderDto;
 import tapplication.dto.ProductAndAmount;
+import tapplication.dto.UserDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.model.Order;
 import tapplication.model.OrderedProduct;
@@ -47,6 +48,10 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderDto create(OrderDto orderDto) {
         Order newOrder = new Order();
+        //check if it is repeating order, then collecting products from target order to new order
+        if (orderDto.getOrderId() != null) {
+            orderDto.setProductAndAmounts(getHistoricalData(orderDto));
+        }
         DeliveryTypeCode deliveryType = orderDto.getDeliveryType();
         putProductsToNewOrder(orderDto, newOrder);
 
@@ -122,8 +127,8 @@ public class OrderServiceImpl implements OrderService {
 
     private void putProductsToNewOrder(OrderDto orderDto, Order newOrder) {
         List<OrderedProduct> orderedProductList = new ArrayList<>();
-        OrderedProduct orderedProduct = new OrderedProduct();
         for (ProductAndAmount productAndAmount : orderDto.getProductAndAmounts()) {
+            OrderedProduct orderedProduct = new OrderedProduct();
             Long quantity = productAndAmount.getCount();
             String size = productAndAmount.getSize();
             Product product = productService.moveToOrder(productAndAmount.getProductId(), quantity, size);
@@ -141,5 +146,32 @@ public class OrderServiceImpl implements OrderService {
                 .stream()
                 .map(ProductAndAmount::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<UserDto> getTopUsers(int topUsersCount) {
+        List<Order> orders = orderDao.findTopUsers(topUsersCount);
+        return orders.stream().map(o -> new UserDto(o.getUser())).collect(Collectors.toList());
+    }
+
+    public Long getMonthRevenue() {
+        long monthTotal = 0;
+        List<Order> orders = orderDao.findMonthRevenue();
+        for (Order order : orders) {
+            for (OrderedProduct orderedProduct : order.getOrderedProducts()) {
+                monthTotal += orderedProduct.getPrice() * orderedProduct.getQuantity();
+            }
+        }
+        return monthTotal;
+    }
+
+    public Long getWeekRevenue() {
+        long weekTotal = 0;
+        List<Order> orders = orderDao.findWeekRevenue();
+        for (Order order : orders) {
+            for (OrderedProduct orderedProduct : order.getOrderedProducts()) {
+                weekTotal += orderedProduct.getPrice() * orderedProduct.getQuantity();
+            }
+        }
+        return weekTotal;
     }
 }

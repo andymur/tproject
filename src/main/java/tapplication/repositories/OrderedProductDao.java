@@ -27,10 +27,11 @@ public class OrderedProductDao extends AbstractDao<OrderedProduct, Long> {
     public List<OrderedProduct> findTopProducts(int count) {
         CriteriaBuilder cb = super.getCriteriaBuilder();
         CriteriaQuery<OrderedProduct> q = cb.createQuery(OrderedProduct.class);
-        Root<OrderedProduct> p = q.from(OrderedProduct.class);
-        Join<OrderedProduct, Order> order = p.join(ORDER);
-        q.multiselect(p.get(PRODUCT), cb.sum(p.get(QUANTITY)));
-        q.groupBy(p.get(PRODUCT));
+        Root<OrderedProduct> productRoot = q.from(OrderedProduct.class);
+        Join<OrderedProduct, Order> order = productRoot.join(ORDER);
+        q.multiselect(productRoot.get(PRODUCT), cb.sum(productRoot.get(QUANTITY)));
+        q.groupBy(productRoot.get(PRODUCT));
+        q.orderBy(cb.desc(cb.sum(productRoot.get(QUANTITY))));
 
         List<Predicate> predList = new LinkedList<>();
         predList.add(cb.and(cb.notEqual(order.get(ORDER_STATUS), OrderStatusCode.EXPIRED.ordinal())));

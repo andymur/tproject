@@ -29,15 +29,17 @@
                 </div>
             </div>
         </div>
-        <sec:authorize access="hasRole('ADMIN')">
+
             <div class="rows">
                 <div class="form-group col-md-12">
                     <label class="col-md-3 control-lable" for="ssoId">Nickname</label>
                     <div class="col-md-7">
                         <c:choose>
                             <c:when test="${edit}">
+                                <sec:authorize access="hasRole('ADMIN')">
                                 <form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm"
                                             disabled="true"/>
+                                </sec:authorize>
                             </c:when>
                             <c:otherwise>
                                 <form:input type="text" path="ssoId" id="ssoId" class="form-control input-sm"/>
@@ -49,7 +51,6 @@
                     </div>
                 </div>
             </div>
-        </sec:authorize>
         <div class="rows">
             <div class="form-group col-md-12">
                 <label class="col-md-3 control-lable" for="password">Password</label>

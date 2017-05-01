@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tapplication.dto.OrderedProductDto;
 import tapplication.dto.ProductDto;
+import tapplication.dto.UserDto;
 
 import java.util.List;
 
@@ -17,37 +17,30 @@ import java.util.List;
 public class StatisticServiceImpl implements StatisticService {
     public static final int TOP_PRODUCTS_COUNT = 10;
     public static final int TOP_USERS_COUNT = 10;
-    @Autowired
-    private ProductService productService;
 
     @Autowired
     private OrderedProductService orderedProductService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private OrderService orderService;
 
     @Override
     public List<ProductDto> getTopOrderedProducts() {
-        List<ProductDto> productDtos = orderedProductService.getTopOrderedProducts(TOP_PRODUCTS_COUNT);
-        return productDtos;
+        return orderedProductService.getTopProducts(TOP_PRODUCTS_COUNT);
     }
 
     @Override
-    public List<String> getTopUsers() {
-        orderService.getTopUsers(TOP_USERS_COUNT);
-        return null;
+    public List<UserDto> getTopUsers() {
+        return orderService.getTopUsers(TOP_USERS_COUNT);
     }
 
     @Override
     public Long getMonthRevenue() {
-        return null;
+        return orderService.getMonthRevenue();
     }
 
     @Override
     public Long getWeekRevenue() {
-        return null;
+        return orderService.getWeekRevenue();
     }
 }

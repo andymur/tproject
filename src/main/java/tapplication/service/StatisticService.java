@@ -1,6 +1,7 @@
 package tapplication.service;
 
 import tapplication.dto.ProductDto;
+import tapplication.dto.UserDto;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface StatisticService {
     List<ProductDto> getTopOrderedProducts();
-    List<String> getTopUsers();
+    List<UserDto> getTopUsers();
     Long getMonthRevenue();
     Long getWeekRevenue();
 }
