@@ -1,6 +1,7 @@
 package tapplication.repositories;
 
 import org.springframework.stereotype.Repository;
+import tapplication.dto.UserDto;
 import tapplication.model.Order;
 import tapplication.service.DateUtil;
 import tapplication.service.OrderStatusCode;
@@ -45,9 +46,9 @@ public class OrderDao extends AbstractDao<Order, Long> {
 
     }
 
-    public List<Order> findTopUsers(int topUsersCount) {
+    public List<UserDto> findTopUsers(int topUsersCount) {
             CriteriaBuilder cb = super.getCriteriaBuilder();
-            CriteriaQuery<Order> q = cb.createQuery(Order.class);
+            CriteriaQuery<UserDto> q = cb.createQuery(UserDto.class);
             Root<Order> orderRoot = q.from(Order.class);
             q.multiselect(orderRoot.get(USER), cb.count(orderRoot.get(USER)));
             q.groupBy(orderRoot.get(USER));

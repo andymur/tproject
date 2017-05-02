@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tapplication.service.StatisticService;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * Created by alexpench on 28.04.17.
@@ -19,10 +23,11 @@ public class StatisticController {
     @ResponseBody
     @RequestMapping(value = "statistic", method = RequestMethod.GET)
     public Object getStatistic(Model model){
-        model.addAttribute("topProducts", statisticService.getTopOrderedProducts());
-        model.addAttribute("topUsers",statisticService.getTopUsers());
-        model.addAttribute("monthRevenue",statisticService.getMonthRevenue());
-        model.addAttribute("weekRevenue",statisticService.getWeekRevenue());
-        return statisticService.getMonthRevenue();
+        Map<String, Object> stat = new HashMap<>();
+        stat.put("topProducts", statisticService.getTopOrderedProducts());
+        stat.put("topUsers", statisticService.getTopUsers());
+        stat.put("monthRevenue", statisticService.getMonthRevenue());
+        stat.put("weekRevenue", statisticService.getWeekRevenue());
+        return stat;
     }
 }

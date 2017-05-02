@@ -149,8 +149,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public List<UserDto> getTopUsers(int topUsersCount) {
-        List<Order> orders = orderDao.findTopUsers(topUsersCount);
-        return orders.stream().map(o -> new UserDto(o.getUser())).collect(Collectors.toList());
+        List<UserDto> topUsers = orderDao.findTopUsers(topUsersCount);
+        return topUsers;
     }
 
     public Long getMonthRevenue() {

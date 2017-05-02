@@ -116,31 +116,6 @@
                                 </div>
                             </div>
                         </sec:authorize>
-                        <%--<sec:authorize access="isAnonymous()">--%>
-                        <%--<li><a href="/newuser">Register</a></li>--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<div id="register" class="col-md-6 last-col">&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<h3>REGIS<span class="color">TER</span></h3>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<div class="form-inline">&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<div class="form-horizontal">&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<input type="text" class="input-1" id="firstName" name="firstName" placeholder="Enter First Name"&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;required>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<input type="text" class="input-1" id="ssoId" name="ssoId" placeholder="Enter Nickname"&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;required>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<input type="password" class="input-1" id="password" name="password"&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;placeholder="Enter Password" required>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<input type="text" class="input-1" id="lastName" name="lastName" placeholder="Enter Last Name"&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;required>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<input type="email" class="input-1" id="email" name="email"&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;placeholder="Enter email" required>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<c:if test="${param.error != null}">&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<p>Already exist.</p>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;</c:if>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;<div><a id="btn-register" href="#" class="c-btn-1">REGISTER</a></div>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;&lt;%&ndash;</sec:authorize>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<!-- end panel content -->&ndash;%&gt;--%>
                     </div>
                 </div>
             </div>
@@ -187,7 +162,7 @@
                                                 <ul>
                                                     <li><a href="/admin_products">Products</a></li>
                                                     <li><a href="/admin_orders">Orders</a></li>
-                                                    <li><a href="/dashboard">Statistics</a></li>
+                                                    <li><a id="statistic" href="#">Statistics</a></li>
                                                 </ul>
                                             </li>
                                         </sec:authorize>
@@ -332,8 +307,10 @@
         <script type="text/javascript" src="/resources/order.js"></script>
         <script type="text/javascript" src="/resources/productedit.js"></script>
         <script type="text/javascript" src="/resources/datepicker.js"></script>
+        <script type="text/javascript" src="/resources/statistic.js"></script>
         <!-- Bootstrap Jquery -->
         <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/resources/js/mdb.min.js"></script>
         <!-- Sticky Jquery -->
         <script type="text/javascript" src="/resources/js/jquery.sticky.js"></script>
         <!-- Parallax Plugin -->

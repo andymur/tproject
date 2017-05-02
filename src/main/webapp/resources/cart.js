@@ -43,6 +43,10 @@
     var loadCardPage_Handler = function (event) {
         loadCardPage(event);
     };
+
+    var loadStatistic_Handler = function (event) {
+        loadStatistic(event);
+    };
     var loadOrder_Handler = function (event) {
         loadOrder(event);
     };
@@ -81,11 +85,13 @@
         assignClickHandler($(".addToCart"), addToCart_Handler);
         assignClickHandler($("#cart"), loadCardPage_Handler);
         assignClickHandler($("#usercart"), loadCardPage_Handler);
+        assignClickHandler($("#statistic"), loadStatistic_Handler);
     });
+
+
 
     function loadCardPage(event) {
         event.preventDefault();
-        // var cart = JSON.stringify(getCart());
         var dataToPush = JSON.stringify(getCart());
         $.ajax({
                 type: "POST",

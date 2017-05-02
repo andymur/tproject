@@ -20,6 +20,7 @@ public class UserDto {
     private String phoneNumber;
     private Role role;
     private List<AddressDto> addresses;
+    private long countOfOrders;
 
     public UserDto(User user) {
         this.name = user.getName();
@@ -29,9 +30,25 @@ public class UserDto {
         this.phoneNumber = user.getPhoneNumber();
     }
 
-
+    public UserDto(User user, long countOfOrders) {
+        this.name = user.getName();
+        this.lastName = user.getLastName();
+        this.birthDate = user.getBirthDate();
+        this.email = user.getEmail();
+        this.phoneNumber = user.getPhoneNumber();
+        this.countOfOrders = countOfOrders;
+    }
 
     public UserDto() {
+    }
+
+
+    public long getCountOfOrders() {
+        return countOfOrders;
+    }
+
+    public void setCountOfOrders(long countOfOrders) {
+        this.countOfOrders = countOfOrders;
     }
 
     public Long getId() {
