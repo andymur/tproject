@@ -36,5 +36,8 @@
     <changeSet id="10" author="alexPench">
     <sqlFile path="sql/010_alter_product.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="11" author="alexPench">
+    <sqlFile path="sql/011_ad_product_table.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 
 </databaseChangeLog>
