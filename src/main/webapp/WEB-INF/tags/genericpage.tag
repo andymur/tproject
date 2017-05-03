@@ -8,7 +8,6 @@
 <html>
 <head>
     <title>Linus</title>
-    <link rel="icon" href="/resources/images/favicon.ico">
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
@@ -20,8 +19,8 @@
 
     <script type="text/javascript" src="/resources/js/jquery-2.1.3.min.js"></script>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="icon" href="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png">
+    <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+    <link rel="icon" href="/resources/images/shop/logo.png">
     <link rel="stylesheet" type="text/css" href="/resources/css/countdown.css"/>
     <link rel="stylesheet" type="text/css" href="/resources/css/drag.css"/>
     <!-- bootstrap magic -->
@@ -127,7 +126,7 @@
 
                                 <div class="minimal-menu">
                                     <div class="logo">
-                                    <a href="/"><img src="//cdn.shopify.com/s/files/1/0049/9332/t/9/assets/logo.png?12457888596116483597" alt="Linus Bike"></a>
+                                    <a href="/"><img src="/resources/images/shop/logo.png" alt="Linus Bike"></a>
                                     </div>
 
 
