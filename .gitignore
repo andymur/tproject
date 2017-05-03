@@ -23,3 +23,4 @@ src/main/webapp/WEB-INF/jsp/.DS_Store
 src/main/webapp/resources/.DS_Store
 src/main/webapp/resources/images/.DS_Store
 src/main/webapp/resources/images/shop/.DS_Store
+!/src/main/webapp/resources/js/mdb.min.js
