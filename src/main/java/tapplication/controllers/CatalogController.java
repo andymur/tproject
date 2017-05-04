@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tapplication.dto.ProductDto;
 import tapplication.exceptions.NotFoundException;
 import tapplication.service.CategoryServiceImpl;
+import tapplication.service.MessageSender;
 import tapplication.service.ProductServiceImpl;
 
+import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ public class CatalogController extends CoreController {
     private ProductServiceImpl productService;
     @Autowired
     private CategoryServiceImpl categoryService;
+    @Autowired
+    private MessageSender sender;
 
     @RequestMapping(method = RequestMethod.GET)
     public Object getCatalogPage(@RequestParam(value = "categoryId") Long categoryId,
@@ -35,7 +39,7 @@ public class CatalogController extends CoreController {
         model.addAttribute("category", categoryService.getCategoryDtoById(categoryId));
         model.addAttribute("categoriesmap", categoryService.getCategoryMap());
         model.addAttribute("loggedinuser", getPrincipal());
-
+        sender.sendMessage("Hello");
         return "catalog";
     }
 

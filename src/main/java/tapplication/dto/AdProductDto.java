@@ -20,6 +20,12 @@ public class AdProductDto {
                 .findFirst().orElse("new.png");
     }
 
+    public AdProductDto(String name, Long price, String imageurl) {
+        setImageUrl(imageurl);
+        setName(name);
+        setPrice(price);
+    }
+
     public String getName() {
         return name;
     }

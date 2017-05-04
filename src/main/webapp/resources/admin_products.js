@@ -1,5 +1,12 @@
 jQuery(function ($) {
 
+    $('#btn-add-promo').click(function (event) {
+       var name = $('#form-promo input[name=name]').val();
+       var price = $('#form-promo input[name=price]').val();
+       var imageurl = $('#form-promo input[name=imageurl]').val();
+        $.post('rest/productslist?name='+name+'&price='+price+'&imageurl='+imageurl);
+    })
+
     $('#btn-save-product').click(function (event) {
         var brand = $('#br-select option:selected').data('brand-name')
         var category = $('#cat-select option:selected').data('category-name')
