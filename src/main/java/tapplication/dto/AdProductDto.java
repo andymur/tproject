@@ -7,11 +7,17 @@ import tapplication.model.ProductImage;
  * Created by apenchukov on 5/3/2017.
  */
 public class AdProductDto {
+    private Long productId;
     private String name;
     private Long price;
     private String imageUrl;
 
+
+    public AdProductDto() {
+    }
+
     public AdProductDto(Product product) {
+        this.productId = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
         this.imageUrl = product.getImages().stream()
@@ -20,10 +26,12 @@ public class AdProductDto {
                 .findFirst().orElse("new.png");
     }
 
-    public AdProductDto(String name, Long price, String imageurl) {
-        setImageUrl(imageurl);
-        setName(name);
-        setPrice(price);
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public String getName() {

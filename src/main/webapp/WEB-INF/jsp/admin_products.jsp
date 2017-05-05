@@ -235,6 +235,13 @@
                         <div class="panel-body">
                             <div id="form-promo" class="form-horizontal">
                                 <div class="form-group">
+                                    <label class="col-sm-2 control-label">Product Id<span
+                                            class="required">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="productId" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Name<span
                                             class="required">*</span></label>
                                     <div class="col-sm-10">

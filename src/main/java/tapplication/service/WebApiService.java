@@ -12,9 +12,9 @@ import java.util.List;
  */
 
 public interface WebApiService {
-    Object getProducts();
+    List<AdProductDto> getProducts();
 
-    void add(String name, String price, String imageurl);
+    void add(Long id);
 
     void addAll(List<AdProduct> products);
 
