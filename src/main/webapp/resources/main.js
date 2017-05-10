@@ -47,9 +47,49 @@
     var loadStatistic_Handler = function (event) {
         loadStatistic(event);
     };
+
+    var loadPromo_Handler = function (event) {
+        loadPromo(event);
+    };
+
+    var addPromo_Handler = function (event) {
+        addPromo(event);
+    };
     var loadOrder_Handler = function (event) {
         loadOrder(event);
     };
+
+    function loadPromo(event) {
+        event.preventDefault();
+        $.get("/promo", (data)=>{
+            $('#wrapper').html(data);
+            assignClickHandler($("#btn-add-promo"), addPromo_Handler);
+        });
+    }
+
+
+    function addPromo(event) {
+        var productId = $('#form-promo input[name=productId]').val();
+        var name = $('#form-promo input[name=name]').val();
+        var price = $('#form-promo input[name=price]').val();
+        var imageurl = $('#form-promo input[name=imageurl]').val();
+
+        var adProduct = JSON.stringify({
+            productId:productId,
+            name : name,
+            price : price,
+            imageUrl : imageurl
+        })
+        $.ajax({
+                type: "POST",
+                url: "/productslist/add",
+                contentType: "application/json",
+                data: adProduct,
+                success: ()=> {
+                swal("Product has been created", "success");
+    }
+    })
+    }
 
     function subtractProduct(event) {
         var productId = event.currentTarget.id;
@@ -86,6 +126,7 @@
         assignClickHandler($("#cart"), loadCardPage_Handler);
         assignClickHandler($("#usercart"), loadCardPage_Handler);
         assignClickHandler($("#statistic"), loadStatistic_Handler);
+        assignClickHandler($("#promo"), loadPromo_Handler);
     });
 
 

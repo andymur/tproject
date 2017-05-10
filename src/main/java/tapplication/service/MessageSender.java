@@ -7,8 +7,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.jms.ConnectionFactory;
-import javax.jms.ObjectMessage;
+import javax.jms.*;
 
 
 //*

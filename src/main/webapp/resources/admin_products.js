@@ -1,28 +1,5 @@
 jQuery(function ($) {
 
-    $('#btn-add-promo').click(function (event) {
-       var productId = $('#form-promo input[name=productId]').val();
-       var name = $('#form-promo input[name=name]').val();
-       var price = $('#form-promo input[name=price]').val();
-       var imageurl = $('#form-promo input[name=imageurl]').val();
-
-       var adProduct = JSON.stringify({
-           productId:productId,
-           name : name,
-           price : price,
-           imageUrl : imageurl
-       })
-        $.ajax({
-                type: "POST",
-                url: "/productslist/add",
-                contentType: "application/json",
-                data: adProduct,
-                success: ()=> {
-                    swal("Product has been created", "success");
-                }
-        })
-    })
-
     $('#btn-save-product').click(function (event) {
         var brand = $('#br-select option:selected').data('brand-name')
         var category = $('#cat-select option:selected').data('category-name')

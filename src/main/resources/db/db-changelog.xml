@@ -45,5 +45,8 @@
     <changeSet id="13" author="alexPench">
     <sqlFile path="sql/013_image_product_alter.sql" relativeToChangelogFile="true" stripComments="true" />
     </changeSet>
+    <changeSet id="14" author="alexPench">
+    <sqlFile path="sql/014_update_main_images.sql" relativeToChangelogFile="true" stripComments="true" />
+    </changeSet>
 
 </databaseChangeLog>
