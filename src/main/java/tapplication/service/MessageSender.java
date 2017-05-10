@@ -29,7 +29,7 @@ public class MessageSender {
         jmsTemplate.setConnectionFactory(jmsConnectionFactory);
         jmsTemplate.send(session -> {
             logger.info("Send message =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-            ObjectMessage objectMessage = session.createObjectMessage("hello");
+            ObjectMessage objectMessage = session.createObjectMessage(msg);
             logger.info("Sent =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
             return objectMessage;
         });

@@ -24,9 +24,9 @@
                                     <c:forEach var="image" items="${product.images}">
                                         <li>
                                             <a class="active" href="#"
-                                               data-image="/resources/images/shop/1-${image.url}"
-                                               data-zoom-image="/resources/images/shop/${image.url}">
-                                                <img id="img_01" src="/resources/images/shop/small-${image.url}"
+                                               data-image="${image.url}"
+                                               data-zoom-image="${image.url}">
+                                                <img id="img_01" src="${image.url}"
                                                      alt=""/>
                                             </a>
                                         </li>

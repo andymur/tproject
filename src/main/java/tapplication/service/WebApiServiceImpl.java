@@ -2,7 +2,6 @@ package tapplication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 import tapplication.dto.AdProductDto;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.model.AdProduct;
@@ -11,9 +10,6 @@ import tapplication.repositories.AdProductDao;
 import tapplication.repositories.ProductDao;
 
 import javax.transaction.Transactional;
-import javax.ws.rs.*;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,10 +19,13 @@ import java.util.stream.Collectors;
 @Service("webApiService")
 @Transactional
 public class WebApiServiceImpl implements WebApiService {
+    public static final String DO_UPDATE = "doUpdate";
     @Autowired
     private AdProductDao adProductDao;
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private MessageSender sender;
 
     public List<AdProductDto> getProducts() {
         return adProductDao.selectAll().stream().map(adProduct -> new AdProductDto(adProduct.getProduct())).collect(Collectors.toList());
@@ -41,6 +40,7 @@ public class WebApiServiceImpl implements WebApiService {
         AdProduct adProduct = new AdProduct();
         adProduct.setProduct(product);
         adProductDao.persist(adProduct);
+        sender.sendMessage(DO_UPDATE);
     }
 
     @Override
