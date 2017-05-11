@@ -1,5 +1,6 @@
 package tapplication.controllers;
 
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import tapplication.dto.AdProductDto;
 import tapplication.model.AdProduct;
 import tapplication.service.WebApiService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -26,12 +28,19 @@ public class WebServiceController {
 
     @RequestMapping(path = "/promo", method = RequestMethod.GET)
     public Object getPromoPage(Model model){
-        model.addAttribute("products", webApiService.getProducts());
+        model.addAttribute("products", webApiService.getPromoList());
         return "promo";
     }
 
     @RequestMapping(value = "/productslist/add",method = RequestMethod.POST)
-    public void addAdProduct(@RequestBody AdProductDto adProductDto){
+    public void addAdProduct(@RequestBody AdProductDto adProductDto, HttpServletResponse resp){
         webApiService.add(adProductDto.getProductId());
+        resp.setStatus(200);
+    }
+
+    @RequestMapping(value = "/productslist/remove",method = RequestMethod.POST)
+    public void removeAdProduct(@RequestBody AdProductDto adProductDto, HttpServletResponse resp){
+        webApiService.removeOne(adProductDto);
+        resp.setStatus(200);
     }
 }

@@ -55,6 +55,11 @@
     var addPromo_Handler = function (event) {
         addPromo(event);
     };
+
+    var removePromo_Handler = function (event) {
+        var buttonValue = this.value;
+        removePromo(buttonValue, event);
+    };
     var loadOrder_Handler = function (event) {
         loadOrder(event);
     };
@@ -64,6 +69,7 @@
         $.get("/promo", (data)=>{
             $('#wrapper').html(data);
             assignClickHandler($("#btn-add-promo"), addPromo_Handler);
+            assignClickHandler($(".removePromoProduct"), removePromo_Handler);
         });
     }
 
@@ -86,9 +92,26 @@
                 contentType: "application/json",
                 data: adProduct,
                 success: ()=> {
-                swal("Product has been created", "success");
+                    swal("Product has been created", "success");
+                }
+        })
     }
-    })
+
+    function removePromo(productId, event) {
+
+        var adProduct = JSON.stringify({
+            productId:productId
+        })
+        $.ajax({
+                type: "POST",
+                url: "/productslist/remove",
+                contentType: "application/json",
+                data: adProduct,
+                success: ()=> {
+                    swal("Product has been removed", "success");
+                    $('#'+productId).remove();
+                }
+        })
     }
 
     function subtractProduct(event) {

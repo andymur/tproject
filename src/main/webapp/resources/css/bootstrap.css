@@ -5104,6 +5104,7 @@ a.thumbnail.active {
 }
 .media-object {
   display: block;
+  width: 150px;
 }
 .media-right,
 .media > .pull-right {

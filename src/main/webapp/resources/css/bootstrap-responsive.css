@@ -921,6 +921,7 @@
   .media-object {
     margin-right: 0;
     margin-left: 0;
+    width: 150px;
   }
   .modal {
     top: 10px;

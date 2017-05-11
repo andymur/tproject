@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-
+    <property name="DEV_HOME" value="c:/logs" />
 
     <appender name="STDOUT"
               class="ch.qos.logback.core.ConsoleAppender">
@@ -11,7 +11,7 @@
 
     <appender name="FILE"
               class="ch.qos.logback.core.FileAppender">
-        <file>shop_server.log</file>
+        <file>${DEV_HOME}/shop_server.log</file>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>%d{yyyy-MM-dd HH:mms.SSS} [%thread] %-5level %logger{64} %msg%n</pattern>
         </layout>

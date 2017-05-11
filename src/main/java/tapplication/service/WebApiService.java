@@ -1,6 +1,7 @@
 package tapplication.service;
 
 import tapplication.dto.AdProductDto;
+import tapplication.dto.ProductDto;
 import tapplication.model.AdProduct;
 import tapplication.model.Product;
 
@@ -14,11 +15,13 @@ import java.util.List;
 public interface WebApiService {
     List<AdProductDto> getProducts();
 
+    List<ProductDto> getPromoList();
+
     void add(Long id);
 
     void addAll(List<AdProduct> products);
 
     void clean();
 
-    void removeOne(AdProduct product);
+    void removeOne(AdProductDto product);
 }

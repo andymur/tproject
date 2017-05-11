@@ -25,13 +25,12 @@
                     <td>
                         <div class="media">
                             <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object" src="/resources/images/shop/${product.icon}" alt="">
+                                <a href="/product/${product.productId}">
+                                    <img class="media-object" src="${product.mainImage}" alt="">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <a href="#" class="media-heading">${product.name}</a>
-                                <%--<div class="stars"><a href="#"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></a></div>--%>
+                                <a href="/product/${product.productId}" class="media-heading">${product.name}</a>
                             </div>
                         </div>
                     </td>
