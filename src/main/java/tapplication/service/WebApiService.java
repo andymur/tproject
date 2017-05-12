@@ -19,6 +19,8 @@ public interface WebApiService {
 
     void addAll(List<AdProduct> products);
 
+    void update(ProductDto productDto);
+
     void clean();
 
     void removeOne(AdProductDto product);

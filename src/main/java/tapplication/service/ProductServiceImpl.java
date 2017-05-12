@@ -37,6 +37,9 @@ public class ProductServiceImpl implements ProductService {
     private CategoryDao categoryDao;
     @Autowired
     private ParametersServiceImpl parametersService;
+    @Autowired
+    private WebApiService webApiService;
+
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -69,6 +72,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDto.getDescription());
         product.setChangeDate(new Date());
         productDao.merge(product);
+        webApiService.update(productDto);
         logger.info("Product id{} is updated.", product.getId());
     }
 
@@ -159,6 +163,7 @@ public class ProductServiceImpl implements ProductService {
         products.forEach(pr -> pr.getParameters().forEach(par -> sizes.add(par.getSize())));
         return sizes;
     }
+
     private void addNewParameters(ProductDto newProduct) {
         Product product = productDao.findOneByAndParams(Product.MODEL, newProduct.getModel());
         parametersService.create(newProduct.getParameters().get(0), product);

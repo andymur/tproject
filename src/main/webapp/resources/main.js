@@ -94,10 +94,21 @@
                     contentType: "application/json",
                     data: adProduct,
                     success: ()=> {
-                        swal("Product has been created", "success");
-                        loadPromo(event);
+                        swal({
+                             title: 'DONE.',
+                             text: '',
+                             timer: 500
+                         });
+                    loadPromo(event);
+                    },
+                    error:()=> {
+                        swal({
+                            title: "Error!",
+                            text: "Product already in promo list",
+                            type: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
-
             })
         }
     }
@@ -112,10 +123,7 @@
                 url: "/productslist/remove",
                 contentType: "application/json",
                 data: adProduct,
-                success: ()=> {
-                    swal("Product has been removed", "success");
-                    $('#'+productId).remove();
-                }
+                success: ()=> {}
         })
     }
 

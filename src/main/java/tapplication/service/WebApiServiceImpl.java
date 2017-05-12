@@ -64,6 +64,15 @@ public class WebApiServiceImpl implements WebApiService {
     }
 
     @Override
+    public void update(ProductDto productDto) {
+        AdProduct adProduct = adProductDao.findOne(PRODUCT, productDto.getId());
+        if(adProduct != null){
+            adProduct.setProduct(productDao.findOne(productDto.getId()));
+            sender.sendMessage(DO_UPDATE);
+        }
+    }
+
+    @Override
     public void clean() {
 
     }
