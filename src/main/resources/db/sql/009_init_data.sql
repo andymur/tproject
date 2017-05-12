@@ -399,42 +399,42 @@ VALUES('back','brooks_flyer_back.jpg',(select p.id from PRODUCT p where p.model 
 -- icons
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','pronto_icon.jpg',(select p.id from PRODUCT p where p.model = 'PR01BL'));
+VALUES('longpic','pronto_icon.jpg',(select p.id from PRODUCT p where p.model = 'PR01BL'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','dutchi_icon.jpg',(select p.id from PRODUCT p where p.model = 'DUCH001Y'));
+VALUES('longpic','dutchi_icon.jpg',(select p.id from PRODUCT p where p.model = 'DUCH001Y'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','avanti_icon.jpg',(select p.id from PRODUCT p where p.model = 'AVA002G'));
+VALUES('longpic','avanti_icon.jpg',(select p.id from PRODUCT p where p.model = 'AVA002G'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','gaston_icon.jpg',(select p.id from PRODUCT p where p.model = 'GAST003BL'));
+VALUES('longpic','gaston_icon.jpg',(select p.id from PRODUCT p where p.model = 'GAST003BL'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','libertine_icon.jpg',(select p.id from PRODUCT p where p.model = 'LIB002MBL'));
-
-
-INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','roadster_icon.jpg',(select p.id from PRODUCT p where p.model = 'ROADSOL'));
-
-INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','mixte_icon.jpg',(select p.id from PRODUCT p where p.model = 'MIX008S'));
+VALUES('longpic','libertine_icon.jpg',(select p.id from PRODUCT p where p.model = 'LIB002MBL'));
 
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','scout_icon.jpg',(select p.id from PRODUCT p where p.model = 'SC007MU'));
+VALUES('longpic','roadster_icon.jpg',(select p.id from PRODUCT p where p.model = 'ROADSOL'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','thousand_icon.jpg',(select p.id from PRODUCT p where p.model = 'THUH001B'));
+VALUES('longpic','mixte_icon.jpg',(select p.id from PRODUCT p where p.model = 'MIX008S'));
+
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','nutcase_dots_icon.jpg',(select p.id from PRODUCT p where p.model = 'NUTLN01DT'));
+VALUES('longpic','scout_icon.jpg',(select p.id from PRODUCT p where p.model = 'SC007MU'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','brooks_b67_icon.jpg',(select p.id from PRODUCT p where p.model = 'B67'));
+VALUES('longpic','thousand_icon.jpg',(select p.id from PRODUCT p where p.model = 'THUH001B'));
 
 INSERT INTO PRODUCT_IMAGE (name, image, product_id)
-VALUES('icon','brooks_flyer_icon.jpg',(select p.id from PRODUCT p where p.model = 'BROOKSFL'));
+VALUES('longpic','nutcase_dots_icon.jpg',(select p.id from PRODUCT p where p.model = 'NUTLN01DT'));
+
+INSERT INTO PRODUCT_IMAGE (name, image, product_id)
+VALUES('longpic','brooks_b67_icon.jpg',(select p.id from PRODUCT p where p.model = 'B67'));
+
+INSERT INTO PRODUCT_IMAGE (name, image, product_id)
+VALUES('longpic','brooks_flyer_icon.jpg',(select p.id from PRODUCT p where p.model = 'BROOKSFL'));
 
 
 END TRANSACTION;

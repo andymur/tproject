@@ -9,19 +9,32 @@
     <jsp:body>
         <div id="wrapper">
 
-        <div class="container welcome">
-            <div class="col-md-12">
-                <img src="resources/images/man-shadow.png" class="shadow-man" alt=""/>
-            </div>
+        <%--<div class="container welcome">--%>
+            <%--<div class="col-md-12">--%>
+                <%--<img src="resources/images/man-shadow.png" class="shadow-man" alt=""/>--%>
+            <%--</div>--%>
+                <div class="container-custom welcome-slider welcome-cust">
+                    <div id="w-owl" class="owl-carousel">
+                        <div>
+                                <div class="textoverlay"><h1>Text 1</h1>
+                                    <p>Some text bla bla bla</p>
+                                </div>
+                            <img src="http://res.cloudinary.com/alexpench/image/upload/v1494596042/linus-bike-mixte-8-lifestyle2-2000x931_wlkmbi.jpg" alt="" width="100%" />
+                        </div>
 
-            <div class="col-md-12">
-                <h2>WELCOME TO</h2>
-                <h1>LIN<span class="color-bg">US</span></h1>
-                <a href="#" class="welcome-button-2 hvr-shutter-in-horizontal-2">READ MORE</a>
-                <a href="shop" class="welcome-button hvr-shutter-in-horizontal">BUY NOW</a>
+                        <%--<a href="/product/2">--%>
+                            <%--<img src="http://res.cloudinary.com/alexpench/image/upload/v1494595762/linus-bike-dutchi-8-lifestyle1-2000x931_dnzyzt.jpg" alt="" width="100%";/>--%>
+                        <%--</a>--%>
+                    </div>
+                </div>
+            <%--<div class="col-md-12">--%>
+                <%--<h2>WELCOME TO</h2>--%>
+                <%--<h1>LIN<span class="color-bg">US</span></h1>--%>
+                <%--<a href="#" class="welcome-button-2 hvr-shutter-in-horizontal-2">READ MORE</a>--%>
+                <%--<a href="shop" class="welcome-button hvr-shutter-in-horizontal">BUY NOW</a>--%>
 
-            </div>
-        </div>
+            <%--</div>--%>
+        <%--</div>--%>
             <div class="about">
                 <div class="partners">
                     <div class="container">

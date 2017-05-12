@@ -21,7 +21,7 @@ public class ProductDto {
     private Long price;
     private String category;
     private String mainImage;
-    private String icon;
+    private String longpic;
     private List<ProductImageDto> images;
     private List<ParametersDto> parameters;
     private Long count;
@@ -53,8 +53,8 @@ public class ProductDto {
                 .filter(im -> im.getName().equals("main"))
                 .map(ProductImage::getImage)
                 .findFirst().orElse("new.png");
-        this.icon = product.getImages().stream()
-                .filter(im -> im.getName().equals("icon"))
+        this.longpic = product.getImages().stream()
+                .filter(im -> im.getName().equals("longpic"))
                 .map(ProductImage::getImage)
                 .findFirst().orElse("dummy_icon.png");
     }
@@ -66,10 +66,11 @@ public class ProductDto {
         this.name = product.getName();
         this.model = product.getModel();
         this.size = size;
-        this.icon = product.getImages().stream()
-                .filter(im -> im.getName().equals("icon"))
+        this.mainImage = product.getImages().stream()
+                .filter(im -> im.getName().equals("main"))
                 .map(ProductImage::getImage)
-                .findFirst().orElse("/dummy_icon.png");
+                .findFirst().orElse("new.png");
+
     }
 
     public ProductDto(OrderedProduct orderedProduct) {
@@ -79,10 +80,7 @@ public class ProductDto {
         this.name = orderedProduct.getProduct().getName();
         this.model = orderedProduct.getProduct().getModel();
         this.size = orderedProduct.getSize();
-        this.icon = orderedProduct.getProduct().getImages().stream()
-                .filter(im -> im.getName().equals("icon"))
-                .map(ProductImage::getImage)
-                .findFirst().orElse("/dummy_icon.png");
+
     }
 
     public ProductDto(Product product, Long count) {
@@ -93,10 +91,10 @@ public class ProductDto {
         this.model = product.getModel();
         this.sizes = product.getParameters().stream()
                 .map(Parameters::getSize).collect(Collectors.toList());
-        this.icon = product.getImages().stream()
-                .filter(im -> im.getName().equals("icon"))
+        this.mainImage = product.getImages().stream()
+                .filter(im -> im.getName().equals("main"))
                 .map(ProductImage::getImage)
-                .findFirst().orElse("/dummy_icon.png");
+                .findFirst().orElse("new.png");
     }
 
     public Long getId() {
@@ -195,12 +193,12 @@ public class ProductDto {
         this.mainImage = mainImage;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getLongpic() {
+        return longpic;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setLongpic(String longpic) {
+        this.longpic = longpic;
     }
 
     public Long getCount() {

@@ -11,9 +11,7 @@
             <div class="shop-single">
                 <div class="container">
                     <div class="col-md-12 headlines">
-                        <h2>${product.name}<span class="color-bg">${product.model}</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<br>
-                            incididunt ut labore et dolore magna aliqua.</p>
+                        <h2>${product.brand} <span class="color-bg">${product.name}</span></h2>
                     </div>
 
                     <div class="col-md-9">
@@ -32,44 +30,19 @@
                                         </li>
                                     </c:forEach>
                                 </ul>
-                                    <%--public ProductDto(Product product) {--%>
-                                    <%--this.id = product.getId();--%>
-                                    <%--this.brand = product.getBrand().getName();--%>
-                                    <%--this.name = product.getName();--%>
-                                    <%--this.model = product.getModel();--%>
-                                    <%--this.color = product.getColor();--%>
-                                    <%--this.description = product.getDescription();--%>
-                                    <%--this.category = product.getCategory().getName();--%>
-                                    <%--this.price = product.getPrice();--%>
-                                    <%--product.getImages().forEach(productImage -> this.images.add(productImage.getImage()));--%>
-                                    <%--product.getParameters().forEach(parameter -> this.parameters.add(new ParametersDto(parameter)));--%>
-                                    <%--this.mainImage = product.getImages().stream()--%>
-                                    <%--.filter(im -> im.getName().equals("main"))--%>
-                                    <%--.map(ProductImage::getImage)--%>
-                                    <%--.findFirst().orElse("/new.png");--%>
-                                    <%--}--%>
-                                <img id="zoom_02" src="/resources/images/shop/1-${product.mainImage}"
-                                     data-zoom-image="/resources/images/shop/${product.mainImage}" alt=""/>
+                                <img id="zoom_02" src="${product.mainImage}"
+                                     data-zoom-image="${product.mainImage}" alt="" width="400"/>
 
                             </div>
 
                             <div class="col-md-4 item-dec">
                                 <div class="item-price">$${product.price}</div>
                                 <div class="divider-1"></div>
-                                <div class="stars">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <a href="#" class="review pull-right">10 REVIEWS</a>
-                                </div>
-                                <p>some review</p>
                                 <div class="divider-2"></div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">SIZE</label>
+                                    <label class="col-sm-2-cust control-label">SIZE</label>
                                     <div class="col-sm-10">
-                                        <select id="size${product.id}" class="form-control m-bot15">
+                                        <select id="size${product.id}" class="autowidht m-bot15">
                                             <c:forEach var="size" items="${product.sizes}">
                                                 <option data-size="${size}">${size}</option>
                                             </c:forEach>
@@ -84,14 +57,9 @@
                                     Add To Cart
                                 </button>
                                 <div class="clearfix"></div>
-                                <div class="user-option">
-                                    <a href="#" class="op-1"><i class="fa fa-heart"></i> ADD TO WISHLIST</a>
-                                </div>
-
                                 <div class="divider-2"></div>
                                 <div class="categories">
-                                    <span class="category">CATEGORIES:</span><a href="#">Ladies</a>, <a
-                                        href="#">Tops</a>, <a href="#">Jeans</a>, <a href="#">Bags</a>
+                                    <span class="category">CATEGORIES:</span><a href="#">${product.category}</a>
                                 </div>
                                 <div class="divider-2"></div>
 
@@ -108,8 +76,6 @@
                                         <li role="presentation" class="active"><a href="#description"
                                                                                   aria-controls="description" role="tab"
                                                                                   data-toggle="tab">DESCRIPTION</a></li>
-                                        <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab"
-                                                                   data-toggle="tab">REVIEWS (4)</a></li>
                                         <li role="presentation"><a href="#specifications" aria-controls="specifications"
                                                                    role="tab" data-toggle="tab">SPECIFICATIONS</a></li>
                                     </ul>
@@ -118,53 +84,6 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="description">
                                             <p>${product.description}</p>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="reviews">
-                                            <div class="heading">4 Reviews From Buyers</div>
-                                            <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/resources/images/about/1.png"
-                                                         alt="/">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Jessica Fernando</h4>
-                                                    Just an awesome design!! We all love it !!
-                                                    <div class="media-stars"><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/resources/images/about/2.png"
-                                                         alt="/">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Jessica Fernando</h4>
-                                                    Just an awesome design!! We all love it !!
-                                                    <div class="media-stars"><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="/resources/images/about/3.png"
-                                                         alt="/">
-                                                </a>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Jessica Fernando</h4>
-                                                    Just an awesome design!! We all love it !!
-                                                    <div class="media-stars"><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                            class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div role="tabpanel" class="tab-pane" id="specifications">
@@ -219,15 +138,6 @@
 
                     <div class="col-md-3 shop-sidebar">
 
-                        <div class="shop-divider"></div>
-
-                        <div class="block">
-                            <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.</p>
-                        </div>
-
-                        <div class="shop-divider"></div>
-
                         <div class="block">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default">
@@ -278,12 +188,19 @@
                             </div>
                         </div>
 
-                        <div class="block">
-                            <img src="/resources/images/shop/banner.jpg" alt=""/>
-                        </div>
+                        <%--<div class="block">--%>
+                            <%--<img src="https://res.cloudinary.com/alexpench/image/upload/v1494597095/linus-bike-roadster-sport-lifestyle2-2000x931_awsddn.jpg" alt="" width="250"/>--%>
+                        <%--</div>--%>
 
                     </div>
 
+                </div>
+                <div class="container-custom welcome-slider welcome-cust">
+                    <div id="w-owl" class="owl-carousel">
+                            <div class="col-md-12-cust">
+                                <img src="${product.longpic}" alt="" width="100%";/>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
