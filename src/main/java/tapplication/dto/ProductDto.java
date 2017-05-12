@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Created by alexpench on 10.04.17.
  */
 public class ProductDto {
-    private Long productId;
+    private Long id;
     private String brand;
     private String name;
     private String model;
@@ -33,7 +33,7 @@ public class ProductDto {
     }
 
     public ProductDto(Product product) {
-        this.productId = product.getId();
+        this.id = product.getId();
         this.brand = product.getBrand().getName();
         this.name = product.getName();
         this.model = product.getModel();
@@ -60,7 +60,7 @@ public class ProductDto {
     }
 
     public ProductDto(Product product, Long count, String size) {
-        this.productId = product.getId();
+        this.id = product.getId();
         this.price = product.getPrice();
         this.count = count;
         this.name = product.getName();
@@ -73,7 +73,7 @@ public class ProductDto {
     }
 
     public ProductDto(OrderedProduct orderedProduct) {
-        this.productId = orderedProduct.getProduct().getId();
+        this.id = orderedProduct.getProduct().getId();
         this.price = orderedProduct.getPrice();
         this.count = orderedProduct.getQuantity();
         this.name = orderedProduct.getProduct().getName();
@@ -86,7 +86,7 @@ public class ProductDto {
     }
 
     public ProductDto(Product product, Long count) {
-        this.productId = product.getId();
+        this.id = product.getId();
         this.price = product.getPrice();
         this.count = count;
         this.name = product.getName();
@@ -99,12 +99,12 @@ public class ProductDto {
                 .findFirst().orElse("/dummy_icon.png");
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBrand() {
@@ -230,7 +230,7 @@ public class ProductDto {
     @Override
     public String toString() {
         return "ProductDto{" +
-                "productId=" + productId +
+                "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", name='" + name + '\'' +
                 ", model='" + model + '\'' +

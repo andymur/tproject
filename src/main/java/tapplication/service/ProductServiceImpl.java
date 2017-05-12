@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void update(ProductDto productDto) {
-        Product product = productDao.findOne(productDto.getProductId());
+        Product product = productDao.findOne(productDto.getId());
 
         Map<Long, ParametersDto> parMap = productDto.getParameters().stream().collect(Collectors.toMap(ParametersDto::getId, par -> par));
 
@@ -188,7 +188,7 @@ public class ProductServiceImpl implements ProductService {
         product.getImages().forEach(item -> item.setProduct(product));
         product.getCategory().getProducts().add(product.getId());
         product.getParameters().forEach(item -> item.setProduct(product));
-        newProduct.setProductId(product.getId());
+        newProduct.setId(product.getId());
         logger.info("Product id{} has been created.", product.getId());
     }
 

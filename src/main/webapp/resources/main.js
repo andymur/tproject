@@ -75,26 +75,31 @@
 
 
     function addPromo(event) {
-        var productId = $('#form-promo input[name=productId]').val();
-        var name = $('#form-promo input[name=name]').val();
-        var price = $('#form-promo input[name=price]').val();
-        var imageurl = $('#form-promo input[name=imageurl]').val();
+        var productId = $("#productSelect option:selected").data('id');
+        if(productId === undefined){
+            swal({
+                title: "Error!",
+                text: "Please select product",
+                type: "error",
+                confirmButtonText: "OK"
+            });
+        } else{
+            var adProduct = JSON.stringify({
+                productId:productId
+            })
 
-        var adProduct = JSON.stringify({
-            productId:productId,
-            name : name,
-            price : price,
-            imageUrl : imageurl
-        })
-        $.ajax({
-                type: "POST",
-                url: "/productslist/add",
-                contentType: "application/json",
-                data: adProduct,
-                success: ()=> {
-                    swal("Product has been created", "success");
-                }
-        })
+            $.ajax({
+                    type: "POST",
+                    url: "/productslist/add",
+                    contentType: "application/json",
+                    data: adProduct,
+                    success: ()=> {
+                        swal("Product has been created", "success");
+                        loadPromo(event);
+                    }
+
+            })
+        }
     }
 
     function removePromo(productId, event) {

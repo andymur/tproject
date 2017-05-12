@@ -84,4 +84,9 @@ public class WebApiServiceImpl implements WebApiService {
         logger.info("Message {} to promo client has been sent.", DO_UPDATE);
     }
 
+    @Override
+    public List<ProductDto> getAllProducts() {
+        return productDao.selectAll().stream().map(ProductDto::new).collect(Collectors.toList());
+    }
+
 }

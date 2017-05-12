@@ -33,7 +33,7 @@
                                     </c:forEach>
                                 </ul>
                                     <%--public ProductDto(Product product) {--%>
-                                    <%--this.productId = product.getId();--%>
+                                    <%--this.id = product.getId();--%>
                                     <%--this.brand = product.getBrand().getName();--%>
                                     <%--this.name = product.getName();--%>
                                     <%--this.model = product.getModel();--%>
@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">SIZE</label>
                                     <div class="col-sm-10">
-                                        <select id="size${product.productId}" class="form-control m-bot15">
+                                        <select id="size${product.id}" class="form-control m-bot15">
                                             <c:forEach var="size" items="${product.sizes}">
                                                 <option data-size="${size}">${size}</option>
                                             </c:forEach>
@@ -78,8 +78,8 @@
                                 </div>
                                 <div class="divider-2"></div>
                                 <button type="button"
-                                        data-productId="${product.productId}"
-                                        value="${product.productId}"
+                                        data-id="${product.id}"
+                                        value="${product.id}"
                                         class="cbp-l-caption-buttonRight addToCart">
                                     Add To Cart
                                 </button>

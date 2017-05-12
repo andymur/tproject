@@ -3,9 +3,7 @@ package tapplication.service;
 import tapplication.dto.AdProductDto;
 import tapplication.dto.ProductDto;
 import tapplication.model.AdProduct;
-import tapplication.model.Product;
 
-import javax.ws.rs.*;
 import java.util.List;
 
 /**
@@ -24,4 +22,6 @@ public interface WebApiService {
     void clean();
 
     void removeOne(AdProductDto product);
+
+    List<ProductDto> getAllProducts();
 }

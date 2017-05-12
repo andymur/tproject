@@ -1,12 +1,13 @@
 package tapplication.controllers;
 
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import tapplication.dto.AdProductDto;
-import tapplication.model.AdProduct;
 import tapplication.service.WebApiService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ public class WebServiceController {
     @RequestMapping(path = "/promo", method = RequestMethod.GET)
     public Object getPromoPage(Model model){
         model.addAttribute("products", webApiService.getPromoList());
+        model.addAttribute("allProducts", webApiService.getAllProducts());
         return "promo";
     }
 

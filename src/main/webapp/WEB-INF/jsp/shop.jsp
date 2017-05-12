@@ -86,11 +86,11 @@
                                                                 <div class="cbp-l-caption-body">
                                                                     <button type="button"
                                                                             class="cbp-l-caption-buttonLeft"
-                                                                            value="${product.productId}">Large View
+                                                                            value="${product.id}">Large View
                                                                     </button>
                                                                     <button type="button"
-                                                                            data-productId="${product.productId}"
-                                                                            value="${product.productId}"
+                                                                            data-id="${product.id}"
+                                                                            value="${product.id}"
                                                                             class="cbp-l-caption-buttonRight addToCart">
                                                                         Add To Cart
                                                                     </button>
@@ -98,7 +98,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div data-productId="${product.productId}"
+                                                    <div data-id="${product.id}"
                                                          class="cbp-l-grid-projects-title">${product.name}<span
                                                             class="pull-right text">$ ${product.price}</span></div>
                                                     <div class="cbp-l-grid-projects-desc">${product.brand}

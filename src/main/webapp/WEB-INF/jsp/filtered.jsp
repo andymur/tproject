@@ -115,20 +115,20 @@
                                                                         <div class="cbp-l-caption-body">
                                                                             <button type="button"
                                                                                     class="cbp-l-caption-buttonLeft productButton"
-                                                                                    value="${product.productId}">
+                                                                                    value="${product.id}">
                                                                                 Large View
                                                                             </button>
                                                                             <button type="button"
-                                                                                    data-productId="${product.productId}"
+                                                                                    data-id="${product.id}"
                                                                                     data-size="${product.sizes[0]}"
-                                                                                    value="${product.productId}"
+                                                                                    value="${product.id}"
                                                                                     class="cbp-l-caption-buttonRight addToCart">
                                                                                 Add To Cart
                                                                             </button>
                                                                             <sec:authorize access="hasRole('ADMIN')">
                                                                             <button type="button"
-                                                                                    data-productId="${product.productId}"
-                                                                                    value="${product.productId}"
+                                                                                    data-id="${product.id}"
+                                                                                    value="${product.id}"
                                                                                     class="cbp-l-caption-buttonRight editProduct">
                                                                                 Edit
                                                                             </button>
@@ -137,7 +137,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div data-productId="${product.productId}"
+                                                            <div data-id="${product.id}"
                                                                  class="cbp-l-grid-projects-title">${product.name}<span
                                                                     class="pull-right text">$${product.price}</span>
                                                             </div>

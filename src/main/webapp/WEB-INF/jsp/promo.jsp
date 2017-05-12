@@ -19,36 +19,19 @@
                 <div class="panel-body">
                     <div id="form-promo" class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Product Id<span
+                            <label class="col-sm-2 control-label">Product<span
                                     class="required">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="productId" required>
-                            </div>
+                            <select id="productSelect" >
+                                <option selected disabled>Select product</option>
+                                <c:forEach var="product" items="${allProducts}">
+                                    <option class="optionClass" data-id=${product.id} data-thumbnail-src=${product.mainImage}>${product.id}|${product.name}|${product.model}</option>
+                                </c:forEach>
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Name<span
-                                    class="required">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Price<span
-                                    class="required">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="price" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Image Url<span
-                                    class="required">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="imageurl" required>
-                            </div>
-                        </div>
+                        <div id="preview"></div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button id="btn-add-promo" class="btn btn-primary">Save</button>
+                                <button id="btn-add-promo" class="btn btn-primary">Add</button>
                             </div>
                         </div>
                     </div>
@@ -75,24 +58,24 @@
                                 <th>ACTION</th>
                             </tr>
                             <c:forEach var="product" items="${products}">
-                                <tr id="${product.productId}">
+                                <tr id="${product.id}">
                                     <td>
-                                            ${product.productId}
+                                            ${product.id}
                                     </td>
                                     <td>
                                         <div class="media">
                                             <div class="media-left">
-                                                <a href="/product/${product.productId}">
+                                                <a href="/product/${product.id}">
                                                     <img class="media-object" src="${product.mainImage}" alt="">
                                                 </a>
                                             </div>
                                             <div class="media-body">
-                                                <a href="/product/${product.productId}" class="media-heading">${product.name}</a>
+                                                <a href="/product/${product.id}" class="media-heading">${product.name}</a>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="removePromoProduct" value="${product.productId}" type="button">
+                                        <button class="removePromoProduct" value="${product.id}" type="button">
                                             Remove
                                         </button>
                                     </td>

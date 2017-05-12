@@ -25,31 +25,31 @@
                     <td>
                         <div class="media">
                             <div class="media-left">
-                                <a href="/product/${product.productId}">
+                                <a href="/product/${product.id}">
                                     <img class="media-object" src="${product.mainImage}" alt="">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <a href="/product/${product.productId}" class="media-heading">${product.name}</a>
+                                <a href="/product/${product.id}" class="media-heading">${product.name}</a>
                             </div>
                         </div>
                     </td>
                     <td>${product.model}</td>
-                    <td id="sizep{product.productId}" data-sizep="${product.size}">
+                    <td id="sizep{product.id}" data-sizep="${product.size}">
                         ${product.size}
                     </td>
                     <td>
                         <form class="f1">
-                            <input id="${product.productId}" data-price="${product.price}" data-size="${product.size}" class="sub" type="button" name="subtract" value="-">
-                            <input id="qty${product.productId}${product.size}" class="qty" type="text" name="qty" value="${product.count}">
-                            <input id="${product.productId}" data-price="${product.price}" data-size="${product.size}" class="add" type="button" name="add" value="+">
+                            <input id="${product.id}" data-price="${product.price}" data-size="${product.size}" class="sub" type="button" name="subtract" value="-">
+                            <input id="qty${product.id}${product.size}" class="qty" type="text" name="qty" value="${product.count}">
+                            <input id="${product.id}" data-price="${product.price}" data-size="${product.size}" class="add" type="button" name="add" value="+">
                         </form>
                     </td>
-                    <td id="subtotal${product.productId}${product.size}">
+                    <td id="subtotal${product.id}${product.size}">
                         $${product.price * product.count}
                     </td>
                     <td>
-                        <button class="removeItem" data-size="${product.size}"  type="button" value="${product.productId}"><i data-size="${product.size}" class="fa fa-times fa-lg"></i></button>
+                        <button class="removeItem" data-size="${product.size}"  type="button" value="${product.id}"><i data-size="${product.size}" class="fa fa-times fa-lg"></i></button>
                     </td>
                 </tr>
                 </c:forEach>
