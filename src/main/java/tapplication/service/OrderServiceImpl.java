@@ -94,7 +94,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public OrderDto getOne(Long orderId) {
-        return new OrderDto().prepareForAdmin(orderDao.findOne(orderId));
+        return new OrderDto(orderDao.findOne(orderId));
     }
 
     public void update(OrderDto orderToUpdate) {

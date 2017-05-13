@@ -15,9 +15,9 @@ var removeClickHandler = function (selector, handler) {
 };
 
 
-var submitOrder_Handler = function (event) {
+var saveOrderStatus_Handler = function (event) {
     var orderId = this.value;
-    submitOrder(orderId);
+    saveOrderStatus(orderId);
 };
 var repeatOrder_Handler = function (event) {
     var orderId = this.value;
@@ -25,12 +25,12 @@ var repeatOrder_Handler = function (event) {
 };
 
 $(function () {
-    assignClickHandler($(".saveOrderStatus"), submitOrder_Handler);
+    assignClickHandler($(".saveOrderStatus"), saveOrderStatus_Handler);
     assignClickHandler($(".repeatOrder"), repeatOrder_Handler);
 
 });
 
-function submitOrder(orderId) {
+function saveOrderStatus(orderId) {
     var orderStatusCode = $('#orderStatusSelect option:selected').data('order-status');
 
 
@@ -42,7 +42,8 @@ function submitOrder(orderId) {
         type: "PUT",
         url: "order",
         contentType: "application/json",
-        data: orderStatusData
+        data: orderStatusData,
+            success: ()=> {swal({title: 'DONE.',text: '',timer: 500});}
     })
 }
 

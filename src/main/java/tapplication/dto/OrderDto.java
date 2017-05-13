@@ -36,14 +36,12 @@ public class OrderDto {
         return newOrderDto;
     }
 
-    public OrderDto prepareForAdmin(Order order) {
-        OrderDto newOrderDto = new OrderDto();
-        newOrderDto.setOrderId(order.getId());
-        newOrderDto.setOrderDate(order.getOrderDate());
-        newOrderDto.setDeliveryAddressDto(new AddressDto(order.getAddress()));
-        newOrderDto.setProducts(order.getOrderedProducts().stream().map(pr->new ProductDto(pr.getProduct())).collect(Collectors.toList()));
-        newOrderDto.setOrderStatusCode(order.getOrderStatus());
-        return newOrderDto;
+    public OrderDto (Order order) {
+        this.orderId = order.getId();
+        this.orderDate = order.getOrderDate();
+        this.deliveryAddressDto = new AddressDto(order.getAddress());
+        this.products = order.getOrderedProducts().stream().map(ProductDto::new).collect(Collectors.toList());
+        this.orderStatusCode = order.getOrderStatus();
     }
 
     public OrderDto(){}
