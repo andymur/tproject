@@ -13,7 +13,7 @@ var updateProduct_Handler = function (event) {
 
 function updateProduct(event){
     event.preventDefault();
-    var productId = event.target.dataset.productId;
+    var productId = event.target.dataset.id;
 
     var parameters = [];
     var ids = $('.paramId');
@@ -29,7 +29,7 @@ function updateProduct(event){
     parameters.push(param);
 })
     var data = JSON.stringify({
-        productId : productId,
+        id : productId,
         parameters : parameters,
         name: $('input[name=name]').val(),
         model: $('input[name=model]').val(),
@@ -43,18 +43,21 @@ function updateProduct(event){
             url: "product/update",
             contentType: "application/json",
             data: data,
-            success: ()=> {
-            alert("Product updated");
-},
-    error: ()=>{
-
-    }
-})
+            success: ()=> {swal({title: 'DONE.',text: '',timer: 500});},
+            error: (data)=>{
+                swal({
+                    title: "Error!",
+                    text: data.responseText,
+                    type: "error",
+                    confirmButtonText: "OK"
+                });
+            }
+    })
 
 }
 
 function editProduct(event) {
-    var productId = event.currentTarget.dataset.productid;
+    var productId = event.currentTarget.dataset.id;
     $.ajax({
             type: "GET",
             url: "product/edit/"+productId,
@@ -62,8 +65,8 @@ function editProduct(event) {
             success:(data)=>{
             $("#wrapper").html(data);
             assignClickHandler($("#updateProduct"), updateProduct_Handler)
-}
-})
+            }
+    })
 }
 
 $(document).on('change', '#cat-filter select', function () {

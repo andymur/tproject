@@ -198,7 +198,7 @@
                 <div class="container-custom welcome-slider welcome-cust">
                     <div id="w-owl" class="owl-carousel">
                             <div class="col-md-12-cust">
-                                <img src="${product.longpic}" alt="" width="100%";/>
+                                <img src="${product.longpic}" alt="" class="longpic";/>
                             </div>
                     </div>
                 </div>

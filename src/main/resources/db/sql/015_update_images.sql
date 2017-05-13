@@ -23,5 +23,31 @@ UPDATE public.product_image SET name = 'longpic', image = 'http://res.cloudinary
 UPDATE public.product_image SET name = 'longpic', image = 'http://res.cloudinary.com/alexpench/image/upload/v1494596054/linus-bike-mixte-8-lifestyle1-2000x931_vkvy3f.jpg', product_id = 5 WHERE id = 41;
 UPDATE public.product_image SET name = 'longpic', image = 'http://res.cloudinary.com/alexpench/image/upload/v1494595820/linus-bike-avanti-2-lifestyle1-2000x931_21534031-8c46-4e16-bf37-aa30bfe59d03_q9fgsp.jpg', product_id = 3 WHERE id = 39;
 UPDATE public.product_image SET name = 'longpic', image = 'http://res.cloudinary.com/alexpench/image/upload/v1494595933/linus-bike-gaston-3-lifestyle2-2000x931_m8q2kl.jpg', product_id = 11 WHERE id = 47;
+
+delete FROM public.product_image WHERE id = 13;
+delete FROM public.product_image WHERE id = 14;
+delete FROM public.product_image WHERE id = 15;
+delete FROM public.product_image WHERE id = 16;
+delete FROM public.product_image WHERE id = 17;
+delete FROM public.product_image WHERE id = 18;
+delete FROM public.product_image WHERE id = 19;
+delete FROM public.product_image WHERE id = 20;
+delete FROM public.product_image WHERE id = 21;
+delete FROM public.product_image WHERE id = 22;
+delete FROM public.product_image WHERE id = 23;
+delete FROM public.product_image WHERE id = 24;
+delete FROM public.product_image WHERE id = 25;
+delete FROM public.product_image WHERE id = 26;
+delete FROM public.product_image WHERE id = 27;
+delete FROM public.product_image WHERE id = 28;
+delete FROM public.product_image WHERE id = 29;
+delete FROM public.product_image WHERE id = 30;
+delete FROM public.product_image WHERE id = 31;
+delete FROM public.product_image WHERE id = 32;
+delete FROM public.product_image WHERE id = 33;
+delete FROM public.product_image WHERE id = 34;
+delete FROM public.product_image WHERE id = 35;
+delete FROM public.product_image WHERE id = 36;
+
 commit;
 end TRANSACTION;

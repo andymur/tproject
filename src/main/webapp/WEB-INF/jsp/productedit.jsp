@@ -59,7 +59,7 @@
                     <td>
                         <c:forEach var="pic" items="${product.images}">
                             <input id="image${product.id}" class="pic" type="image" name="image"
-                                   src="/resources/images/shop/${pic.url}" width="150">
+                                   src="${pic.url}" width="200">
                         </c:forEach>
                     </td>
                 </tr>
@@ -86,7 +86,7 @@
 
                     </td>
                 </tr>
-                <td><a id="updateProduct" data-product-id="${product.id}" href="#"
+                <td><a id="updateProduct" data-id="${product.id}" href="#"
                        class="welcome-button-2 hvr-shutter-in-horizontal-2">SAVE</a></td>
                 </tbody>
             </table>

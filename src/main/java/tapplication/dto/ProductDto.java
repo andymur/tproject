@@ -56,7 +56,7 @@ public class ProductDto {
         this.longpic = product.getImages().stream()
                 .filter(im -> im.getName().equals("longpic"))
                 .map(ProductImage::getImage)
-                .findFirst().orElse("dummy_icon.png");
+                .findFirst().orElse("http://res.cloudinary.com/alexpench/image/upload/v1494595933/linus-bike-gaston-3-lifestyle2-2000x931_m8q2kl.jpg");
     }
 
     public ProductDto(Product product, Long count, String size) {
@@ -80,6 +80,10 @@ public class ProductDto {
         this.name = orderedProduct.getProduct().getName();
         this.model = orderedProduct.getProduct().getModel();
         this.size = orderedProduct.getSize();
+        this.mainImage = orderedProduct.getProduct().getImages().stream()
+                .filter(im -> im.getName().equals("main"))
+                .map(ProductImage::getImage)
+                .findFirst().orElse("new.png");
 
     }
 

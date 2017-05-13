@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tapplication.model.Role;
 import tapplication.model.User;
-import tapplication.service.CategoryServiceImpl;
+import tapplication.service.DataHelperService;
 import tapplication.service.RoleServiceImpl;
 import tapplication.service.UserServiceImpl;
 
@@ -42,7 +42,7 @@ public class LoginController extends CoreController {
     private RoleServiceImpl roleService;
 
     @Autowired
-    private CategoryServiceImpl categoryService;
+    private DataHelperService dataHelperService;
 
     @Autowired
     PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
@@ -53,7 +53,9 @@ public class LoginController extends CoreController {
     @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
     public Object redirect(Model model) {
         model.addAttribute("loggedinuser", getPrincipal());
-        model.addAttribute("categoriesmap", categoryService.getCategoryMap());
+        model.addAttribute("categoriesmap", dataHelperService.getCategoryMap());
+        model.addAttribute("carouselproducts", dataHelperService.getCarouselProductDtoList());
+        model.addAttribute("bestSellers", dataHelperService.getBestSellers());
         return "index";
     }
 

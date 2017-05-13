@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import tapplication.dto.AddressDto;
+import tapplication.dto.CarouselProductDto;
 import tapplication.dto.ProductAndAmount;
 import tapplication.dto.ProductDto;
 import tapplication.model.Category;
@@ -29,6 +30,9 @@ public class DataHelperService {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private StatisticService statisticService;
 
     public AddressDto getShopAddress(){
         return new AddressDto(addressService.findOne(1L));
@@ -65,5 +69,13 @@ public class DataHelperService {
             ssoId = principal.toString();
         }
         return ssoId;
+    }
+
+    public List<CarouselProductDto> getCarouselProductDtoList(){
+        return productService.getAllProductsDtoList().stream().map(CarouselProductDto::new).collect(Collectors.toList());
+    }
+
+    public List<CarouselProductDto> getBestSellers(){
+        return statisticService.getTopOrderedProducts().stream().map(CarouselProductDto::new).collect(Collectors.toList());
     }
 }

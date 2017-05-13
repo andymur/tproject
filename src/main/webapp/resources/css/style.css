@@ -1250,6 +1250,7 @@ h2{
 	color:#FFF;
 	font-size:12px;
 	display:block;
+	padding-top: 100px;
 }
 .welcome{
 	text-align:right;
@@ -1310,12 +1311,21 @@ h2{
 	padding-bottom:10px;
 }
 
+.longpic{
+	width: 100%;
+}
+
 .color{
 	color:#bea473;
 }
 
+.color-wh{
+	color:#ffffff;
+	text-align: center;
+}
+
 .color-bg{
-	background:#fff;
+	background: rgba(255, 255, 255, 0.71);
 	color:#bea473;
 }
 
@@ -1336,6 +1346,15 @@ h2{
 	margin-top:10px;
 	transition:.5s;
 	font-size:13px;
+}
+
+.shop-button {
+	display:inline-block;
+	color:#bea473;
+	padding:10px 16px 10px 16px;
+	margin-top:10px;
+	transition:.5s;
+	font-size:15px;
 }
 
 .video-home .welcome-button{
@@ -2550,7 +2569,7 @@ content: '\f068';
 
 
 /* ----- Partners Section ---- */
-.partners{
+.bestsellers{
 	background: #fff;
 	background-size:cover;
 	color:#fff;
@@ -2565,11 +2584,11 @@ content: '\f068';
 	padding-bottom:35px;
 }
 
-.partners .owl-theme .owl-controls .owl-buttons div {
+.bestsellers .owl-theme .owl-controls .owl-buttons div {
   position: absolute;
 }
 
-.partners .owl-theme .owl-controls .owl-buttons .owl-prev{
+.bestsellers .owl-theme .owl-controls .owl-buttons .owl-prev{
   left: -20px;
   top: 20%;
   background:  url(http://cdn.shopify.com/s/files/1/0049/9332/t/13/assets/linus-arrow-left.png) center center no-repeat;
@@ -2580,7 +2599,7 @@ content: '\f068';
   opacity:1;
 }
 
-.partners .owl-theme .owl-controls .owl-buttons .owl-next{
+.bestsellers .owl-theme .owl-controls .owl-buttons .owl-next{
   right: -20px;
   top: 20%;
   background: url(http://cdn.shopify.com/s/files/1/0049/9332/t/13/assets/linus-arrow-right.png) center center no-repeat;
@@ -2591,7 +2610,7 @@ content: '\f068';
   opacity:1;
 }
 
-.partners .owl-theme .owl-controls .owl-buttons div {
+.bestsellers .owl-theme .owl-controls .owl-buttons div {
 color: #a9aaa9;
 display:block;
 zoom: 1;

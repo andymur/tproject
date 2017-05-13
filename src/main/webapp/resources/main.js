@@ -93,12 +93,7 @@
                     url: "/productslist/add",
                     contentType: "application/json",
                     data: adProduct,
-                    success: ()=> {
-                        swal({
-                             title: 'DONE.',
-                             text: '',
-                             timer: 500
-                         });
+                    success: ()=> {swal({title: 'DONE.',text: '',timer: 500});
                     loadPromo(event);
                     },
                     error:()=> {

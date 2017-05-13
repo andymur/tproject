@@ -9,43 +9,39 @@
     <jsp:body>
         <div id="wrapper">
 
-        <%--<div class="container welcome">--%>
-            <%--<div class="col-md-12">--%>
-                <%--<img src="resources/images/man-shadow.png" class="shadow-man" alt=""/>--%>
-            <%--</div>--%>
-                <div class="container-custom welcome-slider welcome-cust">
-                    <div id="w-owl" class="owl-carousel">
-                        <div>
-                                <div class="textoverlay"><h1>Text 1</h1>
-                                    <p>Some text bla bla bla</p>
-                                </div>
-                            <img src="http://res.cloudinary.com/alexpench/image/upload/v1494596042/linus-bike-mixte-8-lifestyle2-2000x931_wlkmbi.jpg" alt="" width="100%" />
-                        </div>
 
-                        <%--<a href="/product/2">--%>
-                            <%--<img src="http://res.cloudinary.com/alexpench/image/upload/v1494595762/linus-bike-dutchi-8-lifestyle1-2000x931_dnzyzt.jpg" alt="" width="100%";/>--%>
-                        <%--</a>--%>
-                    </div>
+            <div class="container-custom welcome-slider welcome-cust">
+                <div id="w-owl" class="owl-carousel">
+                    <c:forEach var="product" items="${carouselproducts}">
+                        <div>
+                            <div class="col-md-11 textoverlay">
+                                <h1><span class="color-bg">${product.name}</span></h1>
+                                <a href="/product/${product.id}" class="shop-button hvr-shutter-in-horizontal">SHOP
+                                    NOW</a>
+                            </div>
+                            <img class="img-responsive" src="${product.longpic}"
+                                 alt="" ;/>
+                        </div>
+                    </c:forEach>
                 </div>
-            <%--<div class="col-md-12">--%>
+            </div>
+                <%--<div class="col-md-12">--%>
                 <%--<h2>WELCOME TO</h2>--%>
                 <%--<h1>LIN<span class="color-bg">US</span></h1>--%>
-                <%--<a href="#" class="welcome-button-2 hvr-shutter-in-horizontal-2">READ MORE</a>--%>
-                <%--<a href="shop" class="welcome-button hvr-shutter-in-horizontal">BUY NOW</a>--%>
 
-            <%--</div>--%>
-        <%--</div>--%>
+
+                <%--</div>--%>
+                <%--</div>--%>
             <div class="about">
-                <div class="partners">
+                <div class="bestsellers">
+                    <h4 class="text-center text-uppercase">best sellers</h4>
                     <div class="container">
                         <div class="col-md-12">
                             <div id="owl-2" class="owl-carousel">
-                                <div><img src="resources/images/partners/5.png" alt=""/></div>
-                                <div><img src="resources/images/partners/2.png" alt=""/></div>
-                                <div><img src="resources/images/partners/5.png" alt=""/></div>
-                                <div><img src="resources/images/partners/2.png" alt=""/></div>
-                                <div><img src="resources/images/partners/5.png" alt=""/></div>
-                                <div><img src="resources/images/partners/2.png" alt=""/></div>
+                                <c:forEach var="product" items="${bestSellers}">
+                                    <div><a href="/product/${product.id}"><img src="${product.mainpic}" alt=""
+                                                                               class="img-responsive"/></a></div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -58,12 +54,18 @@
 
                     <div class="uni-main">
                         <div class="col-md-7">
-                            <img src="resources/images/banner.png" alt=""/>
+                            <img src="resources/images/banner.png" alt="" class="img-responsive"/>
                         </div>
 
                         <div class="col-md-5 right">
                             <h3>UNIQUE <span class="color">CONCEPT</span></h3>
-                            <p>Inspired by French bicycle design of the 50s and 60s we have created a bicycle that preserves the simple elegance and pure form of that golden era, but has all the benefits of modern comfort and reliability. LINUS is the utilitarian city bike… simple and reliable, but with a personality and style that makes you feel like you’re in an old French movie… you’re floating a little from the wine you drank at lunch… maybe instead of going back to the office you’ll take a nap under a tree, go for a swim in the sea or drop by your lover’s house…<br><br>
+                            <p>Inspired by French bicycle design of the 50s and 60s we have created a bicycle that
+                                preserves the simple elegance and pure form of that golden era, but has all the benefits
+                                of modern comfort and reliability. LINUS is the utilitarian city bike… simple and
+                                reliable, but with a personality and style that makes you feel like you’re in an old
+                                French movie… you’re floating a little from the wine you drank at lunch… maybe instead
+                                of going back to the office you’ll take a nap under a tree, go for a swim in the sea or
+                                drop by your lover’s house…<br><br>
 
                             </p>
                             <a href="#" class="r-more hvr-shutter-in-horizontal-3">Read More</a>
@@ -75,17 +77,6 @@
             </div>
 
             <div class="clearfix"></div>
-
-            <div class="say-hello">
-                <div class="container">
-                    <div class="col-md-12">
-                        <h2>Want To Work <span class="color-bg-2">With Us?</span></h2>
-                        <p></p>
-                        <a href="#" class="hello-btn hvr-shutter-in-horizontal">Say Hello !</a>
-                        <img src="resources/images/team3-1.png" class="img-responsive" alt=""/>
-                    </div>
-                </div>
-            </div>
         </div>
     </jsp:body>
 </t:genericpage>
