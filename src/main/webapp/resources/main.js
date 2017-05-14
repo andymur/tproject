@@ -118,7 +118,10 @@
                 url: "/productslist/remove",
                 contentType: "application/json",
                 data: adProduct,
-                success: ()=> {}
+                success: ()=> {
+                    swal({title: 'DONE.',text: '',timer: 500});
+                    $('#'+productId).remove();
+                }
         })
     }
 

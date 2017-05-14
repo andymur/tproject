@@ -2254,6 +2254,11 @@ th {
   max-width: 100%;
   margin-bottom: 20px;
 }
+
+.table-cust-2 {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -5110,6 +5115,10 @@ a.thumbnail.active {
 }
 .media-body {
   width: 10000px;
+}
+
+.media-body-cust {
+  width: 100%;
 }
 .media-object {
   display: block;

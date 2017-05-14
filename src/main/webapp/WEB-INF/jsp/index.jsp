@@ -34,13 +34,16 @@
                 <%--</div>--%>
             <div class="about">
                 <div class="bestsellers">
-                    <h4 class="text-center text-uppercase">best sellers</h4>
+                    <h4 class="text-center text-uppercase color">best sellers</h4>
                     <div class="container">
                         <div class="col-md-12">
                             <div id="owl-2" class="owl-carousel">
                                 <c:forEach var="product" items="${bestSellers}">
-                                    <div><a href="/product/${product.id}"><img src="${product.mainpic}" alt=""
-                                                                               class="img-responsive"/></a></div>
+                                    <div><a href="/product/${product.id}">
+                                        <img src="${product.mainpic}" alt=""
+                                                                               class="img-responsive opacity"/></a>
+                                        <a href="/product/${product.id}"><span class="color">${product.name}</span></a>
+                                    </div>
                                 </c:forEach>
                             </div>
                         </div>

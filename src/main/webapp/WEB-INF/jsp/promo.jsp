@@ -10,12 +10,12 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                       href="#collapseFive">
+                       href="#collapseOne">
                         <i class="fa fa-plus-square-o"></i> Add PROMO product
                     </a>
                 </h4>
             </div>
-            <div id="collapseFive" class="panel-collapse collapse">
+            <div id="collapseOne" class="panel-collapse collapse  in">
                 <div class="panel-body">
                     <div id="form-promo" class="form-horizontal">
                         <div class="form-group">
@@ -42,12 +42,12 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"
-                       href="#collapseOne">
+                       href="#collapseTwo">
                         <i class="fa fa-plus-square-o"></i> Current PROMO products
                     </a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse">
+            <div id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="col-md-12">
                         <table class="table table-bordered table-striped table-advance table-hover">
