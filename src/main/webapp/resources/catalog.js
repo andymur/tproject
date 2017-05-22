@@ -27,10 +27,26 @@ function updateProduct(event){
         weight : weight
     };
     parameters.push(param);
-})
+    })
+
+    var images = [];
+    var ids = $('.imageurl');
+    $.each(ids,(i)=>{
+        var id = ids[i].value;
+    var name = $('#pic'+id+' input[name=name]').val();
+    var url = $('#pic'+id+' input[name=url]').val();
+    var img = {
+        id : id,
+        name : name,
+        url : url
+    };
+    images.push(img);
+    })
+
     var data = JSON.stringify({
         id : productId,
         parameters : parameters,
+        images: images,
         name: $('input[name=name]').val(),
         model: $('input[name=model]').val(),
         color: $('input[name=color]').val(),
@@ -64,6 +80,7 @@ function editProduct(event) {
             contentType: "application/json",
             success:(data)=>{
             $("#wrapper").html(data);
+            $('.zoomContainer').remove();
             assignClickHandler($("#updateProduct"), updateProduct_Handler)
             }
     })
@@ -91,8 +108,8 @@ $(document).on('change', '#cat-filter select', function () {
             type: "GET",
             url: filterParams,
             success: (data)=> {
-            $("#wrapper").empty()
-    $('#wrapper').append(data)
+            $("#wrapper").html(data);
+    $('.zoomContainer').remove();
     assignClickHandler($(".addToCart"), addToCart_Handler);
     assignClickHandler($(".productButton"), goToProduct_Handler);
     assignClickHandler($(".editProduct"), editProduct_Handler);

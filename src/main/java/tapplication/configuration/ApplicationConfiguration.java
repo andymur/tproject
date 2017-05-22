@@ -15,7 +15,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import tapplication.dto.UserRoleDto;
 
-import javax.ws.rs.ApplicationPath;
 
 /**
  * Created by alexpench on 30.03.17.

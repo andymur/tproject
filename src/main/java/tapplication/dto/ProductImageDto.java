@@ -1,9 +1,12 @@
 package tapplication.dto;
 
+import tapplication.model.ProductImage;
+
 /**
  * Created by alexpench on 22.04.17.
  */
 public class ProductImageDto {
+    private Long id;
     private String name;
     private String url;
     private Long productId;
@@ -11,10 +14,11 @@ public class ProductImageDto {
     public ProductImageDto() {
     }
 
-    public ProductImageDto(String name, String url, Long productId) {
-        this.name = name;
-        this.url = url;
-        this.productId = productId;
+    public ProductImageDto(ProductImage image) {
+        this.id = image.getId();
+        this.name = image.getName();
+        this.url = image.getImage();
+        this.productId = image.getProduct().getId();
     }
 
     public String getName() {
@@ -39,6 +43,14 @@ public class ProductImageDto {
 
     public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

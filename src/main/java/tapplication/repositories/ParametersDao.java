@@ -10,11 +10,13 @@ import tapplication.model.Product;
 @Repository
 public class ParametersDao extends AbstractDao<Parameters, Long>{
 
+    public static final String PRODUCT = "product";
+
     public ParametersDao() {
         super(Parameters.class);
     }
 
-    public boolean isExist(String size, Long weight, Product product) {
-        return super.findAllByAndParams(Parameters.SIZE, size, Parameters.WEIGHT, weight, "product", product).size() > 0;
+    public boolean isExist(String size, Product product) {
+        return super.findAllByAndParams(Parameters.SIZE, size, PRODUCT, product).size() > 0;
     }
 }

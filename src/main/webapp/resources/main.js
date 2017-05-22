@@ -52,6 +52,10 @@
         loadPromo(event);
     };
 
+    var loadAdminProducts_Handler = function (event) {
+        loadAdminProducts(event);
+    };
+
     var addPromo_Handler = function (event) {
         addPromo(event);
     };
@@ -68,8 +72,19 @@
         event.preventDefault();
         $.get("/promo", (data)=>{
             $('#wrapper').html(data);
+            $('.zoomContainer').remove();
             assignClickHandler($("#btn-add-promo"), addPromo_Handler);
             assignClickHandler($(".removePromoProduct"), removePromo_Handler);
+        });
+    }
+
+    function loadAdminProducts(event) {
+        event.preventDefault();
+        $.get("/admin_products", (data)=>{
+            $('#wrapper').html(data);
+            $('.zoomContainer').remove();
+            // assignClickHandler($("#btn-add-promo"), addPromo_Handler);
+            // assignClickHandler($(".removePromoProduct"), removePromo_Handler);
         });
     }
 
@@ -161,6 +176,7 @@
         assignClickHandler($("#usercart"), loadCardPage_Handler);
         assignClickHandler($("#statistic"), loadStatistic_Handler);
         assignClickHandler($("#promo"), loadPromo_Handler);
+        assignClickHandler($("#admin_products"), loadAdminProducts_Handler);
     });
 
 
@@ -174,8 +190,8 @@
                 contentType: "application/json",
                 data: dataToPush,
                 success:(data)=>{
-                    $("#wrapper").empty();
-                    $("#wrapper").append(data);
+                    $("#wrapper").html(data);
+                    $('.zoomContainer').remove();
                     assignClickHandler($(".removeItem"), removeFromCart_Handler);
                     assignClickHandler($(".sub"), subtract_Handler);
                     assignClickHandler($(".add"), add_Handler);
@@ -275,6 +291,7 @@ function loadOrder(event) {
                 data:dataToPush,
                 success:(data)=>{
                     $("#wrapper").html(data);
+                    $('.zoomContainer').remove();
                     assignClickHandler($("#submit-order"), submitOrder_Handler);
                 }
     })

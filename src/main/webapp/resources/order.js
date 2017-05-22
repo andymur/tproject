@@ -83,6 +83,7 @@ function submitOrder(event) {
             $('.cart-count').text("0");
             if(paymentType === 'CARD'){
                 $("#wrapper").html(data);
+                $('.zoomContainer').remove();
                 assignClickHandler($("#submitPayment"), submitPayment_Handler);
             }
             else {
@@ -92,6 +93,7 @@ function submitOrder(event) {
                 'Continue <a href="shop">shopping</a>' +
                 '</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>'
             );
+            $('.zoomContainer').remove();
             }
             localStorage.removeItem("arr")
 
@@ -145,7 +147,32 @@ $(document).on('change', '#form-deliveryTypes select', function () {
                 success:(data)=>{
                     $('#shopAddress').hide();
                     $('#deliveryForm').html(data);
-                    assignChangeHandler($("#deliveryAddressSelect"), changeAddress_Handler)
+                    assignChangeHandler($("#deliveryAddressSelect"), changeAddress_Handler);
+                    if($("#deliveryAddressSelect option:selected" ).val() === "Other address"){
+                        $('#deliveryForm2').html(
+                            '<div class="col-md-6">'+
+                            '<div class="heading">Shipping Address</div>'+
+                            '<div id="checkout-order-form">'+
+                            '<label>Country</label>'+
+                            '<input type="text" class="form-control" name="country" placeholder="Enter your country">'+
+                            '<label>Street</label>'+
+                            '<input type="text" class="form-control" name="street" placeholder="Enter your street">'+
+                            '<label>Building</label>'+
+                            '<input type="text" class="form-control" name="building" placeholder="Enter your building">'+
+                            '<label>Appartment</label>'+
+                            '<input type="text" class="form-control" name="appartment" placeholder="Enter your appartment">'+
+                            '<label>Town/City</label>'+
+                            '<input type="text" class="form-control" name="city" placeholder="Enter your town/city name">'+
+                            '<label>Zip Code</label>'+
+                            '<input type="text" class="form-control" name="zipCode" placeholder="Enter your zipcode">'+
+                            '<label>Email Address</label>'+
+                            '<input type="text" class="form-control" name="email" placeholder="Enter your  email address">'+
+                            '<label>Phone Nmber</label>'+
+                            '<input type="text" class="form-control" name="phonenumber" placeholder="Enter your phone number">'+
+                            '</div>'+
+                            '</div>'
+                        );
+                    }
                 }
     })
     } else {
@@ -184,6 +211,8 @@ function changeAddress(event) {
             );
     } else{
         deliveryAddressId = id;
+        $('#deliveryForm2').html('');
+
     }
 
 

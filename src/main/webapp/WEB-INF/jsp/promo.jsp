@@ -15,7 +15,7 @@
                     </a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse  in">
+            <div id="collapseOne" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div id="form-promo" class="form-horizontal">
                         <div class="form-group">

@@ -47,7 +47,7 @@ public class ProductDto {
         this.sizes = product.getParameters().stream()
                 .map(Parameters::getSize).collect(Collectors.toList());
         this.images = product.getImages().stream()
-                .map(image->new ProductImageDto(image.getName(),image.getImage(),image.getProduct().getId()))
+                .map(ProductImageDto::new)
                 .collect(Collectors.toList());
         this.mainImage = product.getImages().stream()
                 .filter(im -> im.getName().equals("main"))

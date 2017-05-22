@@ -21,10 +21,11 @@
                     </div>
                 </div>
             </div>
-            <div id="shopAddress"
-                 data-id="${shopAddress.id}">${shopAddress.country}|${shopAddress.city}|${shopAddress.street}|${shopAddress.building}</div>
-            <div id="deliveryForm"></div>
-            <div id="deliveryForm2"></div>
+
+            <div id="shopAddress" class="col-md-12"
+                 data-id="${shopAddress.id}"><label class="col-md-2" for="shopAddress">Pick up from shop:</label>${shopAddress.country}|${shopAddress.city}|${shopAddress.street}|${shopAddress.building}</div>
+            <div id="deliveryForm" class="col-md-12"></div>
+            <div id="deliveryForm2" class="col-md-12"></div>
 
             <div class="col-md-12 order">
                 <div class="heading">Your Order</div>

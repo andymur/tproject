@@ -204,6 +204,5 @@
                 </div>
             </div>
         </div>
-        <!-- Image Zoom Plugin -->
     </jsp:body>
 </t:genericpage>

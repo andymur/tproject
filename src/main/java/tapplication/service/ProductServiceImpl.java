@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tapplication.dto.ParametersDto;
 import tapplication.dto.ProductAndAmount;
 import tapplication.dto.ProductDto;
+import tapplication.dto.ProductImageDto;
 import tapplication.exceptions.AlreadyExistException;
 import tapplication.exceptions.NotFoundException;
 import tapplication.exceptions.PlaceToOrderException;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
  * Created by alexpench on 29.03.17.
  */
 @Service("productService")
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.REQUIRED)
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductDao productDao;
@@ -65,6 +66,12 @@ public class ProductServiceImpl implements ProductService {
             par.setWeight(parMap.get(par.getId()).getWeight());
         });
 
+        Map<Long, ProductImageDto> imgMap = productDto.getImages().stream().collect(Collectors.toMap(ProductImageDto::getId, img -> img));
+        product.getImages().forEach(img ->{
+            img.setImage(imgMap.get(img.getId()).getUrl());
+            img.setName(imgMap.get(img.getId()).getName());
+        });
+
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         product.setColor(productDto.getColor());
@@ -72,9 +79,12 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productDto.getDescription());
         product.setChangeDate(new Date());
         productDao.merge(product);
+
         webApiService.update(productDto);
+
         logger.info("Product id{} is updated.", product.getId());
     }
+
 
     public List<Product> findAll() {
         return productDao.selectAll();
@@ -166,11 +176,14 @@ public class ProductServiceImpl implements ProductService {
 
     private void addNewParameters(ProductDto newProduct) {
         Product product = productDao.findOneByAndParams(Product.MODEL, newProduct.getModel());
-        parametersService.create(newProduct.getParameters().get(0), product);
+        ParametersDto parametersDto = newProduct.getParameters().get(0);
+
+        parametersDto.setProductId(product.getId());
+        parametersService.add(parametersDto);
         logger.info("New parameters: size:{},quantity:{},weight:{} added for Product id:{}.",
-                newProduct.getParameters().get(0).getSize(),
-                newProduct.getParameters().get(0).getQuantity(),
-                newProduct.getParameters().get(0).getWeight(),
+                parametersDto.getSize(),
+                parametersDto.getQuantity(),
+                parametersDto.getWeight(),
                 product.getId());
     }
 

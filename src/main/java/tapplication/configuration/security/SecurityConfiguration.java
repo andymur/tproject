@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin_products").access("hasRole('ADMIN')")
+                .antMatchers("/parameters/add").access("hasRole('ADMIN')")
                 .antMatchers("/edit-user-*").access("hasRole('ADMIN')")
                 .antMatchers("/edit-details-user-*").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/list").access("hasRole('ADMIN')")
@@ -48,6 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/orderdetails").access("hasRole('ADMIN') or hasRole('USER')")
                 .antMatchers("/admin_orders").access("hasRole('ADMIN')")
                 .antMatchers("/product/update").access("hasRole('ADMIN')")
+                .antMatchers("/product/create").access("hasRole('ADMIN')")
                 .antMatchers("/product/edit/").access("hasRole('ADMIN')")
                 .antMatchers("/statistic").access("hasRole('ADMIN')")
                 .and()

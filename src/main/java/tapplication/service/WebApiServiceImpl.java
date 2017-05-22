@@ -13,6 +13,7 @@ import tapplication.model.Product;
 import tapplication.repositories.AdProductDao;
 import tapplication.repositories.ProductDao;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,8 +66,13 @@ public class WebApiServiceImpl implements WebApiService {
 
     @Override
     public void update(ProductDto productDto) {
-        AdProduct adProduct = adProductDao.findOne(PRODUCT, productDto.getId());
-        if(adProduct != null){
+        AdProduct adProduct = null;
+        try {
+            adProduct = adProductDao.findOne(PRODUCT, productDto.getId());
+        } catch (NoResultException ex) {
+            logger.info("Product id:{} not in promo list, nothing to update.", productDto.getId());
+        }
+        if (adProduct != null) {
             adProduct.setProduct(productDao.findOne(productDto.getId()));
             sender.sendMessage(DO_UPDATE);
         }
@@ -82,13 +88,13 @@ public class WebApiServiceImpl implements WebApiService {
 
         AdProduct adProduct = adProductDao.findOne(PRODUCT, adProductDto.getProductId());
 
-        if(adProduct == null){
+        if (adProduct == null) {
             logger.warn("Product id:{} was not found in database", adProductDto.getProductId());
             throw new NotFoundException();
         }
 
         adProductDao.delete(adProduct);
-        logger.info("Product id:{}, name:{} has been removed from promo list.",adProduct.getProduct().getId(), adProduct.getProduct().getName());
+        logger.info("Product id:{}, name:{} has been removed from promo list.", adProduct.getProduct().getId(), adProduct.getProduct().getName());
         sender.sendMessage(DO_UPDATE);
         logger.info("Message {} to promo client has been sent.", DO_UPDATE);
     }

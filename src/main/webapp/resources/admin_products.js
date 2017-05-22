@@ -1,5 +1,32 @@
 jQuery(function ($) {
 
+    $('#btn-add-param').click(function (event) {
+        var parameters = JSON.stringify({
+            "size": $('#form-param input[name=size]').val(),
+            "weight": $('#form-param input[name=weight]').val(),
+            "quantity": $('#form-param input[name=quantity]').val(),
+            "productId": $('#paramProductSelect option:selected').data('id')
+        });
+        $.ajax({
+                type: "POST",
+                url: "product/parameters/add",
+                contentType: "application/json",
+                data: parameters,
+                success: ()=> {
+                    $("#form-param input").val("");
+                    swal("New parameters were added.", "success");
+                },
+                error: ()=> {
+                    swal({
+                        title: "Error!",
+                        text: "Parameters already exist",
+                        type: "error",
+                        confirmButtonText: "OK"
+                    });
+                }
+        })
+    })
+
     $('#btn-save-product').click(function (event) {
         var brand = $('#br-select option:selected').data('brand-name')
         var category = $('#cat-select option:selected').data('category-name')
@@ -28,7 +55,7 @@ jQuery(function ($) {
         })
         $.ajax({
                 type: "POST",
-                url: "product/create",
+                url: "/product/create",
                 contentType: "application/json",
                 data: newProduct,
                 success: ()=> {

@@ -58,8 +58,13 @@
                     <th>IMAGES</th>
                     <td>
                         <c:forEach var="pic" items="${product.images}">
+                            <div id="pic${pic.id}" class="col-sm-10">
                             <input id="image${product.id}" class="pic" type="image" name="image"
                                    src="${pic.url}" width="200">
+                                <input type="text" class="form-control " name="name" value="${pic.name}">
+                                <input type="text" class="form-control " name="url" value="${pic.url}">
+                                <input type="hidden" name="id" class="imageurl" value="${pic.id}">
+                            </div>
                         </c:forEach>
                     </td>
                 </tr>

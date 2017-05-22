@@ -159,7 +159,7 @@
                                                 <a href=""><strong>Admin Dashboard</strong></a>
                                                 <input class="show-submenu" type="checkbox" name="show-submenu-2"/>
                                                 <ul>
-                                                    <li><a href="/admin_products">Products</a></li>
+                                                    <li><a id="admin_products" href="#">Products</a></li>
                                                     <li><a href="/admin_orders">Orders</a></li>
                                                     <li><a id="statistic" href="#">Statistics</a></li>
                                                     <li><a id="promo" href="#">Promo Stand</a></li>
@@ -334,14 +334,14 @@
         <script type="text/javascript" src="/resources/js/preloader.js"></script>
         <script type="text/javascript" src="/resources/js/switcher.js"></script>
         <script type="text/javascript" src="/resources/js/custom.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
         <%--sweet alert--%>
         <script type="text/javascript" src="/resources/js/sweetalert.min.js"></script>
         <!--login/registration-->
         <%--<script type="text/javascript" src="/resources/login.js"></script>--%>
 
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <%--<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
         <script type="text/javascript">
             $(function() {
                 var token = $("meta[name='_csrf']").attr("content");

@@ -103,6 +103,7 @@ public class LoginController extends CoreController {
         if (result.hasErrors()) {
             return "registration";
         }
+
         if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
             FieldError ssoError =new FieldError("user","ssoId", "Non unique username");
             result.addError(ssoError);

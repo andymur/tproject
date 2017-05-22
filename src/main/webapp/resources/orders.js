@@ -60,6 +60,7 @@ function repeatOrder(orderId) {
         data: orderStatusData,
         success: (data)=>{
             $("#wrapper").html(data);
+            $('.zoomContainer').remove();
             assignClickHandler($("#submit-order"), submitOrder_Handler);
             assignChangeHandler($("#deliveryAddressSelect"), changeAddress_Handler)
         }

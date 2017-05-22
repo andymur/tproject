@@ -34,6 +34,7 @@ public class DataHelperService {
     @Autowired
     private StatisticService statisticService;
 
+
     public AddressDto getShopAddress(){
         return new AddressDto(addressService.findOne(1L));
     }
@@ -77,5 +78,9 @@ public class DataHelperService {
 
     public List<CarouselProductDto> getBestSellers(){
         return statisticService.getTopOrderedProducts().stream().map(CarouselProductDto::new).collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getAllProducts() {
+        return productService.getAllProductsDtoList();
     }
 }
