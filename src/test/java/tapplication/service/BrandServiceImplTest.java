@@ -18,9 +18,7 @@ public class BrandServiceImplTest {
 
     @Test
     public void createTrue() throws NamingException {
-//        BrandDao brandDao = Mockito.mock(BrandDao.class);
-//        when(brandDao.isBrandExist("Linus")).thenReturn(true);
-//        Assert.isTrue(brandDao.isBrandExist("Linus"), "Not exist");
+
 
     }
 
