@@ -1,6 +1,5 @@
 package tapplication.service;
 
-import org.junit.BeforeClass;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,6 @@ import javax.jms.ConnectionFactory;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.util.Hashtable;
 
 /**
  * Created by alexpench on 22.05.17.
@@ -20,13 +18,6 @@ import java.util.Hashtable;
 public class BrandServiceTestConfig {
 
     public BrandServiceTestConfig() throws NamingException {
-    }
-
-    @BeforeClass
-    public static void init() throws NamingException {
-        Hashtable env = new Hashtable();
-        env.put("ConnectionFactory", "java:/ConnectionFactory");
-        Context ctx = new InitialContext(env);
     }
 
     @Bean
