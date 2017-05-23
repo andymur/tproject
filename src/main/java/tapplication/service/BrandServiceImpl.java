@@ -15,7 +15,9 @@ import java.util.List;
  * Created by alexpench on 30.03.17.
  */
 @Service("brandService")
+@Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
 public class BrandServiceImpl implements CoreService<Brand> {
+
     @Autowired
     private BrandDao brandDao;
 
@@ -23,7 +25,7 @@ public class BrandServiceImpl implements CoreService<Brand> {
         return brandDao.findOne(id);
     }
 
-    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
+
     public Brand create(Brand brand) throws AlreadyExistException {
         if (brandDao.isBrandExist(brand.getName())) {
             throw new AlreadyExistException();
@@ -36,7 +38,6 @@ public class BrandServiceImpl implements CoreService<Brand> {
         return brandDao.selectAll();
     }
 
-    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public Brand update(Brand brand) throws NotFoundException {
         Brand brandToBeMerged = brandDao.findOne(brand.getId());
         if (brandToBeMerged != null) {
@@ -47,7 +48,6 @@ public class BrandServiceImpl implements CoreService<Brand> {
         return brand;
     }
 
-    @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
     public void delete(Brand brand) throws NotFoundException {
         Brand brandToBeDeleted = brandDao.findOne(brand.getId());
         if (brandToBeDeleted != null) {

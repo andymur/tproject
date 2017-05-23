@@ -7,7 +7,8 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.jms.*;
+import javax.jms.ConnectionFactory;
+import javax.jms.ObjectMessage;
 
 
 //*
@@ -19,10 +20,10 @@ public class MessageSender {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource(mappedName = "java:/ConnectionFactory")
-    ConnectionFactory jmsConnectionFactory;
+    private ConnectionFactory jmsConnectionFactory;
 
     @Autowired
-    JmsTemplate jmsTemplate;
+    private JmsTemplate jmsTemplate;
 
     public void sendMessage(String msg) {
         jmsTemplate.setConnectionFactory(jmsConnectionFactory);
